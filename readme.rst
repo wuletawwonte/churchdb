@@ -1,3 +1,5 @@
+Church DAtabase System being developed by Wuletaw Wonte
+
 ###################
 What is CodeIgniter
 ###################
