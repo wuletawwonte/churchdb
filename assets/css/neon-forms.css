@@ -6353,7 +6353,7 @@ hr + .mail-env {
 .login-page .login-header {
   position: relative;
   background: #373e4a;
-  padding: 70px 0;
+  padding: 50px 0;
   -moz-transition: all 550ms ease-in-out;
   -o-transition: all 550ms ease-in-out;
   -webkit-transition: all 550ms ease-in-out;
@@ -6607,8 +6607,8 @@ hr + .mail-env {
   background-color: #9b3022;
 }
 .login-page .login-bottom-links {
-  padding-top: 40px;
-  padding-bottom: 30px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 .login-page .login-bottom-links a {
   -moz-transition: all 300ms ease-in-out;

@@ -3,35 +3,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
-		<meta charset="utf-8">
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Neon Admin Panel" />
-	<meta name="author" content="" />
+	<meta name="description" content="Arbaminch Mekane Eyesus Church Members Database" />
+	<meta name="author" content="wuletawwonte@yahoo.com" />
 	
-	<title>login | PencilCrunch School</title>
+	<title> የአርባምንጭ መካነ እየሱስ ምዕመናን መረጃ ቋት </title>
 	
 
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.3.custom.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-icons/entypo/<?php echo base_url(); ?>assets/css/entypo.css">
-	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/neon-core.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/neon-theme.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/neon-forms.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
 
 	<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script>
 
-	<link rel="shortcut icon" href="http://testlimat.wuletaw/assets/images/favicon.png">
+	<link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.ico">
 	
 </head>
-<body class="page-body login-page login-form-fall" data-url="http://neon.dev">
+<body class="page-body login-page login-form-fall">
 
 
 <script type="text/javascript">
-var baseurl = 'http://testlimat.wuletaw/';
+var baseurl = '<?php echo base_url(); ?>';
 </script>
 
 <div class="login-container">
@@ -121,16 +115,10 @@ var baseurl = 'http://testlimat.wuletaw/';
 
 
 	<!-- Bottom Scripts -->
-	<script src="<?php echo base_url(); ?>assets/js/gsap/main-gsap.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/jquery-ui/<?php echo base_url(); ?>assets/js/jquery-ui-1.10.3.minimal.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.3.minimal.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/joinable.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/resizeable.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/neon-api.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/neon-login.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/neon-custom.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/neon-demo.js"></script>
 
 </body>
 </html>
