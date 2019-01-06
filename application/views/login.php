@@ -15,6 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/neon-forms.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/font-awesome/css/font-awesome.min.css">
 
 	<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script>
 
@@ -70,7 +71,7 @@ var baseurl = '<?php echo base_url(); ?>';
 					
 					<div class="input-group">
 						<div class="input-group-addon">
-							<i class="entypo-user"></i>
+							<i class="fa fa-user"></i>
 						</div>
 						
 						<input type="text" class="form-control" name="email" id="email" placeholder="ስም" autocomplete="off" data-mask="email" />
@@ -82,7 +83,7 @@ var baseurl = '<?php echo base_url(); ?>';
 					
 					<div class="input-group">
 						<div class="input-group-addon">
-							<i class="entypo-key"></i>
+							<i class="fa fa-key"></i>
 						</div>
 						
 						<input type="password" class="form-control" name="password" id="password" placeholder="የይለፍ ቃል" autocomplete="off" />
@@ -115,7 +116,6 @@ var baseurl = '<?php echo base_url(); ?>';
 
 
 	<!-- Bottom Scripts -->
-	<script src="<?php echo base_url(); ?>assets/js/jquery-ui-1.10.3.minimal.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/neon-login.js"></script>
