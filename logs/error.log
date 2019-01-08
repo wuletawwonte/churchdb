@@ -1,1 +1,1 @@
-[Sat Jan 05 19:42:35.112792 2019] [:error] [pid 4954] [client 127.0.0.1:33702] PHP Fatal error:  Call to undefined function base_url() in /var/www/churchcrm/application/views/login.php on line 16
+[Tue Jan 08 14:55:31.834968 2019] [:error] [pid 15538] [client 127.0.0.1:35934] PHP Fatal error:  Call to a member function get_user_type() on null in /var/www/churchcrm/application/controllers/Users.php on line 32, referer: http://church.wuletaw/

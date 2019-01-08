@@ -1,4 +1,4 @@
-# Church DAtabase System being developed by Wuletaw Wonte
+# Church DAtabase System being developed by Wuletaw Wonte using Codeigniter version 3.19
 
 ###################
 What is CodeIgniter

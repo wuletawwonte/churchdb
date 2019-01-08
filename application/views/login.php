@@ -59,13 +59,14 @@ var baseurl = '<?php echo base_url(); ?>';
 	<div class="login-form">
 		
 		<div class="login-content">
-			
+<!-- 			
 			<div class="form-login-error">
 				<h3>Invalid login</h3>
 				<p>Please enter correct email and password!</p>
 			</div>
-			
-			<form method="post" role="form" id="form_login">
+ -->
+
+			<form method="post" action="<?php echo base_url(); ?>users/login" role="form">
 				
 				<div class="form-group">
 					
@@ -74,7 +75,7 @@ var baseurl = '<?php echo base_url(); ?>';
 							<i class="fa fa-user"></i>
 						</div>
 						
-						<input type="text" class="form-control" name="email" id="email" placeholder="ስም" autocomplete="off" data-mask="email" />
+						<input type="text" class="form-control" name="username" id="email" placeholder="ስም" autocomplete="off" required />
 					</div>
 					
 				</div>
@@ -86,7 +87,7 @@ var baseurl = '<?php echo base_url(); ?>';
 							<i class="fa fa-key"></i>
 						</div>
 						
-						<input type="password" class="form-control" name="password" id="password" placeholder="የይለፍ ቃል" autocomplete="off" />
+						<input type="password" class="form-control" name="password" id="password" placeholder="የይለፍ ቃል" autocomplete="off" required />
 					</div>
 				
 				</div>
@@ -101,6 +102,9 @@ var baseurl = '<?php echo base_url(); ?>';
 						
 			</form>
 			
+			<?php if($this->session->flashdata('login_failed')) : ?>
+				<p class="alert alert-danger alert-dismissible"><?php echo $this->session->flashdata('login_failed'); ?></p>
+			<?php endif; ?>
 			
 			<div class="login-bottom-links">
 				<a href="http://testlimat.wuletaw/login/forgot_password" class="link">
