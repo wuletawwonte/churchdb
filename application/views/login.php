@@ -13,11 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<title> የአርባምንጭ መካነ እየሱስ ምዕመናን መረጃ ቋት </title>
 	
 
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/neon-forms.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css">
 
-	<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/vendors/jquery/jquery.min.js"></script>
 
 	<link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.ico">
 	
@@ -120,7 +120,7 @@ var baseurl = '<?php echo base_url(); ?>';
 
 
 	<!-- Bottom Scripts -->
-	<script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
+	<script src="<?php echo base_url(); ?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/neon-login.js"></script>
 

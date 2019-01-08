@@ -20,7 +20,7 @@ class Users extends CI_Controller {
 	}
 
 	public function adminhome() {
-		echo "This is Admin Home";
+		$this->load->view('admin_home');
 	}
 
 	public function login() {
