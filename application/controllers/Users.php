@@ -5,22 +5,26 @@ class Users extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-
-		if(!$this->session->userdata()) {
-			$this->index();
-		}
-
+		
 		$this->load->model('user');
 	}
 
 
 	public function index()
 	{
-		$this->load->view('login');
+		if($this->session->userdata('is_logged_in') == TRUE) {
+			redirect('users/adminhome');			
+		} else {
+			$this->load->view('login');
+		}
 	}
 
 	public function adminhome() {
-		$this->load->view('admin_home');
+		if($this->session->userdata('is_logged_in') == TRUE) {
+			$this->load->view('admin_home');			
+		} else {
+			redirect('users/index');
+		}
 	}
 
 	public function login() {
