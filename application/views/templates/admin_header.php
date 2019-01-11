@@ -223,7 +223,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
+        <li class="header">MENU</li>
         <!-- Optionally, you can add icons to the links -->
         <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li  <?php if($active_menu == 'churches') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>users/churches"><i class="fa fa-institution"></i> <span>Churches</span></a></li>
