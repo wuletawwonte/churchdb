@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta name="description" content="Arbaminch Mekane Eyesus Church Members Database" />
 	<meta name="author" content="wuletawwonte@yahoo.com" />
 	
-	<title> የአርባምንጭ መካነ እየሱስ ምዕመናን መረጃ ቋት </title>
+	<title> ቸርችDB </title>
 	
 
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/bootstrap/css/bootstrap.min.css">
@@ -39,8 +39,7 @@ var baseurl = '<?php echo base_url(); ?>';
 				<img src="<?php echo base_url(); ?>assets/img/logo.png" height="80" alt="" />			</a>
 			
 			<p class="description">
-            	<h2 style="color:#cacaca; font-weight:100;">
-					የአርባምንጭ መካነ እየሱስ ምዕመናን መረጃ ቋት              </h2>
+            	<h2 style="color:#cacaca; font-weight:100;"><b>ቸርች</b>DB</h2>
            </p>
 			
 			<!-- progress bar indicator -->

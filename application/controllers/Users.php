@@ -21,7 +21,12 @@ class Users extends CI_Controller {
 
 	public function adminhome() {
 		if($this->session->userdata('is_logged_in') == TRUE) {
-			$this->load->view('admin_home');			
+
+			$data['active_menu'] = "dashboard";
+			$this->load->view('templates/admin_header', $data);
+			$this->load->view('home');
+			$this->load->view('templates/footer');
+
 		} else {
 			redirect('users/index');
 		}
@@ -73,6 +78,17 @@ class Users extends CI_Controller {
 		redirect();
 	}
 
+	public function churches() {
+		if($this->session->userdata('is_logged_in') == TRUE) {
+			$data['active_menu'] = "churches";
+			$this->load->view('templates/admin_header', $data);
+			$this->load->view('churches');
+			$this->load->view('templates/footer');
+
+		} else {
+			redirect('users/index');
+		}
+	}
 
 
 
