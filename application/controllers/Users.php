@@ -13,24 +13,12 @@ class Users extends CI_Controller {
 	public function index()
 	{
 		if($this->session->userdata('is_logged_in') == TRUE) {
-			redirect('users/adminhome');			
+			redirect('sadmin/index');			
 		} else {
 			$this->load->view('login');
 		}
 	}
 
-	public function adminhome() {
-		if($this->session->userdata('is_logged_in') == TRUE) {
-
-			$data['active_menu'] = "dashboard";
-			$this->load->view('templates/admin_header', $data);
-			$this->load->view('home');
-			$this->load->view('templates/footer');
-
-		} else {
-			redirect('users/index');
-		}
-	}
 
 	public function login() {
 
@@ -48,7 +36,7 @@ class Users extends CI_Controller {
 			$this->session->set_userdata($data);
 
 			if($this->session->userdata('user_type') == "administrator") {
-				redirect('users/adminhome');
+				redirect('sadmin/index');
 			} else {
 				$this->session->unset_userdata('is_logged_id');
 				$this->session->set_flashdata("login_failed", "ያስገቡት መረጃ ትክክል አይደለም");
@@ -78,17 +66,6 @@ class Users extends CI_Controller {
 		redirect();
 	}
 
-	public function churches() {
-		if($this->session->userdata('is_logged_in') == TRUE) {
-			$data['active_menu'] = "churches";
-			$this->load->view('templates/admin_header', $data);
-			$this->load->view('churches');
-			$this->load->view('templates/footer');
-
-		} else {
-			redirect('users/index');
-		}
-	}
 
 
 
