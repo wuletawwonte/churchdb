@@ -20,6 +20,13 @@
     <section class="content container-fluid">
 
 
+    <?php if($this->session->flashdata('success')) : ?>
+        <div class="callout callout-info">
+            <?php echo $this->session->flashdata('success'); ?>
+        </div>
+    <?php endif; ?>
+
+
     <!-- Default box -->
     <div class="box box-primary">
         <div class="box-header">
@@ -33,13 +40,18 @@
                 <tr>
                     <th>Actions</th>
                     <th>Name</th>
-                    <th align="center">City</th>
-                    <th align="center">Families</th>
+                    <th align="center">Description</th>
+                    <th align="center">Date Created</th>
                     <th align="center">More</th>
 
                 </tr>
                 </thead>
                 <tbody>
+                <?php foreach($churches as $church) { ?>
+
+
+
+
                     <tr>
                         <td>
                             <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
@@ -47,9 +59,9 @@
                             <a onclick=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                         </td>
                         <td>
-                            <a href="#"> Mekane Eyesus</a>
+                            <a href="#"> <?php echo $church['name']; ?></a>
                         </td>
-                        <td>Arbaminch</td>
+                        <td><?php echo $church['description']; ?></td>
                         <td> <span class="text-red">8</span>
                                 <a onclick="#"><i class="fa fa-eraser" aria-hidden="true"></i></a>
                         </td>
@@ -59,6 +71,9 @@
                        </td>
 
                     </tr>
+
+                <?php } ?>
+
                 </tbody>
             </table>
         </div>

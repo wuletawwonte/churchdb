@@ -22,36 +22,54 @@
 
 
 
+			<?php if($this->session->flashdata('success')) : ?>
+		        <div class="callout callout-info">
+		            <?php echo $this->session->flashdata('success'); ?>
+		        </div>
+			<?php endif; ?>
+
+
+
+
 
 		<form method="post" action="<?php echo base_url(); ?>sadmin/registerchurch" name="ChurchAdd">
 			<div class="box box-info clearfix">
 				<div class="box-header">
 					<h3 class="box-title">Church Info</h3>
-					<div class="pull-right"><br/>
+
+<!-- 					<div class="pull-right"><br/>
 						<input type="submit" class="btn btn-primary" value="Save" name="ChurchAdd">
 					</div>
-				</div><!-- /.box-header -->
+ -->				
+
+ 				</div><!-- /.box-header -->
+				
 				<div class="box-body">
 					<div class="form-group">
 						<div class="row">
 							<div class="col-md-6">
-								<label>Church Name</label>
-								<input type="text" Name="Name" id="FamilyName" value="" maxlength="48"  class="form-control" required>
+								<label>Name</label>
+								<input type="text" name="name" maxlength="48"  class="form-control" required>
 							</div>
+
+							<div class="form-group col-md-6">
+								<label>Description</label>
+								<textarea class="form-control" rows="3" name="description"></textarea>
+							</div> 
 						</div>
 						<p/>
 						<div class="row">
 							<div class="col-md-6">
 								<label>City:</label>
-									<input type="text" Name="Address1" value="" size="50" maxlength="250"  class="form-control" required>
+									<input type="text" Name="Address1" value="" size="50" maxlength="250"  class="form-control">
 							</div>
 							<div class="col-md-6">
 								<label>Kebele:</label>
-								<input type="text" Name="Address2" value="" size="50" maxlength="250"  class="form-control" required>
+								<input type="text" Name="Address2" value="" size="50" maxlength="250"  class="form-control">
 							</div>
 							<div class="col-md-6">
 								<label>Region:</label>
-								<input type="text" Name="City" value="" maxlength="50"  class="form-control" required>
+								<input type="text" Name="City" value="" maxlength="50"  class="form-control">
 							</div>
 						</div>
 						<p/>
@@ -64,9 +82,11 @@
 			<div class="box box-info clearfix">
 				<div class="box-header">
 					<h3 class="box-title">Contact Info</h3>
-					<div class="pull-right"><br/>
+				
+<!-- 					<div class="pull-right"><br/>
 						<input type="submit" class="btn btn-primary" value="Save" name="FamilySubmit" >
-					</div>
+					</div> -->
+				
 				</div><!-- /.box-header -->
 				<div class="box-body">
 					<div class="row">
@@ -120,9 +140,9 @@
 			</div>
 
 
-            <input type="submit" class="btn btn-primary" value="Save" Name="ChurchAdd">
-			<input type="submit" class="btn btn-info" value="Save and Add" name="ChurchAdd">
-			<input type="button" class="btn" value="Cancel" form="ChurchAdd">
+            <input type="submit" class="btn btn-primary" value="Save" Name="addchurchsubmit">
+			<input type="submit" class="btn btn-info" value="Save and Add" name="addchurchsubmit">
+			<input type="button" class="btn" value="Cancel">
 
 
 

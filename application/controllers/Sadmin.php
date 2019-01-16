@@ -25,6 +25,7 @@ class Sadmin extends CI_Controller {
 	public function churches() {
 
 		$data['active_menu'] = "churches";
+		$data['churches'] = $this->church->get_all();
 		$this->load->view('templates/admin_header', $data);
 		$this->load->view('churches');
 		$this->load->view('templates/footer');
@@ -56,6 +57,22 @@ class Sadmin extends CI_Controller {
 		$this->load->view('newuserform');
 		$this->load->view('templates/footer');
 
+	}
+
+	public function registerchurch() {
+
+		if($this->church->add()) {
+			$this->session->set_flashdata('success', 'Success: Church Successfully Added.');
+			if($this->input->post('addchurchsubmit') == 'Save') {
+				redirect('sadmin/churches');
+			} else if($this->input->post('addchurchsubmit') == 'Save and Add') {
+				redirect('sadmin/newchurchform');
+			}
+		} else {
+			$this->session->set_flashdata('error', '');
+			$this->newchurchform();
+		}
+	
 	}
 
 }

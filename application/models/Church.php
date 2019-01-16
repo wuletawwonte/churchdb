@@ -8,6 +8,24 @@ class Church extends CI_Model {
 		
 	}
 
+	public function Add() {
+		
+		$data = array(
+			'name' => $this->input->post('name'), 
+			'description' => $this->input->post('description') 
+			);
+		if($this->db->insert('churches', $data)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public function get_all() {
+		$res = $this->db->get('churches');	
+		return $res->result_array();
+	}
 
 
 
