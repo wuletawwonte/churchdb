@@ -9,7 +9,9 @@ class Sadmin extends CI_Controller {
 		if($this->session->userdata('is_logged_in') == FALSE) {
 			redirect('users/index');
 		}
+
 		$this->load->model('church');
+		$this->load->model('user');
 	}
 
 
@@ -44,6 +46,7 @@ class Sadmin extends CI_Controller {
 	public function users() {
 
 		$data['active_menu'] = "users";
+		$data['users'] = $this->user->get_all();
 		$this->load->view('templates/admin_header', $data);
 		$this->load->view('users');
 		$this->load->view('templates/footer');
@@ -58,6 +61,16 @@ class Sadmin extends CI_Controller {
 		$this->load->view('templates/footer');
 
 	}
+
+	public function generalsetting() {
+
+		$data['active_menu'] = "generalsetting";
+		$this->load->view('templates/admin_header', $data);
+		$this->load->view('generalsetting');
+		$this->load->view('templates/footer');
+
+	}
+
 
 	public function registerchurch() {
 
@@ -74,5 +87,34 @@ class Sadmin extends CI_Controller {
 		}
 	
 	}
+
+	public function registeruser() {
+
+		if($this->user->add()) {
+			$this->session->set_flashdata('success', 'Success: User Account Successfully Created.');
+			if($this->input->post('addusersubmit') == 'Save') {
+				redirect('sadmin/users');
+			} else if($this->input->post('addusersubmit') == 'Save and Add') {
+				redirect('sadmin/newuserform');
+			}
+		} else {
+			$this->session->set_flashdata('error', '');
+			$this->newuserform();
+		}
+	
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

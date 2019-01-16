@@ -13,7 +13,7 @@ class User extends CI_Model {
 
 		$data = array(
 			'username' => $username ,
-			'password' => $password
+			'password' => md5($password)
 			);
 		
 		$this->db->where($data);
@@ -26,12 +26,31 @@ class User extends CI_Model {
 		}
 	}
 
-
 	public function get_user_type($username) {
 		$this->db->where('username', $username);
 		$res = $this->db->get('users');
 		$res = $res->result_array();
 		return $res[0]['user_type'];
+	}
+
+	public function add() {
+		$data = array(
+			'firstname' => $this->input->post('firstname'), 
+			'lastname' => $this->input->post('lastname'), 
+			'username' => $this->input->post('username'), 
+			'password' => md5($this->input->post('password')), 
+			'user_type' => 'administrator' 
+			);
+		if($this->db->insert('users', $data)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function get_all() {
+		$res = $this->db->get('users');
+		return $res->result_array();
 	}
 
 

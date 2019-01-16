@@ -8,7 +8,7 @@ class Church extends CI_Model {
 		
 	}
 
-	public function Add() {
+	public function add() {
 		
 		$data = array(
 			'name' => $this->input->post('name'), 

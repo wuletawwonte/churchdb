@@ -20,6 +20,15 @@
     <section class="content container-fluid">
 
 
+    <?php if($this->session->flashdata('success')) : ?>
+        <div class="callout callout-info">
+            <?php echo $this->session->flashdata('success'); ?>
+        </div>
+    <?php endif; ?>
+
+
+
+
     <!-- Default box -->
     <div class="box box-primary">
         <div class="box-header">
@@ -35,26 +44,30 @@
                     <th>Name</th>
                     <th align="center">Last Login</th>
                     <th align="center">Total Logins</th>
-                    <th align="center">Failed Logins</th>
+                    <th align="center">Date Created</th>
                     <th align="center">Password</th>
 
                 </tr>
                 </thead>
                 <tbody>
+
+                    <?php foreach($users as $user) { ?>
+                    
                     <tr>
                         <td>
                             <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a onclick=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                         </td>
+
                         <td>
-                            <a href="#"> Wuletaw Wonte</a>
+                            <a href="#"> <?php echo $user['firstname'].' '.$user['lastname']; ?></a>
                         </td>
-                        <td align="center">Jan 23, 2018</td>
+
+                        <td>Jan 23, 2018</td>
                         <td align="center">20</td>
-                        <td align="center"> <span class="text-red">8</span>
-                                <a onclick="#"><i class="fa fa-eraser" aria-hidden="true"></i></a>
-                        </td>
+                        <td><?php echo $user['created']; ?></td>
+
                         <td>
                             <a href="#"><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a onclick="#"><i class="fa fa-send-o" aria-hidden="true"></i></a>
@@ -62,26 +75,8 @@
 
                     </tr>
 
-                    <tr>
-                        <td>
-                            <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a onclick=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                        </td>
-                        <td>
-                            <a href="#"> Kaftile Torayto</a>
-                        </td>
-                        <td align="center">Sempt 20, 2019</td>
-                        <td align="center">4</td>
-                        <td align="center"> <span class="text-red">18</span>
-                                <a onclick="#"><i class="fa fa-eraser" aria-hidden="true"></i></a>
-                        </td>
-                        <td>
-                            <a href="#"><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a onclick="#"><i class="fa fa-send-o" aria-hidden="true"></i></a>
-                       </td>
+                    <?php } ?>
 
-                    </tr>
                 </tbody>
             </table>
         </div>

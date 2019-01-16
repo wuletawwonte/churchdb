@@ -228,7 +228,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li  <?php if($active_menu == 'churches') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/churches"><i class="fa fa-institution"></i> <span>Churches</span></a></li>
         <li <?php if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/users"><i class="fa fa-users"></i> <span>Users</span></a></li>
-        <li><a href="#"><i class="fa fa-gears"></i> <span>General Setting</span></a></li>
+        <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/generalsetting"><i class="fa fa-gears"></i> <span>General Setting</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">
