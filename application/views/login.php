@@ -74,7 +74,7 @@ var baseurl = '<?php echo base_url(); ?>';
 							<i class="fa fa-user"></i>
 						</div>
 						
-						<input type="text" class="form-control" name="username" id="email" placeholder="ስም" autocomplete="off" required />
+						<input type="text" class="form-control" name="username" id="email" placeholder="ስም" autocomplete="off" autofocus required />
 					</div>
 					
 				</div>

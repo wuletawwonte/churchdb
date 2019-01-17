@@ -26,11 +26,11 @@ class User extends CI_Model {
 		}
 	}
 
-	public function get_user_type($username) {
+	public function get_user($username) {
 		$this->db->where('username', $username);
 		$res = $this->db->get('users');
 		$res = $res->result_array();
-		return $res[0]['user_type'];
+		return $res[0];
 	}
 
 	public function add() {
@@ -54,7 +54,6 @@ class User extends CI_Model {
 		$res = $this->db->get('users');
 		return $res->result_array();
 	}
-
 
 
 

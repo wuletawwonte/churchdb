@@ -8,7 +8,7 @@
         	General Settings
       	</h1>
       	<ol class="breadcrumb">
-        	<li><a href="<?php echo base_url(); ?>sadmin/users"><i class="fa fa-gear"></i> Settings</a></li>
+        	<li><a href="<?php echo base_url(); ?>sadmin/generalsetting"><i class="fa fa-gear"></i> General Settings</a></li>
         	<li class="active">General</li>
       	</ol>
     </section>
@@ -20,6 +20,12 @@
 		<!-- Default box -->
 		<div class="box box-info">
 		    <div class="box-body">
+
+		        <div class="callout callout-info">
+		            Note: Changes will not take effect until next logon.
+		        </div>
+
+
 		        <form method="post" action="">
 		            <div class="table-responsive">
 		                <table class="table table-hover">
@@ -27,6 +33,11 @@
 		                    <tr>
 		                        <td>System Name:</td>
 		                        <td><input type="text" name="system_name" value="<?php echo $system_name; ?>" class="form-control" width="32"></td>
+		                    </tr>
+
+		                    <tr>
+		                        <td>System Name in Short:</td>
+		                        <td><input type="text" name="system_name_short" value="<?php echo $system_name_short; ?>" class="form-control" width="5"></td>
 		                    </tr>
 
 		                    <tr>

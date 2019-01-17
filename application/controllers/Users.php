@@ -29,10 +29,15 @@ class Users extends CI_Controller {
 		$this->form_validation->set_rules('password', 'password', 'required|trim');
 
 		if($this->form_validation->run()){
+			$userdata = $this->user->get_user($this->input->post('username'));
 			$data = array(
+				'name' => $userdata['firstname'].' '.$userdata['lastname'],
 				'username' => $this->input->post('username'),
 				'is_logged_in' => TRUE,
-				'user_type' => $this->user->get_user_type($this->input->post('username'))
+				'user_type' => $userdata['user_type'],
+				'skin' => $userdata['skin'],
+				'system_name' => $this->cnfg->get('system_name'),
+				'system_name_short' => $this->cnfg->get('system_name_short')
 				);
 
 			$this->session->set_userdata($data);

@@ -7,19 +7,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> ቸርችDB </title>
+  <title> <?php echo $this->session->userdata('system_name'); ?> </title>
 
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/AdminLTE.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/skins/<?php echo $skin; ?>.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/skins/<?php echo $this->session->userdata('skin'); ?>.min.css">
 
   <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.ico">
 
 </head>
 
-<body class="hold-transition <?php echo $skin; ?> sidebar-mini">
+<body class="hold-transition <?php echo $this->session->userdata('skin'); ?> sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -28,9 +28,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Logo -->
     <a href="<?php echo base_url(); ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>ቸ</b>D</span>
+      <span class="logo-mini"><?php echo $this->session->userdata('system_name_short'); ?></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>ቸርች</b>DB</span>
+      <span class="logo-lg"><?php echo $this->session->userdata('system_name'); ?></span>
     </a>
 
     <!-- Header Navbar -->
@@ -145,7 +145,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- The user image in the navbar-->
               <img src="<?php echo base_url(); ?>assets/img/admin.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Administrator</span>
+              <span class="hidden-xs"><?php echo $this->session->userdata('name'); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -153,7 +153,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <img src="<?php echo base_url(); ?>assets/img/admin.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Gracesoft - Web Developer
+                  <?php echo $this->session->userdata('system_name'); ?> - Super Admin
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -203,7 +203,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="<?php echo base_url(); ?>assets/img/admin.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Administrator</p>
+          <p><?php echo $this->session->userdata('name'); ?></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
