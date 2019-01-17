@@ -7,30 +7,20 @@ class Users extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('user');
+		$this->load->model('cnfg');
 	}
 
 
 	public function index()
 	{
 		if($this->session->userdata('is_logged_in') == TRUE) {
-			redirect('users/adminhome');			
+			redirect('sadmin/index');			
 		} else {
-			$this->load->view('login');
+			$data['system_name'] = $this->cnfg->get('system_name');
+			$this->load->view('login', $data);
 		}
 	}
 
-	public function adminhome() {
-		if($this->session->userdata('is_logged_in') == TRUE) {
-
-			$data['active_menu'] = "dashboard";
-			$this->load->view('templates/admin_header', $data);
-			$this->load->view('home');
-			$this->load->view('templates/footer');
-
-		} else {
-			redirect('users/index');
-		}
-	}
 
 	public function login() {
 
@@ -39,16 +29,22 @@ class Users extends CI_Controller {
 		$this->form_validation->set_rules('password', 'password', 'required|trim');
 
 		if($this->form_validation->run()){
+			$userdata = $this->user->get_user($this->input->post('username'));
 			$data = array(
+				'name' => $userdata['firstname'].' '.$userdata['lastname'],
 				'username' => $this->input->post('username'),
 				'is_logged_in' => TRUE,
-				'user_type' => $this->user->get_user_type($this->input->post('username'))
+				'user_type' => $userdata['user_type'],
+				'skin' => $userdata['skin'],
+				'system_name' => $this->cnfg->get('system_name'),
+				'system_name_short' => $this->cnfg->get('system_name_short'),
+				'language' => $userdata['language']
 				);
 
 			$this->session->set_userdata($data);
 
 			if($this->session->userdata('user_type') == "administrator") {
-				redirect('users/adminhome');
+				redirect('sadmin/index');
 			} else {
 				$this->session->unset_userdata('is_logged_id');
 				$this->session->set_flashdata("login_failed", "ያስገቡት መረጃ ትክክል አይደለም");
@@ -78,17 +74,6 @@ class Users extends CI_Controller {
 		redirect();
 	}
 
-	public function churches() {
-		if($this->session->userdata('is_logged_in') == TRUE) {
-			$data['active_menu'] = "churches";
-			$this->load->view('templates/admin_header', $data);
-			$this->load->view('churches');
-			$this->load->view('templates/footer');
-
-		} else {
-			redirect('users/index');
-		}
-	}
 
 
 

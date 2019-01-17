@@ -7,11 +7,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Churches
-        <small>List of churches Registered</small>
+        Users
+        <small>List of Registered Users</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>sadmin/churches"><i class="fa fa-institution"></i> Churches</a></li>
+        <li><a href="<?php echo base_url(); ?>sadmin/users"><i class="fa fa-users"></i> Users</a></li>
         <li class="active">List</li>
       </ol>
     </section>
@@ -27,11 +27,13 @@
     <?php endif; ?>
 
 
+
+
     <!-- Default box -->
     <div class="box box-primary">
         <div class="box-header">
-            <a href="<?php echo base_url(); ?>sadmin/newchurchform" class="btn btn-app"><i class="fa fa-institution"></i>New Church</a>
-            <a href="SettingsUser.php" class="btn btn-app"><i class="fa fa-wrench"></i>Church Settings</a>
+            <a href="<?php echo base_url(); ?>sadmin/newuserform" class="btn btn-app"><i class="fa fa-user-plus"></i>New User</a>
+            <a href="SettingsUser.php" class="btn btn-app"><i class="fa fa-wrench"></i>User Settings</a>
         </div>
 
         <div class="box-body">
@@ -40,31 +42,32 @@
                 <tr>
                     <th>Actions</th>
                     <th>Name</th>
-                    <th align="center">Description</th>
+                    <th align="center">Last Login</th>
+                    <th align="center">Total Logins</th>
                     <th align="center">Date Created</th>
-                    <th align="center">More</th>
+                    <th align="center">Password</th>
 
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach($churches as $church) { ?>
 
-
-
-
+                    <?php foreach($users as $user) { ?>
+                    
                     <tr>
                         <td>
-                            <a href="<?php echo base_url(); ?>sadmin/editchurchform/<?php echo $church['id']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a onclick=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                         </td>
+
                         <td>
-                            <a href="#"> <?php echo $church['name']; ?></a>
+                            <a href="#"> <?php echo $user['firstname'].' '.$user['lastname']; ?></a>
                         </td>
-                        <td><?php echo $church['description']; ?></td>
-                        <td> <span class="text-red">8</span>
-                                <a onclick="#"><i class="fa fa-eraser" aria-hidden="true"></i></a>
-                        </td>
+
+                        <td>Jan 23, 2018</td>
+                        <td align="center">20</td>
+                        <td><?php echo $user['created']; ?></td>
+
                         <td>
                             <a href="#"><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a onclick="#"><i class="fa fa-send-o" aria-hidden="true"></i></a>
@@ -72,7 +75,7 @@
 
                     </tr>
 
-                <?php } ?>
+                    <?php } ?>
 
                 </tbody>
             </table>
@@ -80,23 +83,6 @@
         <!-- /.box-body -->
     </div>
     <!-- /.box -->
-
-
-
-
-
-
-
-
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
-
-
-
-
-
-
 
 
 
