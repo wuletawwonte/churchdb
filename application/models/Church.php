@@ -27,6 +27,14 @@ class Church extends CI_Model {
 		return $res->result_array();
 	}
 
+	public function get_church($attrib, $value) {
+		$this->db->where($attrib, $value);
+		$data = $this->db->get('churches');
+		$data = $data->result_array();
+
+		return $data[0];
+	}
+
 
 
 }

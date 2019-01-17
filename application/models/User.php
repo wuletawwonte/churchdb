@@ -55,6 +55,14 @@ class User extends CI_Model {
 		return $res->result_array();
 	}
 
+	public function get_my($attrib) {
+		$this->db->where('username', $this->session->userdata('username'));
+		$data = $this->db->get('users');
+		$data = $data->result_array(); 
+
+		return $data[0][$attrib];
+	}
+
 
 
 }

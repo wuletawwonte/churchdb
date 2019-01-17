@@ -63,11 +63,11 @@
 						<p/>
 						<div class="row">
 							<div class="col-md-6">
-								<label>Username:</label>
+								<label><?php echo lang('Username'); ?>:</label>
 									<input type="text" Name="username" value="" size="50" maxlength="250"  class="form-control" required>
 							</div>
 							<div class="col-md-6">
-								<label>Password:</label>
+								<label><?php echo lang('Password'); ?>:</label>
 								<input type="password" Name="password" value="" size="50" maxlength="250"  class="form-control" required>
 							</div>
 						</div>

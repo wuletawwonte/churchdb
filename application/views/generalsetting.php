@@ -54,6 +54,15 @@
 		                    </tr>
 
 		                    <tr>
+		                        <td>Language:</td>
+		                    	<td><select name="skin" size="3" class="form-control">
+					                    <option <?php if($language == 'english') { echo 'selected'; } ?> value="skin-blue">english</option>
+					                    <option <?php if($language == 'amharic') { echo 'selected'; } ?> value="skin-black">amharic</option>
+					                </select>
+					            </td>
+		                    </tr>
+
+		                    <tr>
 		                        <td>Edit Records:</td>
 		                        <td><input type="checkbox" name="EditRecords" value="1"></td>
 		                    </tr>

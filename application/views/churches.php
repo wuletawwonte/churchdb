@@ -54,7 +54,7 @@
 
                     <tr>
                         <td>
-                            <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="<?php echo base_url(); ?>sadmin/editchurchform/<?php echo $church['id']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a onclick=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                         </td>

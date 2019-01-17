@@ -37,7 +37,8 @@ class Users extends CI_Controller {
 				'user_type' => $userdata['user_type'],
 				'skin' => $userdata['skin'],
 				'system_name' => $this->cnfg->get('system_name'),
-				'system_name_short' => $this->cnfg->get('system_name_short')
+				'system_name_short' => $this->cnfg->get('system_name_short'),
+				'language' => $userdata['language']
 				);
 
 			$this->session->set_userdata($data);

@@ -13,6 +13,8 @@ class Sadmin extends CI_Controller {
 		$this->load->model('church');
 		$this->load->model('user');
 		$this->load->model('cnfg');
+
+		$this->lang->load('label_lang', $this->session->userdata('language'));
 	}
 
 
@@ -70,6 +72,7 @@ class Sadmin extends CI_Controller {
 		$data['system_name'] = $this->cnfg->get('system_name');
 		$data['system_name_short'] = $this->cnfg->get('system_name_short');
 		$data2['skin'] = $this->cnfg->get('skin');
+		$data2['language'] = $this->user->get_my('language');
 		$this->load->view('templates/admin_header', $data);
 		$this->load->view('generalsetting', $data2);
 		$this->load->view('templates/footer');
@@ -110,7 +113,15 @@ class Sadmin extends CI_Controller {
 	}
 
 
+	public function editchurchform($churchid) {
 
+		$data['active_menu'] = "";
+		$data2['church'] = $this->church->get_church('id', $churchid);
+		$this->load->view('templates/admin_header', $data);
+		$this->load->view('editchurchform', $data2);
+		$this->load->view('templates/footer');
+
+	}
 
 
 

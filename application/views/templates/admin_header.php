@@ -225,22 +225,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
         <!-- Optionally, you can add icons to the links -->
-        <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li  <?php if($active_menu == 'churches') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/churches"><i class="fa fa-institution"></i> <span>Churches</span></a></li>
+        <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span><?= lang('Dashboard'); ?></span></a></li>
+        <li  <?php if($active_menu == 'churches') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/churches"><i class="fa fa-institution"></i> <span><?= lang('Churches'); ?></span></a></li>
         <li <?php if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/users"><i class="fa fa-users"></i> <span>Users</span></a></li>
-        <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/generalsetting"><i class="fa fa-gears"></i> <span>General Setting</span></a></li>
-<!--         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-gears"></i> <span>Setting</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/generalsetting"><i class="fa fa-angle-double-right"></i> General Setting</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i> User Setting</a></li>
           </ul>
         </li>
- -->      
+      
       </ul>
       <!-- /.sidebar-menu -->
     </section>
