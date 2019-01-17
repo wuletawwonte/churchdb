@@ -7,6 +7,7 @@ class Users extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('user');
+		$this->load->model('cnfg');
 	}
 
 
@@ -15,7 +16,8 @@ class Users extends CI_Controller {
 		if($this->session->userdata('is_logged_in') == TRUE) {
 			redirect('sadmin/index');			
 		} else {
-			$this->load->view('login');
+			$data['system_name'] = $this->cnfg->get('system_name');
+			$this->load->view('login', $data);
 		}
 	}
 

@@ -13,13 +13,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/AdminLTE.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/skins/skin-yellow.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/skins/<?php echo $skin; ?>.min.css">
 
   <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.ico">
 
 </head>
 
-<body class="hold-transition skin-yellow sidebar-mini">
+<body class="hold-transition <?php echo $skin; ?> sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -229,7 +229,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li  <?php if($active_menu == 'churches') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/churches"><i class="fa fa-institution"></i> <span>Churches</span></a></li>
         <li <?php if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/users"><i class="fa fa-users"></i> <span>Users</span></a></li>
         <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/generalsetting"><i class="fa fa-gears"></i> <span>General Setting</span></a></li>
-        <li class="treeview">
+<!--         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -240,6 +240,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li><a href="#">Link in level 2</a></li>
           </ul>
         </li>
+ -->      
       </ul>
       <!-- /.sidebar-menu -->
     </section>

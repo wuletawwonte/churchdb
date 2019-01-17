@@ -39,6 +39,8 @@ class User extends CI_Model {
 			'lastname' => $this->input->post('lastname'), 
 			'username' => $this->input->post('username'), 
 			'password' => md5($this->input->post('password')), 
+			'role' => $this->input->post('role'), 
+			'church' => $this->input->post('church'), 
 			'user_type' => 'administrator' 
 			);
 		if($this->db->insert('users', $data)) {

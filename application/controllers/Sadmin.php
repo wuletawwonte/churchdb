@@ -12,11 +12,13 @@ class Sadmin extends CI_Controller {
 
 		$this->load->model('church');
 		$this->load->model('user');
+		$this->load->model('cnfg');
 	}
 
 
 	public function index() {
 
+		$data['skin'] = $this->cnfg->get('skin');
 		$data['active_menu'] = "dashboard";
 		$this->load->view('templates/admin_header', $data);
 		$this->load->view('home');
@@ -26,6 +28,7 @@ class Sadmin extends CI_Controller {
 
 	public function churches() {
 
+		$data['skin'] = $this->cnfg->get('skin');
 		$data['active_menu'] = "churches";
 		$data['churches'] = $this->church->get_all();
 		$this->load->view('templates/admin_header', $data);
@@ -36,6 +39,7 @@ class Sadmin extends CI_Controller {
 
 	public function newchurchform() {
 
+		$data['skin'] = $this->cnfg->get('skin');
 		$data['active_menu'] = "";
 		$this->load->view('templates/admin_header', $data);
 		$this->load->view('newchurchform');
@@ -45,6 +49,7 @@ class Sadmin extends CI_Controller {
 
 	public function users() {
 
+		$data['skin'] = $this->cnfg->get('skin');
 		$data['active_menu'] = "users";
 		$data['users'] = $this->user->get_all();
 		$this->load->view('templates/admin_header', $data);
@@ -55,7 +60,9 @@ class Sadmin extends CI_Controller {
 
 	public function newuserform() {
 
+		$data['skin'] = $this->cnfg->get('skin');
 		$data['active_menu'] = "";
+		$data['churches'] = $this->church->get_all();
 		$this->load->view('templates/admin_header', $data);
 		$this->load->view('newuserform');
 		$this->load->view('templates/footer');
@@ -64,9 +71,12 @@ class Sadmin extends CI_Controller {
 
 	public function generalsetting() {
 
+		$data['skin'] = $this->cnfg->get('skin');
 		$data['active_menu'] = "generalsetting";
+		$data['system_name'] = $this->cnfg->get('system_name');
+		$data2['skin'] = $this->cnfg->get('skin');
 		$this->load->view('templates/admin_header', $data);
-		$this->load->view('generalsetting');
+		$this->load->view('generalsetting', $data2);
 		$this->load->view('templates/footer');
 
 	}

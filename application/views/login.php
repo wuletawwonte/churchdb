@@ -39,7 +39,7 @@ var baseurl = '<?php echo base_url(); ?>';
 				<img src="<?php echo base_url(); ?>assets/img/logo.png" height="80" alt="" />			</a>
 			
 			<p class="description">
-            	<h2 style="color:#cacaca; font-weight:100;"><b>ቸርች</b>DB</h2>
+            	<h2 style="color:#cacaca; font-weight:100;"><?php echo $system_name; ?></h2>
            </p>
 			
 			<!-- progress bar indicator -->
