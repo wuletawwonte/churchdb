@@ -21,9 +21,9 @@ class Sadmin extends CI_Controller {
 	public function index() {
 
 		$data['active_menu'] = "dashboard";
-		$this->load->view('templates/admin_header', $data);
+		$this->load->view('sadmin_templates/admin_header', $data);
 		$this->load->view('home');
-		$this->load->view('templates/footer');
+		$this->load->view('sadmin_templates/footer');
 
 	}
 
@@ -31,18 +31,18 @@ class Sadmin extends CI_Controller {
 
 		$data['active_menu'] = "churches";
 		$data['churches'] = $this->church->get_all();
-		$this->load->view('templates/admin_header', $data);
+		$this->load->view('sadmin_templates/admin_header', $data);
 		$this->load->view('churches');
-		$this->load->view('templates/footer');
+		$this->load->view('sadmin_templates/footer');
 
 	}
 
 	public function newchurchform() {
 
 		$data['active_menu'] = "";
-		$this->load->view('templates/admin_header', $data);
+		$this->load->view('sadmin_templates/admin_header', $data);
 		$this->load->view('newchurchform');
-		$this->load->view('templates/footer');
+		$this->load->view('sadmin_templates/footer');
 
 	}
 
@@ -50,9 +50,9 @@ class Sadmin extends CI_Controller {
 
 		$data['active_menu'] = "users";
 		$data['users'] = $this->user->get_all();
-		$this->load->view('templates/admin_header', $data);
+		$this->load->view('sadmin_templates/admin_header', $data);
 		$this->load->view('users');
-		$this->load->view('templates/footer');
+		$this->load->view('sadmin_templates/footer');
 
 	}
 
@@ -60,9 +60,9 @@ class Sadmin extends CI_Controller {
 
 		$data['active_menu'] = "";
 		$data['churches'] = $this->church->get_all();
-		$this->load->view('templates/admin_header', $data);
+		$this->load->view('sadmin_templates/admin_header', $data);
 		$this->load->view('newuserform');
-		$this->load->view('templates/footer');
+		$this->load->view('sadmin_templates/footer');
 
 	}
 
@@ -73,9 +73,19 @@ class Sadmin extends CI_Controller {
 		$data['system_name_short'] = $this->cnfg->get('system_name_short');
 		$data2['skin'] = $this->cnfg->get('skin');
 		$data2['language'] = $this->user->get_my('language');
-		$this->load->view('templates/admin_header', $data);
+		$this->load->view('sadmin_templates/admin_header', $data);
 		$this->load->view('generalsetting', $data2);
-		$this->load->view('templates/footer');
+		$this->load->view('sadmin_templates/footer');
+
+	}
+
+	public function usersetting() {
+
+		$data['active_menu'] = "usersetting";
+		$data2['users'] = $this->user->get_all();
+		$this->load->view('sadmin_templates/admin_header', $data);
+		$this->load->view('usersetting', $data2);
+		$this->load->view('sadmin_templates/footer');
 
 	}
 
@@ -117,9 +127,9 @@ class Sadmin extends CI_Controller {
 
 		$data['active_menu'] = "";
 		$data2['church'] = $this->church->get_church('id', $churchid);
-		$this->load->view('templates/admin_header', $data);
+		$this->load->view('sadmin_templates/admin_header', $data);
 		$this->load->view('editchurchform', $data2);
-		$this->load->view('templates/footer');
+		$this->load->view('sadmin_templates/footer');
 
 	}
 
