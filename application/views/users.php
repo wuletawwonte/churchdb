@@ -20,12 +20,15 @@
     <section class="content container-fluid">
 
 
-    <?php if($this->session->flashdata('success')) : ?>
+    <?php if($this->session->flashdata('success')) { ?>
         <div class="callout callout-info">
             <?php echo $this->session->flashdata('success'); ?>
         </div>
-    <?php endif; ?>
-
+    <?php } else if($this->session->flashdata('error')) { ?>
+        <div class="callout callout-error">
+            <?php echo $this->session->flashdata('error'); ?>
+        </div>
+    <?php } ?>
 
 
 
@@ -51,11 +54,12 @@
                 </thead>
                 <tbody>
 
-                    <?php foreach($users as $user) { ?>
-                    
+                    <?php foreach($users as $user) {  
+                            if($user['user_type'] != 'super_administrator') { ?>
+
                     <tr>
                         <td>
-                            <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="<?php echo base_url(); ?>sadmin/edituserform/<?= $user['id'] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a onclick=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                         </td>
@@ -75,7 +79,7 @@
 
                     </tr>
 
-                    <?php } ?>
+                    <?php } } ?>
 
                 </tbody>
             </table>

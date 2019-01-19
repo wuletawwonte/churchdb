@@ -49,8 +49,30 @@
 						<div class="row">
 							<div class="col-md-6">
 								<label>Name</label>
-								<input type="text" name="name" maxlength="48"  class="form-control" required>
+								<input type="text" name="name" maxlength="100"  class="form-control" required>
 							</div>
+
+							<div class="col-md-4">
+								<label>Short Name</label>
+								<input type="text" name="short_name" maxlength="20"  class="form-control" required>
+							</div>
+
+							<div class="col-md-2">
+								<label>Mini logo</label>
+								<input type="text" name="mini_logo" maxlength="3"  class="form-control" required>
+							</div>
+
+				            <div class="form-group col-md-6">
+				                <label>Denomination</label>
+				                <select name="denomination" class="form-control">
+				                    <option value="መካነኢየሱስ">መካነኢየሱስ</option>
+				                    <option value="ቃለሕይወት">ቃለሕይወት</option>
+				                    <option value="ሙሉወንጌል">ሙሉወንጌል</option>
+				                    <option value="መሰረተክርስቶስ">መሰረተክርስቶስ</option>
+				                    <option value="0" disabled>-----------------------</option>
+				                    <option value="ሌላ">ሌላ</option>
+				                </select>
+				            </div>
 
 							<div class="form-group col-md-6">
 								<label>Description</label>
@@ -59,18 +81,6 @@
 						</div>
 						<p/>
 						<div class="row">
-							<div class="col-md-6">
-								<label>City:</label>
-									<input type="text" Name="Address1" value="" size="50" maxlength="250"  class="form-control">
-							</div>
-							<div class="col-md-6">
-								<label>Kebele:</label>
-								<input type="text" Name="Address2" value="" size="50" maxlength="250"  class="form-control">
-							</div>
-							<div class="col-md-6">
-								<label>Region:</label>
-								<input type="text" Name="City" value="" maxlength="50"  class="form-control">
-							</div>
 						</div>
 						<p/>
 						</p></p>
@@ -81,59 +91,22 @@
 
 			<div class="box box-info clearfix">
 				<div class="box-header">
-					<h3 class="box-title">Contact Info</h3>
-				
-<!-- 					<div class="pull-right"><br/>
-						<input type="submit" class="btn btn-primary" value="Save" name="FamilySubmit" >
-					</div> -->
-				
+					<h3 class="box-title">Address Info</h3>
+								
 				</div><!-- /.box-header -->
 				<div class="box-body">
 					<div class="row">
-						<div class="form-group col-md-6">
-							<label>Office Phone:</label>
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-phone"></i>
-								</div>
-								<input type="text" Name="HomePhone" value="" size="30" maxlength="30" class="form-control" data-inputmask='sPhoneFormat' data-mask>
-								<input type="checkbox" name="NoFormat_HomePhone" value="1" >Do not auto-format
-							</div>
+						<div class="col-md-6">
+							<label>City:</label>
+								<input type="text" Name="Address1" value="" size="50" maxlength="250"  class="form-control">
 						</div>
-						<div class="form-group col-md-6">
-							<label>Work Phone:</label>
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-phone"></i>
-								</div>
-								<input type="text" name="WorkPhone" value="" size="30" maxlength="30" class="form-control" data-inputmask='' data-mask/>
-								<input type="checkbox" name="NoFormat_WorkPhone" value="1" >Do not auto-format
-							</div>
+						<div class="col-md-6">
+							<label>Kebele:</label>
+							<input type="text" Name="Address2" value="" size="50" maxlength="250"  class="form-control">
 						</div>
-						<div class="form-group col-md-6">
-							<label>Mobile Phone:</label>
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-phone"></i>
-								</div>
-								<input type="text" name="CellPhone" value="" size="30" maxlength="30" class="form-control" data-inputmask='' data-mask>
-								<input type="checkbox" name="NoFormat_CellPhone" value="1" >Do not auto-format
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-6">
-							<label>Email:</label>
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="fa fa-envelope"></i>
-								</div>
-								<input type="text" Name="Email" class="form-control" value="" size="30" maxlength="100"><font color="red"></font>
-							</div>
-						</div>
-						<div class="form-group col-md-4">
-							<label><?= gettext('Send Newsletter') ?>:</label><br/>
-							<input type="checkbox" Name="SendNewsLetter" value="1">
+						<div class="col-md-6">
+							<label>Region:</label>
+							<input type="text" Name="City" value="" maxlength="50"  class="form-control">
 						</div>
 					</div>
 				</div>

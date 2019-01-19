@@ -8,13 +8,18 @@ class Users extends CI_Controller {
 		
 		$this->load->model('user');
 		$this->load->model('cnfg');
+		$this->load->model('church');
 	}
 
 
 	public function index()
 	{
 		if($this->session->userdata('is_logged_in') == TRUE) {
-			redirect('sadmin/index');			
+			if($this->session->userdata('user_type') == "super_administrator") {
+				redirect('sadmin/index');
+			} else if($this->session->userdata('user_type') == "administrator") {
+				redirect('admin/index');
+			}			
 		} else {
 			$data['system_name'] = $this->cnfg->get('system_name');
 			$this->load->view('login', $data);
@@ -29,22 +34,34 @@ class Users extends CI_Controller {
 		$this->form_validation->set_rules('password', 'password', 'required|trim');
 
 		if($this->form_validation->run()){
-			$userdata = $this->user->get_user($this->input->post('username'));
+			$userdata = $this->user->get_user('username', $this->input->post('username'));
 			$data = array(
 				'name' => $userdata['firstname'].' '.$userdata['lastname'],
 				'username' => $this->input->post('username'),
 				'is_logged_in' => TRUE,
 				'user_type' => $userdata['user_type'],
 				'skin' => $userdata['skin'],
-				'system_name' => $this->cnfg->get('system_name'),
-				'system_name_short' => $this->cnfg->get('system_name_short'),
 				'language' => $userdata['language']
 				);
 
 			$this->session->set_userdata($data);
 
-			if($this->session->userdata('user_type') == "administrator") {
+			if($this->session->userdata('user_type') == "super_administrator") {
+
+				$this->session->set_userdata('system_name', $this->cnfg->get('system_name'));
+				$this->session->set_userdata('system_name_short', $this->cnfg->get('system_name_short'));
+
 				redirect('sadmin/index');
+
+			} else if($this->session->userdata('user_type') == "administrator") {
+				if($userdata['role'] == "Administrator" && $userdata['church'] != 0) {
+					$mychurch = $this->church->get_church('id', $userdata['church']);					
+					$this->session->set_userdata('system_name', $mychurch['short_name']);
+					$this->session->set_userdata('system_name_short', $mychurch['mini_logo']);
+
+					redirect('admin/index');
+				} 
+				redirect('users/index');
 			} else {
 				$this->session->unset_userdata('is_logged_id');
 				$this->session->set_flashdata("login_failed", "ያስገቡት መረጃ ትክክል አይደለም");

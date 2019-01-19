@@ -40,7 +40,7 @@
                 <tr>
                     <th>Actions</th>
                     <th>Name</th>
-                    <th align="center">Description</th>
+                    <th align="center">Denomination</th>
                     <th align="center">Date Created</th>
                     <th align="center">More</th>
 
@@ -61,10 +61,8 @@
                         <td>
                             <a href="#"> <?php echo $church['name']; ?></a>
                         </td>
-                        <td><?php echo $church['description']; ?></td>
-                        <td> <span class="text-red">8</span>
-                                <a onclick="#"><i class="fa fa-eraser" aria-hidden="true"></i></a>
-                        </td>
+                        <td><?php echo $church['denomination']; ?></td>
+                        <td><?php echo $church['created']; ?></td>
                         <td>
                             <a href="#"><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a onclick="#"><i class="fa fa-send-o" aria-hidden="true"></i></a>

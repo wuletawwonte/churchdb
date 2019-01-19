@@ -71,10 +71,11 @@ class Sadmin extends CI_Controller {
 		$data['active_menu'] = "generalsetting";
 		$data['system_name'] = $this->cnfg->get('system_name');
 		$data['system_name_short'] = $this->cnfg->get('system_name_short');
-		$data2['skin'] = $this->user->get_my('skin');
-		$data2['language'] = $this->user->get_my('language');
+		$data['default_password'] = $this->cnfg->get('default_password');
+		$data['skin'] = $this->user->get_my('skin');
+		$data['language'] = $this->user->get_my('language');
 		$this->load->view('sadmin_templates/admin_header', $data);
-		$this->load->view('generalsetting', $data2);
+		$this->load->view('generalsetting');
 		$this->load->view('sadmin_templates/footer');
 
 	}
@@ -100,7 +101,7 @@ class Sadmin extends CI_Controller {
 				redirect('sadmin/newchurchform');
 			}
 		} else {
-			$this->session->set_flashdata('error', '');
+			$this->session->set_flashdata('error', 'Unable to Register Church');
 			$this->newchurchform();
 		}
 	
@@ -126,11 +127,20 @@ class Sadmin extends CI_Controller {
 	public function editchurchform($churchid) {
 
 		$data['active_menu'] = "";
-		$data2['church'] = $this->church->get_church('id', $churchid);
+		$data['church'] = $this->church->get_church('id', $churchid);
 		$this->load->view('sadmin_templates/admin_header', $data);
-		$this->load->view('editchurchform', $data2);
+		$this->load->view('editchurchform');
 		$this->load->view('sadmin_templates/footer');
 
+	}
+
+	public function edituserform($userid) {
+		$data['active_menu'] = "";
+		$data['user'] = $this->user->get_user('id', $userid);
+		$data['churches'] = $this->church->get_all();		
+		$this->load->view('sadmin_templates/admin_header', $data);
+		$this->load->view('edituserform');
+		$this->load->view('sadmin_templates/footer');
 	}
 
 	public function savesetting() {
@@ -142,6 +152,17 @@ class Sadmin extends CI_Controller {
 
 		redirect('sadmin/generalsetting');
 
+	}
+
+	public function edituser() {
+	
+		if($this->user->update_user()) {
+			$this->session->set_flashdata('success', 'Success, User account information successfully updated.');
+		} else {
+			$this->session->set_flashdata('error', 'Error, Something went wrong please check fill carefully.');
+		}
+
+		redirect('sadmin/users');
 	}
 
 

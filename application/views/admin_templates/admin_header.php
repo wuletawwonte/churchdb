@@ -143,17 +143,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="<?php echo base_url(); ?>assets/img/admin.jpg" class="user-image" alt="User Image">
+              <img src="<?php echo base_url(); ?>assets/img/user-icon.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs"><?php echo $this->session->userdata('name'); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="<?php echo base_url(); ?>assets/img/admin.jpg" class="img-circle" alt="User Image">
+                <img src="<?php echo base_url(); ?>assets/img/user-icon.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $this->session->userdata('system_name'); ?> - Super Admin
+                  <?php echo $this->session->userdata('system_name'); ?> - Admin
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -200,7 +200,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url(); ?>assets/img/admin.jpg" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url(); ?>assets/img/user-icon.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('name'); ?></p>
@@ -226,8 +226,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li class="header">MENU</li>
         <!-- Optionally, you can add icons to the links -->
         <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span><?= lang('Dashboard'); ?></span></a></li>
-        <li  <?php if($active_menu == 'churches') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/churches"><i class="fa fa-institution"></i> <span><?= lang('Churches'); ?></span></a></li>
-        <li <?php if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/users"><i class="fa fa-users"></i> <span>Users</span></a></li>
+        <li  <?php if($active_menu == 'people') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/churches"><i class="fa fa-users"></i> <span>People</span></a></li>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-child"></i> <span>Sunday School</span></a></li>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-tag"></i> <span>Groups</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-gears"></i> <span>Setting</span>
             <span class="pull-right-container">
@@ -235,7 +236,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </span>
           </a>
           <ul class="treeview-menu">
-            <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/generalsetting"><i class="fa fa-angle-double-right"></i> General Setting</a></li>
+            <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-angle-double-right"></i> General Setting</a></li>
             <li><a href="#"><i class="fa fa-angle-double-right"></i> User Setting</a></li>
           </ul>
         </li>

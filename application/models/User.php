@@ -26,8 +26,8 @@ class User extends CI_Model {
 		}
 	}
 
-	public function get_user($username) {
-		$this->db->where('username', $username);
+	public function get_user($attrib, $username) {
+		$this->db->where($attrib, $username);
 		$res = $this->db->get('users');
 		$res = $res->result_array();
 		return $res[0];
@@ -44,6 +44,23 @@ class User extends CI_Model {
 			'user_type' => 'administrator' 
 			);
 		if($this->db->insert('users', $data)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function update_user() {
+		$data = array(
+			'firstname' => $this->input->post('firstname'), 
+			'lastname' => $this->input->post('lastname'), 
+			'username' => $this->input->post('username'), 
+			'role' => $this->input->post('role'), 
+			'church' => $this->input->post('church'), 
+			'user_type' => 'administrator' 
+			);
+		$this->db->where('id', $this->input->post('id'));
+		if($this->db->update('users', $data)) {
 			return true;
 		} else {
 			return false;
@@ -70,6 +87,7 @@ class User extends CI_Model {
 		$this->db->where('username', $this->session->userdata('username'));
 		$this->db->update('users', $data);
 	}
+
 
 
 

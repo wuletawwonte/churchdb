@@ -63,13 +63,13 @@
 		                    </tr>
 
 		                    <tr>
-		                        <td>View, Add and Edit Notes:</td>
-		                        <td><input type="checkbox" name="Notes" value="1"></td>
+		                        <td>Default Password:</td>
+		                        <td><input type="password" name="default_password" value="<?php echo $default_password; ?>" class="form-control" width="32"></td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>Edit Self:</td>
-		                        <td><input type="checkbox" name="EditSelf" value="1">&nbsp;<span class="SmallText">(Edit own family only.)</span></td>
+		                        <td><input type="checkbox" name="EditSelf" value="1">&nbsp;</td>
 		                    </tr>
 		                    <tr>
 		                        <td>Canvasser:</td>

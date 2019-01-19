@@ -49,7 +49,7 @@
 						<div class="row">
 							<div class="col-md-3">
 								<label>Initials</label>
-								<input type="text" name="firstname" placeholder="Mr, Ms"  class="form-control">
+								<input type="text" name="firstname" placeholder="አቶ, ወሮ"  class="form-control">
 							</div>
 							<div class="col-md-4">
 								<label>First Name</label>
@@ -85,10 +85,10 @@
 		            <div class="form-group col-md-6">
 		                <label>System Role:</label>
 		                <select name="role" class="form-control">
-		                    <option value="0">Unassigned</option>
+		                    <option value="Unassigned">Unassigned</option>
 		                    <option value="0" disabled>-----------------------</option>
-		                    <option value="1">Administrator&nbsp;
-		                    <option value="2">Standard-User&nbsp;
+		                    <option value="Administrator">Administrator&nbsp;
+		                    <option value="Standard-User">Standard-User&nbsp;
 		                </select>
 		            </div>
 

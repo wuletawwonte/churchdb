@@ -12,7 +12,10 @@ class Church extends CI_Model {
 		
 		$data = array(
 			'name' => $this->input->post('name'), 
-			'description' => $this->input->post('description') 
+			'short_name' => $this->input->post('short_name'), 
+			'mini_logo' => $this->input->post('mini_logo'), 
+			'description' => $this->input->post('description'), 
+			'denomination' => $this->input->post('denomination') 
 			);
 		if($this->db->insert('churches', $data)) {
 			return true;
