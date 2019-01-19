@@ -63,6 +63,14 @@ class User extends CI_Model {
 		return $data[0][$attrib];
 	}
 
+	public function edit_one($attrib, $value) {
+		$data = array(
+			$attrib => $value
+			);
+		$this->db->where('username', $this->session->userdata('username'));
+		$this->db->update('users', $data);
+	}
+
 
 
 }

@@ -26,7 +26,7 @@
 		        </div>
 
 
-		        <form method="post" action="">
+		        <form method="post" action="<?php echo base_url(); ?>sadmin/savesetting">
 		            <div class="table-responsive">
 		                <table class="table table-hover">
 
@@ -55,36 +55,11 @@
 
 		                    <tr>
 		                        <td>Language:</td>
-		                    	<td><select name="skin" size="3" class="form-control">
-					                    <option <?php if($language == 'english') { echo 'selected'; } ?> value="skin-blue">english</option>
-					                    <option <?php if($language == 'amharic') { echo 'selected'; } ?> value="skin-black">amharic</option>
+		                    	<td><select name="language" size="3" class="form-control">
+					                    <option <?php if($language == 'english') { echo 'selected'; } ?> value="english">english</option>
+					                    <option <?php if($language == 'amharic') { echo 'selected'; } ?> value="amharic">amharic</option>
 					                </select>
 					            </td>
-		                    </tr>
-
-		                    <tr>
-		                        <td>Edit Records:</td>
-		                        <td><input type="checkbox" name="EditRecords" value="1"></td>
-		                    </tr>
-
-		                    <tr>
-		                        <td>Delete Records:</td>
-		                        <td><input type="checkbox" name="DeleteRecords" value="1"></td>
-		                    </tr>
-
-		                    <tr>
-		                        <td>Manage Properties and Classifications:</td>
-		                        <td><input type="checkbox" name="MenuOptions" value="1"></td>
-		                    </tr>
-
-		                    <tr>
-		                        <td>Manage Groups and Roles:</td>
-		                        <td><input type="checkbox" name="ManageGroups" value="1"></td>
-		                    </tr>
-
-		                    <tr>
-		                        <td>Manage Donations and Finance:</td>
-		                        <td><input type="checkbox" name="Finance" value="1"></td>
 		                    </tr>
 
 		                    <tr>
@@ -111,9 +86,8 @@
 		                    </tr>
 		                    <tr>
 		                        <td colspan="2" align="center">
-		                            <input type="submit" class="btn btn-primary" value="Save" name="save">&nbsp;<input
-		                                type="button" class="btn" name="Cancel" value="Cancel"
-		                                onclick="javascript:document.location='UserList.php';">
+		                            <input type="submit" class="btn btn-primary" value="Save" name="save">&nbsp;
+		                            <input type="button" class="btn" name="Cancel" value="Cancel">
 		                        </td>
 		                    </tr>
 		                </table>

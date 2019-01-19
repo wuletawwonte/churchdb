@@ -71,7 +71,7 @@ class Sadmin extends CI_Controller {
 		$data['active_menu'] = "generalsetting";
 		$data['system_name'] = $this->cnfg->get('system_name');
 		$data['system_name_short'] = $this->cnfg->get('system_name_short');
-		$data2['skin'] = $this->cnfg->get('skin');
+		$data2['skin'] = $this->user->get_my('skin');
 		$data2['language'] = $this->user->get_my('language');
 		$this->load->view('sadmin_templates/admin_header', $data);
 		$this->load->view('generalsetting', $data2);
@@ -130,6 +130,17 @@ class Sadmin extends CI_Controller {
 		$this->load->view('sadmin_templates/admin_header', $data);
 		$this->load->view('editchurchform', $data2);
 		$this->load->view('sadmin_templates/footer');
+
+	}
+
+	public function savesetting() {
+		
+		$this->cnfg->edit_one('system_name', $this->input->post('system_name'));
+		$this->cnfg->edit_one('system_name_short', $this->input->post('system_name_short'));
+		$this->user->edit_one('skin', $this->input->post('skin'));
+		$this->user->edit_one('language', $this->input->post('language'));
+
+		redirect('sadmin/generalsetting');
 
 	}
 

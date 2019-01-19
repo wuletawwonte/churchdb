@@ -17,6 +17,14 @@ class Cnfg extends CI_Model {
 		return $data[0]['value'];
 	}
 
+	public function edit_one($name, $value) {
+		$data = array(
+			'value' => $value 
+			);
+		$this->db->where('name', $name);
+		$this->db->update('cnfg', $data);
+	}
+
 
 
 }
