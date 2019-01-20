@@ -12,7 +12,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">Here</li>
+        <li class="active">Home</li>
       </ol>
     </section>
 

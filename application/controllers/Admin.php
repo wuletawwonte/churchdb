@@ -23,11 +23,12 @@ class Admin extends CI_Controller {
 		$data['active_menu'] = "dashboard";
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('home');
-		$this->load->view('sadmin_templates/footer');
+		$this->load->view('admin_templates/footer');
 
 	}
 
 	public function generalsetting() {
+		
 		$temp = $this->church->get_church('id', $this->session->church);
 
 		$data['active_menu'] = "generalsetting";
@@ -37,6 +38,15 @@ class Admin extends CI_Controller {
 		$data['language'] = $this->user->get_my('language');
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_generalsetting');
+		$this->load->view('admin_templates/footer');
+
+	}
+
+	public function personregistration() {
+
+		$data['active_menu'] = "personregistration";
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('admin_new_person_form');
 		$this->load->view('admin_templates/footer');
 
 	}

@@ -225,10 +225,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU</li>
         <!-- Optionally, you can add icons to the links -->
-        <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span><?= lang('Dashboard'); ?></span></a></li>
-        <li  <?php if($active_menu == 'churches') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/churches"><i class="fa fa-institution"></i> <span><?= lang('Churches'); ?></span></a></li>
+        <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span><?= lang('dashboard'); ?></span></a></li>
+        <li  <?php if($active_menu == 'churches') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/churches"><i class="fa fa-institution"></i> <span><?= lang('churches'); ?></span></a></li>
         <li <?php if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>sadmin/users"><i class="fa fa-users"></i> <span>Users</span></a></li>
-        <li class="treeview">
+        <li <?php if($active_menu == 'generalsetting' || $active_menu == 'usersetting') { ?> class="active" <?php } ?> class="treeview">
           <a href="#"><i class="fa fa-gears"></i> <span>Setting</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>

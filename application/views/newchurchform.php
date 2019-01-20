@@ -69,6 +69,7 @@
 				                    <option value="ቃለሕይወት">ቃለሕይወት</option>
 				                    <option value="ሙሉወንጌል">ሙሉወንጌል</option>
 				                    <option value="መሰረተክርስቶስ">መሰረተክርስቶስ</option>
+				                    <option value="አማኑኤል">አማኑኤል</option>
 				                    <option value="0" disabled>-----------------------</option>
 				                    <option value="ሌላ">ሌላ</option>
 				                </select>

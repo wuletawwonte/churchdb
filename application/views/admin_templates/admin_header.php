@@ -223,33 +223,57 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MENU</li>
+        <li class="header"><?= lang('menu'); ?></li>
         <!-- Optionally, you can add icons to the links -->
-        <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span><?= lang('Dashboard'); ?></span></a></li>
+        <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span><?= lang('dashboard'); ?></span></a></li>
         
-        <li <?php if($active_menu == 'people') { ?> class="active" <?php } ?> class="treeview">
-          <a href="#"><i class="fa fa-users"></i> <span>People</span>
+        <li <?php if($active_menu == 'personregistration') { ?> class="active" <?php } ?> class="treeview">
+          <a href="#"><i class="fa fa-users"></i> <span> <?= lang('people'); ?></span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-angle-double-right"></i> Dashboard</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i> User Setting</a></li>
+            <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>>
+                <a href="<?php echo base_url(); ?>admin/generalsetting">
+                    <i class="fa fa-angle-double-right"></i> <?= lang('dashboard'); ?></a>
+            </li>
+            
+            <li <?php if($active_menu == 'personregistration') { ?> class="active" <?php } ?>>
+                <a href="<?php echo base_url(); ?>admin/personregistration">
+                    <i class="fa fa-angle-double-right"></i> <?= lang('add_new_person'); ?></a>
+            </li>
+            
+            <li <?php if($active_menu == 'generalsetting') { echo "class='active'"; } ?>>
+                <a href="<?php echo base_url(); ?>admin/generalsetting">
+                    <i class="fa fa-angle-double-right"></i> <?= lang('view_all_persons'); ?></a>
+            </li>
+            
+            <li <?php if($active_menu == 'generalsetting') { echo "class='active'"; } ?>>
+                <a href="<?php echo base_url(); ?>admin/generalsetting">
+                    <i class="fa fa-angle-double-right"></i> <?= lang('add_new_family'); ?> </a>
+            </li>
+            
+            <li <?php if($active_menu == 'generalsetting') { echo "class='active'"; } ?>>
+                <a href="<?php echo base_url(); ?>admin/generalsetting">
+                    <i class="fa fa-angle-double-right"></i> <?= lang('families'); ?> </a>
+            </li>
+                        
           </ul>
         </li>
 
-        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-child"></i> <span>Sunday School</span></a></li>
-        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-tag"></i> <span>Groups</span></a></li>
-        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-file-pdf-o"></i> <span>Data/Reports</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-gears"></i> <span>Settings</span>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-child"></i> <span><?= lang('sunday_school'); ?></span></a></li>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-tag"></i> <span><?= lang('groups'); ?></span></a></li>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-file-pdf-o"></i> <span><?= lang('data_report'); ?></span></a></li>
+        <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?> class="treeview">
+          <a href="#"><i class="fa fa-gears"></i> <span><?= lang('setting'); ?></span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
             <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-angle-double-right"></i> General Setting</a></li>
+            <li <?php if($active_menu == 'usersetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-angle-double-right"></i> Self Registration</a></li>
             <li><a href="#"><i class="fa fa-angle-double-right"></i> User Setting</a></li>
           </ul>
         </li>
