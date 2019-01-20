@@ -9,6 +9,9 @@ class Sadmin extends CI_Controller {
 		if($this->session->userdata('is_logged_in') == FALSE) {
 			redirect('users/index');
 		}
+		if($this->session->userdata('user_type') == "administrator") {
+			redirect('admin/index');
+		}
 
 		$this->load->model('church');
 		$this->load->model('user');

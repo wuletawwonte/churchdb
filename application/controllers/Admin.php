@@ -27,6 +27,20 @@ class Admin extends CI_Controller {
 
 	}
 
+	public function generalsetting() {
+		$temp = $this->church->get_church('id', $this->session->church);
+
+		$data['active_menu'] = "generalsetting";
+		$data['system_name'] = $temp['short_name'];
+		$data['system_name_short'] = $temp['mini_logo'];
+		$data['skin'] = $this->user->get_my('skin');
+		$data['language'] = $this->user->get_my('language');
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('admin_generalsetting');
+		$this->load->view('admin_templates/footer');
+
+	}
+
 
 
 

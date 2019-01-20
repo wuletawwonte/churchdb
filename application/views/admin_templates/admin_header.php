@@ -226,11 +226,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li class="header">MENU</li>
         <!-- Optionally, you can add icons to the links -->
         <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span><?= lang('Dashboard'); ?></span></a></li>
-        <li  <?php if($active_menu == 'people') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/churches"><i class="fa fa-users"></i> <span>People</span></a></li>
+        
+        <li <?php if($active_menu == 'people') { ?> class="active" <?php } ?> class="treeview">
+          <a href="#"><i class="fa fa-users"></i> <span>People</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-angle-double-right"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i> User Setting</a></li>
+          </ul>
+        </li>
+
         <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-child"></i> <span>Sunday School</span></a></li>
         <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-tag"></i> <span>Groups</span></a></li>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-file-pdf-o"></i> <span>Data/Reports</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-gears"></i> <span>Setting</span>
+          <a href="#"><i class="fa fa-gears"></i> <span>Settings</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>

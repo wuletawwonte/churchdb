@@ -58,6 +58,7 @@ class Users extends CI_Controller {
 					$mychurch = $this->church->get_church('id', $userdata['church']);					
 					$this->session->set_userdata('system_name', $mychurch['short_name']);
 					$this->session->set_userdata('system_name_short', $mychurch['mini_logo']);
+					$this->session->set_userdata('church', $userdata['church']);
 
 					redirect('admin/index');
 				} 
