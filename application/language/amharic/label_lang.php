@@ -43,7 +43,7 @@ $lang['november'] = "ሐምሌ";
 $lang['december'] = "ነሐሴ";
 
 $lang['birth_date'] = 'የተወለዱበት ቀን';
-$lang['birth_year'] = 'የተወለዱበት ዓመት';
+$lang['birth_year'] = 'የትውልድ ዘመን';
 $lang['hide_age'] = 'ዕድሜ ይደበቅ';
 $lang['contact_info'] = 'የግል አድራሻ';
 $lang['mobile_phone'] = 'የሞባይል ስልክ ቁጥር';
