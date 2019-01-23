@@ -50,8 +50,12 @@ $lang['mobile_phone'] = 'የሞባይል ስልክ ቁጥር';
 $lang['work_phone'] = 'የመስሪያ ቤት ስልክ ቁጥር';
 $lang['email'] = 'ኢሜል';
 $lang['save'] = 'መዝግብ';
+$lang['family_info'] = 'የቤተሰብ መረጃ';
+$lang['family'] = 'ቤተሰብ';
+$lang['do_not_auto_format'] = 'አይጥፋ';
 
-
+$lang['copyright'] = 'የኮፒ ባለመብት';
+$lang['all_rights_reserved'] = 'መብቱ በህግ የተጠበቀ';
 
 
 

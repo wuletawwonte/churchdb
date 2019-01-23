@@ -126,7 +126,7 @@
 									<i class="fa fa-phone"></i>
 								</div>
 								<input type="text" Name="HomePhone" value="" size="30" maxlength="30" class="form-control" data-inputmask='' data-mask>
-								<input type="checkbox" name="NoFormat_HomePhone" value="1"> Do not auto-format
+								<input type="checkbox" name="NoFormat_HomePhone" value="1"> <?= lang('do_not_auto_format') ?>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
@@ -136,7 +136,7 @@
 									<i class="fa fa-phone"></i>
 								</div>
 								<input type="text" name="WorkPhone" value="" size="30" maxlength="30" class="form-control" data-inputmask='"mask": ""' data-mask/>
-								<input type="checkbox" name="NoFormat_WorkPhone" value="1"> Do not auto-format
+								<input type="checkbox" name="NoFormat_WorkPhone" value="1"> <?= lang('do_not_auto_format') ?>
 							</div>
 						</div>
 					</div>
@@ -161,22 +161,26 @@
 
 		    <div class="box box-info clearfix">
 		        <div class="box-header">
-		            <h3 class="box-title"> Family Info  </h3>
+		            <h3 class="box-title"> <?= lang('family_info') ?>  </h3>
 		            <div class="pull-right"><br/>
 		                <input type="submit" class="btn btn-primary" value=" Save  " name="PersonSubmit">
 		            </div>
 		        </div><!-- /.box-header -->
 		        <div class="box-body">
 		            <div class="form-group col-md-3">
-		                <label> Family Role  :</label>
+		                <label> Family Role :</label>
 		                <select name="FamilyRole" class="form-control">
 		                    <option value="0"> Unassigned  </option>
 		                    <option value="0" disabled>-----------------------</option>
+		                    <option value="0" disabled> Head </option>
+		                    <option value="0" disabled> Mother </option>
+		                    <option value="0" disabled> Son </option>
+		                    <option value="0" disabled> Daughter </option>
 		                </select>
 		            </div>
 
 		            <div class="form-group col-md-6">
-		                <label> Family:</label>
+		                <label> <?= lang('family') ?>:</label>
 		                <select name="Family" size="8" class="form-control">
 		                    <option value="0" selected> Unassigned  </option>
 		                    <option value="-1"> Create a new family (using last name)  </option>

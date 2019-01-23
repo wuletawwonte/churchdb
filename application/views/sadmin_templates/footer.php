@@ -6,7 +6,7 @@
       <b>Version</b> 1.01
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2019 <a href="#"><b>Grace</b>Soft webdesign</a>.</strong> All rights reserved.
+    <strong><?= lang('copyright') ?> &copy; 2019 <a href="#"><b>Grace</b>Soft webdesign</a>.</strong> <?= lang('all_rights_reserved') ?>.  
   </footer>
 
   <!-- Control Sidebar -->

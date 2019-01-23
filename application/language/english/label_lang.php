@@ -50,6 +50,35 @@ $lang['mobile_phone'] = 'Mobile Phone';
 $lang['work_phone'] = 'Work Phone';
 $lang['email'] = 'Email';
 $lang['save'] = 'Save';
+$lang['family_info'] = 'Family Info';
+$lang['family'] = 'Family';
+$lang['do_not_auto_format'] = 'Do not auto format';
+
+$lang['copyright'] = 'Copyright';
+$lang['all_rights_reserved'] = 'All rights reserved';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
