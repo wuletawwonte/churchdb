@@ -17,6 +17,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.ico">
 
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 3 -->
+<script src="<?php echo base_url(); ?>assets/vendors/jquery/jquery.min.js"></script>
+  
+
 </head>
 
 <body class="hold-transition <?php echo $this->session->userdata('skin'); ?> sidebar-mini">
@@ -249,8 +256,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <i class="fa fa-angle-double-right"></i> <?= lang('view_all_persons'); ?></a>
             </li>
             
-            <li <?php if($active_menu == 'generalsetting') { echo "class='active'"; } ?>>
-                <a href="<?php echo base_url(); ?>admin/generalsetting">
+            <li <?php if($active_menu == 'familyregistration') { echo "class='active'"; } ?>>
+                <a href="<?php echo base_url(); ?>admin/familyregistration">
                     <i class="fa fa-angle-double-right"></i> <?= lang('add_new_family'); ?> </a>
             </li>
             

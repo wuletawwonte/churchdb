@@ -51,11 +51,26 @@ $lang['work_phone'] = 'Work Phone';
 $lang['email'] = 'Email';
 $lang['save'] = 'Save';
 $lang['family_info'] = 'Family Info';
+$lang['family_role'] = 'Family Role';
 $lang['family'] = 'Family';
+$lang['continue'] = 'Continue';
 $lang['do_not_auto_format'] = 'Do not auto format';
+$lang['create_new_family_by_name'] = 'Create a new family (using last name)';
 
+$lang['unassigned'] = 'Unassigned';
 $lang['copyright'] = 'Copyright';
 $lang['all_rights_reserved'] = 'All rights reserved';
+
+$lang['church_participation'] = 'Church Participation';
+$lang['membership_year'] = 'Membership Year';
+$lang['cause_of_membership'] = 'Cause of Membership';
+$lang['level_of_membership'] = 'Level of Membership';
+$lang['by_baptism'] = 'By Baptism';
+$lang['do_you_serve'] = 'Do You Serve';
+$lang['serving_as'] = 'Serve As';
+
+$lang['family_registration'] = 'Family Registration';
+$lang['family_name'] = 'Family Name';
 
 
 

@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <?= lang('person_registration'); ?>
+        <?= lang('family_registration'); ?>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>"><i class="fa fa-users"></i> <?= lang('people'); ?></a></li>
@@ -31,10 +31,16 @@
  -->
 		    <div class="box box-info clearfix">
 		        <div class="box-header">
-		            <h3 class="box-title"> <?= lang('personal_info'); ?>  </h3>
+		            <h3 class="box-title"> <?= lang('family_info'); ?>  </h3>
 		        </div><!-- /.box-header -->
 		        <div class="box-body">
 		            <div class="form-group">
+						<div class="row">
+							<div class="col-md-6">
+								<label> <?= lang('family_name') ?>:</label>
+								<input type="text" Name="Name" id="FamilyName" value="" maxlength="48"  class="form-control">
+							</div>
+						</div><p/>		            
 		                <div class="row">
 		                    <div class="col-md-2">
 		                        <label> <?= lang('gender'); ?>  :</label>
@@ -212,41 +218,6 @@
 
 
 
-
-
-
-		    <div class="box box-info clearfix">
-		        <div class="box-header">
-		            <h3 class="box-title"> <?= lang('family_info') ?>  </h3>
-		            <div class="pull-right"><br/>
-		                <button class="btn btn-primary" name="PersonSubmit"><?= lang('continue') ?></button>
-		            </div>
-		        </div><!-- /.box-header -->
-		        <div class="box-body">
-		            <div class="form-group col-md-6">
-		                <label> <?= lang('family_role') ?> :</label>
-		                <select name="FamilyRole" class="form-control">
-		                    <option value="0"> <?= lang('unassigned') ?>  </option>
-		                    <option value="0" disabled>-----------------------</option>
-		                    <option value="0"> Head </option>
-		                    <option value="0"> Mother </option>
-		                    <option value="0"> Son </option>
-		                    <option value="0"> Daughter </option>
-		                </select>
-		            </div>
-
-		            <div class="form-group col-md-6">
-		                <label> <?= lang('family') ?>:</label>
-		                <select name="Family" size="8" class="form-control">
-		                    <option value="0" selected> <?= lang('unassigned') ?>  </option>
-		                    <option value="-1"> <?= lang('create_new_family_by_name') ?>  </option>
-		                    <option value="0" disabled>-----------------------</option>
-		                </select>
-		            </div>
-		        </div>
-		    </div>
-
-
             <input type="submit" class="btn btn-primary" value="<?= lang('save') ?>" Name="addchurchsubmit">
 			<input type="submit" class="btn btn-info" value="Save and Add" name="addchurchsubmit">
 			<input type="button" class="btn" value="Cancel">
@@ -260,22 +231,6 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-
-
-
-
-<script type="text/javaScript">
-	
-	function toggle(className, obj) {
-	    if ( obj.checked ) $(className).show();
-	    else $(className).hide();
-	}
-
-</script>
-
-
-
 
 
 

@@ -51,11 +51,26 @@ $lang['work_phone'] = 'የመስሪያ ቤት ስልክ ቁጥር';
 $lang['email'] = 'ኢሜል';
 $lang['save'] = 'መዝግብ';
 $lang['family_info'] = 'የቤተሰብ መረጃ';
+$lang['family_role'] = 'የቤተሰቡ አባልነት';
 $lang['family'] = 'ቤተሰብ';
+$lang['continue'] = 'ቀጥል';
 $lang['do_not_auto_format'] = 'አይጥፋ';
+$lang['create_new_family_by_name'] = 'በስሙ አዲስ ቤተሰብ መዝግብ';
 
+$lang['unassigned'] = 'አልተመረጠም';
 $lang['copyright'] = 'የኮፒ ባለመብት';
 $lang['all_rights_reserved'] = 'መብቱ በህግ የተጠበቀ';
+
+$lang['church_participation'] = 'የቤተክርስትያን ተሳትፎ';
+$lang['membership_year'] = 'አባል የሆኑበት ዘመን';
+$lang['cause_of_membership'] = 'አባል የሆኑበት ሁኔታ';
+$lang['level_of_membership'] = 'የአባልነት ደረጃ';
+$lang['by_baptism'] = 'በጥምቀት';
+$lang['do_you_serve'] = 'ያገለግላሉ';
+$lang['serving_as'] = 'የአገልግሎት ዘርፍ';
+
+$lang['family_registration'] = 'ቤተሰብ መመዝገቢያ';
+$lang['family_name'] = 'የቤተሰብ ስም';
 
 
 

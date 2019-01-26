@@ -51,6 +51,15 @@ class Admin extends CI_Controller {
 
 	}
 
+	public function familyregistration() {
+
+		$data['active_menu'] = "familyregistration";
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('admin_new_family_form');
+		$this->load->view('admin_templates/footer');
+
+	}
+
 
 
 
