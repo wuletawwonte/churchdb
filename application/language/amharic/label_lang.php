@@ -47,6 +47,7 @@ $lang['birth_year'] = 'የትውልድ ዘመን';
 $lang['hide_age'] = 'ዕድሜ ይደበቅ';
 $lang['contact_info'] = 'የግል አድራሻ';
 $lang['mobile_phone'] = 'የሞባይል ስልክ ቁጥር';
+$lang['home_phone'] = 'የቤት ስልክ ቁጥር';
 $lang['work_phone'] = 'የመስሪያ ቤት ስልክ ቁጥር';
 $lang['email'] = 'ኢሜል';
 $lang['save'] = 'መዝግብ';
@@ -71,6 +72,35 @@ $lang['serving_as'] = 'የአገልግሎት ዘርፍ';
 
 $lang['family_registration'] = 'ቤተሰብ መመዝገቢያ';
 $lang['family_name'] = 'የቤተሰብ ስም';
+$lang['living_kebele'] = 'የመኖርያ ቀበሌ';
+$lang['living_subcity'] = 'የመኖርያ ክፍለከተማ';
+$lang['nechsar'] = 'ነጭሳር';
+$lang['idget_ber'] = 'ዕድገት በር';
+$lang['house_number'] = 'የቤት ቁጥር';
+$lang['wedding_year'] = 'የጋብቻ ዓመት';
+$lang['family_members'] = 'የቤተሰቡ አባላት';
+$lang['family_members_registration_table_precaution'] = 'የቤተሰቡን አባላት አሁን መመዝገብ ወይም ቆይተው መጨመር ይችላሉ:: እያንዳንዱ የቤተሰቡ አባል እንደ አዲስ ሰው ይመዘገባል::';
+$lang['husband'] = 'ባል';
+$lang['wife'] = 'ሚስት';
+$lang['son'] = 'ወንድ ልጅ';
+$lang['daughter'] = 'ሴት ልጅ';
+$lang['save_family_info'] = 'የቤተሰቡ መረጃ ወደ መረጃ ቋት ይመዝገብ?';
+$lang['close'] = 'ዝጋ';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

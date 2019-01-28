@@ -10,18 +10,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title> <?php echo $this->session->userdata('system_name'); ?> </title>
 
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/AdminLTE.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/skins/<?php echo $this->session->userdata('skin'); ?>.min.css">
+  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/skins/'.$this->session->userdata('skin').'.min.css'); ?>">
 
-  <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.ico">
+  <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>">
 
 
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="<?php echo base_url(); ?>assets/vendors/jquery/jquery.min.js"></script>
+<script src="<?php echo base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
   
 
 </head>
@@ -261,8 +261,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <i class="fa fa-angle-double-right"></i> <?= lang('add_new_family'); ?> </a>
             </li>
             
-            <li <?php if($active_menu == 'generalsetting') { echo "class='active'"; } ?>>
-                <a href="<?php echo base_url(); ?>admin/generalsetting">
+            <li <?php if($active_menu == 'listfamilies') { echo "class='active'"; } ?>>
+                <a href="<?php echo base_url(); ?>admin/listfamilies">
                     <i class="fa fa-angle-double-right"></i> <?= lang('families'); ?> </a>
             </li>
                         

@@ -13,6 +13,7 @@ class Admin extends CI_Controller {
 		$this->load->model('church');
 		$this->load->model('user');
 		$this->load->model('cnfg');
+		$this->load->model('family');
 
 		$this->lang->load('label_lang', $this->session->userdata('language'));
 	}
@@ -60,8 +61,27 @@ class Admin extends CI_Controller {
 
 	}
 
+	public function listfamilies() {
+		$data['active_menu'] = "listfamilies";
+		$data['families'] = $this->family->get_all();
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('admin_list_families');
+		$this->load->view('admin_templates/footer');
+
+	}
 
 
+	public function savefamily() {
+
+		$result = $this->family->add();
+		if($result == 'success') {
+			$this->session->set_flashdata('success', 'Success: Family Successfully Registered.');
+			redirect('admin/listfamilies');
+		} else {
+			$this->output->set_content_type('application/json');
+			echo json_encode(array('status' => $result));			
+		}
+	}
 
 
 

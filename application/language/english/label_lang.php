@@ -47,6 +47,7 @@ $lang['birth_year'] = 'Birth Year';
 $lang['hide_age'] = 'Hide Age';
 $lang['contact_info'] = 'Contact Info';
 $lang['mobile_phone'] = 'Mobile Phone';
+$lang['home_phone'] = 'Home Phone';
 $lang['work_phone'] = 'Work Phone';
 $lang['email'] = 'Email';
 $lang['save'] = 'Save';
@@ -71,6 +72,29 @@ $lang['serving_as'] = 'Serve As';
 
 $lang['family_registration'] = 'Family Registration';
 $lang['family_name'] = 'Family Name';
+$lang['living_kebele'] = 'Living Kebele';
+$lang['living_subcity'] = 'Living Subcity';
+$lang['nechsar'] = 'Nechsar';
+$lang['idget_ber'] = 'Idget Ber';
+$lang['house_number'] = 'House Number';
+$lang['wedding_year'] = 'Wedding Year';
+$lang['family_members'] = 'Family Members';
+$lang['family_members_registration_table_precaution'] = 'You may create family members now or add them later.  All entries will become <i>new</i> person records.';
+$lang['husband'] = 'Husband';
+$lang['wife'] = 'Wife';
+$lang['son'] = 'Son';
+$lang['daughter'] = 'Daughter';
+$lang['save_family_info'] = 'Save the Families information to the database?';
+$lang['close'] = 'Close';
+
+
+
+
+
+
+
+
+
 
 
 
