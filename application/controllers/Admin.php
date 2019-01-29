@@ -46,6 +46,7 @@ class Admin extends CI_Controller {
 	public function personregistration() {
 
 		$data['active_menu'] = "personregistration";
+		$data['families'] = $this->family->get_all();
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_new_person_form');
 		$this->load->view('admin_templates/footer');

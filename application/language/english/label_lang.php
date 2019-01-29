@@ -69,6 +69,7 @@ $lang['level_of_membership'] = 'Level of Membership';
 $lang['by_baptism'] = 'By Baptism';
 $lang['do_you_serve'] = 'Do You Serve';
 $lang['serving_as'] = 'Serve As';
+$lang['not_serve'] = 'Not Serving';
 
 $lang['family_registration'] = 'Family Registration';
 $lang['family_name'] = 'Family Name';

@@ -163,12 +163,12 @@
 
 					<div class="row">
 
-	                    <div class="col-md-2">
+	                    <div class="col-md-3">
 	                        <label for="Title"> <?= lang('membership_year'); ?>  :</label>
 	                        <input type="text" name="membership_year" maxlength="4" size="5" class="form-control">
 	                    </div>
 
-	                    <div class="col-md-4">
+	                    <div class="col-md-5">
 	                        <label> <?= lang('cause_of_membership'); ?>  :</label>
 	                        <select name="Gender" class="form-control">
 	                        	<option value="0"> <?= lang('by_baptism'); ?></option>
@@ -191,15 +191,16 @@
 					<p/>
 					<div class="row">
 					<p/>
-	                    <div class="col-md-2">
+<!-- 	                    <div class="col-md-2">
 	                        <label> <?= lang('do_you_serve'); ?>  </label><br/>
-	                        <input type="checkbox" name="do_you_serve" onclick="toggle('.serving_as', this)" value="1" checked>
+	                        <input type="checkbox" name="do_you_serve" onclick="toggle('.serving_as', this)" value="1" checked><p/>
 	                    </div>
-
+ -->
 	                    <div class="col-md-4 serving_as">
 	                        <label> <?= lang('serving_as'); ?>  :</label>
 	                        <select name="Gender" class="form-control">
-	                        	<option value="0"> <?= lang('by_baptism'); ?></option>
+	                        	<option value="<?= lang('not_serve'); ?>"><?= lang('not_serve'); ?></option>
+	                        	<option value="<?= lang('by_baptism'); ?>"><?= lang('by_baptism'); ?></option>
 	                        	<option value="0" disabled >-----------------
 	                            <option value="1"> <?= lang('female'); ?>  </option>
 	                            <option value="2"> <?= lang('male'); ?>  </option>
@@ -207,6 +208,7 @@
 	                    </div>
 
 					</div>
+					<p/>
 				</div>
 			</div>
 
@@ -241,6 +243,9 @@
 		                    <option value="0" selected> <?= lang('unassigned') ?>  </option>
 		                    <option value="-1"> <?= lang('create_new_family_by_name') ?>  </option>
 		                    <option value="0" disabled>-----------------------</option>
+		                    <?php foreach($families as $family) { ?>
+		                    <option><?= $family['name']; ?></option>
+		                    <?php } ?>
 		                </select>
 		            </div>
 		        </div>

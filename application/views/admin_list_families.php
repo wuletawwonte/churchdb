@@ -30,11 +30,11 @@
 
     <!-- Default box -->
     <div class="box box-primary">
-        <div class="box-header">
+<!--         <div class="box-header">
             <a href="<?php echo base_url(); ?>sadmin/newuserform" class="btn btn-app"><i class="fa fa-user-plus"></i>New User</a>
             <a href="SettingsUser.php" class="btn btn-app"><i class="fa fa-wrench"></i>User Settings</a>
         </div>
-
+ -->
         <div class="box-body">
             <table class="table table-hover table-bordered dt-responsive" id="user-listing-table" style="width:100%;">
                 <thead>

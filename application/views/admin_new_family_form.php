@@ -280,7 +280,6 @@ $(function() {
 		var homePhoneNumber = $('#homePhoneNumber').val();
  		var weddingYear = $('#weddingYear').val();
 
-//		console.log(table_data);
 		// Registering Family Info here
 		var data = {
 			'name': $('#FamilyName').val(),
@@ -307,8 +306,6 @@ $(function() {
 			}
 
 		});
-
-		console.log(data);
 
 	});
 

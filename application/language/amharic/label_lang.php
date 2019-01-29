@@ -69,6 +69,7 @@ $lang['level_of_membership'] = 'የአባልነት ደረጃ';
 $lang['by_baptism'] = 'በጥምቀት';
 $lang['do_you_serve'] = 'ያገለግላሉ';
 $lang['serving_as'] = 'የአገልግሎት ዘርፍ';
+$lang['not_serve'] = 'አያገለግሉም';
 
 $lang['family_registration'] = 'ቤተሰብ መመዝገቢያ';
 $lang['family_name'] = 'የቤተሰብ ስም';
