@@ -8,7 +8,7 @@
         	General Settings
       	</h1>
       	<ol class="breadcrumb">
-        	<li><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-gear"></i> Setting</a></li>
+        	<li><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="glyphicon glyphicon-cog"></i> Setting</a></li>
         	<li class="active">General Setting</li>
       	</ol>
     </section>

@@ -10,8 +10,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title> <?php echo $this->session->userdata('system_name'); ?> </title>
 
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/skins/'.$this->session->userdata('skin').'.min.css'); ?>">
 
@@ -53,7 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
+              <i class="glyphicon glyphicon-envelope"></i>
               <span class="label label-success">4</span>
             </a>
             <ul class="dropdown-menu">
@@ -70,7 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <!-- Message title and timestamp -->
                       <h4>
                         Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                        <small><i class="glyphicon glyphicon-time"></i> 5 mins</small>
                       </h4>
                       <!-- The message -->
                       <p>Why not buy a new awesome theme?</p>
@@ -89,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="dropdown notifications-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
+              <i class="glyphicon glyphicon-bell"></i>
               <span class="label label-warning">10</span>
             </a>
             <ul class="dropdown-menu">
@@ -99,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <ul class="menu">
                   <li><!-- start notification -->
                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                      <i class="glyphicon glyphicon-user text-aqua"></i> 5 new members joined today
                     </a>
                   </li>
                   <!-- end notification -->
@@ -112,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="dropdown tasks-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
+              <i class="glyphicon glyphicon-flag"></i>
               <span class="label label-danger">9</span>
             </a>
             <ul class="dropdown-menu">
@@ -192,7 +192,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            <a href="#" data-toggle="control-sidebar"><i class="glyphicon glyphicon-cog"></i></a>
           </li>
         </ul>
       </div>
@@ -212,7 +212,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('name'); ?></p>
           <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <a href="#"><i class="glyphicon glyphicon-certificate text-success"></i> Online</a>
         </div>
       </div>
 
@@ -221,7 +221,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="glyphicon glyphicon-search"></i>
               </button>
             </span>
         </div>
@@ -232,56 +232,56 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header"><?= lang('menu'); ?></li>
         <!-- Optionally, you can add icons to the links -->
-        <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> <span><?= lang('dashboard'); ?></span></a></li>
+        <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="glyphicon glyphicon-dashboard"></i><span><?= lang('dashboard'); ?></span></a></li>
         
         <li <?php if($active_menu == 'personregistration') { ?> class="active" <?php } ?> class="treeview">
-          <a href="#"><i class="fa fa-users"></i> <span> <?= lang('people'); ?></span>
+          <a href="#"><i class="glyphicon glyphicon-user"></i> <span> <?= lang('people'); ?></span>
             <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
+                <i class="glyphicon glyphicon-menu-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
             <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>>
                 <a href="<?php echo base_url(); ?>admin/generalsetting">
-                    <i class="fa fa-angle-double-right"></i> <?= lang('dashboard'); ?></a>
+                    <i class="glyphicon glyphicon-menu-right"></i> <?= lang('dashboard'); ?></a>
             </li>
             
             <li <?php if($active_menu == 'personregistration') { ?> class="active" <?php } ?>>
                 <a href="<?php echo base_url(); ?>admin/personregistration">
-                    <i class="fa fa-angle-double-right"></i> <?= lang('add_new_person'); ?></a>
+                    <i class="glyphicon glyphicon-menu-right"></i> <?= lang('add_new_person'); ?></a>
             </li>
             
             <li <?php if($active_menu == 'generalsetting') { echo "class='active'"; } ?>>
                 <a href="<?php echo base_url(); ?>admin/generalsetting">
-                    <i class="fa fa-angle-double-right"></i> <?= lang('view_all_persons'); ?></a>
+                    <i class="glyphicon glyphicon-menu-right"></i> <?= lang('view_all_persons'); ?></a>
             </li>
             
             <li <?php if($active_menu == 'familyregistration') { echo "class='active'"; } ?>>
                 <a href="<?php echo base_url(); ?>admin/familyregistration">
-                    <i class="fa fa-angle-double-right"></i> <?= lang('add_new_family'); ?> </a>
+                    <i class="glyphicon glyphicon-menu-right"></i> <?= lang('add_new_family'); ?> </a>
             </li>
             
             <li <?php if($active_menu == 'listfamilies') { echo "class='active'"; } ?>>
                 <a href="<?php echo base_url(); ?>admin/listfamilies">
-                    <i class="fa fa-angle-double-right"></i> <?= lang('families'); ?> </a>
+                    <i class="glyphicon glyphicon-menu-right"></i> <?= lang('families'); ?> </a>
             </li>
                         
           </ul>
         </li>
 
-        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-child"></i> <span><?= lang('sunday_school'); ?></span></a></li>
-        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-tag"></i> <span><?= lang('groups'); ?></span></a></li>
-        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-file-pdf-o"></i> <span><?= lang('data_report'); ?></span></a></li>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="glyphicon glyphicon-plane"></i> <span><?= lang('sunday_school'); ?></span></a></li>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="glyphicon glyphicon-tag"></i> <span><?= lang('groups'); ?></span></a></li>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="glyphicon glyphicon-stats"></i> <span><?= lang('data_report'); ?></span></a></li>
         <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?> class="treeview">
-          <a href="#"><i class="fa fa-gears"></i> <span><?= lang('setting'); ?></span>
+          <a href="#"><i class="glyphicon glyphicon-cog"></i> <span><?= lang('setting'); ?></span>
             <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
+                <i class="glyphicon glyphicon-menu-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-angle-double-right"></i> General Setting</a></li>
-            <li <?php if($active_menu == 'usersetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-angle-double-right"></i> Self Registration</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i> User Setting</a></li>
+            <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="glyphicon glyphicon-menu-right"></i> General Setting</a></li>
+            <li <?php if($active_menu == 'usersetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="glyphicon glyphicon-menu-right"></i> Self Registration</a></li>
+            <li><a href="#"><i class="glyphicon glyphicon-menu-right"></i> User Setting</a></li>
           </ul>
         </li>
       

@@ -5,11 +5,7 @@
       <h1>
         <?= lang('families') ?>
       </h1>
-<!--       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>sadmin/users"><i class="fa fa-users"></i> Users</a></li>
-        <li class="active">List</li>
-      </ol>
- -->    
+
  	</section>
 
     <!-- Main content -->
@@ -30,11 +26,9 @@
 
     <!-- Default box -->
     <div class="box box-primary">
-<!--         <div class="box-header">
-            <a href="<?php echo base_url(); ?>sadmin/newuserform" class="btn btn-app"><i class="fa fa-user-plus"></i>New User</a>
-            <a href="SettingsUser.php" class="btn btn-app"><i class="fa fa-wrench"></i>User Settings</a>
-        </div>
- -->
+
+
+
         <div class="box-body">
             <table class="table table-hover table-bordered dt-responsive" id="user-listing-table" style="width:100%;">
                 <thead>
@@ -54,9 +48,9 @@
 
                     <tr>
                         <td>
-                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $family['id'] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a onclick=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $family['id'] ?>"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="#"><i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a onclick=""><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
                         </td>
 
                         <td>

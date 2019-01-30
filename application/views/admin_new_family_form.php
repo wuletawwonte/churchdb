@@ -9,7 +9,7 @@
         <?= lang('family_registration'); ?>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>"><i class="fa fa-users"></i> <?= lang('people'); ?></a></li>
+        <li><a href="<?php echo base_url(); ?>"><i class="glyphicon glyphicon-user"></i> <?= lang('people'); ?></a></li>
         <li class="active"><?= lang('add_new_person'); ?></li>
       </ol>
     </section>
@@ -84,7 +84,7 @@
 			                    </label>
 			                    <div class="input-group">
 			                        <div class="input-group-addon">
-			                            <i class="fa fa-phone"></i>
+			                            <i class="glyphicon glyphicon-earphone"></i>
 			                        </div>
 			                        <input type="text" id="homePhoneNumber"
 			                               value="" size="30"
@@ -145,7 +145,7 @@
 									<td class="TextColumn" contenteditable id="birth_year"></td>
 
 									<td class="TextColumn">
-										<button type="button" id="btn_add" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
+										<button type="button" id="btn_add" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-plus"></i></button>
 									</td>
 
 								</tr>

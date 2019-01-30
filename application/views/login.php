@@ -71,7 +71,7 @@ var baseurl = '<?php echo base_url(); ?>';
 					
 					<div class="input-group">
 						<div class="input-group-addon">
-							<i class="fa fa-user"></i>
+							<i class="glyphicon glyphicon-user"></i>
 						</div>
 						
 						<input type="text" class="form-control" name="username" id="email" placeholder="ስም" autocomplete="off" autofocus required />
@@ -83,7 +83,7 @@ var baseurl = '<?php echo base_url(); ?>';
 					
 					<div class="input-group">
 						<div class="input-group-addon">
-							<i class="fa fa-key"></i>
+							<i class="glyphicon glyphicon-lock"></i>
 						</div>
 						
 						<input type="password" class="form-control" name="password" id="password" placeholder="የይለፍ ቃል" autocomplete="off" required />

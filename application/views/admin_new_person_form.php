@@ -9,7 +9,7 @@
         <?= lang('person_registration'); ?>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>"><i class="fa fa-users"></i> <?= lang('people'); ?></a></li>
+        <li><a href="<?php echo base_url(); ?>"><i class="glyphicon glyphicon-user"></i> <?= lang('people'); ?></a></li>
         <li class="active"><?= lang('add_new_person'); ?></li>
       </ol>
     </section>
@@ -123,7 +123,7 @@
 							<label><?= lang('mobile_phone') ?>:</label>
 							<div class="input-group">
 								<div class="input-group-addon">
-									<i class="fa fa-phone"></i>
+									<i class="glyphicon glyphicon-earphone"></i>
 								</div>
 								<input type="text" Name="HomePhone" value="" size="30" maxlength="30" class="form-control" data-inputmask='' data-mask>
 								<input type="checkbox" name="NoFormat_HomePhone" value="1"> <?= lang('do_not_auto_format') ?>
@@ -133,7 +133,7 @@
 							<label><?= lang('work_phone') ?>:</label>
 							<div class="input-group">
 								<div class="input-group-addon">
-									<i class="fa fa-phone"></i>
+									<i class="glyphicon glyphicon-earphone"></i>
 								</div>
 								<input type="text" name="WorkPhone" value="" size="30" maxlength="30" class="form-control" data-inputmask='"mask": ""' data-mask/>
 								<input type="checkbox" name="NoFormat_WorkPhone" value="1"> <?= lang('do_not_auto_format') ?>
@@ -145,7 +145,7 @@
 							<label><?= lang('email') ?> :</label>
 							<div class="input-group">
 								<div class="input-group-addon">
-									<i class="fa fa-envelope"></i>
+									<i class="glyphicon glyphicon-envelope"></i>
 								</div>
 								<input type="text" Name="Email" class="form-control" value="" size="30" maxlength="100"><font color="red"><BR></font>
 							</div>
