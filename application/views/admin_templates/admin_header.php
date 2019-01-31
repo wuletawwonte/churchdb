@@ -230,11 +230,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header"><?= lang('menu'); ?></li>
+        <!-- <li class="header"><?= lang('menu'); ?></li> -->
         <!-- Optionally, you can add icons to the links -->
         <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="glyphicon glyphicon-dashboard"></i><span><?= lang('dashboard'); ?></span></a></li>
         
-        <li <?php if($active_menu == 'personregistration') { ?> class="active" <?php } ?> class="treeview">
+        <li <?php if($active_menu == 'personregistration' || $active_menu == 'familyregistration' || $active_menu == 'listfamilies') { ?> class="active" <?php } ?> class="treeview">
           <a href="#"><i class="glyphicon glyphicon-user"></i> <span> <?= lang('people'); ?></span>
             <span class="pull-right-container">
                 <i class="glyphicon glyphicon-menu-left pull-right"></i>
@@ -242,8 +242,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </a>
           <ul class="treeview-menu">
             <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>>
-                <a href="<?php echo base_url(); ?>admin/generalsetting">
-                    <i class="glyphicon glyphicon-menu-right"></i> <?= lang('dashboard'); ?></a>
+                <a href="<?php echo base_url(); ?>admin/generalsetting"><i class="glyphicon glyphicon-menu-right"></i> <?= lang('dashboard'); ?></a>
             </li>
             
             <li <?php if($active_menu == 'personregistration') { ?> class="active" <?php } ?>>
@@ -282,6 +281,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <ul class="treeview-menu">
             <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="glyphicon glyphicon-menu-right"></i> General Setting</a></li>
             <li <?php if($active_menu == 'usersetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="glyphicon glyphicon-menu-right"></i> Self Registration</a></li>
+            <li <?php if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="glyphicon glyphicon-menu-right"></i> Users</a></li>
             <li><a href="#"><i class="glyphicon glyphicon-menu-right"></i> User Setting</a></li>
           </ul>
         </li>

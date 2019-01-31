@@ -300,9 +300,12 @@ $(function() {
 				console.log('something');
 				if(result.status == 'success') {
 					console.log('success');
+					location.reload(); 
 				} else {
 					console.log('error'+result.status);
+					window.location.replace('<?= base_url('admin/listfamilies') ?>');
 				}
+				return false;
 			}
 
 		});

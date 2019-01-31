@@ -8,18 +8,15 @@ class Users extends CI_Controller {
 		
 		$this->load->model('user');
 		$this->load->model('cnfg');
-		$this->load->model('church');
 	}
 
 
 	public function index()
 	{
 		if($this->session->userdata('is_logged_in') == TRUE) {
-			if($this->session->userdata('user_type') == "super_administrator") {
-				redirect('sadmin/index');
-			} else if($this->session->userdata('user_type') == "administrator") {
+			if($this->session->userdata('user_type') == "administrator") {
 				redirect('admin/index');
-			}			
+			} 			
 		} else {
 			$data['system_name'] = $this->cnfg->get('system_name');
 			$this->load->view('login', $data);
@@ -45,19 +42,11 @@ class Users extends CI_Controller {
 				);
 
 			$this->session->set_userdata($data);
-
-			if($this->session->userdata('user_type') == "super_administrator") {
-
-				$this->session->set_userdata('system_name', $this->cnfg->get('system_name'));
-				$this->session->set_userdata('system_name_short', $this->cnfg->get('system_name_short'));
-
-				redirect('sadmin/index');
-
-			} else if($this->session->userdata('user_type') == "administrator") {
+			
+			if($this->session->userdata('user_type') == "administrator") {
 				if($userdata['role'] == "Administrator" && $userdata['church'] != 0) {
-					$mychurch = $this->church->get_church('id', $userdata['church']);					
-					$this->session->set_userdata('system_name', $mychurch['short_name']);
-					$this->session->set_userdata('system_name_short', $mychurch['mini_logo']);
+					$this->session->set_userdata('system_name', $this->cnfg->get('system_name'));
+					$this->session->set_userdata('system_name_short', $this->cnfg->get('system_name_short'));
 					$this->session->set_userdata('church', $userdata['church']);
 
 					redirect('admin/index');

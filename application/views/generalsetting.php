@@ -26,7 +26,7 @@
 		        </div>
 
 
-		        <form method="post" action="<?php echo base_url(); ?>sadmin/savesetting">
+		        <form method="post" action="<?php echo base_url(); ?>admin/savesetting">
 		            <div class="table-responsive">
 		                <table class="table table-hover">
 
