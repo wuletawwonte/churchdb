@@ -87,6 +87,9 @@ $lang['son'] = 'Son';
 $lang['daughter'] = 'Daughter';
 $lang['save_family_info'] = 'Save the Families information to the database?';
 $lang['close'] = 'Close';
+$lang['search'] = 'Search';
+$lang['website'] = 'Website';
+
 
 
 

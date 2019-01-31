@@ -84,7 +84,7 @@
 			                    </label>
 			                    <div class="input-group">
 			                        <div class="input-group-addon">
-			                            <i class="glyphicon glyphicon-earphone"></i>
+			                            <i class="glyphicon glyphicon-phone-alt"></i>
 			                        </div>
 			                        <input type="text" id="homePhoneNumber"
 			                               value="" size="30"
@@ -185,7 +185,7 @@
 
 
 <div class="modal" id="mymodal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -230,7 +230,7 @@ $(function() {
 		var birthDate = $('#birth_day').text();
 		var birthMonth = $('#birth_month').text();
 		var birthYear = $('#birth_year').text();
-		var deleteBtn = "<button type='button' name='btn_delete' class='btn btn-sm btn-warning'><i class='fa fa-minus'></i></button>";
+		var deleteBtn = "<button type='button' name='btn_delete' class='btn btn-sm btn-warning'><i class='glyphicon glyphicon-minus'></i></button>";
 	
 		$('#member_table tbody').append(
 			'<tr>'+

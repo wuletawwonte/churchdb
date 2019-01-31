@@ -87,6 +87,8 @@ $lang['son'] = 'ወንድ ልጅ';
 $lang['daughter'] = 'ሴት ልጅ';
 $lang['save_family_info'] = 'የቤተሰቡ መረጃ ወደ መረጃ ቋት ይመዝገብ?';
 $lang['close'] = 'ዝጋ';
+$lang['search'] = 'ፈልግ';
+$lang['website'] = 'ድኅረገፅ';
 
 
 

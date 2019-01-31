@@ -155,9 +155,9 @@ throw new Error('AdminLTE requires jQuery')
     animationSpeed : 500,
     collapseTrigger: '[data-widget="collapse"]',
     removeTrigger  : '[data-widget="remove"]',
-    collapseIcon   : 'fa-minus',
-    expandIcon     : 'fa-plus',
-    removeIcon     : 'fa-times'
+    collapseIcon   : 'glyphicon-minus',
+    expandIcon     : 'glyphicon-plus',
+    removeIcon     : 'glyphicon-times'
   };
 
   var Selector = {

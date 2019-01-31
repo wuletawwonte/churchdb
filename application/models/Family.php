@@ -17,9 +17,22 @@ class Family extends CI_Model {
 			'home_phone' => $this->input->post('home_phone'),
 			'wedding_year' => $this->input->post('wedding_year')
 			);
+
 		$members = $this->input->post('members');
 		try{
-			$this->db->insert('families', $data);
+			$res = $this->db->insert('families', $data);
+			for ($x=0; $x < count($members); $x++) { 
+				$member = array(
+					'firstname' => $members[$x]['firstname'], 
+					'middlename' => $members[$x]['middlename'], 
+					'lastname' => $members[$x]['lastname'], 
+					'birthdate' => $members[$x]['birthdate'], 
+					'birthmonth' => $members[$x]['birthmonth'], 
+					'birthyear' => $members[$x]['birthyear'], 
+					'family_id' => $res[0]['id'] 
+					);				
+				$this->db->insert('members', $member);
+			}
 			return 'success';
 		} catch(Exception $e) {
 			return 'error';
