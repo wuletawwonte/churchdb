@@ -44,14 +44,12 @@ class Users extends CI_Controller {
 			$this->session->set_userdata($data);
 			
 			if($this->session->userdata('user_type') == "administrator") {
-				if($userdata['role'] == "Administrator" && $userdata['church'] != 0) {
-					$this->session->set_userdata('system_name', $this->cnfg->get('system_name'));
-					$this->session->set_userdata('system_name_short', $this->cnfg->get('system_name_short'));
-					$this->session->set_userdata('church', $userdata['church']);
 
-					redirect('admin/index');
-				} 
-				redirect('users/index');
+				$this->session->set_userdata('system_name', $this->cnfg->get('system_name'));
+				$this->session->set_userdata('system_name_short', $this->cnfg->get('system_name_short'));
+
+				redirect('admin/index');
+
 			} else {
 				$this->session->unset_userdata('is_logged_id');
 				$this->session->set_flashdata("login_failed", "ያስገቡት መረጃ ትክክል አይደለም");

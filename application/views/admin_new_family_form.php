@@ -294,16 +294,16 @@ $(function() {
 		$.ajax({
 			data: data,
 			type: 'POST',
-			url: '<?php echo base_url('admin/savefamily'); ?>',
+			url: '<?= base_url('admin/savefamily') ?>',
 			dataType: 'json', 
 			success: function(result){
 				console.log('something');
 				if(result.status == 'success') {
 					console.log('success');
-					location.reload(); 
+					window.location = "<?= base_url('admin/listfamilies') ?>";
 				} else {
-					console.log('error'+result.status);
-					window.location.replace('<?= base_url('admin/listfamilies') ?>');
+					console.log('error: '+result.status);
+					location.reload(); 
 				}
 				return false;
 			}

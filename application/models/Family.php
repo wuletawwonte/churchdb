@@ -8,38 +8,31 @@ class Family extends CI_Model {
 		
 	}
 
-	public function add() {
-		$data = array(
-			'name' => $this->input->post('name'), 
-			'subcity' => $this->input->post('subcity'),
-			'kebele' => $this->input->post('kebele'),
-			'house_number' => $this->input->post('house_number'),
-			'home_phone' => $this->input->post('home_phone'),
-			'wedding_year' => $this->input->post('wedding_year')
-			);
+	public function add($data) {
 
-		$members = $this->input->post('members');
-		try{
-			$res = $this->db->insert('families', $data);
-			for ($x=0; $x < count($members); $x++) { 
-				$member = array(
-					'firstname' => $members[$x]['firstname'], 
-					'middlename' => $members[$x]['middlename'], 
-					'lastname' => $members[$x]['lastname'], 
-					'birthdate' => $members[$x]['birthdate'], 
-					'birthmonth' => $members[$x]['birthmonth'], 
-					'birthyear' => $members[$x]['birthyear'], 
-					'family_id' => $res[0]['id'] 
-					);				
-				$this->db->insert('members', $member);
-			}
-			return 'success';
-		} catch(Exception $e) {
-			return 'error';
-		}
+		$this->db->insert('families', $data);
+		return true;
+		// try{
+		// 	for ($x=0; $x < count($members); $x++) { 
+		// 		$member = array(
+		// 			'firstname' => $members[$x]['firstname'], 
+		// 			'middlename' => $members[$x]['middlename'], 
+		// 			'lastname' => $members[$x]['lastname'], 
+		// 			'birthdate' => $members[$x]['birthdate'], 
+		// 			'birthmonth' => $members[$x]['birthmonth'], 
+		// 			'birthyear' => $members[$x]['birthyear'], 
+		// 			'family_id' => $res[0]['id'] 
+		// 			);				
+		// 		$this->db->insert('members', $member);
+		// 	}
+		// 	return 'success';
+		// } catch(Exception $e) {
+		// 	return 'error'.$e;
+		// }
 	}
 
-	public function get_all() {
+	public function get_all($attrib, $order) {
+		$this->db->order_by($attrib, $order);
 		$data = $this->db->get('families');
 		return $data->result_array();	
 	}

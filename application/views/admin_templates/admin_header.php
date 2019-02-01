@@ -272,7 +272,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="glyphicon glyphicon-tag"></i> <span><?= lang('groups'); ?></span></a></li>
         <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="glyphicon glyphicon-stats"></i> <span><?= lang('data_report'); ?></span></a></li>
         <li <?php if($active_menu == 'wesite') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="glyphicon glyphicon-globe"></i> <span><?= lang('website'); ?></span></a></li>
-        <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?> class="treeview">
+        <li <?php if($active_menu == 'generalsetting' || $active_menu == 'users') { ?> class="active" <?php } ?> class="treeview">
           <a href="#"><i class="glyphicon glyphicon-cog"></i> <span><?= lang('setting'); ?></span>
             <span class="pull-right-container">
                 <i class="glyphicon glyphicon-menu-left pull-right"></i>

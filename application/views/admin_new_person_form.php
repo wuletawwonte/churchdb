@@ -21,7 +21,7 @@
 
 
 
-		<form method="post" action="" name="PersonEditor">
+		<form method="post" action="<?= base_url('admin/savemember') ?>" name="PersonEditor">
 
 <!-- 		    <div class="alert alert-info alert-dismissable">
 		        <i class="fa fa-info"></i>
@@ -29,6 +29,18 @@
 		        <strong><span style="color: red;"> Red text  </span></strong> indicates items inherited from the associated family record.
 		    </div>
  -->
+
+
+     <?php if($this->session->flashdata('success')) { ?>
+        <div class="callout callout-info">
+            <?php echo $this->session->flashdata('success'); ?>
+        </div>
+    <?php } else if($this->session->flashdata('error')) { ?>
+        <div class="callout callout-error">
+            <?php echo $this->session->flashdata('error'); ?>
+        </div>
+    <?php } ?>
+
 		    <div class="box box-info clearfix">
 		        <div class="box-header">
 		            <h3 class="box-title"> <?= lang('personal_info'); ?>  </h3>
@@ -38,67 +50,50 @@
 		                <div class="row">
 		                    <div class="col-md-2">
 		                        <label> <?= lang('gender'); ?>  :</label>
-		                        <select name="Gender" class="form-control">
-		                        	<option value="0"> <?= lang('choose_gender'); ?></option>
-		                        	<option value="0" disabled >-----------------
-		                            <option value="1"> <?= lang('female'); ?>  </option>
-		                            <option value="2"> <?= lang('male'); ?>  </option>
+		                        <select name="gender" class="form-control">
+		                            <option value="<?= lang('female'); ?>"> <?= lang('female'); ?>  </option>
+		                            <option value="<?= lang('male'); ?>"> <?= lang('male'); ?>  </option>
 		                        </select>
 		                    </div>
 		                    <div class="col-md-3">
 		                        <label for="Title"> <?= lang('title'); ?>  :</label>
-		                        <input type="text" name="Title" id="Title"
-		                               value="" class="form-control">
+		                        <input type="text" name="Title" class="form-control">
 		                    </div>
 		                </div>
 		                <p/>
 		                <div class="row">
 		                    <div class="col-md-4">
-		                        <label for="FirstName"> <?= lang('first_name'); ?>  :</label>
-		                        <input type="text" name="FirstName" id="FirstName" class="form-control">
+		                        <label for="firstname"> <?= lang('first_name'); ?>  :</label>
+		                        <input type="text" name="firstname" class="form-control">
 		        				<br><font color="red"></font>
 		                    </div>
 
 		                    <div class="col-md-2">
-		                        <label for="MiddleName"> <?= lang('middle_name'); ?>  :</label>
-		                        <input type="text" name="MiddleName" id="MiddleName" class="form-control">
+		                        <label for="middlename"> <?= lang('middle_name'); ?>  :</label>
+		                        <input type="text" name="middlename" class="form-control">
 
 		                    </div>
 
 		                    <div class="col-md-6">
-		                        <label for="LastName"> <?= lang('last_name'); ?>  :</label>
-		                        <input type="text" name="LastName" id="LastName" class="form-control">                    
+		                        <label for="lastname"> <?= lang('last_name'); ?>  :</label>
+		                        <input type="text" name="lastname" class="form-control">                    
 		                    </div>
 		                </div>
 		                <p/>
 		                <div class="row">
 		                    <div class="col-md-2">
-		                        <label> <?= lang('birth_month'); ?>  :</label>
-		                        <select name="BirthMonth" class="form-control">
-		                            <option value="0" > <?= lang('select_month'); ?>  </option>
-		                            <option value="0" > -----------------
-		                            <option value="01" > <?= lang('january'); ?>  </option>
-		                            <option value="02" > <?= lang('february'); ?>  </option>
-		                            <option value="03" > <?= lang('march'); ?>  </option>
-		                            <option value="04" > <?= lang('april'); ?>  </option>
-		                            <option value="05" > <?= lang('may'); ?>  </option>
-		                            <option value="06" > <?= lang('june'); ?>  </option>
-		                            <option value="07" > <?= lang('july'); ?>  </option>
-		                            <option value="08" > <?= lang('august'); ?>  </option>
-		                            <option value="09" > <?= lang('september'); ?>  </option>
-		                            <option value="10" > <?= lang('october'); ?>  </option>
-		                            <option value="11" > <?= lang('november'); ?>  </option>
-		                            <option value="12" > <?= lang('december'); ?>  </option>
-		                        </select>
+		                        <label> <?= lang('birth_date'); ?> :</label>
+		                        <input type="text" name="birthdate" max='31'
+		                               class="form-control">
 		                    </div>
 		                    <div class="col-md-2">
-		                        <label> <?= lang('birth_date'); ?> :</label>
-		                        <input type="text" name="BirthDate" max='31'
+		                        <label> <?= lang('birth_month'); ?> :</label>
+		                        <input type="text" name="birthmonth" max='31'
 		                               class="form-control">
 		                    </div>
 		                    <div class="col-md-2">
 		                        <label> <?= lang('birth_year'); ?> :</label>
-		                        <input type="text" name="BirthYear" value="" maxlength="4" size="5"
+		                        <input type="text" name="birthyear" maxlength="4" size="5"
 		                               class="form-control">
 		                    </div>
 		                    <div class="col-md-2">
@@ -125,7 +120,7 @@
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-earphone"></i>
 								</div>
-								<input type="text" Name="HomePhone" value="" size="30" maxlength="30" class="form-control" data-inputmask='' data-mask>
+								<input type="text" Name="mobilephone" value="" size="30" maxlength="30" class="form-control" data-inputmask='' data-mask>
 								<input type="checkbox" name="NoFormat_HomePhone" value="1"> <?= lang('do_not_auto_format') ?>
 							</div>
 						</div>
@@ -135,7 +130,7 @@
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-earphone"></i>
 								</div>
-								<input type="text" name="WorkPhone" value="" size="30" maxlength="30" class="form-control" data-inputmask='"mask": ""' data-mask/>
+								<input type="text" name="workphone" value="" size="30" maxlength="30" class="form-control" data-inputmask='"mask": ""' data-mask/>
 								<input type="checkbox" name="NoFormat_WorkPhone" value="1"> <?= lang('do_not_auto_format') ?>
 							</div>
 						</div>
@@ -147,7 +142,7 @@
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-envelope"></i>
 								</div>
-								<input type="text" Name="Email" class="form-control" value="" size="30" maxlength="100"><font color="red"><BR></font>
+								<input type="text" Name="email" class="form-control" value="" size="30" maxlength="100"><font color="red"><BR></font>
 							</div>
 						</div>
 					</div>
@@ -239,12 +234,12 @@
 
 		            <div class="form-group col-md-6">
 		                <label> <?= lang('family') ?>:</label>
-		                <select name="Family" size="8" class="form-control">
-		                    <option value="0" selected> <?= lang('unassigned') ?>  </option>
-		                    <option value="-1"> <?= lang('create_new_family_by_name') ?>  </option>
+		                <select name="family" size="8" class="form-control">
+		                    <option value="-1" selected> <?= lang('unassigned') ?>  </option>
+		                    <option value="0"> <?= lang('create_new_family_by_name') ?>  </option>
 		                    <option value="0" disabled>-----------------------</option>
 		                    <?php foreach($families as $family) { ?>
-		                    <option><?= $family['name']; ?></option>
+		                    <option value="<?= $family['id']; ?>"><?= $family['name']; ?></option>
 		                    <?php } ?>
 		                </select>
 		            </div>

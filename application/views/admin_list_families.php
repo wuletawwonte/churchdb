@@ -11,6 +11,11 @@
     <!-- Main content -->
     <section class="content container-fluid">
 
+    <div class="pull-right">
+        <a class="btn btn-success" role="button" href="<?= base_url('admin/familyregistration') ?>">
+        <span class="glyphicon glyphicon-plus"></span> <?= lang('add_new_family'); ?></a>
+    </div>
+    <p><br><br></p>
 
     <?php if($this->session->flashdata('success')) { ?>
         <div class="callout callout-info">
@@ -22,11 +27,6 @@
         </div>
     <?php } ?>
 
-    <div class="pull-right">
-        <a class="btn btn-success" role="button" href="<?= base_url('admin/familyregistration') ?>">
-        <span class="glyphicon glyphicon-plus"></span> <?= lang('add_new_family'); ?></a>
-    </div>
-    <p><br><br></p>
 
     <!-- Default box -->
     <div class="box">

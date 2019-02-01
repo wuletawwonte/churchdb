@@ -11,7 +11,7 @@
         <small>List of Registered Users</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>sadmin/users"><i class="fa fa-users"></i> Users</a></li>
+        <li><a href="<?php echo base_url(); ?>sadmin/users"><i class="glyphicon glyphicon-users"></i> Users</a></li>
         <li class="active">List</li>
       </ol>
     </section>
@@ -35,8 +35,8 @@
     <!-- Default box -->
     <div class="box box-primary">
         <div class="box-header">
-            <a href="<?php echo base_url(); ?>sadmin/newuserform" class="btn btn-app"><i class="fa fa-user-plus"></i>New User</a>
-            <a href="SettingsUser.php" class="btn btn-app"><i class="fa fa-wrench"></i>User Settings</a>
+            <a href="<?php echo base_url(); ?>sadmin/newuserform" class="btn btn-app"><i class="glyphicon glyphicon-user"></i>New User</a>
+            <a href="SettingsUser.php" class="btn btn-app"><i class="glyphicon glyphicon-wrench"></i>User Settings</a>
         </div>
 
         <div class="box-body">
@@ -59,9 +59,9 @@
 
                     <tr>
                         <td>
-                            <a href="<?php echo base_url(); ?>sadmin/edituserform/<?= $user['id'] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a onclick=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            <a href="<?php echo base_url(); ?>sadmin/edituserform/<?= $user['id'] ?>"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="#"><i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a onclick=""><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
                         </td>
 
                         <td>
@@ -73,8 +73,8 @@
                         <td><?php echo $user['created']; ?></td>
 
                         <td>
-                            <a href="#"><i class="fa fa-wrench" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a onclick="#"><i class="fa fa-send-o" aria-hidden="true"></i></a>
+                            <a href="#"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a onclick="#"><i class="glyphicon glyphicon-send" aria-hidden="true"></i></a>
                        </td>
 
                     </tr>

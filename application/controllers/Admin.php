@@ -13,6 +13,7 @@ class Admin extends CI_Controller {
 		$this->load->model('user');
 		$this->load->model('cnfg');
 		$this->load->model('family');
+		$this->load->model('member');
 
 		$this->lang->load('label_lang', $this->session->userdata('language'));
 	}
@@ -128,7 +129,7 @@ class Admin extends CI_Controller {
 	public function personregistration() {
 
 		$data['active_menu'] = "personregistration";
-		$data['families'] = $this->family->get_all();
+		$data['families'] = $this->family->get_all('name', 'ASC');
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_new_person_form');
 		$this->load->view('admin_templates/footer');
@@ -146,7 +147,7 @@ class Admin extends CI_Controller {
 
 	public function listfamilies() {
 		$data['active_menu'] = "listfamilies";
-		$data['families'] = $this->family->get_all();
+		$data['families'] = $this->family->get_all('created', 'DESC');
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_list_families');
 		$this->load->view('admin_templates/footer');
@@ -155,18 +156,56 @@ class Admin extends CI_Controller {
 
 
 	public function savefamily() {
+		$data = array(
+			'name' => $this->input->post('name'), 
+			'subcity' => $this->input->post('subcity'),
+			'kebele' => $this->input->post('kebele'),
+			'house_number' => $this->input->post('house_number'),
+			'home_phone' => $this->input->post('home_phone'),
+			'wedding_year' => $this->input->post('wedding_year')
+			);
 
-		$result = $this->family->add();
-		if($result == 'success') {
+		if($this->family->add($data)) {
+			$members[] = $this->input->post('members');
+			for ($x=0;$x < count($members); $x++) { 
+				$member = array(
+					'firstname' => $members[$x]['firstname'], 
+					'middlename' => $members[$x]['middlename'], 
+					'lastname' => $members[$x]['lastname'], 
+					'birthdate' => $members[$x]['birthdate'], 
+					'birthmonth' => $members[$x]['birthmonth'], 
+					'birthyear' => $members[$x]['birthyear'] 
+					);
+				$this->member->add($member);
+			}
 			$this->session->set_flashdata('success', 'Success: Family Successfully Registered.');
-			redirect('admin/listfamilies');
+			echo json_encode(array('status' => 'success'));			
 		} else {
-			$this->output->set_content_type('application/json');
+			$this->session->set_flashdata('error', 'Error: Family not Registered.');
 			echo json_encode(array('status' => $result));			
 		}
 	}
 
+	public function savemember() {
+		$data = array(
+			'firstname' => $this->input->post('firstname'), 
+			'middlename' => $this->input->post('middlename'), 
+			'lastname' => $this->input->post('lastname'), 
+			'gender' => $this->input->post('gender'), 
+			'birthdate' => $this->input->post('birthdate'), 
+			'birthmonth' => $this->input->post('birthmonth'), 
+			'birthyear' => $this->input->post('birthyear'), 
+			'family_id' => $this->input->post('family') 
+			);
 
+		if($this->member->add($data)) {
+			$this->session->set_flashdata('success', 'Success: Member Successfully Registered.');
+			redirect('admin/personregistration');
+		} else {
+			$this->session->set_flashdata('error', 'Error: Member Can not be Registered.');
+			redirect('admin/personregistration');			
+		}
+	}
 
 
 
