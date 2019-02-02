@@ -15,7 +15,7 @@ $lang['choose_gender'] = 'Choose Gender';
 $lang['churches'] = 'Churches';
 $lang['people'] = 'People';
 $lang['add_new_person'] = 'Add New Person';
-$lang['view_all_persons'] = 'View All Persons';
+$lang['members'] = 'Members';
 $lang['add_new_family'] = 'Add New Family';
 $lang['families'] = 'Families';
 $lang['title'] = 'Title';
@@ -90,6 +90,9 @@ $lang['close'] = 'Close';
 $lang['search'] = 'Search';
 $lang['website'] = 'Website';
 
+$lang['website_hits'] = 'Website Hits';
+$lang['more_info'] = 'More info';
+$lang['welcome'] = 'Welcome';
 
 
 

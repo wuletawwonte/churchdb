@@ -300,6 +300,7 @@ $(function() {
 				console.log('something');
 				if(result.status == 'success') {
 					console.log('success');
+					console.log(result.members);
 					window.location = "<?= base_url('admin/listfamilies') ?>";
 				} else {
 					console.log('error: '+result.status);

@@ -241,9 +241,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </span>
           </a>
           <ul class="treeview-menu">
-            <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>>
-                <a href="<?php echo base_url(); ?>admin/generalsetting"><i class="glyphicon glyphicon-menu-right"></i> <?= lang('dashboard'); ?></a>
-            </li>
             
             <li <?php if($active_menu == 'personregistration') { ?> class="active" <?php } ?>>
                 <a href="<?php echo base_url(); ?>admin/personregistration">
@@ -252,7 +249,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             
             <li <?php if($active_menu == 'generalsetting') { echo "class='active'"; } ?>>
                 <a href="<?php echo base_url(); ?>admin/generalsetting">
-                    <i class="glyphicon glyphicon-menu-right"></i> <?= lang('view_all_persons'); ?></a>
+                    <i class="glyphicon glyphicon-menu-right"></i> <?= lang('members'); ?></a>
             </li>
             
             <li <?php if($active_menu == 'familyregistration') { echo "class='active'"; } ?>>

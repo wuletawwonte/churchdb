@@ -15,7 +15,7 @@ $lang['choose_gender'] = 'ፆታ ምረጥ';
 $lang['churches'] = 'ቸርቾች';
 $lang['people'] = 'ምዕመን';
 $lang['add_new_person'] = 'ምዕመን መዝግብ';
-$lang['view_all_persons'] = 'ምዕመናን';
+$lang['members'] = 'ምዕመናን';
 $lang['add_new_family'] = 'አዲስ ቤተሰብ መዝግብ';
 $lang['families'] = 'ቤተሰቦች';
 $lang['title'] = 'ማዕረግ';
@@ -90,6 +90,9 @@ $lang['close'] = 'ዝጋ';
 $lang['search'] = 'ፈልግ';
 $lang['website'] = 'ድኅረገፅ';
 
+$lang['website_hits'] = 'የድኅረ ገፅ ጉብኝቶች';
+$lang['more_info'] = 'ለበለጠ መረጃ';
+$lang['welcome'] = 'እንኳን ደህና መጡ';
 
 
 
