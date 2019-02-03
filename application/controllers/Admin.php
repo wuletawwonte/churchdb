@@ -154,6 +154,15 @@ class Admin extends CI_Controller {
 
 	}
 
+	public function listmembers() {
+		$data['active_menu'] = "listmembers";
+		$data['members'] = $this->member->get_all('created', 'DESC');
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('admin_list_members');
+		$this->load->view('admin_templates/footer');
+
+	}
+
 
 	public function savefamily() {
 		$data = array(

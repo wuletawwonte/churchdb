@@ -12,8 +12,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/skins/'.$this->session->userdata('skin').'.min.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
 
   <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>">
 
@@ -236,7 +236,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Optionally, you can add icons to the links -->
         <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="glyphicon glyphicon-dashboard"></i><span><?= lang('dashboard'); ?></span></a></li>
         
-        <li <?php if($active_menu == 'personregistration' || $active_menu == 'familyregistration' || $active_menu == 'listfamilies') { ?> class="active" <?php } ?> class="treeview">
+        <li <?php if($active_menu == 'personregistration' || $active_menu == 'familyregistration' || $active_menu == 'listfamilies' || $active_menu == 'listmembers') { ?> class="active" <?php } ?> class="treeview">
           <a href="#"><i class="glyphicon glyphicon-user"></i> <span> <?= lang('people'); ?></span>
             <span class="pull-right-container">
                 <i class="glyphicon glyphicon-menu-left pull-right"></i>
@@ -249,8 +249,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <i class="glyphicon glyphicon-menu-right"></i> <?= lang('add_new_person'); ?></a>
             </li>
             
-            <li <?php if($active_menu == 'generalsetting') { echo "class='active'"; } ?>>
-                <a href="<?php echo base_url(); ?>admin/generalsetting">
+            <li <?php if($active_menu == 'listmembers') { echo "class='active'"; } ?>>
+                <a href="<?php echo base_url(); ?>admin/listmembers">
                     <i class="glyphicon glyphicon-menu-right"></i> <?= lang('members'); ?></a>
             </li>
             

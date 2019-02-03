@@ -13,6 +13,11 @@ class Member extends CI_Model {
 		return true;
 	}
 
+	public function get_all($attrib, $order) {
+		$this->db->order_by($attrib, $order);
+		$data = $this->db->get('members');
+		return $data->result_array();			
+	}
 
 
 
