@@ -157,31 +157,23 @@ class Admin extends CI_Controller {
 
 	public function savefamily() {
 		$data = array(
-			'name' => $this->input->post('name'), 
+			'name' => $this->input->post('family_name'), 
 			'subcity' => $this->input->post('subcity'),
 			'kebele' => $this->input->post('kebele'),
 			'house_number' => $this->input->post('house_number'),
-			'home_phone' => $this->input->post('home_phone'),
+			'home_phone' => $this->input->post('home_phone_number'),
 			'wedding_year' => $this->input->post('wedding_year')
 			);
 
 		if($this->family->add($data)) {
-			// $members[] = $this->input->post('members');
-			// for ($x=0;$x < count($members); $x++) { 
-			// 	$member = array(
-			// 		'firstname' => $members[$x]['firstname'], 
-			// 		'middlename' => $members[$x]['middlename'], 
-			// 		'lastname' => $members[$x]['lastname'], 
-			// 		'birthdate' => $members[$x]['birthdate'], 
-			// 		'birthmonth' => $members[$x]['birthmonth'], 
-			// 		'birthyear' => $members[$x]['birthyear'] 
-			// 		);
-			// 	// $this->member->add($member);
-			// }
+			$decoded_members = json_decode($this->input->post('members'));
+			foreach ($decoded_members as $member) {
+				$this->member->add($member);
+			}
+
 			$this->session->set_flashdata('success', 'Success: Family Successfully Registered.');
 
-			echo json_encode(array('members' => $this->input->post('members')));			
-			echo json_encode(array('status' => 'success'));			
+			redirect('admin/listfamilies');
 		} else {
 			$this->session->set_flashdata('error', 'Error: Family not Registered.');
 			echo json_encode(array('status' => $result));			

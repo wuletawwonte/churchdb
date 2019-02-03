@@ -1,5 +1,6 @@
-
-
+<script type="text/javascript" src="<?= base_url('assets/plugins/jquery.validate.min.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.date.extensions.js'); ?>"></script>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -24,38 +25,53 @@
 		        <strong><span style="color: red;"> Red text  </span></strong> indicates items inherited from the associated family record.
 		    </div>
  -->
+
+ 			<form  method='POST' id="savefamily" action="<?= base_url('admin/savefamily'); ?>">
 		    <div class="box box-info clearfix">
 		        <div class="box-header">
 		            <h3 class="box-title"> <?= lang('family_info'); ?>  </h3>
 		        </div><!-- /.box-header -->
 		        <div class="box-body">
 		            <div class="form-group">
-						<div class="row">
+						<div class="row" id="inputs">
 
 							<div class="col-md-4">
 								<label> <?= lang('first_name') ?>:</label>
-								<input type="text" id="hFirstName" maxlength="48"  class="form-control family-head" required>
+								<input type="text" id="hFirstName" name="head_first_name" maxlength="48"  class="form-control family-head" required>
 							</div>
 							<div class="col-md-4">
 								<label> <?= lang('middle_name') ?>:</label>
-								<input type="text" id="hMiddleName" maxlength="48"  class="form-control family-head" required>
+								<input type="text" id="hMiddleName" name="head_middle_name" maxlength="48"  class="form-control family-head" required>
 							</div>
 							<div class="col-md-4">
 								<label> <?= lang('last_name') ?>:</label>
-								<input type="text" id="hLastName" maxlength="48"  class="form-control family-head" required>
+								<input type="text" id="hLastName" name="head_last_name" maxlength="48"  class="form-control family-head" required>
 							</div>
 
 						</div><p/>		            
 						<div class="row">
 							<div class="col-md-6">
 								<label> <?= lang('family_name') ?>:</label>
-								<input type="text" id="FamilyName" maxlength="48"  class="form-control" readonly>
+								<input type="text" id="FamilyName" name="family_name" maxlength="48"  class="form-control" readonly>
 							</div>
+
+			                <div class="col-md-6 form-group">
+				                <label><?= lang('birth_date') ?>:</label>
+
+				                <div class="input-group">
+				                  <div class="input-group-addon">
+				                    <i class="glyphicon glyphicon-calendar"></i>
+				                  </div>
+				                  <input type="text" class="form-control family-head birthdate" id="hBirthDate" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+				                </div>
+				                <!-- /.input group -->
+				            </div>
+
 						</div><p/><hr>		            
 		                <div class="row">
 		                    <div class="col-md-4">
 		                        <label> <?= lang('living_subcity'); ?>  :</label>
-		                        <select id="subcity" class="form-control">
+		                        <select id="subcity" name="subcity" class="form-control">
 		                        	<option value="<?= lang('nechsar'); ?>"><?= lang('nechsar'); ?></option>
 		                        	<option value="0" disabled >-----------------
 		                            <option value="<?= lang('female'); ?>"><?= lang('female'); ?></option>
@@ -64,7 +80,7 @@
 		                    </div>
 		                    <div class="col-md-4">
 		                        <label> <?= lang('living_kebele'); ?>  :</label>
-		                        <select id="kebele" class="form-control">
+		                        <select id="kebele" name="kebele" class="form-control">
 		                        	<option value="<?= lang('idget_ber'); ?>"><?= lang('idget_ber'); ?></option>
 		                        	<option value="0" disabled >-----------------
 		                            <option value="1"><?= lang('female'); ?></option>
@@ -73,7 +89,7 @@
 		                    </div>
 		                    <div class="col-md-4">
 		                        <label for="houseNumber"> <?= lang('house_number'); ?>  :</label>
-		                        <input type="text" id="houseNumber" class="form-control">
+		                        <input type="text" id="houseNumber" name="house_number" class="form-control">
 		                    </div>
 						</div>
 						<p/>
@@ -86,15 +102,13 @@
 			                        <div class="input-group-addon">
 			                            <i class="glyphicon glyphicon-phone-alt"></i>
 			                        </div>
-			                        <input type="text" id="homePhoneNumber"
-			                               value="" size="30"
-			                               maxlength="100" class="form-control">
+			                        <input type="text" id="homePhoneNumber" name="home_phone_number" value="" size="30" maxlength="100" class="form-control">
 			                    </div>
 			                </div>
 
 		                    <div class="col-md-6 col-md-offset-2">
 		                        <label for="weddingYear"> <?= lang('wedding_year'); ?>  :</label>
-		                        <input type="text" id="weddingYear" class="form-control">
+		                        <input type="text" id="weddingYear" name="wedding_year" class="form-control">
 		        				<br><font color="red"></font>
 		                    </div>
 
@@ -123,31 +137,7 @@
 									<th style="width:120px"><?= lang('middle_name') ?></th>
 									<th style="width:120px"><?= lang('last_name') ?></th>
 									<th><?= lang('birth_date') ?></th>
-									<th><?= lang('birth_month') ?></th>
-									<th><?= lang('birth_year') ?></th>
 									<th><?= gettext('Action') ?></th>
-								</tr>
-								<tr>
-
-									<td class="TextColumn">
-										<select id="role">
-											<option value="<?= lang('wife') ?>" ><?= lang('wife') ?></option>
-											<option value="<?= lang('husband') ?>" ><?= lang('husband') ?></option>
-											<option value="<?= lang('son') ?>" ><?= lang('son') ?></option>
-											<option value="<?= lang('daughter') ?>" ><?= lang('daughter') ?></option>
-										</select>
-									</td>
-									<td class="TextColumn" contenteditable id="first_name"></td>
-									<td class="TextColumn" contenteditable id="middle_name"></td>
-									<td class="TextColumn" contenteditable id="last_name"></td>
-									<td class="TextColumn" contenteditable id="birth_day"></td>
-				                    <td class="TextColumn" contenteditable id='birth_month'></td>
-									<td class="TextColumn" contenteditable id="birth_year"></td>
-
-									<td class="TextColumn">
-										<button type="button" id="btn_add" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-plus"></i></button>
-									</td>
-
 								</tr>
 							</thead>
 							<tbody>
@@ -158,24 +148,54 @@
 									<td class="TextColumn" name="eFirstName" id="eFirstName"></td>
 									<td class="TextColumn" name="eMiddleName" id="eMiddleName"></td>
 									<td class="TextColumn" name="eLastName" id="eLastName"></td>
-									<td class="TextColumn" contenteditable name="eBirthDay"></td>
-				                    <td class="TextColumn" contenteditable name='eBirthMonth'></td>
-									<td class="TextColumn" contenteditable name="eBirthYear"></td>
+									<td class="TextColumn" name="eBirthDate" id="eBirthDate"></td>
 
 									<td class="TextColumn"></td>
 
 								</tr>
-
-								</tbody>
 							</tbody>
-
 						</table>
+					
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-2">
+								<?= lang('family_role') ?><br>
+								<select id="role" class="form-control input-sm">
+									<option value="<?= lang('wife') ?>" ><?= lang('wife') ?></option>
+									<option value="<?= lang('husband') ?>" ><?= lang('husband') ?></option>
+									<option value="<?= lang('son') ?>" ><?= lang('son') ?></option>
+									<option value="<?= lang('daughter') ?>" ><?= lang('daughter') ?></option>
+								</select>							
+							</div>
+							<div class="col-md-2">
+								<?= lang('first_name') ?><br>
+								<input type="text" id="first_name" class="form-control input-sm">
+							</div>	
+							<div class="col-md-2">
+								<?= lang('middle_name') ?>
+								<input type="text" id="middle_name" class="form-control input-sm">
+							</div>	
+							<div class="col-md-2">
+								<?= lang('last_name') ?>
+								<input type="text" id="last_name" class="form-control input-sm">
+							</div>	
+							<div class="col-md-3">
+								<?= lang('birth_date') ?>
+								<input type="text" id="birth_day" class="form-control birthdate input-sm" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+							</div>
+							<div class="col-md-1"><br>
+								<button type="button" id="btn_add" class="btn btn-sm btn-success pull-right"><i class="glyphicon glyphicon-plus"></i></button>							
+							</div>	
+						</div>
 					</div>
 
 				</div>
 			</div>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#mymodal"><?= lang('save') ?></button>
-			<input type="submit" class="btn btn-info" value="Save and Add" name="addchurchsubmit">
+            <button type="submit" class="btn btn-primary"><?= lang('save') ?></button>
+			<input class="btn btn-info" value="Save and Add" name="addchurchsubmit">
+    		</form>
     </section>
     <!-- /.content -->
   </div>
@@ -193,7 +213,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><?= lang('close') ?></button>
-        <button type="button" id="btn_save" class="btn btn-primary"><?= lang('save') ?></button>
+        <button type="button" class="btn btn-primary" id="submit_form"><?= lang('save') ?></button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -214,22 +234,22 @@ $(function() {
 		var firstname = $('#hFirstName').val();
 		var middlename = $('#hMiddleName').val();
 		var lastname = $('#hLastName').val();
+		var birthdate = $('#hBirthDate').val();
 		$('#FamilyName').val(firstname+' '+middlename);
 		$('#eFirstName').text(firstname);
 		$('#eMiddleName').text(middlename);
 		$('#eLastName').text(lastname);
+		$('#eBirthDate').text(birthdate);
 
 	});
 
 	$('#btn_add').click(function() {
 
 		var role = $('#role').val();
-		var firstName = $('#first_name').text();
-		var middleName = $('#middle_name').text();
-		var lastName = $('#last_name').text();
-		var birthDate = $('#birth_day').text();
-		var birthMonth = $('#birth_month').text();
-		var birthYear = $('#birth_year').text();
+		var firstName = $('#first_name').val();
+		var middleName = $('#middle_name').val();
+		var lastName = $('#last_name').val();
+		var birthDate = $('#birth_day').val();
 		var deleteBtn = "<button type='button' name='btn_delete' class='btn btn-sm btn-warning'><i class='glyphicon glyphicon-minus'></i></button>";
 	
 		$('#member_table tbody').append(
@@ -239,8 +259,6 @@ $(function() {
 				'<td>'+middleName+'</td>'+
 				'<td>'+lastName+'</td>'+
 				'<td>'+birthDate+'</td>'+
-				'<td>'+birthMonth+'</td>'+
-				'<td>'+birthYear+'</td>'+
 				'<td>'+deleteBtn+'</td>'+
 			'</tr>'
 			);
@@ -249,70 +267,35 @@ $(function() {
 		$('#middle_name').text('');
 		$('#last_name').text('');
 		$('#birth_day').text('');
-		$('#birth_month').text('');
-		$('#birth_year').text('');
 	});
 
-	$('#btn_save').click(function() {
+	$('#savefamily').validate({
+		submitHandler: function(form) {
+			$("#mymodal").modal('show');
+			$("#submit_form").click(function() {
+		
+				var table_data = [];
+				$('#member_table tbody tr').each(function(row,tr){
 
-		var table_data = [];
-		$('#member_table tbody tr').each(function(row,tr){
+					var row = {
+						'firstname': $(tr).find('td:eq(1)').text(), 
+						'middlename': $(tr).find('td:eq(2)').text(), 
+						'lastname': $(tr).find('td:eq(3)').text(), 
+						'birthdate': $(tr).find('td:eq(4)').text() 
+					};
+					table_data.push(row);
+				});
+				var encoded = JSON.stringify(table_data);
+				$('#inputs').append("<input type='text' name='members' value='"+encoded+"' hidden>");
 
-			var row = {
-				'role': $(tr).find('td:eq(0)').text(), 
-				'firstname': $(tr).find('td:eq(1)').text(), 
-				'middlename': $(tr).find('td:eq(2)').text(), 
-				'lastname': $(tr).find('td:eq(3)').text(), 
-				'birthdate': $(tr).find('td:eq(4)').text(), 
-				'birthmonth': $(tr).find('td:eq(5)').text(), 
-				'birthyear': $(tr).find('td:eq(6)').text(), 
-			};
-			table_data.push(row);
-		});
-
-		var firstName = $('#hFirstName').val();
-		var middleName = $('#hMiddleName').val();
-		var lastName = $('#hLastName').val();
-		var familyName = $('#FamilyName').val();
-		var subcity = $('#subcity').val();
-		var kebele = $('#kebele').val();
-		var houseNumber = $('#houseNumber').val();
-		var homePhoneNumber = $('#homePhoneNumber').val();
- 		var weddingYear = $('#weddingYear').val();
-
-		// Registering Family Info here
-		var data = {
-			'name': $('#FamilyName').val(),
-			'subcity': $('#subcity').val(),
-			'kebele': $('#kebele').val(),
-			'house_number': $('#houseNumber').val(),
-			'home_phone': $('#homePhoneNumber').val(),
-			'wedding_year': $('#weddingYear').val(),
-			'members': table_data
-		};
-
-		$.ajax({
-			data: data,
-			type: 'POST',
-			url: '<?= base_url('admin/savefamily') ?>',
-			dataType: 'json', 
-			success: function(result){
-				console.log('something');
-				if(result.status == 'success') {
-					console.log('success');
-					console.log(result.members);
-					window.location = "<?= base_url('admin/listfamilies') ?>";
-				} else {
-					console.log('error: '+result.status);
-					location.reload(); 
-				}
-				return false;
-			}
-
-		});
+				form.submit();
+			}); 
+		}
 
 	});
 
+
+	$(".birthdate").inputmask(); 
 
 });
 </script>

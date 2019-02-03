@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/skins/'.$this->session->userdata('skin').'.min.css'); ?>">
 
   <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>">
@@ -22,6 +22,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="<?php echo base_url(); ?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
   
 
 </head>
