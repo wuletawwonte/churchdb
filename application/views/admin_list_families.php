@@ -94,6 +94,8 @@
 
                 </tbody>
             </table>
+            <p><?= $links; ?></p>
+
         </div>
         <!-- /.box-body -->
     </div>

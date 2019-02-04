@@ -4,7 +4,6 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #512DA8;
   font-size: 30px;
   color: #fff;
   text-align: center;
@@ -69,7 +68,7 @@ table tbody td a, table tbody td span {
 
                     <tr>
 
-                        <td><a href=""><div class="profile-image">CZ</div></a></td>
+                        <td><a href=""><div class="profile-image" style="background: <?= $member['profile_color']; ?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div></a></td>
 
                         <td>
                             <a href="#"> <?= $member['firstname'].' '.$member['middlename']; ?></a>
@@ -88,6 +87,8 @@ table tbody td a, table tbody td span {
 
                 </tbody>
             </table>
+            <p><?= $links; ?></p>
+
         </div>
         <!-- /.box-body -->
     </div>

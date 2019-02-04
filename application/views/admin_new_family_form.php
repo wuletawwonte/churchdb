@@ -132,10 +132,10 @@
 						<table width="100%" class="table table-bordered" id="member_table">
 							<thead>
 								<tr class="TableHeader" align="center">
-									<th><?= lang('family_role') ?></th>
-									<th style="width:120px"><?= lang('first_name') ?></th>
-									<th style="width:120px"><?= lang('middle_name') ?></th>
-									<th style="width:120px"><?= lang('last_name') ?></th>
+									<th width="18%"><?= lang('family_role') ?></th>
+									<th width="17%"><?= lang('first_name') ?></th>
+									<th width="17%"><?= lang('middle_name') ?></th>
+									<th width="17%"><?= lang('last_name') ?></th>
 									<th><?= lang('birth_date') ?></th>
 									<th><?= gettext('Action') ?></th>
 								</tr>
@@ -263,10 +263,10 @@ $(function() {
 			'</tr>'
 			);
 		$('#role').val('<?= lang('wife') ?>');
-		$('#first_name').text('');
-		$('#middle_name').text('');
-		$('#last_name').text('');
-		$('#birth_day').text('');
+		$('#first_name').val('');
+		$('#middle_name').val('');
+		$('#last_name').val('');
+		$('#birth_day').val('');
 	});
 
 	$('#savefamily').validate({

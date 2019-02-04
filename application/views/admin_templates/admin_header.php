@@ -37,9 +37,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Logo -->
     <a href="<?php echo base_url(); ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><?php echo $this->session->userdata('system_name_short'); ?></span>
+      <span class="logo-mini"><?= $this->session->userdata('system_name_short'); ?></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><?php echo $this->session->userdata('system_name'); ?></span>
+      <span class="logo-lg"><?= $this->session->userdata('system_name'); ?></span>
     </a>
 
     <!-- Header Navbar -->

@@ -1,4 +1,7 @@
 
+<script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.date.extensions.js'); ?>"></script>
+
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -81,21 +84,17 @@
 		                </div>
 		                <p/>
 		                <div class="row">
-		                    <div class="col-md-2">
-		                        <label> <?= lang('birth_date'); ?> :</label>
-		                        <input type="text" name="birthdate" max='31'
-		                               class="form-control">
-		                    </div>
-		                    <div class="col-md-2">
-		                        <label> <?= lang('birth_month'); ?> :</label>
-		                        <input type="text" name="birthmonth" max='31'
-		                               class="form-control">
-		                    </div>
-		                    <div class="col-md-2">
-		                        <label> <?= lang('birth_year'); ?> :</label>
-		                        <input type="text" name="birthyear" maxlength="4" size="5"
-		                               class="form-control">
-		                    </div>
+			                <div class="col-md-6 form-group">
+				                <label><?= lang('birth_date') ?>:</label>
+
+				                <div class="input-group">
+				                  <div class="input-group-addon">
+				                    <i class="glyphicon glyphicon-calendar"></i>
+				                  </div>
+				                  <input type="text" class="form-control family-head birthdate" name="birthdate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask>
+				                </div>
+				                <!-- /.input group -->
+				            </div>
 		                    <div class="col-md-2">
 		                        <label> <?= lang('hide_age'); ?>  </label><br/>
 		                        <input type="checkbox" name="HideAge" value="1" >
@@ -271,6 +270,10 @@
 	    if ( obj.checked ) $(className).show();
 	    else $(className).hide();
 	}
+
+
+
+	$(".birthdate").inputmask(); 
 
 </script>
 

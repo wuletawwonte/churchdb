@@ -14,6 +14,7 @@ class Admin extends CI_Controller {
 		$this->load->model('cnfg');
 		$this->load->model('family');
 		$this->load->model('member');
+		$this->load->helper('text');
 
 		$this->lang->load('label_lang', $this->session->userdata('language'));
 	}
@@ -146,8 +147,34 @@ class Admin extends CI_Controller {
 	}
 
 	public function listfamilies() {
+
+		$config['base_url'] = base_url('admin/listfamilies');
+		$config['total_rows'] = $this->family->record_count();
+		$config['per_page'] = 5;
+		$config["uri_segment"] = 3;
+
+		$config['full_tag_open'] = "<ul class='pagination pagination-sm'>";
+		$config['full_tag_close'] ="</ul>";
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+		$config['next_tag_open'] = "<li>";
+		$config['next_tagl_close'] = "</li>";
+		$config['prev_tag_open'] = "<li>";
+		$config['prev_tagl_close'] = "</li>";
+		$config['first_tag_open'] = "<li>";
+		$config['first_tagl_close'] = "</li>";
+		$config['last_tag_open'] = "<li>";
+		$config['last_tagl_close'] = "</li>";
+
+		$this->pagination->initialize($config);
+
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+		$data['links'] = $this->pagination->create_links();
 		$data['active_menu'] = "listfamilies";
-		$data['families'] = $this->family->get_all('created', 'DESC');
+		$data['families'] = $this->family->get_all_paginated('created', 'DESC', $config["per_page"], $page);
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_list_families');
 		$this->load->view('admin_templates/footer');
@@ -155,8 +182,34 @@ class Admin extends CI_Controller {
 	}
 
 	public function listmembers() {
+
+		$config['base_url'] = base_url('admin/listmembers');
+		$config['total_rows'] = $this->member->record_count();
+		$config['per_page'] = 5;
+		$config["uri_segment"] = 3;
+
+		$config['full_tag_open'] = "<ul class='pagination pagination-sm'>";
+		$config['full_tag_close'] ="</ul>";
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+		$config['next_tag_open'] = "<li>";
+		$config['next_tagl_close'] = "</li>";
+		$config['prev_tag_open'] = "<li>";
+		$config['prev_tagl_close'] = "</li>";
+		$config['first_tag_open'] = "<li>";
+		$config['first_tagl_close'] = "</li>";
+		$config['last_tag_open'] = "<li>";
+		$config['last_tagl_close'] = "</li>";
+
+		$this->pagination->initialize($config);
+
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+		$data['links'] = $this->pagination->create_links();
 		$data['active_menu'] = "listmembers";
-		$data['members'] = $this->member->get_all('created', 'DESC');
+		$data['members'] = $this->member->get_all_paginated('created', 'DESC', $config["per_page"], $page);
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_list_members');
 		$this->load->view('admin_templates/footer');
@@ -196,8 +249,6 @@ class Admin extends CI_Controller {
 			'lastname' => $this->input->post('lastname'), 
 			'gender' => $this->input->post('gender'), 
 			'birthdate' => $this->input->post('birthdate'), 
-			'birthmonth' => $this->input->post('birthmonth'), 
-			'birthyear' => $this->input->post('birthyear'), 
 			'family_id' => $this->input->post('family') 
 			);
 
