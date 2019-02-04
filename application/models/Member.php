@@ -15,15 +15,8 @@ class Member extends CI_Model {
 		return true;
 	}
 
-	public function get_all_paginated($attrib, $order, $limit, $start) {
+	public function get_all($attrib, $order, $limit = NULL, $start = NULL) {
         $this->db->limit($limit, $start);
-
-		$this->db->order_by($attrib, $order);
-		$data = $this->db->get('members');
-		return $data->result_array();			
-	}
-
-	public function get_all($attrib, $order) {
 
 		$this->db->order_by($attrib, $order);
 		$data = $this->db->get('members');
@@ -32,6 +25,12 @@ class Member extends CI_Model {
 
 	public function record_count() {
 		return $this->db->count_all('members');
+	}
+
+	public function get_one($id = NULL) {
+		$res = $this->db->get_where('members', array('id' => $id));
+		$res = $res->result_array();
+		return  $res[0];
 	}
 
 

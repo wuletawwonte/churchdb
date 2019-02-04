@@ -19,20 +19,12 @@ class Family extends CI_Model {
 		return true;
 	}
 
-	public function get_all_paginated($attrib, $order, $limit, $start) {
+	public function get_all($attrib, $order, $limit = NULL, $start = Null) {
        $this->db->limit($limit, $start);
 
 		$this->db->order_by($attrib, $order);
 		$data = $this->db->get('families');
 		return $data->result_array();	
 	}
-
-	public function get_all($attrib, $order) {
-
-		$this->db->order_by($attrib, $order);
-		$data = $this->db->get('families');
-		return $data->result_array();	
-	}
-
 
 }

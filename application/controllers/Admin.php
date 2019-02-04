@@ -174,7 +174,7 @@ class Admin extends CI_Controller {
 
 		$data['links'] = $this->pagination->create_links();
 		$data['active_menu'] = "listfamilies";
-		$data['families'] = $this->family->get_all_paginated('created', 'DESC', $config["per_page"], $page);
+		$data['families'] = $this->family->get_all('created', 'DESC', $config["per_page"], $page);
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_list_families');
 		$this->load->view('admin_templates/footer');
@@ -209,7 +209,7 @@ class Admin extends CI_Controller {
 
 		$data['links'] = $this->pagination->create_links();
 		$data['active_menu'] = "listmembers";
-		$data['members'] = $this->member->get_all_paginated('created', 'DESC', $config["per_page"], $page);
+		$data['members'] = $this->member->get_all('created', 'DESC', $config["per_page"], $page);
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_list_members');
 		$this->load->view('admin_templates/footer');
@@ -261,6 +261,12 @@ class Admin extends CI_Controller {
 		}
 	}
 
-
+	public function memberdetails($id = NULL) {
+		$data['active_menu'] = "listmembers";
+		$data['member'] = $this->member->get_one($id);
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('member_details');
+		$this->load->view('admin_templates/footer');		
+	}
 
 }

@@ -44,7 +44,7 @@ table tbody td a, table tbody td span {
 
 
     <!-- Default box -->
-    <div class="box">
+    <div class="box box-warning">
         <div class="box-body">
 
 
@@ -68,10 +68,10 @@ table tbody td a, table tbody td span {
 
                     <tr>
 
-                        <td><a href=""><div class="profile-image" style="background: <?= $member['profile_color']; ?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div></a></td>
+                        <td><a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']; ?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div></a></td>
 
                         <td>
-                            <a href="#"> <?= $member['firstname'].' '.$member['middlename']; ?></a>
+                            <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"> <?= $member['firstname'].' '.$member['middlename']; ?></a>
                         </td>
 
                         <td><span><?= $member['birthdate']?></span></td>
@@ -87,7 +87,7 @@ table tbody td a, table tbody td span {
 
                 </tbody>
             </table>
-            <p><?= $links; ?></p>
+            <div style="text-align: center;"><p><?= $links; ?></p></div>
 
         </div>
         <!-- /.box-body -->
