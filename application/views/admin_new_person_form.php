@@ -84,7 +84,7 @@
 		                </div>
 		                <p/>
 		                <div class="row">
-			                <div class="col-md-6 form-group">
+			                <div class="col-md-4 form-group">
 				                <label><?= lang('birth_date') ?>:</label>
 
 				                <div class="input-group">
@@ -99,6 +99,11 @@
 		                        <label> <?= lang('hide_age'); ?>  </label><br/>
 		                        <input type="checkbox" name="HideAge" value="1" >
 		                    </div>
+		                    <div class="col-md-6">
+		                        <label for="lastname"> <?= lang('birth_place'); ?>  :</label>
+		                        <input type="text" name="lastname" class="form-control">                    
+		                    </div>
+
 		                </div>
 		            </div>
 		        </div>
@@ -159,7 +164,7 @@
 
 	                    <div class="col-md-3">
 	                        <label for="Title"> <?= lang('membership_year'); ?>  :</label>
-	                        <input type="text" name="membership_year" maxlength="4" size="5" class="form-control">
+	                        <input type="text" name="membership_year" class="form-control birthdate" data-inputmask="'alias': 'yyyy'" data-mask>
 	                    </div>
 
 	                    <div class="col-md-5">
@@ -173,7 +178,7 @@
 	                    </div>
 
 	                    <div class="col-md-4">
-	                        <label> <?= lang('cause_of_membership'); ?>  :</label>
+	                        <label> <?= lang('level_of_membership'); ?>  :</label>
 	                        <select name="Gender" class="form-control">
 	                        	<option value="0"> <?= lang('by_baptism'); ?></option>
 	                        	<option value="0" disabled >-----------------
@@ -185,11 +190,6 @@
 					<p/>
 					<div class="row">
 					<p/>
-<!-- 	                    <div class="col-md-2">
-	                        <label> <?= lang('do_you_serve'); ?>  </label><br/>
-	                        <input type="checkbox" name="do_you_serve" onclick="toggle('.serving_as', this)" value="1" checked><p/>
-	                    </div>
- -->
 	                    <div class="col-md-4 serving_as">
 	                        <label> <?= lang('serving_as'); ?>  :</label>
 	                        <select name="Gender" class="form-control">

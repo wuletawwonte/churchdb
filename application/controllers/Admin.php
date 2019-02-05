@@ -10,7 +10,7 @@ class Admin extends CI_Controller {
 			redirect('users/index');
 		} else {
 			$interval = time() - $this->session->userdata('last_visited');
- 			if($interval > 300 && $interval < 1200) {
+ 			if($interval > 600 && $interval < 1200) {
 				redirect('users/relogin');
 			} else if($interval > 1200) {
 				redirect('users/logout');

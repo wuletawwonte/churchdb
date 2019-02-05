@@ -26,8 +26,12 @@
             <div class="box-body box-profile">
             	<div class="profile-image" style="background: <?= $member['profile_color']?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div><p/>
                 <h3 class="profile-username text-center">
-                                            <i class="fa fa-male"></i>
-                                            <?= $member['firstname']." ".$member['middlename']; ?></h3>
+                  <?php if($member['gender'] == 'ወንድ'): ?>
+                    <i class="fa fa-male"></i>
+                  <?php else:?>
+                    <i class="fa fa-female"></i>
+                  <?php endif;?>
+                    <?= $member['firstname']." ".$member['middlename']; ?></h3>
 
                 <p class="text-muted text-center">
                     Head of Household                    &nbsp;

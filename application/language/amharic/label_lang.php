@@ -93,7 +93,7 @@ $lang['website'] = 'ድኅረገፅ';
 $lang['website_hits'] = 'የድኅረ ገፅ ጉብኝቶች';
 $lang['more_info'] = 'ለበለጠ መረጃ';
 $lang['welcome'] = 'እንኳን ደህና መጡ';
-
+$lang['birth_place'] = 'የትውልድ ሥፍራ';
 
 
 

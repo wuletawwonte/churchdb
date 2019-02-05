@@ -72,10 +72,9 @@
 		                    <div class="col-md-4">
 		                        <label> <?= lang('living_subcity'); ?>  :</label>
 		                        <select id="subcity" name="subcity" class="form-control">
-		                        	<option value="<?= lang('nechsar'); ?>"><?= lang('nechsar'); ?></option>
-		                        	<option value="0" disabled >-----------------
-		                            <option value="<?= lang('female'); ?>"><?= lang('female'); ?></option>
-		                            <option value="<?= lang('male'); ?>"><?= lang('male'); ?></option>
+		                        	<option value="ነጭሳር">ነጭሳር</option>
+		                            <option value="ሲቀላ">ሲቀላ</option>
+		                            <option value="ሴቻ">ሴቻ</option>
 		                        </select>
 		                    </div>
 		                    <div class="col-md-4">

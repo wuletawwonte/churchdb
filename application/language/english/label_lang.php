@@ -93,6 +93,7 @@ $lang['website'] = 'Website';
 $lang['website_hits'] = 'Website Hits';
 $lang['more_info'] = 'More info';
 $lang['welcome'] = 'Welcome';
+$lang['birth_place'] = 'Birth Place';
 
 
 
