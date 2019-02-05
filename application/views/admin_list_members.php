@@ -15,7 +15,6 @@ table tbody td a, table tbody td span {
     line-height: 80px;
 }
 
-
 </style>
 
 
@@ -48,7 +47,7 @@ table tbody td a, table tbody td span {
         <div class="box-body">
 
 
-            <p></p>
+            <p/>
 
 
 

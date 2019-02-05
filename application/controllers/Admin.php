@@ -8,7 +8,17 @@ class Admin extends CI_Controller {
 
 		if($this->session->userdata('is_logged_in') == FALSE) {
 			redirect('users/index');
+		} else {
+			$interval = time() - $this->session->userdata('last_visited');
+ 			if($interval > 300 && $interval < 1200) {
+				redirect('users/relogin');
+			} else if($interval > 1200) {
+				redirect('users/logout');
+			}
+
 		}
+
+		$this->session->set_userdata('last_visited', time());
 
 		$this->load->model('user');
 		$this->load->model('cnfg');

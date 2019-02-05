@@ -38,7 +38,8 @@ class Users extends CI_Controller {
 				'is_logged_in' => TRUE,
 				'user_type' => $userdata['user_type'],
 				'skin' => $userdata['skin'],
-				'language' => $userdata['language']
+				'language' => $userdata['language'],
+				'last_visited' => time()
 				);
 
 			$this->session->set_userdata($data);
@@ -72,6 +73,10 @@ class Users extends CI_Controller {
 			return false;
 		}
 
+	}
+
+	public function relogin() {
+		$this->load->view('relogin');
 	}
 
 	public function logout() {
