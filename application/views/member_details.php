@@ -4,7 +4,7 @@
 .profile-image {
   margin: 0 auto;
   margin-top: 15px;
-  width: 180px;
+  width: 80%;
   height: 150px;
   border-radius: 5px;
   font-size: 80px;

@@ -33,6 +33,23 @@ class Member extends CI_Model {
 		return  $res[0];
 	}
 
+	public function filtered_members_count() {
+		$this->db->like('firstname', $this->input->post('name'));
+		$this->db->or_like('middlename', $this->input->post('name'));
+        $this->db->where('gender', $this->input->post('gender'));
+		$this->db->from('members');
+		return $this->db->count_all_results();
+	}
+
+	public function get_filtered_sorted($attrib, $order, $limit = NULL, $start = NULL) {
+        $this->db->limit($limit, $start);
+        $this->db->like('firstname', $this->input->post('name'));
+        $this->db->or_like('middlename', $this->input->post('name'));
+        $this->db->where('gender', $this->input->post('gender'));
+		$this->db->order_by($attrib, $order);
+		$data = $this->db->get('members');
+		return $data->result_array();			
+	}
 
 
 

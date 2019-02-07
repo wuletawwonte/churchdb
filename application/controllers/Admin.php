@@ -194,37 +194,56 @@ class Admin extends CI_Controller {
 
 	public function listmembers() {
 
-		$config['base_url'] = base_url('admin/listmembers');
-		$config['total_rows'] = $this->member->record_count();
-		$config['per_page'] = 5;
-		$config["uri_segment"] = 3;
+		$config = array(
+				'base_url' => base_url('admin/listmembers'), 
+				'per_page' => 5,
+				'uri_segment'=> 3,
+				'full_tag_open' => "<ul class='pagination pagination-sm'>",
+				'full_tag_close' => "</ul>",
+				'num_tag_open' => '<li>',
+				'num_tag_close' => '</li>',
+				'cur_tag_open' => "<li class='disabled'><li class='active'><a href='#'>",
+				'cur_tag_close' => "<span class='sr-only'></span></a></li>",
+				'next_tag_open' => "<li>",
+				'next_tagl_close' => "</li>",
+				'prev_tag_open' => "<li>",
+				'prev_tagl_close' => "</li>",
+				'first_tag_open' => "<li>",
+				'first_tagl_close' => "</li>",
+				'last_tag_open' => "<li>",
+				'last_tagl_close' => "</li>"
 
-		$config['full_tag_open'] = "<ul class='pagination pagination-sm'>";
-		$config['full_tag_close'] ="</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
+			);
 
-		$this->pagination->initialize($config);
+		if(isset($_POST['submit'])) {
 
-		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+			$config['total_rows'] = $this->member->filtered_members_count();
 
-		$data['links'] = $this->pagination->create_links();
-		$data['active_menu'] = "listmembers";
-		$data['members'] = $this->member->get_all_sorted('created', 'DESC', $config['per_page'], $page);
-		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('admin_list_members');
-		$this->load->view('admin_templates/footer');
+			$this->pagination->initialize($config);
 
+			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+			$data['links'] = $this->pagination->create_links();
+			$data['active_menu'] = "listmembers";
+			$data['members'] = $this->member->get_filtered_sorted('created', 'DESC', $config['per_page'], $page);
+			$this->load->view('admin_templates/admin_header', $data);
+			$this->load->view('admin_list_members');
+			$this->load->view('admin_templates/footer');
+
+		} else {
+			$config['total_rows'] = $this->member->record_count();
+
+			$this->pagination->initialize($config);
+
+			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+			$data['links'] = $this->pagination->create_links();
+			$data['active_menu'] = "listmembers";
+			$data['members'] = $this->member->get_all_sorted('created', 'DESC', $config['per_page'], $page);
+			$this->load->view('admin_templates/admin_header', $data);
+			$this->load->view('admin_list_members');
+			$this->load->view('admin_templates/footer');
+		}
 	}
 
 

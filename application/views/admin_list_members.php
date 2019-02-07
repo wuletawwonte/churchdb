@@ -52,22 +52,20 @@ table tbody td a, table tbody td span {
 
 
 
-    <form method="get" action="<?= base_url(); ?>admin/listmembers?gender=<?= gettext('gender'); ?>?" name="PersonList">
+    <form method="post" action="<?= base_url(); ?>admin/listmembers" id="PersonList">
       <p align="center">
         <table align="center"><tr><td align="center">
           Sort order:
-          <select name="Sort" onchange="this.form.submit()">
+          <select name="sort" onchange="this.form.submit()">
             <option value="name" selected>By Name</option>
             <option value="family" >By Family</option>
           </select>&nbsp;
-          <input type="text" name="Filter" value="">
-          <input type="hidden" name="mode" value="person">
-          <input type="hidden" name="Letter" value="">
-          <input type="submit" class="btn btn-default" value="Apply Filter">
+          <input type="text" name="name" autofocus>
+          <input type="submit" name="submit" class="btn btn-default" value="Apply Filter">
 
         </td></tr>
         <tr><td align="center">
-          <select name="gender" onchange="this.form.submit()">
+          <select name="gender" form="PersonList">
             <option value="" > ወንድ እና ሴት </option>
             <option value="ወንድ"> ወንድ </option>
             <option value="ሴት"> ሴት</option>
@@ -95,7 +93,7 @@ table tbody td a, table tbody td span {
             <option value="4">Sunday School Class</option>
             <option value="5">Scouts</option>
           </select>
-            <input type="button" class="btn btn-default" value="Clear Filters" onclick="javascript:document.location='SelectList.php?mode=person&amp;Sort=name&amp;type=0'"><BR><BR>
+            <input type="button" class="btn btn-default" value="Clear Filters" onclick=""><BR><BR>
           </td></tr>
         </table></form>
 
