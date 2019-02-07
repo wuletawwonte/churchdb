@@ -42,9 +42,65 @@ table tbody td a, table tbody td span {
     <?php } ?>
 
 
+
     <!-- Default box -->
     <div class="box box-warning">
         <div class="box-body">
+
+
+
+
+
+
+    <form method="get" action="<?= base_url(); ?>admin/listmembers?gender=<?= gettext('gender'); ?>?" name="PersonList">
+      <p align="center">
+        <table align="center"><tr><td align="center">
+          Sort order:
+          <select name="Sort" onchange="this.form.submit()">
+            <option value="name" selected>By Name</option>
+            <option value="family" >By Family</option>
+          </select>&nbsp;
+          <input type="text" name="Filter" value="">
+          <input type="hidden" name="mode" value="person">
+          <input type="hidden" name="Letter" value="">
+          <input type="submit" class="btn btn-default" value="Apply Filter">
+
+        </td></tr>
+        <tr><td align="center">
+          <select name="gender" onchange="this.form.submit()">
+            <option value="" > ወንድ እና ሴት </option>
+            <option value="ወንድ"> ወንድ </option>
+            <option value="ሴት"> ሴት</option>
+          </select>  
+          <select name="Classification" onchange="this.form.submit()">
+            <option value="" >All Classifications</option>
+            <option value="0">Unassigned</option>
+            <option value="1">Member</option>
+            <option value="2">Regular Attender</option>
+            <option value="3">Guest</option>
+            <option value="5">Non-Attender</option>
+          </select>
+          <select name="PersonProperties" onchange="this.form.submit()">
+            <option value=""  selected >All Contact Properties</option>
+            <option value="0">Unassigned</option>
+            <option value="1">Disabled</option>
+            <option value="-10000">! Unassigned</option>
+            <option value="-9999">! Disabled</option>
+          </select>
+          <select name="grouptype" onchange="this.form.submit()">
+            <option value="" >All Group Types</option>
+            <option value="1">Ministry</option>
+            <option value="2">Team</option>
+            <option value="3">Bible Study</option>
+            <option value="4">Sunday School Class</option>
+            <option value="5">Scouts</option>
+          </select>
+            <input type="button" class="btn btn-default" value="Clear Filters" onclick="javascript:document.location='SelectList.php?mode=person&amp;Sort=name&amp;type=0'"><BR><BR>
+          </td></tr>
+        </table></form>
+
+
+
 
 
             <p/>
@@ -57,6 +113,7 @@ table tbody td a, table tbody td span {
                     <th width="120"></th>
                     <th>Name</th>
                     <th>Birthday</th>
+                    <th><?= lang('mobile_phone') ?></th>
                     <th>Actions</th>
 
                 </tr>
@@ -74,8 +131,9 @@ table tbody td a, table tbody td span {
                         </td>
 
                         <td><span><?= $member['birthdate']?></span></td>
+                        <td><span><?= $member['mobile_phone']?></span></td>
                         <td>
-                            <a href="#"><i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a href="#"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a onclick=""><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
                         </td>

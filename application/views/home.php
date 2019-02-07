@@ -50,14 +50,14 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53</h3>
+              <h3><?= $total_families; ?></h3>
 
               <p><?= lang('families') ?></p>
             </div>
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="#" class="small-box-footer"><?= lang('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('admin/listfamilies'); ?>" class="small-box-footer"><?= lang('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -65,14 +65,14 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3><?= $total_members; ?></h3>
 
               <p><?= lang('members') ?></p>
             </div>
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <a href="#" class="small-box-footer"><?= lang('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('admin/listmembers'); ?>" class="small-box-footer"><?= lang('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

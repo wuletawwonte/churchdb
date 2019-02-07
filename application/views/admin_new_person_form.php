@@ -1,6 +1,7 @@
 
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.date.extensions.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.phone.extensions.js'); ?>"></script>
 
 
 
@@ -91,7 +92,7 @@
 				                  <div class="input-group-addon">
 				                    <i class="glyphicon glyphicon-calendar"></i>
 				                  </div>
-				                  <input type="text" class="form-control family-head birthdate" name="birthdate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask>
+				                  <input type="text" class="form-control family-head inputmasked" name="birthdate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask>
 				                </div>
 				                <!-- /.input group -->
 				            </div>
@@ -114,7 +115,7 @@
 
 			<div class="box box-info clearfix">
 				<div class="box-header">
-					<h3 class="box-title"><?= lang('contact_info') ?></h3>
+					<h3 class="box-title"><?= lang('contact_and_job_info') ?></h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
 					<div class="row">
@@ -124,31 +125,52 @@
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-earphone"></i>
 								</div>
-								<input type="text" Name="mobilephone" value="" size="30" maxlength="30" class="form-control" data-inputmask='' data-mask>
-								<input type="checkbox" name="NoFormat_HomePhone" value="1"> <?= lang('do_not_auto_format') ?>
+								<input type="text" name="mobile_phone" class="form-control inputmasked" data-inputmask='"mask": "(9999) 99-9999"' data-mask>
 							</div>
 						</div>
-						<div class="form-group col-md-6">
-							<label><?= lang('work_phone') ?>:</label>
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="glyphicon glyphicon-earphone"></i>
-								</div>
-								<input type="text" name="workphone" value="" size="30" maxlength="30" class="form-control" data-inputmask='"mask": ""' data-mask/>
-								<input type="checkbox" name="NoFormat_WorkPhone" value="1"> <?= lang('do_not_auto_format') ?>
-							</div>
-						</div>
-					</div>
-					<div class="row">
+
 						<div class="form-group col-md-6">
 							<label><?= lang('email') ?> :</label>
 							<div class="input-group">
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-envelope"></i>
 								</div>
-								<input type="text" Name="email" class="form-control" value="" size="30" maxlength="100"><font color="red"><BR></font>
+								<input type="email" Name="email" class="form-control" value="" size="50" maxlength="50">
 							</div>
 						</div>
+
+					</div><p/>
+					<div class="row">
+	                    <div class="col-md-4">
+	                        <label> <?= lang('job_type'); ?>  :</label>
+	                        <select name="job_type" class="form-control">
+	                            <option value="የመንግስት ስራ"> የመንግስት ሥራ </option>
+	                            <option value="ነጋዴ"> ነጋዴ </option>
+	                            <option value="መንግስታዊ ያልሆነ ድርጅት"> መንግስታዊ ያልሆነ ድርጅት </option>
+	                            <option value="የግል ሥራ"> የግል ሥራ </option>
+	                            <option value="የቤት እመቤት"> የቤት እመቤት </option>
+	                            <option value="ተማሪ"> ተማሪ </option>
+	                            <option value="የጉልበት ሰራተኛ"> የጉልበት ሠራተኛ </option>
+	                            <option value="ሥራ የሌለው"> ሥራ የሌለው </option>
+	                        </select>
+	                    </div>
+
+	                    <div class="col-md-4">
+	                        <label for="workplace_name"> <?= lang('workplace_name'); ?>  :</label>
+	                        <input type="text" name="workplace_name" class="form-control">                    
+	                    </div>
+
+
+						<div class="form-group col-md-4">
+							<label><?= lang('work_phone') ?>:</label>
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="glyphicon glyphicon-phone-alt"></i>
+								</div>
+								<input type="text" name="workphone" class="form-control inputmasked" data-inputmask='"mask": "(999) 999-9999"' data-mask/>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -162,28 +184,31 @@
 
 					<div class="row">
 
-	                    <div class="col-md-3">
+	                    <div class="col-md-4">
 	                        <label for="Title"> <?= lang('membership_year'); ?>  :</label>
-	                        <input type="text" name="membership_year" class="form-control birthdate" data-inputmask="'alias': 'yyyy'" data-mask>
+	                        <div class="input-group">
+	                        	<input type="text" name="membership_year" class="form-control inputmasked" data-inputmask='"mask": "9999"' data-mask>
+	                    		<div class="input-group-addon">ዓ.ም</div>
+
+	                    	</div>
 	                    </div>
 
-	                    <div class="col-md-5">
+	                    <div class="col-md-4">
 	                        <label> <?= lang('cause_of_membership'); ?>  :</label>
-	                        <select name="Gender" class="form-control">
-	                        	<option value="0"> <?= lang('by_baptism'); ?></option>
-	                        	<option value="0" disabled >-----------------
-	                            <option value="1"> <?= lang('female'); ?>  </option>
-	                            <option value="2"> <?= lang('male'); ?>  </option>
+	                        <select name="couse_of_membership" class="form-control">
+	                        	<option value="በጥምቀት"> በጥምቀት </option>
+	                            <option value="በእምነት ማጽኛ ትምህርት"> በእምነት ማጽኛ ትምህርት </option>
+	                            <option value="ከሌላ መ/ኢ/ማ/ም በዝውውር"> ከሌላ መ/ኢ/ማ/ም በዝውውር </option>
+	                            <option value="ከሌላ ወ/አ/ክርስቲያናት በመምጣት"> ከሌላ ወ/አ/ክርስቲያናት በመምጣት </option>
 	                        </select>
 	                    </div>
 
 	                    <div class="col-md-4">
 	                        <label> <?= lang('level_of_membership'); ?>  :</label>
-	                        <select name="Gender" class="form-control">
-	                        	<option value="0"> <?= lang('by_baptism'); ?></option>
-	                        	<option value="0" disabled >-----------------
-	                            <option value="1"> <?= lang('female'); ?>  </option>
-	                            <option value="2"> <?= lang('male'); ?>  </option>
+	                        <select name="level_of_membership" class="form-control">
+	                        	<option value="ቆራቢ አባል"> ቆራቢ አባል </option>
+	                        	<option value="የድነት ትምህርት ተማሪ"> የድነት ትምህርት ተማሪ </option>
+	                            <option value="የእምነት ማጽኛ ተማሪ"> የእምነት ማጽኛ ተማሪ </option>
 	                        </select>
 	                    </div>
 					</div>
@@ -273,7 +298,7 @@
 
 
 
-	$(".birthdate").inputmask(); 
+	$(".inputmasked").inputmask(); 
 
 </script>
 

@@ -94,6 +94,18 @@ $lang['website_hits'] = 'Website Hits';
 $lang['more_info'] = 'More info';
 $lang['welcome'] = 'Welcome';
 $lang['birth_place'] = 'Birth Place';
+$lang['job_type'] = 'Job Type';
+$lang['contact_and_job_info'] = 'Contact and Job Info';
+$lang['workplace_name'] = 'Workplace Name';
+$lang['about_me'] = 'About Me';
+$lang['person_profile'] = 'Person Profile';
+$lang['address'] = 'Address';
+$lang['printable_page'] = 'Printable Page';
+$lang['edit'] = 'Edit';
+$lang['tithes_info'] = 'Tithes Info';
+$lang['note_info'] = 'Notes Info';
+$lang['assign_new_group'] = 'Assign New Group';
+$lang['delete_this_member'] = 'Delete This Member';
 
 
 

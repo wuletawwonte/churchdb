@@ -1,6 +1,7 @@
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.validate.min.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.date.extensions.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.phone.extensions.js'); ?>"></script>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -10,7 +11,7 @@
         <?= lang('family_registration'); ?>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>"><i class="glyphicon glyphicon-user"></i> <?= lang('people'); ?></a></li>
+        <li><a href="<?php echo base_url(); ?>"><i class="fa fa-user"></i> <?= lang('people'); ?></a></li>
         <li class="active"><?= lang('add_new_person'); ?></li>
       </ol>
     </section>
@@ -60,9 +61,9 @@
 
 				                <div class="input-group">
 				                  <div class="input-group-addon">
-				                    <i class="glyphicon glyphicon-calendar"></i>
+				                    <i class="fa fa-calendar"></i>
 				                  </div>
-				                  <input type="text" class="form-control family-head birthdate" id="hBirthDate" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+				                  <input type="text" class="form-control family-head inputmasked" id="hBirthDate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask>
 				                </div>
 				                <!-- /.input group -->
 				            </div>
@@ -88,7 +89,7 @@
 		                    </div>
 		                    <div class="col-md-4">
 		                        <label for="houseNumber"> <?= lang('house_number'); ?>  :</label>
-		                        <input type="text" id="houseNumber" name="house_number" class="form-control">
+		                        <input type="text" id="houseNumber" name="house_number" class="form-control" required>
 		                    </div>
 						</div>
 						<p/>
@@ -101,13 +102,13 @@
 			                        <div class="input-group-addon">
 			                            <i class="glyphicon glyphicon-phone-alt"></i>
 			                        </div>
-			                        <input type="text" id="homePhoneNumber" name="home_phone_number" value="" size="30" maxlength="100" class="form-control">
+			                        <input type="text" id="homePhoneNumber" name="home_phone_number" class="form-control inputmasked" data-inputmask='"mask": "(999) 999-9999"' data-mask>
 			                    </div>
 			                </div>
 
 		                    <div class="col-md-6 col-md-offset-2">
 		                        <label for="weddingYear"> <?= lang('wedding_year'); ?>  :</label>
-		                        <input type="text" id="weddingYear" name="wedding_year" class="form-control">
+		                        <input type="text" id="weddingYear" name="wedding_year" class="form-control inputmasked" data-inputmask='"mask": "9999"' data-mask>
 		        				<br><font color="red"></font>
 		                    </div>
 
@@ -182,10 +183,10 @@
 							</div>	
 							<div class="col-md-3">
 								<?= lang('birth_date') ?>
-								<input type="text" id="birth_day" class="form-control birthdate input-sm" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+								<input type="text" id="birth_day" class="form-control inputmasked input-sm" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask>
 							</div>
 							<div class="col-md-1"><br>
-								<button type="button" id="btn_add" class="btn btn-sm btn-success pull-right"><i class="glyphicon glyphicon-plus"></i></button>							
+								<button type="button" id="btn_add" class="btn btn-sm btn-success pull-right"><i class="fa fa-plus"></i></button>							
 							</div>	
 						</div>
 					</div>
@@ -249,7 +250,7 @@ $(function() {
 		var middleName = $('#middle_name').val();
 		var lastName = $('#last_name').val();
 		var birthDate = $('#birth_day').val();
-		var deleteBtn = "<button type='button' name='btn_delete' class='btn btn-sm btn-warning'><i class='glyphicon glyphicon-minus'></i></button>";
+		var deleteBtn = "<button type='button' name='btn_delete' class='btn btn-sm btn-warning'><i class='fa fa-minus'></i></button>";
 	
 		$('#member_table tbody').append(
 			'<tr>'+
@@ -294,7 +295,7 @@ $(function() {
 	});
 
 
-	$(".birthdate").inputmask(); 
+	$(".inputmasked").inputmask(); 
 
 });
 </script>

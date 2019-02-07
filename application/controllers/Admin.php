@@ -10,9 +10,9 @@ class Admin extends CI_Controller {
 			redirect('users/index');
 		} else {
 			$interval = time() - $this->session->userdata('last_visited');
- 			if($interval > 600 && $interval < 1200) {
+ 			if($interval > 1200 && $interval < 7200) {
 				redirect('users/relogin');
-			} else if($interval > 1200) {
+			} else if($interval > 7200) {
 				redirect('users/logout');
 			}
 
@@ -31,7 +31,8 @@ class Admin extends CI_Controller {
 
 
 	public function index() {
-
+		$data['total_families'] = $this->family->record_count();
+		$data['total_members'] = $this->member->record_count();
 		$data['active_menu'] = "dashboard";
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('home');
@@ -219,7 +220,7 @@ class Admin extends CI_Controller {
 
 		$data['links'] = $this->pagination->create_links();
 		$data['active_menu'] = "listmembers";
-		$data['members'] = $this->member->get_all('created', 'DESC', $config["per_page"], $page);
+		$data['members'] = $this->member->get_all_sorted('created', 'DESC', $config['per_page'], $page);
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_list_members');
 		$this->load->view('admin_templates/footer');
@@ -258,6 +259,10 @@ class Admin extends CI_Controller {
 			'middlename' => $this->input->post('middlename'), 
 			'lastname' => $this->input->post('lastname'), 
 			'gender' => $this->input->post('gender'), 
+			'job_type' => $this->input->post('job_type'), 
+			'workplace_name' => $this->input->post('workplace_name'), 
+			'mobile_phone' => $this->input->post('mobile_phone'), 
+			'email' => $this->input->post('email'), 
 			'birthdate' => $this->input->post('birthdate'), 
 			'family_id' => $this->input->post('family') 
 			);

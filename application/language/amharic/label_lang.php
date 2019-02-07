@@ -48,7 +48,7 @@ $lang['hide_age'] = 'ዕድሜ ይደበቅ';
 $lang['contact_info'] = 'የግል አድራሻ';
 $lang['mobile_phone'] = 'የሞባይል ስልክ ቁጥር';
 $lang['home_phone'] = 'የቤት ስልክ ቁጥር';
-$lang['work_phone'] = 'የመስሪያ ቤት ስልክ ቁጥር';
+$lang['work_phone'] = 'የመሥሪያ ቤት ስልክ ቁጥር';
 $lang['email'] = 'ኢሜል';
 $lang['save'] = 'መዝግብ';
 $lang['family_info'] = 'የቤተሰብ መረጃ';
@@ -94,7 +94,18 @@ $lang['website_hits'] = 'የድኅረ ገፅ ጉብኝቶች';
 $lang['more_info'] = 'ለበለጠ መረጃ';
 $lang['welcome'] = 'እንኳን ደህና መጡ';
 $lang['birth_place'] = 'የትውልድ ሥፍራ';
-
+$lang['job_type'] = 'የሥራ አይነት';
+$lang['contact_and_job_info'] = 'አድራሻና የሥራ ሁኔታ';
+$lang['workplace_name'] = 'የመሥሪያ ቤቱ ስም';
+$lang['about_me'] = 'ስለ እኔ';
+$lang['person_profile'] = 'የምዕመን መረጃ';
+$lang['address'] = 'አድራሻ';
+$lang['printable_page'] = 'የሚታተም ገፅ';
+$lang['edit'] = 'ቀይር';
+$lang['tithes_info'] = 'የአስራት መረጃ';
+$lang['note_info'] = 'የተያዙ ማስታወሻዎች';
+$lang['assign_new_group'] = 'አዲስ ቡድን ውስጥ አካትት';
+$lang['delete_this_member'] = 'የዚህ ምዕመን መረጃ ይጥፋ';
 
 
 
