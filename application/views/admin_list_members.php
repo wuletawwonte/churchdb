@@ -60,7 +60,7 @@ table tbody td a, table tbody td span {
             <option value="name" selected>By Name</option>
             <option value="family" >By Family</option>
           </select>&nbsp;
-          <input type="text" name="name" autofocus>
+          <input type="text" name="name">
           <input type="submit" name="submit" class="btn btn-default" value="Apply Filter">
 
         </td></tr>
@@ -112,6 +112,7 @@ table tbody td a, table tbody td span {
                     <th>Name</th>
                     <th>Birthday</th>
                     <th><?= lang('mobile_phone') ?></th>
+                    <th>Created</th>
                     <th>Actions</th>
 
                 </tr>
@@ -130,10 +131,11 @@ table tbody td a, table tbody td span {
 
                         <td><span><?= $member['birthdate']?></span></td>
                         <td><span><?= $member['mobile_phone']?></span></td>
+                        <td><span><?= $member['created']?></span></td>
                         <td>
-                            <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a href="#"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a onclick=""><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                            <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a onclick=""><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
 
                     </tr>

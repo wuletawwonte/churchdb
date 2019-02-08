@@ -258,9 +258,10 @@ class Admin extends CI_Controller {
 			);
 
 		if($this->family->add($data)) {
+			$family_id = $this->family->get_by_attrib('id', $data['name']);
 			$decoded_members = json_decode($this->input->post('members'));
 			foreach ($decoded_members as $member) {
-				$this->member->add($member);
+				$this->member->add_from_family($member, $family_id);
 			}
 
 			$this->session->set_flashdata('success', 'Success: Family Successfully Registered.');
@@ -274,15 +275,24 @@ class Admin extends CI_Controller {
 
 	public function savemember() {
 		$data = array(
+			'title' => $this->input->post('title'), 
 			'firstname' => $this->input->post('firstname'), 
 			'middlename' => $this->input->post('middlename'), 
 			'lastname' => $this->input->post('lastname'), 
 			'gender' => $this->input->post('gender'), 
 			'job_type' => $this->input->post('job_type'), 
 			'workplace_name' => $this->input->post('workplace_name'), 
+			'workplace_phone' => $this->input->post('workplace_phone'), 
 			'mobile_phone' => $this->input->post('mobile_phone'), 
 			'email' => $this->input->post('email'), 
 			'birthdate' => $this->input->post('birthdate'), 
+			'hide_age' => $this->input->post('hide_age'), 
+			'birth_place' => $this->input->post('birth_place'), 
+			'membership_year' => $this->input->post('membership_year'), 
+			'cause_of_membership' => $this->input->post('cause_of_membership'), 
+			'level_of_membership' => $this->input->post('level_of_membership'), 
+			'serving_as' => $this->input->post('serving_as'), 
+			'family_role' => $this->input->post('family_role'), 
 			'family_id' => $this->input->post('family') 
 			);
 
@@ -293,13 +303,58 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error', 'Error: Member Can not be Registered.');
 			redirect('admin/personregistration');			
 		}
+	}	
+
+	public function savememberchanges() {
+		$data = array(
+			'title' => $this->input->post('title'), 
+			'firstname' => $this->input->post('firstname'), 
+			'middlename' => $this->input->post('middlename'), 
+			'lastname' => $this->input->post('lastname'), 
+			'gender' => $this->input->post('gender'), 
+			'job_type' => $this->input->post('job_type'), 
+			'workplace_name' => $this->input->post('workplace_name'), 
+			'workplace_phone' => $this->input->post('workplace_phone'), 
+			'mobile_phone' => $this->input->post('mobile_phone'), 
+			'email' => $this->input->post('email'), 
+			'birthdate' => $this->input->post('birthdate'), 
+			'hide_age' => $this->input->post('hide_age'), 
+			'birth_place' => $this->input->post('birth_place'), 
+			'membership_year' => $this->input->post('membership_year'), 
+			'cause_of_membership' => $this->input->post('cause_of_membership'), 
+			'level_of_membership' => $this->input->post('level_of_membership'), 
+			'serving_as' => $this->input->post('serving_as'), 
+			'family_role' => $this->input->post('family_role'), 
+			'family_id' => $this->input->post('family') 
+			);
+
+		if($this->member->edit($this->input->post('id'), $data)) {
+			$this->session->set_flashdata('success', 'Success: Member Successfully Edited.');
+			redirect('admin/listmembers');
+		} else {
+			$this->session->set_flashdata('error', 'Error: Member Can not be Edited.');
+			redirect('admin/listmembers');			
+		}
 	}
 
 	public function memberdetails($id = NULL) {
 		$data['active_menu'] = "listmembers";
 		$data['member'] = $this->member->get_one($id);
+		$family_id = $this->member->get_by_attrib('family_id', $id);
+		if($family_id != 0) {
+			$data['family'] = $this->family->get_one($family_id);
+		}
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('member_details');
+		$this->load->view('admin_templates/footer');		
+	}
+
+	public function editmember($id = NULL) {
+		$data['active_menu'] = '';
+		$data['member'] = $this->member->get_one($id);
+		$data['families'] = $this->family->get_all('name', 'ASC');
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('admin_edit_person_form');
 		$this->load->view('admin_templates/footer');		
 	}
 

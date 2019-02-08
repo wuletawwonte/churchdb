@@ -25,26 +25,19 @@
     <div class="col-lg-3 col-md-3 col-sm-3">
         <div class="box box-primary">
             <div class="box-body box-profile">
-            	<div class="profile-image" style="background: <?= $member['profile_color']?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div><p/>
-                <h3 class="profile-username text-center">
-                  <?php if($member['gender'] == 'ወንድ'): ?>
+            	<div class="profile-image" style="background: <?= $member['profile_color']?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div><br>
+              
+              <h3 class="profile-username text-center">
+                  <?php if($member['gender'] == 'ወንድ'){ ?>
                     <i class="fa fa-male"></i>
-                  <?php else:?>
+                  <?php } else {?>
                     <i class="fa fa-female"></i>
-                  <?php endif;?>
+                  <?php } ?>
                     <?= $member['firstname']." ".$member['middlename']; ?></h3>
 
-                <p class="text-muted text-center">
-                    Head of Household                    &nbsp;
-<!--                     <a id="edit-role-btn" data-person_id="59" data-family_role="Head of Household"
-                       data-family_role_id="1"  class="btn btn-primary btn-xs">
-                        <i class="fa fa-pencil"></i>
-                    </a>
- -->                </p>
 
-        <p class="text-muted text-center">
-          Unassigned        </p>
-                  <a href="/master/PersonEditor.php?PersonID=59" class="btn btn-primary btn-block" id="EditPerson"><b><?= lang('edit') ?></b></a>
+        <p class="text-muted text-center">የቤተሰብ አባልነት: <b><?= $member['family_role']?></b></p>
+                  <a href="<?= base_url('admin/editmember/'.$member['id']); ?>" class="btn btn-primary btn-block" id="EditPerson"><b><?= lang('edit') ?></b></a>
               </div>
       <!-- /.box-body -->
     </div>
@@ -59,13 +52,15 @@
       <div class="box-body">
         <ul class="fa-ul">
           <li><i class="fa-li fa fa-group"></i><?= lang('family') ?>: <span>
-            <a href="/master/FamilyView.php?FamilyID=13">Beck </a>
+          <?php if(isset($family)) { ?>
+            <a href="/master/FamilyView.php?FamilyID=13"><?= $family['name'] ?> </a>
             <a href="/master/FamilyEditor.php?FamilyID=13" class="table-link">
               <span class="fa-stack">
                 <i class="fa fa-square fa-stack-2x"></i>
                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
               </span>
             </a>
+          <?php } else { echo "አልተመረጠም"; } ?>
           </span></li>
           <li><i class="fa-li fa fa-home"></i><?= lang('address') ?>: <span><?= time(); ?></span></li>
           <li>

@@ -76,20 +76,20 @@
 		                        	<option value="ነጭሳር">ነጭሳር</option>
 		                            <option value="ሲቀላ">ሲቀላ</option>
 		                            <option value="ሴቻ">ሴቻ</option>
+		                            <option value="ሴቻ">ልማት</option>
 		                        </select>
 		                    </div>
 		                    <div class="col-md-4">
 		                        <label> <?= lang('living_kebele'); ?>  :</label>
 		                        <select id="kebele" name="kebele" class="form-control">
-		                        	<option value="<?= lang('idget_ber'); ?>"><?= lang('idget_ber'); ?></option>
-		                        	<option value="0" disabled >-----------------
-		                            <option value="1"><?= lang('female'); ?></option>
-		                            <option value="2"><?= lang('male'); ?>  </option>
+		                        	<option value="ዕድገት በር">ዕድገት በር</option>
+		                            <option value="ጉርባ">ጉርባ</option>
+		                            <option value="ወዜ">ወዜ</option>
 		                        </select>
 		                    </div>
 		                    <div class="col-md-4">
 		                        <label for="houseNumber"> <?= lang('house_number'); ?>  :</label>
-		                        <input type="text" id="houseNumber" name="house_number" class="form-control" required>
+		                        <input type="text" id="houseNumber" name="house_number" class="form-control" maxlength="5" required>
 		                    </div>
 						</div>
 						<p/>
@@ -108,8 +108,11 @@
 
 		                    <div class="col-md-6 col-md-offset-2">
 		                        <label for="weddingYear"> <?= lang('wedding_year'); ?>  :</label>
-		                        <input type="text" id="weddingYear" name="wedding_year" class="form-control inputmasked" data-inputmask='"mask": "9999"' data-mask>
-		        				<br><font color="red"></font>
+		                        <div class="input-group">
+			                        <input type="text" id="weddingYear" name="wedding_year" class="form-control inputmasked" data-inputmask='"mask": "9999"' data-mask>
+			        				<br><font color="red"></font>
+			        				<div class="input-group-addon">ዓ.ም</div>
+		        				</div>
 		                    </div>
 
 		                </div>
@@ -276,8 +279,13 @@ $(function() {
 		
 				var table_data = [];
 				$('#member_table tbody tr').each(function(row,tr){
-
+					var gender = 'ወንድ';
+					if($(tr).find('td:eq(0)').text() == 'ሚስት' || $(tr).find('td:eq(0)').text() == 'ሴት ልጅ') {
+						gender = 'ሴት';
+					}
 					var row = {
+						'gender': gender,
+						'family_role': $(tr).find('td:eq(0)').text(), 
 						'firstname': $(tr).find('td:eq(1)').text(), 
 						'middlename': $(tr).find('td:eq(2)').text(), 
 						'lastname': $(tr).find('td:eq(3)').text(), 

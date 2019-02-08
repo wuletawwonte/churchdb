@@ -8,10 +8,24 @@ class Member extends CI_Model {
 		
 	}
 
-	public function add($data) {
-		$colors = array("#00ff00", "#4ABDAC", "#FC4A1A", "#F7B733", "#07889B", "#6D7993");
-		$data->profile_color = $colors[array_rand($colors, 1)]; 
+	public function add_from_family($data, $family_id) {
+		$colors = array("#00c0ef", "#dd4b39", "#00a65a", "#f39c12", "#932ab6", "#f56954");
+		$data->profile_color = $colors[array_rand($colors, 1)];
+		$data->family_id = $family_id; 
 		$this->db->insert('members', $data);
+		return true;
+	}
+
+	public function add($data) {
+		$colors = array("#00c0ef", "#dd4b39", "#00a65a", "#f39c12", "#932ab6", "#f56954");
+		$data['profile_color'] = $colors[array_rand($colors, 1)]; 
+		$this->db->insert('members', $data);
+		return true;
+	}
+
+	public function edit($id, $data) {
+		$this->db->where('id', $id);
+		$this->db->update('members', $data);
 		return true;
 	}
 
@@ -51,7 +65,12 @@ class Member extends CI_Model {
 		return $data->result_array();			
 	}
 
-
+	public function get_by_attrib($attrib, $id) {
+		$this->db->where('id', $id);
+		$res = $this->db->get('members');
+		$res = $res->result_array();
+		return $res[0][$attrib];
+	}
 
 
 }

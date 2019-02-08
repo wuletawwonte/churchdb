@@ -27,4 +27,19 @@ class Family extends CI_Model {
 		return $data->result_array();	
 	}
 
+
+	public function get_one($id) {
+		$res = $this->db->get_where('families', array('id' => $id));
+		$res = $res->result_array();
+		return  $res[0];
+	}
+
+	public function get_by_attrib($attrib, $name) {
+		$this->db->where('name', $name);
+		$res = $this->db->get('families');
+		$res = $res->result_array();
+		return $res[0]['id'];
+	}
+
+
 }
