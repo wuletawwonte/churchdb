@@ -98,7 +98,7 @@
 				            </div>
 		                    <div class="col-md-2">
 		                        <label> <?= lang('hide_age'); ?>  </label><br/>
-		                        <input type="checkbox" name="hide_age" value="0">
+		                        <input type="checkbox" name="hide_age">
 		                    </div>
 		                    <div class="col-md-6">
 		                        <label for="birth_place"> <?= lang('birth_place'); ?>  :</label>

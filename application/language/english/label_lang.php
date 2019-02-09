@@ -20,6 +20,7 @@ $lang['add_new_family'] = 'Add New Family';
 $lang['families'] = 'Families';
 $lang['title'] = 'Title';
 $lang['first_name'] = 'First Name';
+$lang['name'] = 'Name';
 $lang['middle_name'] = 'Middle Name';
 $lang['last_name'] = 'Last Name';
 $lang['person_registration'] = 'Person Registration';

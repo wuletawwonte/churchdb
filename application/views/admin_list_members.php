@@ -4,6 +4,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  border: 3px solid #d2d6de;
   font-size: 30px;
   color: #fff;
   text-align: center;
@@ -105,12 +106,12 @@ table tbody td a, table tbody td span {
 
 
 
-            <table class="table dt-responsive" id="user-listing-table" style="width:100%;">
+            <table class="table table-responsive" id="user-listing-table" style="width:100%;">
                 <thead>
                 <tr>
                     <th width="120"></th>
-                    <th>Name</th>
-                    <th>Birthday</th>
+                    <th><?= lang('name') ?></th>
+                    <th><?= lang('birth_date') ?></th>
                     <th><?= lang('mobile_phone') ?></th>
                     <th>Created</th>
                     <th>Actions</th>

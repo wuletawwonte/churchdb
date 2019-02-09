@@ -13,6 +13,15 @@ class Member extends CI_Model {
 		$data->profile_color = $colors[array_rand($colors, 1)];
 		$data->family_id = $family_id; 
 		$this->db->insert('members', $data);
+		$last_id = $this->db->insert_id();
+		
+		$tracked_change = array(
+			'by_user' => $this->session->userdata('name'),
+			'change_occured' => "created",
+			'member_id' => $last_id
+			);
+		$this->db->insert('timelines', $tracked_change);
+
 		return true;
 	}
 
@@ -20,12 +29,26 @@ class Member extends CI_Model {
 		$colors = array("#00c0ef", "#dd4b39", "#00a65a", "#f39c12", "#932ab6", "#f56954");
 		$data['profile_color'] = $colors[array_rand($colors, 1)]; 
 		$this->db->insert('members', $data);
+		$last_id = $this->db->insert_id();
+		$tracked_change = array(
+			'by_user' => $this->session->userdata('name'),
+			'change_occured' => "created",
+			'member_id' => $last_id
+			);
+		$this->db->insert('timelines', $tracked_change);
+
 		return true;
 	}
 
 	public function edit($id, $data) {
 		$this->db->where('id', $id);
 		$this->db->update('members', $data);
+		$tracked_change = array(
+			'by_user' => $this->session->userdata('name'),
+			'change_occured' => "updated",
+			'member_id' => $id
+			);
+		$this->db->insert('timelines', $tracked_change);
 		return true;
 	}
 

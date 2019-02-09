@@ -24,6 +24,7 @@ class Admin extends CI_Controller {
 		$this->load->model('cnfg');
 		$this->load->model('family');
 		$this->load->model('member');
+		$this->load->model('timeline');
 		$this->load->helper('text');
 
 		$this->lang->load('label_lang', $this->session->userdata('language'));
@@ -344,6 +345,7 @@ class Admin extends CI_Controller {
 		if($family_id != 0) {
 			$data['family'] = $this->family->get_one($family_id);
 		}
+		$data['timelines'] = $this->timeline->get_timeline($id);
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('member_details');
 		$this->load->view('admin_templates/footer');		

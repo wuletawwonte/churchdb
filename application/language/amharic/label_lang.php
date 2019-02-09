@@ -20,6 +20,7 @@ $lang['add_new_family'] = 'አዲስ ቤተሰብ መዝግብ';
 $lang['families'] = 'ቤተሰቦች';
 $lang['title'] = 'ማዕረግ';
 $lang['first_name'] = 'ስም';
+$lang['name'] = 'ስም';
 $lang['middle_name'] = 'የአባት ስም';
 $lang['last_name'] = 'የአያት ስም';
 $lang['person_registration'] = 'ምዕመን መመዝገብያ';

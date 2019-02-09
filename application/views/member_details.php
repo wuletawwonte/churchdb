@@ -4,13 +4,14 @@
 .profile-image {
   margin: 0 auto;
   margin-top: 15px;
-  width: 80%;
-  height: 150px;
-  border-radius: 5px;
-  font-size: 80px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid #d2d6de; 
+  font-size: 60px;
   color: #fff;
   text-align: center;
-  line-height: 150px;
+  line-height: 130px;
 }
 
 </style>
@@ -25,7 +26,7 @@
     <div class="col-lg-3 col-md-3 col-sm-3">
         <div class="box box-primary">
             <div class="box-body box-profile">
-            	<div class="profile-image" style="background: <?= $member['profile_color']?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div><br>
+            	<a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div></a><br>
               
               <h3 class="profile-username text-center">
                   <?php if($member['gender'] == 'ወንድ'){ ?>
@@ -97,57 +98,42 @@
             <li role="presentation"><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a></li>
           </ul>
 
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div role="tab-pane fade" class="tab-pane active" id="timeline">
-              <ul class="timeline">
-                <!-- timeline time label -->
-                <li class="time-label">
-                  <span class="bg-red">
-                    2019-02-04                    </span>
-                  </li>
-                  <!-- /.timeline-label -->
-
-                  <!-- timeline item -->
-                  <li>
-                    <!-- timeline icon -->
-                    <i class="fa fa-pencil bg-blue"></i>
-
-                    <div class="timeline-item">
-                      <span class="time">
-                        <i class="fa fa-clock-o"></i> 2016-11-19 03:49:36</span>
-
-                        <h4 class="timeline-header">
-                          Updated via Family by Church Admin                        </h4>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tab-pane fade" class="tab-pane active" id="timeline">
+                <ul class="timeline">
+                  <!-- timeline time label -->
+                  <li class="time-label">
+                    <span class="bg-red">
+                      2019-02-04                    </span>
+                    </li>
+                    <!-- /.timeline-label -->
+                    <?php foreach ($timelines as $timeline) { 
+                    if($timeline['change_occured'] == 'created') { ?>
+                      <li>
+                        <!-- timeline icon -->
+                        <i class="fa fa-plus bg-blue"></i>
+                        <div class="timeline-item">
+                          <span class="time">
+                            <i class="fa fa-clock-o"></i> <?= $timeline['date']; ?></span>
+                            <h4 class="timeline-header">Created by <?= $timeline['by_user']; ?></h4>
                         </div>
                       </li>
+                    <?php } else if($timeline['change_occured'] == 'updated') { ?>
                       <li>
                         <!-- timeline icon -->
                         <i class="fa fa-pencil bg-blue"></i>
-
                         <div class="timeline-item">
                           <span class="time">
-                            <i class="fa fa-clock-o"></i> 2016-11-19 03:46:56</span>
+                            <i class="fa fa-clock-o"></i> <?= $timeline['date']; ?></span>
+                            <h4 class="timeline-header">Edited by <?= $timeline['by_user']; ?></h4>
+                        </div>
+                      </li>
+                    <?php } } ?>
 
-                            <h4 class="timeline-header">
-                              Updated via Family by Church Admin                        </h4>
+                                <!-- END timeline item -->
+                              </ul>
                             </div>
-                          </li>
-                          <li>
-                            <!-- timeline icon -->
-                            <i class="fa fa-plus-circle bg-blue"></i>
-
-                            <div class="timeline-item">
-                              <span class="time">
-                                <i class="fa fa-clock-o"></i> 2007-02-01 04:50:26</span>
-
-                                <h4 class="timeline-header">
-                                  Created by Church Admin                        </h4>
-                                </div>
-                              </li>
-                              <!-- END timeline item -->
-                            </ul>
-                          </div>
                           <div role="tab-pane fade" class="tab-pane" id="family">
 
                             <table class="table user-list table-hover">
