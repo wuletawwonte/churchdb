@@ -18,6 +18,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>">
 
+  <style type="text/css">
+    
+    .se-pre-con {
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: url(<?= base_url('assets/img/ripple.gif'); ?>) center no-repeat #eee;
+    }
+
+  </style>
 
 <!-- REQUIRED JS SCRIPTS -->
 
@@ -30,6 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 <body class="hold-transition <?php echo $this->session->userdata('skin'); ?> sidebar-mini">
+<div class="se-pre-con"></div>
 <div class="wrapper">
 
   <!-- Main Header -->

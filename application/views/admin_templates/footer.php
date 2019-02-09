@@ -90,6 +90,15 @@
 
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>assets/js/adminlte.js"></script>
+ 
+<script type="text/javascript">   
+     // Wait for window load
+     $(window).on('load', function() {
+        // Animate loader off screen
+        $(".se-pre-con").fadeOut("slow");;
+     });
+   
+</script>
 
 </body>
 </html>
