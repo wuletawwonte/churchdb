@@ -351,6 +351,17 @@ class Admin extends CI_Controller {
 		$this->load->view('admin_templates/footer');		
 	}
 
+	public function familydetails($id = NULL) {
+		$data['active_menu'] = "listfamilies";
+		$data['family'] = $this->family->get_one($id);
+		$data['members'] = $this->member->members_in_family($id);
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('family_details');
+		$this->load->view('admin_templates/footer');		
+	}
+
+
+
 	public function editmember($id = NULL) {
 		$data['active_menu'] = '';
 		$data['member'] = $this->member->get_one($id);

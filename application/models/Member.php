@@ -95,5 +95,24 @@ class Member extends CI_Model {
 		return $res[0][$attrib];
 	}
 
+	public function members_in_family($id) {
+		$this->db->where('family_id', $id);
+		$res = $this->db->get('members');
+		return $res->result_array();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

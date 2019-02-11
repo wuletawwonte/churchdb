@@ -59,7 +59,7 @@
             <table class="table table-hover table-bordered table-striped dt-responsive" id="user-listing-table" style="width:100%;">
                 <thead>
                 <tr>
-                    <th>Actions</th>
+                    <th  style="text-align: center">Actions</th>
                     <th><?= lang('family_name') ?></th>
                     <th><?= lang('living_subcity') ?></th>
                     <th><?= lang('living_kebele') ?></th>
@@ -73,14 +73,13 @@
                     <?php foreach($families as $family) {  ?>
 
                     <tr>
-                        <td>
-                            <a href="#"><i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $family['id'] ?>"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a onclick=""><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                        <td style="text-align: center"> 
+                            <a href="<?= base_url('admin/familydetails/'.$family['id']) ?>"><i class="fa fa-search-plus"></i></a>&nbsp;&nbsp;
+                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $family['id'] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
                         </td>
 
                         <td>
-                            <a href="#"> <?= $family['name']; ?></a>
+                            <a href="<?= base_url('admin/familydetails/'.$family['id']); ?>"> <?= $family['name']; ?></a>
                         </td>
 
                         <td><?= $family['subcity']?></td>

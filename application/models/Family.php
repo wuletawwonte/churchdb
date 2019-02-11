@@ -14,7 +14,8 @@ class Family extends CI_Model {
 
 
 	public function add($data) {
-
+		$colors = array("#00c0ef", "#dd4b39", "#00a65a", "#f39c12", "#932ab6", "#f56954");
+		$data['profile_color'] = $colors[array_rand($colors, 1)];
 		$this->db->insert('families', $data);
 		return true;
 	}

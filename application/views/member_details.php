@@ -54,8 +54,8 @@
         <ul class="fa-ul">
           <li><i class="fa-li fa fa-group"></i><?= lang('family') ?>: <span>
           <?php if(isset($family)) { ?>
-            <a href="/master/FamilyView.php?FamilyID=13"><?= $family['name'] ?> </a>
-            <a href="/master/FamilyEditor.php?FamilyID=13" class="table-link">
+            <a href="<?= base_url('admin/familydetails/'.$family['id']); ?>"><?= $family['name'] ?> </a>
+            <a href="#" class="table-link">
               <span class="fa-stack">
                 <i class="fa fa-square fa-stack-2x"></i>
                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>

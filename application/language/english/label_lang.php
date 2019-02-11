@@ -107,6 +107,7 @@ $lang['tithes_info'] = 'Tithes Info';
 $lang['note_info'] = 'Notes Info';
 $lang['assign_new_group'] = 'Assign New Group';
 $lang['delete_this_member'] = 'Delete This Member';
+$lang['delete_this_family'] = 'Delete This Family';
 
 
 
