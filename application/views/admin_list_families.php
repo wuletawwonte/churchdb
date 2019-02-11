@@ -1,3 +1,10 @@
+<style type="text/css">
+.btns .btn {
+    background: #eee;
+}
+</style>
+
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -36,11 +43,11 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="btns">          
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">Copy</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">Excel</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">CSV</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">PDF</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">Print</button> 
+                        <a class="btn">Copy</a> 
+                        <a class="btn">Excel</a> 
+                        <a class="btn" href="<?= base_url('admin/export_families_csv') ?>">CSV</a> 
+                        <a class="btn">PDF</a> 
+                        <a class="btn">Print</a> 
                     </div>
                 </div>
                 <div class="col-sm-4">

@@ -20,11 +20,7 @@ class Admin extends CI_Controller {
 
 		$this->session->set_userdata('last_visited', time());
 
-		$this->load->model('user');
-		$this->load->model('cnfg');
-		$this->load->model('family');
-		$this->load->model('member');
-		$this->load->model('timeline');
+		$this->load->model(array('user', 'cnfg', 'family', 'member', 'timeline', 'group'));
 		$this->load->helper('text');
 
 		$this->lang->load('label_lang', $this->session->userdata('language'));
@@ -34,6 +30,7 @@ class Admin extends CI_Controller {
 	public function index() {
 		$data['total_families'] = $this->family->record_count();
 		$data['total_members'] = $this->member->record_count();
+		$data['total_groups'] = $this->group->record_count();
 		$data['active_menu'] = "dashboard";
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('home');
@@ -275,29 +272,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function savemember() {
-		$data = array(
-			'title' => $this->input->post('title'), 
-			'firstname' => $this->input->post('firstname'), 
-			'middlename' => $this->input->post('middlename'), 
-			'lastname' => $this->input->post('lastname'), 
-			'gender' => $this->input->post('gender'), 
-			'job_type' => $this->input->post('job_type'), 
-			'workplace_name' => $this->input->post('workplace_name'), 
-			'workplace_phone' => $this->input->post('workplace_phone'), 
-			'mobile_phone' => $this->input->post('mobile_phone'), 
-			'email' => $this->input->post('email'), 
-			'birthdate' => $this->input->post('birthdate'), 
-			'hide_age' => $this->input->post('hide_age'), 
-			'birth_place' => $this->input->post('birth_place'), 
-			'membership_year' => $this->input->post('membership_year'), 
-			'cause_of_membership' => $this->input->post('cause_of_membership'), 
-			'level_of_membership' => $this->input->post('level_of_membership'), 
-			'serving_as' => $this->input->post('serving_as'), 
-			'family_role' => $this->input->post('family_role'), 
-			'family_id' => $this->input->post('family') 
-			);
 
-		if($this->member->add($data)) {
+		if($this->member->add()) {
 			$this->session->set_flashdata('success', 'Success: Member Successfully Registered.');
 			redirect('admin/personregistration');
 		} else {
@@ -307,29 +283,8 @@ class Admin extends CI_Controller {
 	}	
 
 	public function savememberchanges() {
-		$data = array(
-			'title' => $this->input->post('title'), 
-			'firstname' => $this->input->post('firstname'), 
-			'middlename' => $this->input->post('middlename'), 
-			'lastname' => $this->input->post('lastname'), 
-			'gender' => $this->input->post('gender'), 
-			'job_type' => $this->input->post('job_type'), 
-			'workplace_name' => $this->input->post('workplace_name'), 
-			'workplace_phone' => $this->input->post('workplace_phone'), 
-			'mobile_phone' => $this->input->post('mobile_phone'), 
-			'email' => $this->input->post('email'), 
-			'birthdate' => $this->input->post('birthdate'), 
-			'hide_age' => $this->input->post('hide_age'), 
-			'birth_place' => $this->input->post('birth_place'), 
-			'membership_year' => $this->input->post('membership_year'), 
-			'cause_of_membership' => $this->input->post('cause_of_membership'), 
-			'level_of_membership' => $this->input->post('level_of_membership'), 
-			'serving_as' => $this->input->post('serving_as'), 
-			'family_role' => $this->input->post('family_role'), 
-			'family_id' => $this->input->post('family') 
-			);
 
-		if($this->member->edit($this->input->post('id'), $data)) {
+		if($this->member->edit($this->input->post('id'))) {
 			$this->session->set_flashdata('success', 'Success: Member Successfully Edited.');
 			redirect('admin/listmembers');
 		} else {
@@ -355,6 +310,7 @@ class Admin extends CI_Controller {
 		$data['active_menu'] = "listfamilies";
 		$data['family'] = $this->family->get_one($id);
 		$data['members'] = $this->member->members_in_family($id);
+		$data['all_members'] = $this->member->get_all_for_selection();
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('family_details');
 		$this->load->view('admin_templates/footer');		
@@ -369,6 +325,73 @@ class Admin extends CI_Controller {
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_edit_person_form');
 		$this->load->view('admin_templates/footer');		
+	}
+
+	public function listgroups() {
+
+		$config['base_url'] = base_url('admin/listgroups');
+		$config['total_rows'] = $this->group->record_count();
+		$config['per_page'] = 5;
+		$config["uri_segment"] = 3;
+
+		$config['full_tag_open'] = "<ul class='pagination pagination-sm'>";
+		$config['full_tag_close'] ="</ul>";
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+		$config['next_tag_open'] = "<li>";
+		$config['next_tagl_close'] = "</li>";
+		$config['prev_tag_open'] = "<li>";
+		$config['prev_tagl_close'] = "</li>";
+		$config['first_tag_open'] = "<li>";
+		$config['first_tagl_close'] = "</li>";
+		$config['last_tag_open'] = "<li>";
+		$config['last_tagl_close'] = "</li>";
+
+		$this->pagination->initialize($config);
+
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+		$data['links'] = $this->pagination->create_links();
+		$data['active_menu'] = "groups";
+		$data['groups'] = $this->group->get_all('created', 'DESC', $config["per_page"], $page);
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('admin_list_groups');
+		$this->load->view('admin_templates/footer');		
+	}
+
+	public function savegroup() {
+		$this->group->add();
+		redirect('admin/listgroups');
+	}
+
+	public function export_families_csv() {
+		$filename = "family_details_on_".date('Ymd').".csv";
+		header("Content-Description: File Transfer");
+		header("Content-Disposition: attachement; filename=$filename");
+		header("content-Type: application/csv;");
+		$families = $this->family->get_all_for_export();
+
+		$file = fopen('php://output', 'w');
+
+		$header = array(lang('family_name'), lang('living_subcity'), lang('living_kebele'), lang('house_number'), lang('wedding_year'), lang('home_phone'), lang('created'));
+		fputcsv($file, $header); 
+		foreach($families as $family) {
+			fputcsv($file, $family);
+		}
+		fclose($file);
+		exit;
+	}
+
+	public function add_family_member() {
+		$this->member->add_family_member();
+		redirect('admin/familydetails/'.$this->input->post('family_id'));
+	}
+
+	public function remove_member_from_family($id) {
+		$this->member->remove_member_from_family($id);
+		redirect('admin/familydetails/73');
 	}
 
 }

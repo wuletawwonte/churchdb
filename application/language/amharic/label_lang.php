@@ -108,6 +108,9 @@ $lang['note_info'] = 'የተያዙ ማስታወሻዎች';
 $lang['assign_new_group'] = 'አዲስ ቡድን ውስጥ አካትት';
 $lang['delete_this_member'] = 'የዚህ ምዕመን መረጃ ይጥፋ';
 $lang['delete_this_family'] = 'የዚህ ቤተሰብ መረጃ ይጥፋ';
+$lang['create_group'] = 'ቡድን ፍጠር';
+$lang['group_type'] = 'የቡድን አይነት';
+$lang['created'] = 'የተፈጠረበት';
 
 
 

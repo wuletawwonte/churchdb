@@ -14,7 +14,7 @@ class Family extends CI_Model {
 
 
 	public function add($data) {
-		$colors = array("#00c0ef", "#dd4b39", "#00a65a", "#f39c12", "#932ab6", "#f56954");
+		$colors = array('#00c0ef', '#0073b7', '#3c8dbc', '#39cccc', '#f39c12', '#ff851b', '#00a65a', '#01ff70', '#dd4b39', '#605ca8', '#f012be', '#777777', '#001f3f');		
 		$data['profile_color'] = $colors[array_rand($colors, 1)];
 		$this->db->insert('families', $data);
 		return true;
@@ -42,5 +42,10 @@ class Family extends CI_Model {
 		return $res[0]['id'];
 	}
 
+	public function get_all_for_export() {
+		$this->db->select(array('name', 'subcity', 'kebele', 'house_number', 'wedding_year', 'home_phone', 'created'));
+		$res = $this->db->get('families');
+		return $res->result_array();
+	}
 
 }

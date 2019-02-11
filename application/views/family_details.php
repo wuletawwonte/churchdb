@@ -1,3 +1,6 @@
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2.min.css') ?>">
+<script type="text/javascript" src="<?= base_url('assets/vendors/select2/js/select2.full.min.js') ?>"></script>
+
 <style type="text/css">
 
 .member-profile-image {
@@ -17,7 +20,7 @@
   margin-top: 15px;
   width: 70%;
   height: 130px;
-  border-radius: 10%;
+  border-radius: 5%;
   border: 3px solid #d2d6de; 
   font-size: 60px;
   color: #fff;
@@ -81,12 +84,13 @@ table tbody td a, table tbody td span {
 	        </div>
 	        <div class="col-lg-9 col-md-9 col-sm-9">
 	        		<div class="box box-solid">
+	        			<div class="box-header"><?= lang('family_members')?></div>
 	        			<div class="box-body table-responsive clearfix">
 	        				<table class="table user-list table-hover">
 	        					<thead>
 	        						<tr>
 	        							<th></th>
-	        							<th><span>Family Members</span></th>
+	        							<th><span><?= lang('name') ?></span></th>
 	        							<th class="text-center"><span>Role</span></th>
 	        							<th><span>Birthday</span></th>
 	        							<th><span>Email</span></th>
@@ -113,25 +117,63 @@ table tbody td a, table tbody td span {
         									<a href="mailto:wuletaw.wonte@amu.edu.et"><?= $member['email'] ?></a>
         								</td>
         								<td style="width: 20%;">
-        									<a href="PersonEditor.php?PersonID=109" class="table-link">
-        										<span class="fa-stack">
-        											<i class="fa fa-square fa-stack-2x"></i>
-        											<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-        										</span>
-        									</a>
-        									<a class="delete-person" data-person_name="dgfg Aashutosh"
-        									data-person_id="109" data-view="family">
+        								<?php if($family['head_id'] != $member['id']) { ?>
+        									<a class="delete-person" href="<?= base_url('admin/remove_member_from_family/'.$member['id']); ?>">
 	        									<span class="fa-stack">
 	        										<i class="fa fa-square fa-stack-2x"></i>
-	        										<i class="fa fa-trash-o fa-stack-1x fa-inverse btn-danger"></i>
+	        										<i class="fa fa-minus fa-stack-1x fa-inverse btn-danger"></i>
 	        									</span>
 	        								</a>
+	        							<?php } ?>
 	        							</td>
 	        						</tr>
 	        					<?php } ?>
 	        		</tbody>
-	        	</table>
+	        	</table><p/><hr>
+	        	<div class="box">
+	        		<div class="box-header">Add Member</div>
+	        		<div class="box-body">
+		        	<form action="<?= base_url('admin/add_family_member') ?>" method="POST">
+		        		<input type="text" name="family_id" value="<?= $family['id'] ?>" hidden>
+						<div class="col-md-4">
+							<select name="family_role" class="form-control input-sm select2">
+								<option value="<?= lang('daughter') ?>" ><?= lang('daughter') ?></option>
+								<option value="<?= lang('son') ?>" ><?= lang('son') ?></option>
+								<option value="<?= lang('wife') ?>" ><?= lang('wife') ?></option>
+								<option value="<?= lang('husband') ?>" ><?= lang('husband') ?></option>
+							</select>							
+						</div>
+
+						<div class="col-md-6">
+		                	<select id="members" name="member_id" class="form-control input-lg" style="width: 100%;">
+
+
+ 		                  		<?php foreach($all_members as $member) { ?>
+		                  		<option value="<?= $member['id']?>"><?= $member['firstname'].' '.$member['middlename']; ?></option>
+		                  		<?php } ?>
+		                	</select>
+		                </div>
+		                <div>
+		                	<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>
+		                </div>	
+		            </form>
+		            </div>        	
+	        	</div>
 			</div>
     	</div>
     </section>
 </div>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.select2').select2();
+	$('#members').select2();
+});
+</script>
+
+
+
+
+
+

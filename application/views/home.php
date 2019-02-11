@@ -80,14 +80,14 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+              <h3><?= $total_groups; ?></h3>
 
               <p><?= lang('groups') ?></p>
             </div>
             <div class="icon">
               <i class="fa fa-tag"></i>
             </div>
-            <a href="#" class="small-box-footer"><?= lang('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('admin/listgroups'); ?>" class="small-box-footer"><?= lang('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

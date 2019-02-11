@@ -8,7 +8,7 @@
   height: 130px;
   border-radius: 50%;
   border: 3px solid #d2d6de; 
-  font-size: 60px;
+  font-size: 50px;
   color: #fff;
   text-align: center;
   line-height: 130px;
