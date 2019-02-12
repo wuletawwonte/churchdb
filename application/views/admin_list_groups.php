@@ -35,7 +35,7 @@
             <div class="form-group">
             <form method="POST" action="<?= base_url('admin/savegroup'); ?>">
                 <div class="col-md-5">
-                    <select name="type" class="form-control">
+                    <select name="type" class="form-control s2">
                     	<option value="የአገልግሎት ቡድን">የአገልግሎት ቡድን</option>
                         <option value="የአስተዳደር ቡድን">የአስተዳደር ቡድን</option>
                         <option value="መዘምራን">መዘምራን</option>

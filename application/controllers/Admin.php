@@ -389,9 +389,21 @@ class Admin extends CI_Controller {
 		redirect('admin/familydetails/'.$this->input->post('family_id'));
 	}
 
-	public function remove_member_from_family($id) {
+	public function remove_member_from_family($id, $famid) {
 		$this->member->remove_member_from_family($id);
-		redirect('admin/familydetails/73');
+		redirect('admin/familydetails/'.$famid);
 	}
+
+	public function ajax_get_member() {
+
+		$json = [];
+		$res = $this->member->ajax_get_members();
+		$json = $res->result();
+		header('Content-Type: application/json');
+		echo json_encode($json);
+	}
+
+
+
 
 }

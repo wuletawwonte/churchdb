@@ -13,11 +13,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
+  <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2.min.css') ?>">
+  <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2-bootstrap.min.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/skins/'.$this->session->userdata('skin').'.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
 
   <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>">
-
+  
   <style type="text/css">
     
     .se-pre-con {
@@ -38,6 +40,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="<?php echo base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url(); ?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+<!-- Select2 -->
+<script type="text/javascript" src="<?= base_url('assets/vendors/select2/js/select2.min.js') ?>"></script>
   
 
 </head>
@@ -234,15 +238,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
 
       <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="<?= lang('search') ?> ...">
-          <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-        </div>
-      </form>
+      <div class="sidebar-form">
+        <select name="searchbox[]" id="searchbox" class="form-control" placeholder="<?= lang('search') ?> ..." onchange="location='<?= base_url('admin/memberdetails/') ?>'+this.value"></select>
+      </div>
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
@@ -282,9 +280,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </ul>
         </li>
 
-        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-child"></i> <span><?= lang('sunday_school'); ?></span></a></li>
         <li <?php if($active_menu == 'groups') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/listgroups"><i class="fa fa-tag"></i> <span><?= lang('groups'); ?></span></a></li>
-        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-file-pdf-o"></i> <span><?= lang('data_report'); ?></span></a></li>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-child"></i> <span><?= lang('sunday_school'); ?></span></a></li>
+        <li <?php if($active_menu == 'report') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-file-pdf-o"></i> <span><?= lang('data_report'); ?></span></a></li>
         <li <?php if($active_menu == 'wesite') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-globe"></i> <span><?= lang('website'); ?></span></a></li>
         <li <?php if($active_menu == 'generalsetting' || $active_menu == 'users') { ?> class="active" <?php } ?> class="treeview">
           <a href="#"><i class="fa fa-cog"></i> <span><?= lang('setting'); ?></span>

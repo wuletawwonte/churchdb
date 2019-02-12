@@ -95,7 +95,26 @@
      // Wait for window load
      $(window).on('load', function() {
         // Animate loader off screen
-        $(".se-pre-con").fadeOut("slow");;
+        $(".se-pre-con").fadeOut("slow");
+
+        $('#searchbox').select2({
+          placeholder: '<?= lang('search') ?>',
+          ajax: {
+            url: '<?= base_url('admin/ajax_get_member') ?>',
+            datatype: 'json',
+            delay: 250,
+            processResults: function(data) {
+              return {
+                results: data
+              };
+            },
+            cache: true
+          },
+          minimumInputLength: 2
+        });
+
+        $(".s2").select2();
+     
      });
    
 </script>

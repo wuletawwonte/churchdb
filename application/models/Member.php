@@ -172,6 +172,14 @@ class Member extends CI_Model {
 		$this->db->update('members', $data);
 	}
 
+	public function ajax_get_members() {
+		$this->db->like('firstname', $this->input->get('q'));
+		$this->db->or_like('middlename', $this->input->get('q'));
+		$res = $this->db->select("id,firstname as text")
+						->limit(10)
+						->get('members');
+		return $res;
+	}
 
 
 

@@ -101,7 +101,7 @@
 				            </div>
 		                    <div class="col-md-2">
 		                        <label> <?= lang('hide_age'); ?>  </label><br/>
-		                        <input type="checkbox" name="HideAge" value="1" >
+		                        <input type="checkbox" name="hide_age" <?php if($member['hide_age'] == 'on') echo 'checked';?> >
 		                    </div>
 		                    <div class="col-md-6">
 		                        <label for="birth_place"> <?= lang('birth_place'); ?>  :</label>

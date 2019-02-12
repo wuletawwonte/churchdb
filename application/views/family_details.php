@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2.min.css') ?>">
-<script type="text/javascript" src="<?= base_url('assets/vendors/select2/js/select2.full.min.js') ?>"></script>
 
 <style type="text/css">
 
@@ -118,7 +116,7 @@ table tbody td a, table tbody td span {
         								</td>
         								<td style="width: 20%;">
         								<?php if($family['head_id'] != $member['id']) { ?>
-        									<a class="delete-person" href="<?= base_url('admin/remove_member_from_family/'.$member['id']); ?>">
+        									<a class="delete-person" href="<?= base_url('admin/remove_member_from_family/'.$member['id'].'/'.$family['id']); ?>">
 	        									<span class="fa-stack">
 	        										<i class="fa fa-square fa-stack-2x"></i>
 	        										<i class="fa fa-minus fa-stack-1x fa-inverse btn-danger"></i>
@@ -136,7 +134,7 @@ table tbody td a, table tbody td span {
 		        	<form action="<?= base_url('admin/add_family_member') ?>" method="POST">
 		        		<input type="text" name="family_id" value="<?= $family['id'] ?>" hidden>
 						<div class="col-md-4">
-							<select name="family_role" class="form-control input-sm select2">
+							<select name="family_role" class="form-control input-sm s2">
 								<option value="<?= lang('daughter') ?>" ><?= lang('daughter') ?></option>
 								<option value="<?= lang('son') ?>" ><?= lang('son') ?></option>
 								<option value="<?= lang('wife') ?>" ><?= lang('wife') ?></option>
@@ -154,7 +152,7 @@ table tbody td a, table tbody td span {
 		                	</select>
 		                </div>
 		                <div>
-		                	<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>
+		                	<button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i></button>
 		                </div>	
 		            </form>
 		            </div>        	
@@ -167,7 +165,6 @@ table tbody td a, table tbody td span {
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$('.select2').select2();
 	$('#members').select2();
 });
 </script>
