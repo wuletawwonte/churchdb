@@ -98,12 +98,12 @@
 
                     <tr>
                         <td style="text-align: center"> 
-                            <a href="<?= base_url('admin/familydetails/'.$group['id']) ?>"><i class="fa fa-search-plus"></i></a>&nbsp;&nbsp;
-                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $group['id'] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $group['id'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="<?= base_url('admin/groupdetails/'.$group['gid']) ?>"><i class="fa fa-search-plus"></i></a>&nbsp;&nbsp;
+                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $group['gid'] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $group['gid'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
                         </td>
 
                         <td>
-                            <a href="<?= base_url('admin/familydetails/'.$group['id']); ?>"> <?= $group['name']; ?></a>
+                            <a href="<?= base_url('admin/groupdetails/'.$group['gid']); ?>"> <?= $group['name']; ?></a>
                         </td>
 
                         <td><?= $group['type']; ?></td>

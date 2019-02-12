@@ -109,8 +109,7 @@
               };
             },
             cache: true
-          },
-          minimumInputLength: 2
+          }
         });
 
         $(".s2").select2();

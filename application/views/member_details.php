@@ -28,13 +28,13 @@
             <div class="box-body box-profile">
             	<a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div></a><br>
               
-              <h3 class="profile-username text-center">
+              <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><h3 class="profile-username text-center">
                   <?php if($member['gender'] == 'ወንድ'){ ?>
                     <i class="fa fa-male"></i>
                   <?php } else {?>
                     <i class="fa fa-female"></i>
                   <?php } ?>
-                    <?= $member['firstname']." ".$member['middlename']; ?></h3>
+                    <?= $member['firstname']." ".$member['middlename']; ?></h3></a>
 
 
         <p class="text-muted text-center">የቤተሰብ አባልነት: <b><?= $member['family_role']?></b></p>
@@ -65,7 +65,7 @@
           </span></li>
           <li><i class="fa-li fa fa-home"></i><?= lang('address') ?>: <span><?= time(); ?></span></li>
           <li>
-            <i class="fa-li fa fa-calendar"></i><?= lang('birth_date') ?>: <?= $member['birthdate']; ?>                            (<span></span>44 yrs old)
+            <i class="fa-li fa fa-calendar"></i><?= lang('birth_date') ?>: <?= $member['birthdate']; ?>                            <span></span><?php if(!$member['hide_age'] == 'on') { echo '('.$member['age'].' yrs old)'; } ?> 
           </li>
           <li><i class="fa-li fa fa-mobile-phone"></i><?= lang('mobile_phone') ?>: <span><?= $member['mobile_phone']; ?></span></li>
           <li><i class="fa-li fa fa-phone"></i><?= lang('home_phone') ?>: <span>(237)-926-6342</span></li>

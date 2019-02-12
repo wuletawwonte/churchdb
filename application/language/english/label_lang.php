@@ -108,9 +108,12 @@ $lang['note_info'] = 'Notes Info';
 $lang['assign_new_group'] = 'Assign New Group';
 $lang['delete_this_member'] = 'Delete This Member';
 $lang['delete_this_family'] = 'Delete This Family';
-$lang['create_group'] = 'Create Group';
+$lang['delete_this_group'] = 'Delete This Group';
+$lang['group'] = 'Group';
 $lang['group_type'] = 'Group Type';
 $lang['created'] = 'Created';
+$lang['edit_this_group'] = 'Edit This Group';
+$lang['add_member'] = 'Add Member';
 
 
 

@@ -112,6 +112,7 @@ class Member extends CI_Model {
 	}
 
 	public function get_one($id = NULL) {
+		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
 		$res = $this->db->get_where('members', array('id' => $id));
 		$res = $res->result_array();
 		return  $res[0];
@@ -175,12 +176,32 @@ class Member extends CI_Model {
 	public function ajax_get_members() {
 		$this->db->like('firstname', $this->input->get('q'));
 		$this->db->or_like('middlename', $this->input->get('q'));
-		$res = $this->db->select("id,firstname as text")
-						->limit(10)
+		$res = $this->db->select("id,concat(firstname,' ',middlename) AS text")
+						->limit(8)
 						->get('members');
 		return $res;
 	}
 
+	public function get_group_members($id) {
+		$this->db->select('*');
+		$this->db->from('members');
+		$this->db->join('group_members', 'members.id = group_members.member_id', 'INNER');
+		$this->db->where('group_members.group_id', $id);
+		$res = $this->db->get();
+
+		return $res->result_array();
+	}
+
+	public function get_non_group_members($id) {
+		$this->db->select('members.firstname, members.middlename, members.id');
+		$this->db->from('members');
+		$this->db->where('group_members.group_id', $id);
+		$this->db->join('group_members', 'members.id != group_members.member_id');
+		$this->db->limit(10);
+		$res = $this->db->get();
+
+		return $res->result_array();
+	}
 
 
 

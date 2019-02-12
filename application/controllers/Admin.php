@@ -20,7 +20,7 @@ class Admin extends CI_Controller {
 
 		$this->session->set_userdata('last_visited', time());
 
-		$this->load->model(array('user', 'cnfg', 'family', 'member', 'timeline', 'group'));
+		$this->load->model(array('user', 'cnfg', 'family', 'member', 'timeline', 'group', 'group_member'));
 		$this->load->helper('text');
 
 		$this->lang->load('label_lang', $this->session->userdata('language'));
@@ -389,6 +389,11 @@ class Admin extends CI_Controller {
 		redirect('admin/familydetails/'.$this->input->post('family_id'));
 	}
 
+	public function add_group_member() {
+		$this->group_member->add_group_member();
+		redirect('admin/groupdetails/'.$this->input->post('group_id'));		
+	}
+
 	public function remove_member_from_family($id, $famid) {
 		$this->member->remove_member_from_family($id);
 		redirect('admin/familydetails/'.$famid);
@@ -401,6 +406,16 @@ class Admin extends CI_Controller {
 		$json = $res->result();
 		header('Content-Type: application/json');
 		echo json_encode($json);
+	}
+
+	public function groupdetails($id) {
+		$data['active_menu'] = "";
+		$data['group'] = $this->group->get_one($id);
+		$data['group_members'] = $this->member->get_group_members($id);
+		$data['non_group_members'] = $this->member->get_non_group_members($id);
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('group_details');
+		$this->load->view('admin_templates/footer');				
 	}
 
 

@@ -68,19 +68,19 @@
 		                <div class="row">
 		                    <div class="col-md-4">
 		                        <label for="firstname"> <?= lang('first_name'); ?>  :</label>
-		                        <input type="text" name="firstname" class="form-control">
+		                        <input type="text" name="firstname" class="form-control" required>
 		        				<br><font color="red"></font>
 		                    </div>
 
 		                    <div class="col-md-2">
 		                        <label for="middlename"> <?= lang('middle_name'); ?>  :</label>
-		                        <input type="text" name="middlename" class="form-control">
+		                        <input type="text" name="middlename" class="form-control" required>
 
 		                    </div>
 
 		                    <div class="col-md-6">
 		                        <label for="lastname"> <?= lang('last_name'); ?>  :</label>
-		                        <input type="text" name="lastname" class="form-control">                    
+		                        <input type="text" name="lastname" class="form-control" required>                    
 		                    </div>
 		                </div>
 		                <p/>
@@ -92,7 +92,7 @@
 				                  <div class="input-group-addon">
 				                    <i class="glyphicon glyphicon-calendar"></i>
 				                  </div>
-				                  <input type="text" class="form-control family-head inputmasked" name="birthdate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask>
+				                  <input type="text" class="form-control family-head inputmasked" name="birthdate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask required>
 				                </div>
 				                <!-- /.input group -->
 				            </div>

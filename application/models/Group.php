@@ -28,8 +28,12 @@ class Group extends CI_Model {
 		$this->db->insert('groups', $data);
 	}
 
-
-
+	public function get_one($id) {
+		$this->db->where('gid', $id);
+		$res = $this->db->get('groups');
+		$res = $res->result_array();
+		return $res[0];
+	}
 
 
 
