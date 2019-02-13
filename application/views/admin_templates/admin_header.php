@@ -280,8 +280,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </ul>
         </li>
 
-        <li <?php if($active_menu == 'groups') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/listgroups"><i class="fa fa-tag"></i> <span><?= lang('groups'); ?></span></a></li>
-        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-child"></i> <span><?= lang('sunday_school'); ?></span></a></li>
+        <li <?php if($active_menu == 'groups' || $active_menu == 'sunday_school') { ?> class="active" <?php } ?> class="treeview">
+          <a href="#"><i class="fa fa-tag"></i> <span><?= lang('group'); ?></span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li <?php if($active_menu == 'groups') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/listgroups"><i class="fa fa-angle-double-right"></i> <span><?= lang('groups'); ?></span></a></li>
+            <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/sunday_school_classes"><i class="fa fa-child"></i> <span><?= lang('sunday_school'); ?></span></a></li>
+          </ul>
+        </li>
+
         <li <?php if($active_menu == 'report') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-file-pdf-o"></i> <span><?= lang('data_report'); ?></span></a></li>
         <li <?php if($active_menu == 'wesite') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-globe"></i> <span><?= lang('website'); ?></span></a></li>
         <li <?php if($active_menu == 'generalsetting' || $active_menu == 'users') { ?> class="active" <?php } ?> class="treeview">

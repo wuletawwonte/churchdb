@@ -1,5 +1,17 @@
 <style type="text/css">
 
+.member-profile-image {
+  margin: 0 auto;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid #d2d6de; 
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;  
+}
+
 
 .profile-image {
   margin: 0 auto;
@@ -12,6 +24,10 @@
   color: #fff;
   text-align: center;
   line-height: 130px;
+}
+
+table tbody td a, table tbody td span {
+    line-height: 50px;
 }
 
 </style>
@@ -139,201 +155,36 @@
                             <table class="table user-list table-hover">
                               <thead>
                                 <tr>
-                                  <th><span>Family Members</span></th>
+                                  <th></th>
+                                  <th><span><?= lang('name') ?></span></th>
                                   <th class="text-center"><span>Role</span></th>
                                   <th><span>Birthday</span></th>
                                   <th><span>Email</span></th>
-                                  <th>&nbsp;</th>
                                 </tr>
                               </thead>
                               <tbody>
+                              <?php if(isset($family_members)) { foreach($family_members as $member) {?>
                                 <tr>
                                   <td>
-
-                                   <img style="width:40px; height:40px;display:inline-block" src = "/master/api/person/59/thumbnail" class="initials-image profile-user-img img-responsive img-circle no-border">
-                                   <a href="/master/PersonView.php?PersonID=59" class="user-link">Franklin Beck </a>
-
-
-                                 </td>
-                                 <td class="text-center">
-                                  Head of Household                </td>
+                                    <div class="member-profile-image" style="background: <?= $member['profile_color']; ?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div>
+                                  </td>
+                                  <td>                      
+                                    <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"
+                                    class="user-link"><?= $member['firstname'].' '.$member['middlename'];?> </a>
+                                  </td>
+                                  <td class="text-center">
+                                    <span style="line-height: 50px;" class='label label-default'><?= $member['family_role']?> </span>
+                                  </td>
                                   <td>
-                                    07/30/1974                </td>
-                                    <td>
-                                      <a href="mailto:franklin.beck@example.com">franklin.beck@example.com</a>
-                                    </td>
-                                    <td style="width: 20%;">
-                                      <a class="AddToPeopleCart" data-cartpersonid="59">
-                                        <span class="fa-stack">
-                                          <i class="fa fa-square fa-stack-2x"></i>
-                                          <i class="fa fa-cart-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                      </a>
-                                      <a href="/master/PersonEditor.php?PersonID=59">
-                                        <span class="fa-stack">
-                                          <i class="fa fa-square fa-stack-2x"></i>
-                                          <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                      </a>
-                                      <a class="delete-person" data-person_name="Franklin Beck"
-                                      data-person_id="59" data-view="family">
-                                      <span class="fa-stack">
-                                        <i class="fa fa-square fa-stack-2x"></i>
-                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse btn-danger"></i>
-                                      </span>
-                                    </a>
+                                    <span> <?= $member['birthdate']?> </span>                                
+                                  </td>
+                                  <td>
+                                    <a href="mailto:wuletaw.wonte@amu.edu.et"><?= $member['email'] ?></a>
                                   </td>
                                 </tr>
-                                <tr>
-                                  <td>
-
-                                   <img style="width:40px; height:40px;display:inline-block" src = "/master/api/person/60/thumbnail" class="initials-image profile-user-img img-responsive img-circle no-border">
-                                   <a href="/master/PersonView.php?PersonID=60" class="user-link">Joel Beck </a>
-
-
-                                 </td>
-                                 <td class="text-center">
-                                  Child                </td>
-                                  <td>
-                                    06/26/2011                </td>
-                                    <td>
-                                      <a href="mailto:joel.murray@example.com">joel.murray@example.com</a>
-                                    </td>
-                                    <td style="width: 20%;">
-                                      <a class="AddToPeopleCart" data-cartpersonid="60">
-                                        <span class="fa-stack">
-                                          <i class="fa fa-square fa-stack-2x"></i>
-                                          <i class="fa fa-cart-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                      </a>
-                                      <a href="/master/PersonEditor.php?PersonID=60">
-                                        <span class="fa-stack">
-                                          <i class="fa fa-square fa-stack-2x"></i>
-                                          <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                      </a>
-                                      <a class="delete-person" data-person_name="Joel Beck"
-                                      data-person_id="60" data-view="family">
-                                      <span class="fa-stack">
-                                        <i class="fa fa-square fa-stack-2x"></i>
-                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse btn-danger"></i>
-                                      </span>
-                                    </a>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-
-                                   <img style="width:40px; height:40px;display:inline-block" src = "/master/api/person/61/thumbnail" class="initials-image profile-user-img img-responsive img-circle no-border">
-                                   <a href="/master/PersonView.php?PersonID=61" class="user-link">Stella Beck </a>
-
-
-                                 </td>
-                                 <td class="text-center">
-                                  Child                </td>
-                                  <td>
-                                    07/18/2010                </td>
-                                    <td>
-                                      <a href="mailto:stella.soto@example.com">stella.soto@example.com</a>
-                                    </td>
-                                    <td style="width: 20%;">
-                                      <a class="AddToPeopleCart" data-cartpersonid="61">
-                                        <span class="fa-stack">
-                                          <i class="fa fa-square fa-stack-2x"></i>
-                                          <i class="fa fa-cart-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                      </a>
-                                      <a href="/master/PersonEditor.php?PersonID=61">
-                                        <span class="fa-stack">
-                                          <i class="fa fa-square fa-stack-2x"></i>
-                                          <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                      </a>
-                                      <a class="delete-person" data-person_name="Stella Beck"
-                                      data-person_id="61" data-view="family">
-                                      <span class="fa-stack">
-                                        <i class="fa fa-square fa-stack-2x"></i>
-                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse btn-danger"></i>
-                                      </span>
-                                    </a>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-
-                                   <img style="width:40px; height:40px;display:inline-block" src = "/master/api/person/62/thumbnail" class="initials-image profile-user-img img-responsive img-circle no-border">
-                                   <a href="/master/PersonView.php?PersonID=62" class="user-link">Emma Beck </a>
-
-
-                                 </td>
-                                 <td class="text-center">
-                                  Child                </td>
-                                  <td>
-                                    11/30/2015                </td>
-                                    <td>
-                                      <a href="mailto:emma.rice@example.com">emma.rice@example.com</a>
-                                    </td>
-                                    <td style="width: 20%;">
-                                      <a class="AddToPeopleCart" data-cartpersonid="62">
-                                        <span class="fa-stack">
-                                          <i class="fa fa-square fa-stack-2x"></i>
-                                          <i class="fa fa-cart-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                      </a>
-                                      <a href="/master/PersonEditor.php?PersonID=62">
-                                        <span class="fa-stack">
-                                          <i class="fa fa-square fa-stack-2x"></i>
-                                          <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                      </a>
-                                      <a class="delete-person" data-person_name="Emma Beck"
-                                      data-person_id="62" data-view="family">
-                                      <span class="fa-stack">
-                                        <i class="fa fa-square fa-stack-2x"></i>
-                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse btn-danger"></i>
-                                      </span>
-                                    </a>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-
-                                   <img style="width:40px; height:40px;display:inline-block" src = "/master/api/person/63/thumbnail" class="initials-image profile-user-img img-responsive img-circle no-border">
-                                   <a href="/master/PersonView.php?PersonID=63" class="user-link">Julie Beck </a>
-
-
-                                 </td>
-                                 <td class="text-center">
-                                  Spouse                </td>
-                                  <td>
-                                    08/21/1982                </td>
-                                    <td>
-                                      <a href="mailto:julie.gregory@example.com">julie.gregory@example.com</a>
-                                    </td>
-                                    <td style="width: 20%;">
-                                      <a class="AddToPeopleCart" data-cartpersonid="63">
-                                        <span class="fa-stack">
-                                          <i class="fa fa-square fa-stack-2x"></i>
-                                          <i class="fa fa-cart-plus fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                      </a>
-                                      <a href="/master/PersonEditor.php?PersonID=63">
-                                        <span class="fa-stack">
-                                          <i class="fa fa-square fa-stack-2x"></i>
-                                          <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                      </a>
-                                      <a class="delete-person" data-person_name="Julie Beck"
-                                      data-person_id="63" data-view="family">
-                                      <span class="fa-stack">
-                                        <i class="fa fa-square fa-stack-2x"></i>
-                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse btn-danger"></i>
-                                      </span>
-                                    </a>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
+                              <?php } }?>
+                        </tbody>
+                      </table><p/><hr>
                           </div>
                           <div role="tab-pane fade" class="tab-pane" id="groups">
                             <div class="main-box clearfix">

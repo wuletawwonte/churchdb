@@ -193,14 +193,16 @@ class Member extends CI_Model {
 	}
 
 	public function get_non_group_members($id) {
-		$this->db->select('members.firstname, members.middlename, members.id');
-		$this->db->from('members');
-		$this->db->where('group_members.group_id', $id);
-		$this->db->join('group_members', 'members.id != group_members.member_id');
-		$this->db->limit(10);
-		$res = $this->db->get();
-
-		return $res->result_array();
+		$this->db->where('group_id', $id);
+		$res = $this->db->get('group_members')->result_array();
+		$coll = [];
+		foreach ($res as $key) {
+			# code...
+			array_push($coll, $key['member_id']);
+		}
+		$this->db->where_not_in('id', $coll);
+		$result = $this->db->get('members');
+		return $result->result_array();
 	}
 
 

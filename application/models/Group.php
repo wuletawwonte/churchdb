@@ -35,6 +35,12 @@ class Group extends CI_Model {
 		return $res[0];
 	}
 
+	public function get_sunday_classes() {
+		$this->db->where('type', 'የሰንበት ትምህርት ቡድን');
+		$res = $this->db->get('groups');
+		return $res->result_array();
+	}
+
 
 
 

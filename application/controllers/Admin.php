@@ -299,6 +299,7 @@ class Admin extends CI_Controller {
 		$family_id = $this->member->get_by_attrib('family_id', $id);
 		if($family_id != 0) {
 			$data['family'] = $this->family->get_one($family_id);
+			$data['family_members'] = $this->member->members_in_family($family_id);		
 		}
 		$data['timelines'] = $this->timeline->get_timeline($id);
 		$this->load->view('admin_templates/admin_header', $data);
@@ -416,6 +417,14 @@ class Admin extends CI_Controller {
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('group_details');
 		$this->load->view('admin_templates/footer');				
+	}
+
+	public function sunday_school_classes() {
+		$data['active_menu'] = "sunday_school";
+		$data['sunday_school_classes'] = $this->group->get_sunday_classes();
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('sunday_school_classes');
+		$this->load->view('admin_templates/footer');						
 	}
 
 
