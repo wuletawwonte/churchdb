@@ -114,6 +114,7 @@ $lang['group_type'] = 'Group Type';
 $lang['created'] = 'Created';
 $lang['edit_this_group'] = 'Edit This Group';
 $lang['add_member'] = 'Add Member';
+$lang['latest_members'] = 'Latest Members';
 
 
 

@@ -72,7 +72,7 @@ table tbody td a, table tbody td span {
                   Default Role <span class="badge">getOptionName</span>
                 </button>
                 <button class="btn btn-primary" type="button">
-                  Total Members <span class="badge" id="iTotalMembers"></span>
+                  Total Members <span class="badge" id="iTotalMembers"><?= count($group_members) ?></span>
                 </button>
             </div>
         </div>
@@ -98,7 +98,7 @@ table tbody td a, table tbody td span {
                     <div class="member-profile-image" style="background: <?= $member['profile_color']; ?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div>
                   </td>
                   <td>                      
-                    <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"
+                    <a href="<?= base_url('admin/memberdetails/'.$member['member_id']); ?>"
                     class="user-link"><?= $member['firstname'].' '.$member['middlename'];?> </a>
                   </td>
                   <td class="text-center">
@@ -111,7 +111,7 @@ table tbody td a, table tbody td span {
                     <a href="mailto:wuletaw.wonte@amu.edu.et"><?= $member['email'] ?></a>
                   </td>
                   <td style="width: 20%;">
-                    <a class="delete-person" href="<?= base_url('admin/remove_member_from_family/'.$member['id']); ?>">
+                    <a class="delete-person" href="<?= base_url('admin/remove_group_member/'.$member['member_id'].'/'.$group['gid']); ?>">
                       <span class="fa-stack">
                         <i class="fa fa-square fa-stack-2x"></i>
                         <i class="fa fa-minus fa-stack-1x fa-inverse btn-danger"></i>

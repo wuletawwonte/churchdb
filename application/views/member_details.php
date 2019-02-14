@@ -26,7 +26,7 @@
   line-height: 130px;
 }
 
-table tbody td a, table tbody td span {
+.user-list tbody td a, .user-list tbody td span {
     line-height: 50px;
 }
 
@@ -150,8 +150,14 @@ table tbody td a, table tbody td span {
                                 <!-- END timeline item -->
                               </ul>
                             </div>
+                          
+
+
+
+
                           <div role="tab-pane fade" class="tab-pane" id="family">
 
+                          <?php if(isset($family_members)) { ?>
                             <table class="table user-list table-hover">
                               <thead>
                                 <tr>
@@ -163,7 +169,7 @@ table tbody td a, table tbody td span {
                                 </tr>
                               </thead>
                               <tbody>
-                              <?php if(isset($family_members)) { foreach($family_members as $member) {?>
+                              <?php foreach($family_members as $member) {?>
                                 <tr>
                                   <td>
                                     <div class="member-profile-image" style="background: <?= $member['profile_color']; ?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div>
@@ -182,20 +188,72 @@ table tbody td a, table tbody td span {
                                     <a href="mailto:wuletaw.wonte@amu.edu.et"><?= $member['email'] ?></a>
                                   </td>
                                 </tr>
-                              <?php } }?>
+                              <?php } ?>
                         </tbody>
-                      </table><p/><hr>
+                      </table><p/><hr> <?php } else { ?>
+                                <div class="main-box clearfix">
+                                  <div class="main-box-body clearfix">
+                                    <br>
+                                    <div class="alert alert-warning">
+                                      <i class="fa fa-question-circle fa-fw fa-lg"></i> <span>Not Member of Any Family.</span>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              <?php } ?>
+
                           </div>
+
+
+
+
+
                           <div role="tab-pane fade" class="tab-pane" id="groups">
+                          <?php if($assigned_groups != false) { ?>
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th><span><?= lang('name') ?></span></th>
+                                  <th  class="text-center"><span>type</span></th>
+                                  <th><span>role</span></th>
+                                  <th><span>Created</span></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              <?php foreach($assigned_groups as $group) {?>
+                                <tr>
+                                  <td>                      
+                                    <a href="<?= base_url('admin/groupdetails/'.$group['gid']); ?>"><?= $group['name'];?> </a>
+                                  </td>
+                                  <td class="text-center">
+                                    <span class='label label-default'><?= $group['type']?> </span>
+                                  </td>
+                                  <td><?= $group['role'] ?></td>
+                                  <td><?= $group['created'] ?></td>
+                                </tr>
+                              <?php } ?>
+                            </tbody>
+                          </table><p/><hr> 
+                          <?php } else { ?>
+                          
                             <div class="main-box clearfix">
                               <div class="main-box-body clearfix">
                                 <br>
                                 <div class="alert alert-warning">
-                                  <i class="fa fa-question-circle fa-fw fa-lg"></i> <span>No group assignments.</span>
+                                  <i class="fa fa-question-circle fa-fw fa-lg"></i> <span>Not Member of Any Group.</span>
                                 </div>
                               </div>
                             </div>
+
+                          <?php } ?>
                           </div>
+
+
+
+
+
+
+
                           <div role="tab-pane fade" class="tab-pane" id="properties">
                             <div class="main-box clearfix">
                               <div class="main-box-body clearfix">

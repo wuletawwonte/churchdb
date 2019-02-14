@@ -20,6 +20,15 @@ class Group_member extends CI_Model {
 	
 	}
 
+	public function remove_group_member($mid, $gid) {
+		$data = array(
+			'member_id' => $mid, 
+			'group_id' => $gid
+			);
+		$this->db->where($data);
+		$this->db->delete('group_members');
+	}
+
 
 
 

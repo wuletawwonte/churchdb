@@ -68,12 +68,12 @@
 
                     <tr>
                         <td style="text-align: center"> 
-                            <a href="<?= base_url('admin/classdetails/'.$class['gid']) ?>"><i class="fa fa-search-plus"></i></a>&nbsp;&nbsp;
+                            <a href="<?= base_url('admin/groupdetails/'.$class['gid']) ?>"><i class="fa fa-search-plus"></i></a>&nbsp;&nbsp;
                             <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $class['gid'] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $class['gid'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
                         </td>
 
                         <td>
-                            <a href="<?= base_url('admin/classdetails/'.$class['gid']); ?>"> <?= $class['name']; ?></a>
+                            <a href="<?= base_url('admin/groupdetails/'.$class['gid']); ?>"> <?= $class['name']; ?></a>
                         </td>
 
                         <td><?= $class['type']; ?></td>

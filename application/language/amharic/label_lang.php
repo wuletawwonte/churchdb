@@ -115,6 +115,7 @@ $lang['group_type'] = 'የቡድን አይነት';
 $lang['created'] = 'የተፈጠረበት';
 $lang['edit_this_group'] = 'የቡድን መረጃ ቀይር';
 $lang['add_member'] = 'አባል ጨምር';
+$lang['latest_members'] = 'አዳዲስ ምዕመናን';
 
 
 

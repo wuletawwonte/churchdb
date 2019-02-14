@@ -107,6 +107,13 @@ class Member extends CI_Model {
 		return $data->result_array();			
 	}
 
+	public function latest_members(){
+		$this->db->limit(12);
+		$this->db->order_by('created', 'DESC');
+		$res = $this->db->get('members')->result_array();
+		return $res;
+	}
+
 	public function record_count() {
 		return $this->db->count_all('members');
 	}

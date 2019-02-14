@@ -31,6 +31,8 @@ class Admin extends CI_Controller {
 		$data['total_families'] = $this->family->record_count();
 		$data['total_members'] = $this->member->record_count();
 		$data['total_groups'] = $this->group->record_count();
+		$data['latest_members'] = $this->member->latest_members();
+		$data['latest_families'] = $this->family->latest_families();
 		$data['active_menu'] = "dashboard";
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('home');
@@ -302,6 +304,7 @@ class Admin extends CI_Controller {
 			$data['family_members'] = $this->member->members_in_family($family_id);		
 		}
 		$data['timelines'] = $this->timeline->get_timeline($id);
+		$data['assigned_groups'] = $this->group->get_assigned_groups($id);
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('member_details');
 		$this->load->view('admin_templates/footer');		
@@ -427,7 +430,10 @@ class Admin extends CI_Controller {
 		$this->load->view('admin_templates/footer');						
 	}
 
-
+	public function remove_group_member($mid, $gid) {
+		$this->group_member->remove_group_member($mid, $gid);
+		redirect('admin/groupdetails/'.$gid);
+	}
 
 
 }

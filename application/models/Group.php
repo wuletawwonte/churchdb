@@ -41,7 +41,16 @@ class Group extends CI_Model {
 		return $res->result_array();
 	}
 
+	public function get_assigned_groups($id) {
 
+		$this->db->select('groups.gid, groups.name, groups.type, groups.created, group_members.role');
+		$this->db->from('groups');
+		$this->db->where('group_members.member_id', $id);
+		$this->db->join('group_members', 'groups.gid = group_members.group_id', 'INNER');
+		$res = $this->db->get();
+
+		return $res->result_array();
+	}
 
 
 }

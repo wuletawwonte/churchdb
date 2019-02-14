@@ -28,6 +28,13 @@ class Family extends CI_Model {
 		return $data->result_array();	
 	}
 
+	public function latest_families(){
+		$this->db->limit(12);
+		$this->db->order_by('created', 'DESC');
+		$res = $this->db->get('families')->result_array();
+		return $res;
+	}
+
 
 	public function get_one($id) {
 		$res = $this->db->get_where('families', array('id' => $id));
