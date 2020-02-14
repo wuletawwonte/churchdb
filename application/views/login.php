@@ -3,6 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
@@ -14,114 +18,101 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/neon-forms.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/icheck/blue.css">
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/skins/skin-blue-light.min.css'); ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
 
-	<script src="<?php echo base_url(); ?>assets/vendors/jquery/jquery.min.js"></script>
+	<style type="text/css">
+	    
+	    .se-pre-con {
+	      position: fixed;
+	      left: 0px;
+	      top: 0px;
+	      width: 100%;
+	      height: 100%;
+	      z-index: 9999;
+	      background: url(<?= base_url('assets/img/ripple.gif'); ?>) center no-repeat #eee;
+	    }
+
+	</style>
+
 
 	<link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.ico">
 	
 </head>
-<body class="page-body login-page login-form-fall">
+<!--  -->
+<body class="hold-transition login-page">
+
+<div class="se-pre-con"></div>
+
+	<div class="login-box">
+	  <div class="login-logo">
+	    <a href="<?= base_url(); ?>"><b><?php echo $system_name; ?></a>
+	  </div>
+	  <!-- /.login-logo -->
+	  <div class="login-box-body">
+	    <p class="login-box-msg">Sign in to start your session</p>
+
+	    <form action="<?php echo base_url(); ?>users/login" method="post">
+	      <div class="form-group has-feedback">
+	        <input type="text" class="form-control" name="username" placeholder="ስም">
+	        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+	      </div>
+	      <div class="form-group has-feedback">
+	        <input type="password" name="password" class="form-control" placeholder="የይለፍ ቃል">
+	        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+	      </div>
+
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
+          </div>
+
+	        <div>
+	          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+	        </div>
+
+	    </form>
+
+				<?php if($this->session->flashdata('login_failed')) : ?>
+					<br><p class="alert alert-danger alert-dismissible"><?php echo $this->session->flashdata('login_failed'); ?></p>
+				<?php endif; ?>
 
 
-<script type="text/javascript">
-var baseurl = '<?php echo base_url(); ?>';
+
+	    <br><a href="#">I forgot my password</a><br>
+
+	  </div>
+	  <!-- /.login-box-body -->
+	</div>
+	<!-- /.login-box -->
+
+
+
+<!-- jQuery 3 -->
+<script src="<?php echo base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="<?php echo base_url(); ?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="<?= base_url(); ?>assets/vendors/icheck/icheck.min.js"></script>
+<script>
+
+    $(window).on('load', function() {
+        // Animate loader off screen
+        $(".se-pre-con").fadeOut("slow");
+    });
+
+    $(function () {
+        $('input').iCheck({
+	      checkboxClass: 'icheckbox_square-blue',
+	      radioClass: 'iradio_square-blue',
+	      increaseArea: '20%' /* optional */
+	    });
+    });
+
+
 </script>
-
-<div class="login-container">
-	
-	<div class="login-header login-caret">
-		
-		<div class="login-content" style="width:100%;">
-			
-			<a href="<?php echo base_url(); ?>" class="logo">
-				<img src="<?php echo base_url(); ?>assets/img/logo.png" height="80" alt="" />			</a>
-			
-			<p class="description">
-            	<h2 style="color:#cacaca; font-weight:100;"><?php echo $system_name; ?></h2>
-           </p>
-			
-			<!-- progress bar indicator -->
-			<div class="login-progressbar-indicator">
-				<h3>43%</h3>
-				<span>logging in...</span>
-			</div>
-		</div>
-		
-	</div>
-	
-	<div class="login-progressbar">
-		<div></div>
-	</div>
-	
-	<div class="login-form">
-		
-		<div class="login-content">
-<!-- 			
-			<div class="form-login-error">
-				<h3>Invalid login</h3>
-				<p>Please enter correct email and password!</p>
-			</div>
- -->
-
-			<form method="post" action="<?php echo base_url(); ?>users/login" role="form">
-				
-				<div class="form-group">
-					
-					<div class="input-group">
-						<div class="input-group-addon">
-							<i class="glyphicon glyphicon-user"></i>
-						</div>
-						
-						<input type="text" class="form-control" name="username" id="email" placeholder="ስም" autocomplete="off" autofocus required />
-					</div>
-					
-				</div>
-				
-				<div class="form-group">
-					
-					<div class="input-group">
-						<div class="input-group-addon">
-							<i class="glyphicon glyphicon-lock"></i>
-						</div>
-						
-						<input type="password" class="form-control" name="password" id="password" placeholder="የይለፍ ቃል" autocomplete="off" required />
-					</div>
-				
-				</div>
-				
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-block btn-login">
-						<i class="entypo-login"></i>
-						ይግቡ
-					</button>
-				</div>
-				
-						
-			</form>
-			
-			<?php if($this->session->flashdata('login_failed')) : ?>
-				<p class="alert alert-danger alert-dismissible"><?php echo $this->session->flashdata('login_failed'); ?></p>
-			<?php endif; ?>
-			
-			<div class="login-bottom-links">
-				<a href="http://testlimat.wuletaw/login/forgot_password" class="link">
-					የይለፍ ቃል ረሱ ?
-				</a>
-			</div>
-			
-		</div>
-		
-	</div>
-	
-</div>
-
-
-	<!-- Bottom Scripts -->
-	<script src="<?php echo base_url(); ?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/neon-login.js"></script>
-
 </body>
 </html>
