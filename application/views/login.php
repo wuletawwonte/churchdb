@@ -26,13 +26,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<style type="text/css">
 	    
 	    .se-pre-con {
-	      position: fixed;
-	      left: 0px;
-	      top: 0px;
-	      width: 100%;
-	      height: 100%;
-	      z-index: 9999;
-	      background: url(<?= base_url('assets/img/ripple.gif'); ?>) center no-repeat #eee;
+	      	position: fixed;
+	      	left: 0px;
+	      	top: 0px;
+	      	width: 100%;
+	      	height: 100%;
+	      	z-index: 9999;
+	      	background: url(<?= base_url('assets/img/ripple.gif'); ?>) center no-repeat #eee;
+	    }
+
+	    #footer {
+			font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+			font-weight: 400;
 	    }
 
 	</style>
@@ -46,7 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="se-pre-con"></div>
 
-	<div class="login-box">
+<div class="wrapper">
+	<div class="login-box main-rapper">
 	  <div class="login-logo">
 	    <a href="<?= base_url(); ?>"><b><?php echo $system_name; ?></a>
 	  </div>
@@ -87,9 +93,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  </div>
 	  <!-- /.login-box-body -->
 	</div>
-	<!-- /.login-box -->
 
+	<div class="footer text-center" id="footer">
+	    Copyright © <?= date('Y'); ?> <b><a href="https://www.gracesoft.com.et" class="text-black" target="_blank">Grace Soft Arbaminch</a>	
+	</div>
 
+</div>
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
