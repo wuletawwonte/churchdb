@@ -211,10 +211,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-cog"></i></a>
-          </li>
+
         </ul>
       </div>
     </nav>
@@ -237,19 +234,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
       </div>
 
-      <!-- search form (Optional) -->
-      <div class="sidebar-form">
-        <select name="searchbox[]" id="searchbox" class="form-control" placeholder="<?= lang('search') ?> ..." onchange="location='<?= base_url('admin/memberdetails/') ?>'+this.value"></select>
-      </div>
-      <!-- /.search form -->
-
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <!-- <li class="header"><?= lang('menu'); ?></li> -->
         <!-- Optionally, you can add icons to the links -->
         <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i><span><?= lang('dashboard'); ?></span></a></li>
         
-        <li <?php if($active_menu == 'personregistration' || $active_menu == 'familyregistration' || $active_menu == 'listfamilies' || $active_menu == 'listmembers') { ?> class="active" <?php } ?> class="treeview">
+        <li <?php if($active_menu == 'personregistration' || $active_menu == 'listmembers') { ?> class="active" <?php } ?> class="treeview">
           <a href="#"><i class="fa fa-users"></i> <span> <?= lang('people'); ?></span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -262,21 +253,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <i class="fa fa-angle-double-right"></i> <?= lang('add_new_person'); ?></a>
             </li>
             
-            <li <?php if($active_menu == 'listmembers') { echo "class='active'"; } ?>>
+            <li <?php if($active_menu == 'listmembers') { ?> class="active" <?php } ?>>
                 <a href="<?php echo base_url(); ?>admin/listmembers">
                     <i class="fa fa-angle-double-right"></i> <?= lang('members'); ?></a>
             </li>
-            
-            <li <?php if($active_menu == 'familyregistration') { echo "class='active'"; } ?>>
-                <a href="<?php echo base_url(); ?>admin/familyregistration">
-                    <i class="fa fa-angle-double-right"></i> <?= lang('add_new_family'); ?> </a>
-            </li>
-            
-            <li <?php if($active_menu == 'listfamilies') { echo "class='active'"; } ?>>
-                <a href="<?php echo base_url(); ?>admin/listfamilies">
-                    <i class="fa fa-angle-double-right"></i> <?= lang('families'); ?> </a>
-            </li>
-                        
+                                                
           </ul>
         </li>
 

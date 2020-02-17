@@ -55,23 +55,30 @@ table tbody td a, table tbody td span {
 
     <form method="post" action="<?= base_url(); ?>admin/listmembers" id="PersonList">
       <p align="center">
-        <table align="center"><tr><td align="center">
-          Sort order:
-          <select name="sort" onchange="this.form.submit()">
-            <option value="name" selected>By Name</option>
-            <option value="family" >By Family</option>
-          </select>&nbsp;
-          <input type="text" name="name">
-          <input type="submit" name="submit" class="btn btn-default" value="Apply Filter">
-
+        <table align="center"><tr><td>
+          <div class="row">
+            <div class="col-xs-4" align="right" style="padding-right: 0px;">
+              Sort order:
+              <select name="sort" onchange="this.form.submit()" class="s2">
+                <option value="name" selected>By Name</option>
+                <option value="family" >By Family</option>
+              </select>&nbsp;
+            </div>
+            <div class="col-xs-4" style="padding-left: 0px;padding-right: 5px;">
+              <input type="text" placeholder="Search.." name="name" class="form-control" style="border-radius: 5px">
+            </div>
+            <div class="col-xs-4" style="padding-left: 0px;">
+              <input type="submit" name="submit" class="btn btn-primary" value="Apply Filter">
+            </div>
+          </div>
         </td></tr>
-        <tr><td align="center">
-          <select name="gender" form="PersonList">
+        <tr><td align="center" style="padding-top: 3px">
+          <select name="gender" form="PersonList" class="s2">
             <option value="" > ወንድ እና ሴት </option>
             <option value="ወንድ"> ወንድ </option>
             <option value="ሴት"> ሴት</option>
           </select>  
-          <select name="Classification" onchange="this.form.submit()">
+          <select name="Classification" class="s2">
             <option value="" >All Classifications</option>
             <option value="0">Unassigned</option>
             <option value="1">Member</option>
@@ -79,14 +86,14 @@ table tbody td a, table tbody td span {
             <option value="3">Guest</option>
             <option value="5">Non-Attender</option>
           </select>
-          <select name="PersonProperties" onchange="this.form.submit()">
+          <select name="PersonProperties" class="s2">
             <option value=""  selected >All Contact Properties</option>
             <option value="0">Unassigned</option>
             <option value="1">Disabled</option>
             <option value="-10000">! Unassigned</option>
             <option value="-9999">! Disabled</option>
           </select>
-          <select name="grouptype" onchange="this.form.submit()">
+          <select name="grouptype" class="s2">
             <option value="" >All Group Types</option>
             <option value="1">Ministry</option>
             <option value="2">Team</option>
@@ -94,7 +101,7 @@ table tbody td a, table tbody td span {
             <option value="4">Sunday School Class</option>
             <option value="5">Scouts</option>
           </select>
-            <input type="button" class="btn btn-default" value="Clear Filters" onclick=""><BR><BR>
+            <input type="button" class="btn btn-warning" value="Clear Filters" onclick=""><BR><BR>
           </td></tr>
         </table></form>
 

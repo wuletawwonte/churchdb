@@ -2,6 +2,8 @@
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.date.extensions.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.phone.extensions.js'); ?>"></script>
+<script src="<?= base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/iCheck/square/blue.css">
 
 
 
@@ -25,14 +27,7 @@
 
 
 
-		<form method="post" action="<?= base_url('admin/savemember') ?>" name="PersonEditor">
-
-<!-- 		    <div class="alert alert-info alert-dismissable">
-		        <i class="fa fa-info"></i>
-		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		        <strong><span style="color: red;"> Red text  </span></strong> indicates items inherited from the associated family record.
-		    </div>
- -->
+	<form method="post" action="<?= base_url('admin/savemember') ?>" name="PersonEditor">
 
 
      <?php if($this->session->flashdata('success')) { ?>
@@ -47,46 +42,46 @@
 
 		    <div class="box box-info clearfix">
 		        <div class="box-header">
-		            <h3 class="box-title"> <?= lang('personal_info'); ?>  </h3>
+		            <h3 class="box-title"> የግል መረጃ </h3>
 		        </div><!-- /.box-header -->
 		        <div class="box-body">
 		            <div class="form-group">
 		                <div class="row">
 		                    <div class="col-md-2">
-		                        <label> <?= lang('gender'); ?>  :</label>
-		                        <select name="gender" class="form-control">
-		                            <option value="<?= lang('female'); ?>"> <?= lang('female'); ?>  </option>
-		                            <option value="<?= lang('male'); ?>"> <?= lang('male'); ?>  </option>
+		                        <label> ፆታ  :</label>
+		                        <select name="gender" class="form-control s2">
+		                            <option value="ሴት"> ሴት </option>
+		                            <option value="ወንድ"> ወንድ </option>
 		                        </select>
 		                    </div>
 		                    <div class="col-md-3">
-		                        <label for="title"> <?= lang('title'); ?>  :</label>
+		                        <label for="title"> ማዕረግ  :</label>
 		                        <input type="text" name="title" class="form-control">
 		                    </div>
 		                </div>
 		                <p/>
 		                <div class="row">
 		                    <div class="col-md-4">
-		                        <label for="firstname"> <?= lang('first_name'); ?>  :</label>
+		                        <label for="firstname"> ስም  :</label>
 		                        <input type="text" name="firstname" class="form-control" required>
 		        				<br><font color="red"></font>
 		                    </div>
 
 		                    <div class="col-md-2">
-		                        <label for="middlename"> <?= lang('middle_name'); ?>  :</label>
+		                        <label for="middlename"> የአባት ስም  :</label>
 		                        <input type="text" name="middlename" class="form-control" required>
 
 		                    </div>
 
 		                    <div class="col-md-6">
-		                        <label for="lastname"> <?= lang('last_name'); ?>  :</label>
+		                        <label for="lastname"> የአያት ስም :</label>
 		                        <input type="text" name="lastname" class="form-control" required>                    
 		                    </div>
 		                </div>
 		                <p/>
 		                <div class="row">
 			                <div class="col-md-4 form-group">
-				                <label><?= lang('birth_date') ?>:</label>
+				                <label>የተወለዱበት ቀን :</label>
 
 				                <div class="input-group">
 				                  <div class="input-group-addon">
@@ -97,11 +92,13 @@
 				                <!-- /.input group -->
 				            </div>
 		                    <div class="col-md-2">
-		                        <label> <?= lang('hide_age'); ?>  </label><br/>
-		                        <input type="checkbox" name="hide_age">
+		                        <label> ዕድሜ ይደበቅ  </label><br/>
+		                        <div class="checkbox icheck">
+			                        <input type="checkbox" name="hide_age">
+		                    	</div>
 		                    </div>
 		                    <div class="col-md-6">
-		                        <label for="birth_place"> <?= lang('birth_place'); ?>  :</label>
+		                        <label for="birth_place"> የትውልድ ሥፍራ :</label>
 		                        <input type="text" name="birth_place" class="form-control">                    
 		                    </div>
 
@@ -115,12 +112,12 @@
 
 			<div class="box box-info clearfix">
 				<div class="box-header">
-					<h3 class="box-title"><?= lang('contact_and_job_info') ?></h3>
+					<h3 class="box-title"> አድራሻና የሥራ ሁኔታ </h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label><?= lang('mobile_phone') ?>:</label>
+							<label>የሞባይል ስልክ ቁጥር:</label>
 							<div class="input-group">
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-earphone"></i>
@@ -130,7 +127,7 @@
 						</div>
 
 						<div class="form-group col-md-6">
-							<label><?= lang('email') ?> :</label>
+							<label>ኢሜል :</label>
 							<div class="input-group">
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-envelope"></i>
@@ -142,8 +139,8 @@
 					</div><p/>
 					<div class="row">
 	                    <div class="col-md-4">
-	                        <label> <?= lang('job_type'); ?>  :</label>
-	                        <select name="job_type" class="form-control">
+	                        <label> የሥራ አይነት  :</label>
+	                        <select name="job_type" class="form-control s2">
 	                            <option value="የመንግስት ስራ"> የመንግስት ሥራ </option>
 	                            <option value="ነጋዴ"> ነጋዴ </option>
 	                            <option value="መንግስታዊ ያልሆነ ድርጅት"> መንግስታዊ ያልሆነ ድርጅት </option>
@@ -156,13 +153,13 @@
 	                    </div>
 
 	                    <div class="col-md-4">
-	                        <label for="workplace_name"> <?= lang('workplace_name'); ?>  :</label>
+	                        <label for="workplace_name"> የመሥሪያ ቤቱ ስም :</label>
 	                        <input type="text" name="workplace_name" class="form-control">                    
 	                    </div>
 
 
 						<div class="form-group col-md-4">
-							<label><?= lang('work_phone') ?>:</label>
+							<label>የመሥሪያ ቤት ስልክ ቁጥር :</label>
 							<div class="input-group">
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-phone-alt"></i>
@@ -178,14 +175,14 @@
 
 			<div class="box box-info clearfix">
 				<div class="box-header">
-					<h3 class="box-title"><?= lang('church_participation') ?></h3>
+					<h3 class="box-title"> የቤተክርስትያን ተሳትፎ </h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
 
 					<div class="row">
 
 	                    <div class="col-md-4">
-	                        <label for="Title"> <?= lang('membership_year'); ?>  :</label>
+	                        <label for="Title"> አባል የሆኑበት ዘመን :</label>
 	                        <div class="input-group">
 	                        	<input type="text" name="membership_year" class="form-control inputmasked" data-inputmask='"mask": "9999"' data-mask>
 	                    		<div class="input-group-addon">ዓ.ም</div>
@@ -194,8 +191,8 @@
 	                    </div>
 
 	                    <div class="col-md-4">
-	                        <label> <?= lang('cause_of_membership'); ?>  :</label>
-	                        <select name="cause_of_membership" class="form-control">
+	                        <label> አባል የሆኑበት ሁኔታ :</label>
+	                        <select name="cause_of_membership" class="form-control s2">
 	                        	<option value="በጥምቀት"> በጥምቀት </option>
 	                            <option value="በእምነት ማጽኛ ትምህርት"> በእምነት ማጽኛ ትምህርት </option>
 	                            <option value="ከሌላ መ/ኢ/ማ/ም በዝውውር"> ከሌላ መ/ኢ/ማ/ም በዝውውር </option>
@@ -204,8 +201,8 @@
 	                    </div>
 
 	                    <div class="col-md-4">
-	                        <label> <?= lang('level_of_membership'); ?>  :</label>
-	                        <select name="level_of_membership" class="form-control">
+	                        <label> የአባልነት ደረጃ :</label>
+	                        <select name="level_of_membership" class="form-control s2">
 	                        	<option value="ቆራቢ አባል"> ቆራቢ አባል </option>
 	                        	<option value="የድነት ትምህርት ተማሪ"> የድነት ትምህርት ተማሪ </option>
 	                            <option value="የእምነት ማጽኛ ተማሪ"> የእምነት ማጽኛ ተማሪ </option>
@@ -216,8 +213,8 @@
 					<div class="row">
 					<p/>
 	                    <div class="col-md-4 serving_as">
-	                        <label> <?= lang('serving_as'); ?>  :</label>
-	                        <select name="serving_as" class="form-control">
+	                        <label> የአገልግሎት ዘርፍ :</label>
+	                        <select name="serving_as" class="form-control s2">
 	                        	<option value="አያገለግሉም">አያገለግሉም</option>
 	                        	<option value="አስተናጋጅ">አስተናጋጅ</option>
 	                            <option value="ኳየር">ኳየር</option>
@@ -233,12 +230,9 @@
 
 
 
-
-
-
 		    <div class="box box-info clearfix">
 		        <div class="box-header">
-		            <h3 class="box-title"> <?= lang('family_info') ?>  </h3>
+		            <h3 class="box-title"> የቤተሰብ መረጃ </h3>
 		            <div class="pull-right"><br/>
 		                <button class="btn btn-primary" name="PersonSubmit"><?= lang('continue') ?></button>
 		            </div>
@@ -246,7 +240,7 @@
 		        <div class="box-body">
 		            <div class="form-group col-md-6">
 		                <label> <?= lang('family_role') ?> :</label>
-		                <select name="family_role" class="form-control">
+		                <select name="family_role" class="form-control s2">
 		                    <option value="አልተመረጠም">አልተመረጠም</option>
 		                    <option value="0" disabled>-----------------------</option>
 		                    <option value="ባል">ባል</option>
@@ -299,6 +293,15 @@
 
 
 	$(".inputmasked").inputmask(); 
+
+    $(function () {
+        $('input').iCheck({
+	      checkboxClass: 'icheckbox_square-blue',
+	      radioClass: 'iradio_square-blue',
+	      increaseArea: '20%' /* optional */
+	    });
+    });
+
 
 </script>
 

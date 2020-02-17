@@ -143,51 +143,7 @@ class Admin extends CI_Controller {
 		$data['active_menu'] = "personregistration";
 		$data['families'] = $this->family->get_all('name', 'ASC');
 		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('admin_new_person_form');
-		$this->load->view('admin_templates/footer');
-
-	}
-
-	public function familyregistration() {
-
-		$data['active_menu'] = "familyregistration";
-		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('admin_new_family_form');
-		$this->load->view('admin_templates/footer');
-
-	}
-
-	public function listfamilies() {
-
-		$config['base_url'] = base_url('admin/listfamilies');
-		$config['total_rows'] = $this->family->record_count();
-		$config['per_page'] = 5;
-		$config["uri_segment"] = 3;
-
-		$config['full_tag_open'] = "<ul class='pagination pagination-sm'>";
-		$config['full_tag_close'] ="</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tagl_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
-
-		$this->pagination->initialize($config);
-
-		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-		$data['links'] = $this->pagination->create_links();
-		$data['active_menu'] = "listfamilies";
-		$data['families'] = $this->family->get_all('created', 'DESC', $config["per_page"], $page);
-		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('admin_list_families');
+		$this->load->view('admin_new_member_form');
 		$this->load->view('admin_templates/footer');
 
 	}
@@ -246,33 +202,6 @@ class Admin extends CI_Controller {
 		}
 	}
 
-
-	public function savefamily() {
-		$data = array(
-			'name' => $this->input->post('family_name'), 
-			'subcity' => $this->input->post('subcity'),
-			'kebele' => $this->input->post('kebele'),
-			'house_number' => $this->input->post('house_number'),
-			'home_phone' => $this->input->post('home_phone_number'),
-			'wedding_year' => $this->input->post('wedding_year')
-			);
-
-		if($this->family->add($data)) {
-			$family_id = $this->family->get_by_attrib('id', $data['name']);
-			$decoded_members = json_decode($this->input->post('members'));
-			foreach ($decoded_members as $member) {
-				$this->member->add_from_family($member, $family_id);
-			}
-
-			$this->session->set_flashdata('success', 'Success: Family Successfully Registered.');
-
-			redirect('admin/listfamilies');
-		} else {
-			$this->session->set_flashdata('error', 'Error: Family not Registered.');
-			echo json_encode(array('status' => $result));			
-		}
-	}
-
 	public function savemember() {
 
 		if($this->member->add()) {
@@ -309,18 +238,6 @@ class Admin extends CI_Controller {
 		$this->load->view('member_details');
 		$this->load->view('admin_templates/footer');		
 	}
-
-	public function familydetails($id = NULL) {
-		$data['active_menu'] = "listfamilies";
-		$data['family'] = $this->family->get_one($id);
-		$data['members'] = $this->member->members_in_family($id);
-		$data['all_members'] = $this->member->get_all_for_selection();
-		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('family_details');
-		$this->load->view('admin_templates/footer');		
-	}
-
-
 
 	public function editmember($id = NULL) {
 		$data['active_menu'] = '';
@@ -388,19 +305,10 @@ class Admin extends CI_Controller {
 		exit;
 	}
 
-	public function add_family_member() {
-		$this->member->add_family_member();
-		redirect('admin/familydetails/'.$this->input->post('family_id'));
-	}
 
 	public function add_group_member() {
 		$this->group_member->add_group_member();
 		redirect('admin/groupdetails/'.$this->input->post('group_id'));		
-	}
-
-	public function remove_member_from_family($id, $famid) {
-		$this->member->remove_member_from_family($id);
-		redirect('admin/familydetails/'.$famid);
 	}
 
 	public function ajax_get_member() {

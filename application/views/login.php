@@ -19,9 +19,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/icheck/blue.css">
-	<link rel="stylesheet" href="<?php echo base_url('assets/css/skins/skin-blue-light.min.css'); ?>">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/iCheck/square/blue.css">
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/skins/skin-blue-light.min.css'); ?>">
 
 	<style type="text/css">
 	    
@@ -95,7 +95,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 
 	<div class="footer text-center" id="footer">
-	    Copyright © <?= date('Y'); ?> <b><a href="https://www.gracesoft.com.et" class="text-black" target="_blank">Grace Soft Arbaminch</a>	
+	    Copyright © <?= date('Y'); ?> <b><a href="https://www.gracesoft.com.et" target="_blank">Grace Soft Arbaminch</a>	
 	</div>
 
 </div>
@@ -105,7 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url(); ?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="<?= base_url(); ?>assets/vendors/icheck/icheck.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
 <script>
 
     $(window).on('load', function() {
