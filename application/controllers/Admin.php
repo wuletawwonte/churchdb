@@ -20,7 +20,7 @@ class Admin extends CI_Controller {
 
 		$this->session->set_userdata('last_visited', time());
 
-		$this->load->model(array('user', 'cnfg', 'family', 'member', 'timeline', 'group', 'group_member'));
+		$this->load->model(array('user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level'));
 		$this->load->helper('text');
 
 		$this->lang->load('label_lang', $this->session->userdata('language'));
@@ -28,11 +28,9 @@ class Admin extends CI_Controller {
 
 
 	public function index() {
-		$data['total_families'] = $this->family->record_count();
 		$data['total_members'] = $this->member->record_count();
 		$data['total_groups'] = $this->group->record_count();
 		$data['latest_members'] = $this->member->latest_members();
-		$data['latest_families'] = $this->family->latest_families();
 		$data['active_menu'] = "dashboard";
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('home');
@@ -141,9 +139,12 @@ class Admin extends CI_Controller {
 	public function personregistration() {
 
 		$data['active_menu'] = "personregistration";
-		$data['families'] = $this->family->get_all('name', 'ASC');
+		$data['members'] = $this->member->get_all();
+		$data['job_types'] = $this->job_type->get_all();
+		$data['membership_causes'] = $this->membership_cause->get_all();
+		$data['membership_levels'] = $this->membership_level->get_all();
 		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('admin_new_member_form');
+		$this->load->view('admin_new_member_form', $data);
 		$this->load->view('admin_templates/footer');
 
 	}
@@ -182,6 +183,7 @@ class Admin extends CI_Controller {
 			$data['links'] = $this->pagination->create_links();
 			$data['active_menu'] = "listmembers";
 			$data['members'] = $this->member->get_filtered_sorted('created', 'DESC', $config['per_page'], $page);
+			$this->session->set_flashdata('search_key', $this->input->post('name'));
 			$this->load->view('admin_templates/admin_header', $data);
 			$this->load->view('admin_list_members');
 			$this->load->view('admin_templates/footer');

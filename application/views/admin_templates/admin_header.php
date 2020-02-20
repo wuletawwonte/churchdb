@@ -274,7 +274,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </li>
 
         <li <?php if($active_menu == 'report') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-file-pdf-o"></i> <span><?= lang('data_report'); ?></span></a></li>
-        <li <?php if($active_menu == 'wesite') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-globe"></i> <span><?= lang('website'); ?></span></a></li>
         <li <?php if($active_menu == 'generalsetting' || $active_menu == 'users') { ?> class="active" <?php } ?> class="treeview">
           <a href="#"><i class="fa fa-cog"></i> <span><?= lang('setting'); ?></span>
             <span class="pull-right-container">

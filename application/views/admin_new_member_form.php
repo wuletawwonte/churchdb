@@ -1,7 +1,6 @@
 
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.date.extensions.js'); ?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.phone.extensions.js'); ?>"></script>
 <script src="<?= base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/iCheck/square/blue.css">
 
@@ -122,7 +121,7 @@
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-earphone"></i>
 								</div>
-								<input type="text" name="mobile_phone" class="form-control inputmasked" data-inputmask='"mask": "(9999) 99-9999"' data-mask>
+								<input type="text" name="mobile_phone" class="form-control" placeholder="09..">
 							</div>
 						</div>
 
@@ -141,14 +140,9 @@
 	                    <div class="col-md-4">
 	                        <label> የሥራ አይነት  :</label>
 	                        <select name="job_type" class="form-control s2">
-	                            <option value="የመንግስት ስራ"> የመንግስት ሥራ </option>
-	                            <option value="ነጋዴ"> ነጋዴ </option>
-	                            <option value="መንግስታዊ ያልሆነ ድርጅት"> መንግስታዊ ያልሆነ ድርጅት </option>
-	                            <option value="የግል ሥራ"> የግል ሥራ </option>
-	                            <option value="የቤት እመቤት"> የቤት እመቤት </option>
-	                            <option value="ተማሪ"> ተማሪ </option>
-	                            <option value="የጉልበት ሰራተኛ"> የጉልበት ሠራተኛ </option>
-	                            <option value="ሥራ የሌለው"> ሥራ የሌለው </option>
+	                        	<?php foreach($job_types as $job_type) { ?>
+		                            <option value="<?= $job_type['job_type_id'] ?>"> <?= $job_type['job_type']; ?> </option>
+		                        <?php } ?>
 	                        </select>
 	                    </div>
 
@@ -192,20 +186,19 @@
 
 	                    <div class="col-md-4">
 	                        <label> አባል የሆኑበት ሁኔታ :</label>
-	                        <select name="cause_of_membership" class="form-control s2">
-	                        	<option value="በጥምቀት"> በጥምቀት </option>
-	                            <option value="በእምነት ማጽኛ ትምህርት"> በእምነት ማጽኛ ትምህርት </option>
-	                            <option value="ከሌላ መ/ኢ/ማ/ም በዝውውር"> ከሌላ መ/ኢ/ማ/ም በዝውውር </option>
-	                            <option value="ከሌላ ወ/አ/ክርስቲያናት በመምጣት"> ከሌላ ወ/አ/ክርስቲያናት በመምጣት </option>
+	                        <select name="membership_cause" class="form-control s2">
+	                        	<?php foreach($membership_causes as $membership_cause) { ?>
+		                        	<option value="<?= $membership_cause['membership_cause_id']; ?>"> <?= $membership_cause['membership_cause']; ?> </option>
+		                        <?php } ?>
 	                        </select>
 	                    </div>
 
 	                    <div class="col-md-4">
 	                        <label> የአባልነት ደረጃ :</label>
-	                        <select name="level_of_membership" class="form-control s2">
-	                        	<option value="ቆራቢ አባል"> ቆራቢ አባል </option>
-	                        	<option value="የድነት ትምህርት ተማሪ"> የድነት ትምህርት ተማሪ </option>
-	                            <option value="የእምነት ማጽኛ ተማሪ"> የእምነት ማጽኛ ተማሪ </option>
+	                        <select name="membership_level" class="form-control s2">
+	                        	<?php foreach($membership_levels as $membership_level) { ?>
+		                        	<option value="<?= $membership_level['membership_level_id']; ?>"> <?= $membership_level['membership_level']; ?> </option>
+		                        <?php } ?>
 	                        </select>
 	                    </div>
 					</div>
@@ -233,9 +226,6 @@
 		    <div class="box box-info clearfix">
 		        <div class="box-header">
 		            <h3 class="box-title"> የቤተሰብ መረጃ </h3>
-		            <div class="pull-right"><br/>
-		                <button class="btn btn-primary" name="PersonSubmit"><?= lang('continue') ?></button>
-		            </div>
 		        </div><!-- /.box-header -->
 		        <div class="box-body">
 		            <div class="form-group col-md-6">
@@ -252,12 +242,11 @@
 
 		            <div class="form-group col-md-6">
 		                <label> <?= lang('family') ?>:</label>
-		                <select name="family" size="8" class="form-control">
+		                <select name="family" class="form-control" id="spouse">
 		                    <option value="አልተመረጠም" selected>አልተመረጠም</option>
-		                    <option value="0"> <?= lang('create_new_family_by_name') ?>  </option>
 		                    <option disabled>-----------------------</option>
-		                    <?php foreach($families as $family) { ?>
-		                    <option value="<?= $family['id']; ?>"><?= $family['name']; ?></option>
+		                    <?php foreach($members as $member) { ?>
+		                    <option value="<?= $member['id']; ?>"><?= $member['firstname'].' '.$member['lastname']; ?></option>
 		                    <?php } ?>
 		                </select>
 		            </div>
@@ -290,9 +279,9 @@
 	    else $(className).hide();
 	}
 
-
-
 	$(".inputmasked").inputmask(); 
+
+	$("#spouse").select2();
 
     $(function () {
         $('input').iCheck({

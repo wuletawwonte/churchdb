@@ -1,19 +1,20 @@
 <style type="text/css">
 
 .profile-image {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  border: 3px solid #d2d6de;
-  font-size: 30px;
+  border: 2px solid #d2d6de;
+  font-size: 20px;
+  /*font-weight: bold;*/
   color: #fff;
   text-align: center;
-  line-height: 80px;
+  line-height: 60px;
   margin: 0 0; 
 }
 
 table tbody td a, table tbody td span {
-    line-height: 80px;
+    line-height: 60px;
 }
 
 </style>
@@ -57,15 +58,8 @@ table tbody td a, table tbody td span {
       <p align="center">
         <table align="center"><tr><td>
           <div class="row">
-            <div class="col-xs-4" align="right" style="padding-right: 0px;">
-              Sort order:
-              <select name="sort" onchange="this.form.submit()" class="s2">
-                <option value="name" selected>By Name</option>
-                <option value="family" >By Family</option>
-              </select>&nbsp;
-            </div>
-            <div class="col-xs-4" style="padding-left: 0px;padding-right: 5px;">
-              <input type="text" placeholder="Search.." name="name" class="form-control" style="border-radius: 5px">
+            <div class="col-xs-4 col-xs-offset-3" align="right" style="padding-left: 0px;padding-right: 5px;">
+              <input type="text" placeholder="Search.." name="name" class="form-control" style="border-radius: 3px" value="<?= $this->session->flashdata('search_key'); ?>">
             </div>
             <div class="col-xs-4" style="padding-left: 0px;">
               <input type="submit" name="submit" class="btn btn-primary" value="Apply Filter">
@@ -113,10 +107,10 @@ table tbody td a, table tbody td span {
 
 
 
-            <table class="table table-responsive" id="user-listing-table" style="width:100%;">
+            <table class="table table-responsive table-hover" id="user-listing-table" style="width:100%;">
                 <thead>
                 <tr>
-                    <th width="120"></th>
+                    <th width="80"></th>
                     <th><?= lang('name') ?></th>
                     <th><?= lang('birth_date') ?></th>
                     <th><?= lang('mobile_phone') ?></th>
@@ -152,7 +146,7 @@ table tbody td a, table tbody td span {
 
                 </tbody>
             </table>
-            <div style="text-align: center;"><p><?= $links; ?></p></div>
+            <div style="text-align: end;"><p><?= $links; ?></p></div>
 
         </div>
         <!-- /.box-body -->
