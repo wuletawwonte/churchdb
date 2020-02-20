@@ -20,7 +20,7 @@ class Admin extends CI_Controller {
 
 		$this->session->set_userdata('last_visited', time());
 
-		$this->load->model(array('user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level'));
+		$this->load->model(array('user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
 		$this->load->helper('text');
 
 		$this->lang->load('label_lang', $this->session->userdata('language'));
@@ -143,6 +143,7 @@ class Admin extends CI_Controller {
 		$data['job_types'] = $this->job_type->get_all();
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
+		$data['ministries'] = $this->ministry->get_all();
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_new_member_form', $data);
 		$this->load->view('admin_templates/footer');

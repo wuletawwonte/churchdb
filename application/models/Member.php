@@ -26,8 +26,8 @@ class Member extends CI_Model {
 			'birth_place' => $this->input->post('birth_place'), 
 			'membership_year' => $this->input->post('membership_year'), 
 			'membership_cause' => $this->input->post('membership_cause'), 
-			'level_of_membership' => $this->input->post('level_of_membership'), 
-			'serving_as' => $this->input->post('serving_as'), 
+			'membership_level' => $this->input->post('membership_level'), 
+			'ministry' => $this->input->post('ministry'), 
 			'family_role' => $this->input->post('family_role'), 
 			'family_id' => $this->input->post('family'),
 			'profile_color' => $colors[array_rand($colors, 1)] 
@@ -62,8 +62,8 @@ class Member extends CI_Model {
 			'birth_place' => $this->input->post('birth_place'), 
 			'membership_year' => $this->input->post('membership_year'), 
 			'membership_cause' => $this->input->post('membership_cause'), 
-			'level_of_membership' => $this->input->post('level_of_membership'), 
-			'serving_as' => $this->input->post('serving_as'), 
+			'membership_level' => $this->input->post('membership_level'), 
+			'ministry' => $this->input->post('ministry'), 
 			'family_role' => $this->input->post('family_role'), 
 			'family_id' => $this->input->post('family') 
 			);

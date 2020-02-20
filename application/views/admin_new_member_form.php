@@ -205,14 +205,12 @@
 					<p/>
 					<div class="row">
 					<p/>
-	                    <div class="col-md-4 serving_as">
+	                    <div class="col-md-4 ministries">
 	                        <label> የአገልግሎት ዘርፍ :</label>
-	                        <select name="serving_as" class="form-control s2">
-	                        	<option value="አያገለግሉም">አያገለግሉም</option>
-	                        	<option value="አስተናጋጅ">አስተናጋጅ</option>
-	                            <option value="ኳየር">ኳየር</option>
-	                            <option value="አስተዳደር">አስተዳደር</option>
-	                            <option value="ወንጌላዊ">ወንጌላዊ</option>
+	                        <select name="ministries" class="form-control s2">
+	                        	<?php foreach($ministries as $ministry) { ?>
+		                        	<option value="<?= $ministry['ministry_id']; ?>"> <?= $ministry['ministry']; ?> </option>
+		                        <?php } ?>
 	                        </select>
 	                    </div>
 
