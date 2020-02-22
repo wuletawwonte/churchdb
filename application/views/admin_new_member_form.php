@@ -207,7 +207,7 @@
 					<p/>
 	                    <div class="col-md-4 ministries">
 	                        <label> የአገልግሎት ዘርፍ :</label>
-	                        <select name="ministries" class="form-control s2">
+	                        <select name="ministry" class="form-control s2">
 	                        	<?php foreach($ministries as $ministry) { ?>
 		                        	<option value="<?= $ministry['ministry_id']; ?>"> <?= $ministry['ministry']; ?> </option>
 		                        <?php } ?>

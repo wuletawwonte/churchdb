@@ -15,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2.min.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2-bootstrap.min.css') ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/skins/'.$this->session->userdata('skin').'.min.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/skins/skin-blue-light.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
 
   <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>">
@@ -46,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </head>
 
-<body class="hold-transition <?php echo $this->session->userdata('skin'); ?> sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-mini">
 <div class="se-pre-con"></div>
 <div class="wrapper">
 

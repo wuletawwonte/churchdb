@@ -23,7 +23,7 @@ class Admin extends CI_Controller {
 		$this->load->model(array('user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
 		$this->load->helper('text');
 
-		$this->lang->load('label_lang', $this->session->userdata('language'));
+		$this->lang->load('label_lang', 'amharic');
 	}
 
 
@@ -67,8 +67,6 @@ class Admin extends CI_Controller {
 		$data['system_name'] = $this->cnfg->get('system_name');
 		$data['system_name_short'] = $this->cnfg->get('system_name_short');
 		$data['default_password'] = $this->cnfg->get('default_password');
-		$data['skin'] = $this->user->get_my('skin');
-		$data['language'] = $this->user->get_my('language');
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('generalsetting');
 		$this->load->view('admin_templates/footer');
@@ -116,8 +114,6 @@ class Admin extends CI_Controller {
 		
 		$this->cnfg->edit_one('system_name', $this->input->post('system_name'));
 		$this->cnfg->edit_one('system_name_short', $this->input->post('system_name_short'));
-		$this->user->edit_one('skin', $this->input->post('skin'));
-		$this->user->edit_one('language', $this->input->post('language'));
 
 		redirect('admin/generalsetting');
 
@@ -170,12 +166,13 @@ class Admin extends CI_Controller {
 				'first_tagl_close' => "</li>",
 				'last_tag_open' => "<li>",
 				'last_tagl_close' => "</li>"
-
 			);
+		$data['job_types'] = $this->job_type->get_all();
+		$data['membership_causes'] = $this->membership_cause->get_all();
+		$data['membership_levels'] = $this->membership_level->get_all();
+		$data['ministries'] = $this->ministry->get_all();
 
 		if(isset($_POST['submit'])) {
-
-			$config['total_rows'] = $this->member->filtered_members_count();
 
 			$this->pagination->initialize($config);
 
@@ -183,14 +180,19 @@ class Admin extends CI_Controller {
 
 			$data['links'] = $this->pagination->create_links();
 			$data['active_menu'] = "listmembers";
+			$filtermember = array(
+				'search_key' => $this->input->post('search_key'),
+				'gender' => $this->input->post('gender') 
+			);
+			$this->session->set_userdata('filtermember', $filtermember);
+			$config['total_rows'] = $this->member->filtered_members_count();
 			$data['members'] = $this->member->get_filtered_sorted('created', 'DESC', $config['per_page'], $page);
-			$this->session->set_flashdata('search_key', $this->input->post('name'));
 			$this->load->view('admin_templates/admin_header', $data);
 			$this->load->view('admin_list_members');
 			$this->load->view('admin_templates/footer');
 
 		} else {
-			$config['total_rows'] = $this->member->record_count();
+			$config['total_rows'] = $this->member->filtered_members_count();
 
 			$this->pagination->initialize($config);
 
@@ -203,6 +205,15 @@ class Admin extends CI_Controller {
 			$this->load->view('admin_list_members');
 			$this->load->view('admin_templates/footer');
 		}
+	}
+
+	public function clearfilter () {
+			$filtermember = array(
+				'search_key' => NULL,
+				'gender' => NULL
+			);
+			$this->session->set_userdata('filtermember', $filtermember);		
+			redirect('admin/listmembers'); 
 	}
 
 	public function savemember() {

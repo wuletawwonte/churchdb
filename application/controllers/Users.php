@@ -32,14 +32,17 @@ class Users extends CI_Controller {
 
 		if($this->form_validation->run()){
 			$userdata = $this->user->get_user('username', $this->input->post('username'));
+			$filtermember = array(
+				'search_key' => NULL, 
+				'gender' => NULL
+			);
 			$data = array(
 				'name' => $userdata['firstname'].' '.$userdata['lastname'],
 				'username' => $this->input->post('username'),
 				'is_logged_in' => TRUE,
 				'user_type' => $userdata['user_type'],
-				'skin' => $userdata['skin'],
-				'language' => $userdata['language'],
-				'last_visited' => time()
+				'last_visited' => time(),
+				'filtermember' => $filtermember
 				);
 
 			$this->session->set_userdata($data);

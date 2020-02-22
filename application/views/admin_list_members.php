@@ -59,7 +59,7 @@ table tbody td a, table tbody td span {
         <table align="center"><tr><td>
           <div class="row">
             <div class="col-xs-4 col-xs-offset-3" align="right" style="padding-left: 0px;padding-right: 5px;">
-              <input type="text" placeholder="Search.." name="name" class="form-control" style="border-radius: 3px" value="<?= $this->session->flashdata('search_key'); ?>">
+              <input type="text" placeholder="Search.." name="search_key" class="form-control" style="border-radius: 3px" value="<?= $_SESSION['filtermember']['search_key']; ?>">
             </div>
             <div class="col-xs-4" style="padding-left: 0px;">
               <input type="submit" name="submit" class="btn btn-primary" value="Apply Filter">
@@ -68,34 +68,29 @@ table tbody td a, table tbody td span {
         </td></tr>
         <tr><td align="center" style="padding-top: 3px">
           <select name="gender" form="PersonList" class="s2">
-            <option value="" > ወንድ እና ሴት </option>
-            <option value="ወንድ"> ወንድ </option>
-            <option value="ሴት"> ሴት</option>
+            <option value="" <?php if($_SESSION['filtermember']['gender'] == '') echo 'selected'; ?>> ወንድ እና ሴት </option>
+            <option value="ወንድ" <?php if($_SESSION['filtermember']['gender'] == 'ወንድ') echo 'selected'; ?>> ወንድ </option>
+            <option value="ሴት" <?php if($_SESSION['filtermember']['gender'] == 'ሴት') echo 'selected'; ?>> ሴት </option>
           </select>  
           <select name="Classification" class="s2">
-            <option value="" >All Classifications</option>
-            <option value="0">Unassigned</option>
-            <option value="1">Member</option>
-            <option value="2">Regular Attender</option>
-            <option value="3">Guest</option>
-            <option value="5">Non-Attender</option>
+            <option value=""> የሥራ አይነት </option>
+                            <?php foreach($job_types as $job_type) { ?>
+                                <option value="<?= $job_type['job_type_id'] ?>"> <?= $job_type['job_type']; ?> </option>
+                            <?php } ?>
           </select>
           <select name="PersonProperties" class="s2">
-            <option value=""  selected >All Contact Properties</option>
-            <option value="0">Unassigned</option>
-            <option value="1">Disabled</option>
-            <option value="-10000">! Unassigned</option>
-            <option value="-9999">! Disabled</option>
+            <option value=""  selected >የአባልነት ደረጃ</option>
+                            <?php foreach($membership_levels as $membership_level) { ?>
+                              <option value="<?= $membership_level['membership_level_id']; ?>"> <?= $membership_level['membership_level']; ?> </option>
+                            <?php } ?>
           </select>
           <select name="grouptype" class="s2">
-            <option value="" >All Group Types</option>
-            <option value="1">Ministry</option>
-            <option value="2">Team</option>
-            <option value="3">Bible Study</option>
-            <option value="4">Sunday School Class</option>
-            <option value="5">Scouts</option>
+            <option>የአገልግሎት ዘርፍ</option>
+                            <?php foreach($ministries as $ministry) { ?>
+                              <option value="<?= $ministry['ministry_id']; ?>"> <?= $ministry['ministry']; ?> </option>
+                            <?php } ?>
           </select>
-            <input type="button" class="btn btn-warning" value="Clear Filters" onclick=""><BR><BR>
+            <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning">Clear Filters</a><BR><BR>
           </td></tr>
         </table></form>
 
