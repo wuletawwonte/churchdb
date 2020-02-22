@@ -174,18 +174,20 @@ class Admin extends CI_Controller {
 
 		if(isset($_POST['submit'])) {
 
-			$this->pagination->initialize($config);
-
-			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-			$data['links'] = $this->pagination->create_links();
-			$data['active_menu'] = "listmembers";
 			$filtermember = array(
 				'search_key' => $this->input->post('search_key'),
-				'gender' => $this->input->post('gender') 
+				'gender' => $this->input->post('gender'),
+				'job_type' => $this->input->post('job_type'), 
+				'membership_level' => $this->input->post('membership_level'),
+				'ministry' => $this->input->post('ministry')
 			);
 			$this->session->set_userdata('filtermember', $filtermember);
+
 			$config['total_rows'] = $this->member->filtered_members_count();
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+			$data['links'] = $this->pagination->create_links();
+			$data['active_menu'] = "listmembers";
 			$data['members'] = $this->member->get_filtered_sorted('created', 'DESC', $config['per_page'], $page);
 			$this->load->view('admin_templates/admin_header', $data);
 			$this->load->view('admin_list_members');
@@ -210,7 +212,10 @@ class Admin extends CI_Controller {
 	public function clearfilter () {
 			$filtermember = array(
 				'search_key' => NULL,
-				'gender' => NULL
+				'gender' => NULL,
+				'job_type' => NULL,
+				'membership_level' => NULL,
+				'ministry' => NULL
 			);
 			$this->session->set_userdata('filtermember', $filtermember);		
 			redirect('admin/listmembers'); 

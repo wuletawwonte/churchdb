@@ -96,6 +96,15 @@ class Member extends CI_Model {
 	    if($_SESSION['filtermember']['gender'] != NULL) {
 	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
 	    }
+	    if($_SESSION['filtermember']['job_type'] != NULL) {
+	    	$this->db->where('job_type', $_SESSION['filtermember']['job_type']);
+	    }
+	    if($_SESSION['filtermember']['membership_level'] != NULL) {
+	    	$this->db->where('membership_level', $_SESSION['filtermember']['membership_level']);
+	    }
+	    if($_SESSION['filtermember']['ministry'] != NULL) {
+	    	$this->db->where('ministry', $_SESSION['filtermember']['ministry']);
+	    }
 		$this->db->order_by($attrib, $order);
 		$data = $this->db->get('members');
 		return $data->result_array();			
@@ -128,6 +137,15 @@ class Member extends CI_Model {
 	    if($_SESSION['filtermember']['gender'] != NULL) {
 	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
 	    }
+	    if($_SESSION['filtermember']['job_type'] != NULL) {
+	    	$this->db->where('job_type', $_SESSION['filtermember']['job_type']);
+	    }
+	    if($_SESSION['filtermember']['membership_level'] != NULL) {
+	    	$this->db->where('membership_level', $_SESSION['filtermember']['membership_level']);
+	    }
+	    if($_SESSION['filtermember']['ministry'] != NULL) {
+	    	$this->db->where('ministry', $_SESSION['filtermember']['ministry']);
+	    }
 		$this->db->from('members');
 		return $this->db->count_all_results();
 	}
@@ -141,6 +159,15 @@ class Member extends CI_Model {
 	        ->group_end();
 	    if($_SESSION['filtermember']['gender'] != NULL) {
 	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
+	    }
+	    if($_SESSION['filtermember']['job_type'] != NULL) {
+	    	$this->db->where('job_type', $_SESSION['filtermember']['job_type']);
+	    }
+	    if($_SESSION['filtermember']['membership_level'] != NULL) {
+	    	$this->db->where('membership_level', $_SESSION['filtermember']['membership_level']);
+	    }
+	    if($_SESSION['filtermember']['ministry'] != NULL) {
+	    	$this->db->where('ministry', $_SESSION['filtermember']['ministry']);
 	    }
 		$this->db->order_by($attrib, $order);
 		$data = $this->db->get('members');

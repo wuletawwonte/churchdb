@@ -72,22 +72,28 @@ table tbody td a, table tbody td span {
             <option value="ወንድ" <?php if($_SESSION['filtermember']['gender'] == 'ወንድ') echo 'selected'; ?>> ወንድ </option>
             <option value="ሴት" <?php if($_SESSION['filtermember']['gender'] == 'ሴት') echo 'selected'; ?>> ሴት </option>
           </select>  
-          <select name="Classification" class="s2">
-            <option value=""> የሥራ አይነት </option>
+          <select name="job_type" class="s2">
+            <option value="" <?php if($_SESSION['filtermember']['job_type'] == '') echo 'selected'; ?>> የሥራ አይነት </option>
                             <?php foreach($job_types as $job_type) { ?>
-                                <option value="<?= $job_type['job_type_id'] ?>"> <?= $job_type['job_type']; ?> </option>
+                                <option value="<?= $job_type['job_type_id'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
+                                  <?= $job_type['job_type']; ?> 
+                                </option>
                             <?php } ?>
           </select>
-          <select name="PersonProperties" class="s2">
-            <option value=""  selected >የአባልነት ደረጃ</option>
+          <select name="membership_level" class="s2">
+            <option value="" <?php if($_SESSION['filtermember']['membership_level'] == NULL) echo 'selected'; ?>>የአባልነት ደረጃ</option>
                             <?php foreach($membership_levels as $membership_level) { ?>
-                              <option value="<?= $membership_level['membership_level_id']; ?>"> <?= $membership_level['membership_level']; ?> </option>
+                              <option value="<?= $membership_level['membership_level_id']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $membership_level['membership_level_id']) echo 'selected'; ?>> 
+                                <?= $membership_level['membership_level']; ?> 
+                              </option>
                             <?php } ?>
           </select>
-          <select name="grouptype" class="s2">
-            <option>የአገልግሎት ዘርፍ</option>
+          <select name="ministry" class="s2">
+            <option value="" <?php if($_SESSION['filtermember']['ministry'] == NULL) echo 'selected'; ?>>የአገልግሎት ዘርፍ</option>
                             <?php foreach($ministries as $ministry) { ?>
-                              <option value="<?= $ministry['ministry_id']; ?>"> <?= $ministry['ministry']; ?> </option>
+                              <option value="<?= $ministry['ministry_id']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
+                                <?= $ministry['ministry']; ?> 
+                              </option>
                             <?php } ?>
           </select>
             <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning">Clear Filters</a><BR><BR>
