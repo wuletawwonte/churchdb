@@ -41,34 +41,6 @@
 		                    </tr>
 
 		                    <tr>
-		                        <td>Skin Color:</td>
-		                    	<td><select name="skin" size="7" class="form-control">
-					                    <option <?php if($skin == 'skin-blue') { echo 'selected'; } ?> value="skin-blue">skin-blue</option>
-					                    <option <?php if($skin == 'skin-black') { echo 'selected'; } ?> value="skin-black">skin-black</option>
-					                    <option <?php if($skin == 'skin-purple') { echo 'selected'; } ?> value="skin-purple">skin-purple&nbsp;
-					                    <option <?php if($skin == 'skin-yellow') { echo 'selected'; } ?> value="skin-yellow">skin-yellow&nbsp;
-					                    <option <?php if($skin == 'skin-red') { echo 'selected'; } ?> value="skin-red">skin-red&nbsp;
-					                    <option <?php if($skin == 'skin-green') { echo 'selected'; } ?> value="skin-green">skin-green&nbsp;
-					                    <option <?php if($skin == 'skin-blue-light') { echo 'selected'; } ?> value="skin-blue-light">skin-blue-light</option>
-					                    <option <?php if($skin == 'skin-black-light') { echo 'selected'; } ?> value="skin-black-light">skin-black-light</option>
-					                    <option <?php if($skin == 'skin-purple-light') { echo 'selected'; } ?> value="skin-purple-light">skin-purple-light&nbsp;
-					                    <option <?php if($skin == 'skin-yellow-light') { echo 'selected'; } ?> value="skin-yellow-light">skin-yellow-light&nbsp;
-					                    <option <?php if($skin == 'skin-red-light') { echo 'selected'; } ?> value="skin-red-light">skin-red-light&nbsp;
-					                    <option <?php if($skin == 'skin-green-light') { echo 'selected'; } ?> value="skin-green-light">skin-green-light&nbsp;
-					                </select>
-					            </td>
-		                    </tr>
-
-		                    <tr>
-		                        <td>Language:</td>
-		                    	<td><select name="language" size="3" class="form-control">
-					                    <option <?php if($language == 'english') { echo 'selected'; } ?> value="english">english</option>
-					                    <option <?php if($language == 'amharic') { echo 'selected'; } ?> value="amharic">amharic</option>
-					                </select>
-					            </td>
-		                    </tr>
-
-		                    <tr>
 		                        <td>Default Password:</td>
 		                        <td><input type="password" name="default_password" value="<?php echo $default_password; ?>" class="form-control" width="32"></td>
 		                    </tr>

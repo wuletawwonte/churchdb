@@ -66,7 +66,7 @@ table tbody td a, table tbody td span {
             </div>
           </div>
         </td></tr>
-        <tr><td align="center" style="padding-top: 3px">
+        <tr><td align="center" style="padding-top: 3px;">
           <select name="gender" form="PersonList" class="s2">
             <option value="" <?php if($_SESSION['filtermember']['gender'] == '') echo 'selected'; ?>> ወንድ እና ሴት </option>
             <option value="ወንድ" <?php if($_SESSION['filtermember']['gender'] == 'ወንድ') echo 'selected'; ?>> ወንድ </option>
@@ -74,39 +74,62 @@ table tbody td a, table tbody td span {
           </select>  
           <select name="job_type" class="s2">
             <option value="" <?php if($_SESSION['filtermember']['job_type'] == '') echo 'selected'; ?>> የሥራ አይነት </option>
-                            <?php foreach($job_types as $job_type) { ?>
-                                <option value="<?= $job_type['job_type_id'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
-                                  <?= $job_type['job_type']; ?> 
-                                </option>
-                            <?php } ?>
+                    <?php foreach($job_types as $job_type) { ?>
+                        <option value="<?= $job_type['job_type_id'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
+                          <?= $job_type['job_type']; ?> 
+                        </option>
+                    <?php } ?>
+          </select>
+          <select name="marital_status" class="s2">
+            <option value="" <?php if($_SESSION['filtermember']['marital_status'] == '') echo 'selected'; ?>> የጋብቻ ሁኔታ </option>
+                    <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['marital_status'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
+                    <option value="0" disabled>-----------------------</option>
+                    <option value="ያላገባ/ች" <?php if($_SESSION['filtermember']['marital_status'] == 'ያላገባ/ች') echo 'selected'; ?> > ያላገባ/ች </option>
+                    <option value="ያገባ/ች" <?php if($_SESSION['filtermember']['marital_status'] == 'ያገባ/ች') echo 'selected'; ?> >ያገባ/ች</option>                        
+                    <option value="የፈታ/ች" <?php if($_SESSION['filtermember']['marital_status'] == 'የፈታ/ች') echo 'selected'; ?> > የፈታ/ች</option>
+
           </select>
           <select name="membership_level" class="s2">
             <option value="" <?php if($_SESSION['filtermember']['membership_level'] == NULL) echo 'selected'; ?>>የአባልነት ደረጃ</option>
-                            <?php foreach($membership_levels as $membership_level) { ?>
-                              <option value="<?= $membership_level['membership_level_id']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $membership_level['membership_level_id']) echo 'selected'; ?>> 
-                                <?= $membership_level['membership_level']; ?> 
-                              </option>
-                            <?php } ?>
+                    <?php foreach($membership_levels as $membership_level) { ?>
+                      <option value="<?= $membership_level['membership_level_id']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $membership_level['membership_level_id']) echo 'selected'; ?>> 
+                        <?= $membership_level['membership_level_title']; ?> 
+                      </option>
+                    <?php } ?>
           </select>
           <select name="ministry" class="s2">
             <option value="" <?php if($_SESSION['filtermember']['ministry'] == NULL) echo 'selected'; ?>>የአገልግሎት ዘርፍ</option>
-                            <?php foreach($ministries as $ministry) { ?>
-                              <option value="<?= $ministry['ministry_id']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
-                                <?= $ministry['ministry']; ?> 
-                              </option>
-                            <?php } ?>
+                    <?php foreach($ministries as $ministry) { ?>
+                      <option value="<?= $ministry['ministry_id']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
+                        <?= $ministry['ministry']; ?> 
+                      </option>
+                    <?php } ?>
           </select>
             <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning">Clear Filters</a><BR><BR>
           </td></tr>
         </table></form>
+      <p/>
 
 
 
 
 
-            <p/>
+            <div class="row" style="margin-top: -15px;">
+                <div class="col-sm-12">
+
+                    <div class="btns" align="right">
+                        <span style="font-size: 15px;">Export:</span>           
+                        <button class="btn" tabindex="0" aria-controls="families" type="button"><i class="fa fa-file-excel-o"></i> Excel</button> 
+                        <button class="btn" tabindex="0" aria-controls="families" type="button"><i class="fa fa-file-o"></i> CSV</button> 
+                        <button class="btn" tabindex="0" aria-controls="families" type="button"><i class="fa fa-file-pdf-o"></i> PDF</button> 
+                        <button class="btn" tabindex="0" aria-controls="families" type="button"><i class="fa fa-print"></i> Print</button> 
+                    </div>
+                </div>
+            </div>
 
 
+
+            <hr style="margin-top: 5px;margin-bottom: 0px;">
 
             <table class="table table-responsive table-hover" id="user-listing-table" style="width:100%;">
                 <thead>
@@ -114,6 +137,7 @@ table tbody td a, table tbody td span {
                     <th width="80"></th>
                     <th><?= lang('name') ?></th>
                     <th><?= lang('birth_date') ?></th>
+                    <th>የአባልነት ደረጃ</th>
                     <th><?= lang('mobile_phone') ?></th>
                     <th>Created</th>
                     <th>Actions</th>
@@ -133,6 +157,7 @@ table tbody td a, table tbody td span {
                         </td>
 
                         <td><span><?= $member['birthdate']?></span></td>
+                        <td><span><?= $member['membership_level_title']?></span></td>
                         <td><span><?= $member['mobile_phone']?></span></td>
                         <td><span><?= $member['created']?></span></td>
                         <td>

@@ -179,7 +179,8 @@ class Admin extends CI_Controller {
 				'gender' => $this->input->post('gender'),
 				'job_type' => $this->input->post('job_type'), 
 				'membership_level' => $this->input->post('membership_level'),
-				'ministry' => $this->input->post('ministry')
+				'ministry' => $this->input->post('ministry'),
+				'marital_status' => $this->input->post('marital_status')
 			);
 			$this->session->set_userdata('filtermember', $filtermember);
 
@@ -202,7 +203,7 @@ class Admin extends CI_Controller {
 
 			$data['links'] = $this->pagination->create_links();
 			$data['active_menu'] = "listmembers";
-			$data['members'] = $this->member->get_all_sorted('created', 'DESC', $config['per_page'], $page);
+			$data['members'] = $this->member->get_filtered_sorted('created', 'DESC', $config['per_page'], $page);
 			$this->load->view('admin_templates/admin_header', $data);
 			$this->load->view('admin_list_members');
 			$this->load->view('admin_templates/footer');
@@ -215,7 +216,8 @@ class Admin extends CI_Controller {
 				'gender' => NULL,
 				'job_type' => NULL,
 				'membership_level' => NULL,
-				'ministry' => NULL
+				'ministry' => NULL,
+				'marital_status' => NULL
 			);
 			$this->session->set_userdata('filtermember', $filtermember);		
 			redirect('admin/listmembers'); 

@@ -28,8 +28,8 @@ class Member extends CI_Model {
 			'membership_cause' => $this->input->post('membership_cause'), 
 			'membership_level' => $this->input->post('membership_level'), 
 			'ministry' => $this->input->post('ministry'), 
-			'family_role' => $this->input->post('family_role'), 
-			'family_id' => $this->input->post('family'),
+			'marital_status' => $this->input->post('marital_status'), 
+			'spouse' => $this->input->post('spouse'),
 			'profile_color' => $colors[array_rand($colors, 1)] 
 			);
 
@@ -64,8 +64,8 @@ class Member extends CI_Model {
 			'membership_cause' => $this->input->post('membership_cause'), 
 			'membership_level' => $this->input->post('membership_level'), 
 			'ministry' => $this->input->post('ministry'), 
-			'family_role' => $this->input->post('family_role'), 
-			'family_id' => $this->input->post('family') 
+			'marital_status' => $this->input->post('marital_status'), 
+			'spouse' => $this->input->post('spouse') 
 			);
 
 		$this->db->where('id', $id);
@@ -84,30 +84,6 @@ class Member extends CI_Model {
 		$data = $this->db->get('members');
 
 		return $data->result_array(); 
-	}
-
-	public function get_all_sorted($attrib, $order, $limit = NULL, $start = NULL) {
-        $this->db->limit($limit, $start);
-        $this->db
-        	->group_start()
-	        	->like('firstname', $_SESSION['filtermember']['search_key'])
-	        	->or_like('middlename', $_SESSION['filtermember']['search_key'])
-	        ->group_end();
-	    if($_SESSION['filtermember']['gender'] != NULL) {
-	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
-	    }
-	    if($_SESSION['filtermember']['job_type'] != NULL) {
-	    	$this->db->where('job_type', $_SESSION['filtermember']['job_type']);
-	    }
-	    if($_SESSION['filtermember']['membership_level'] != NULL) {
-	    	$this->db->where('membership_level', $_SESSION['filtermember']['membership_level']);
-	    }
-	    if($_SESSION['filtermember']['ministry'] != NULL) {
-	    	$this->db->where('ministry', $_SESSION['filtermember']['ministry']);
-	    }
-		$this->db->order_by($attrib, $order);
-		$data = $this->db->get('members');
-		return $data->result_array();			
 	}
 
 	public function latest_members(){
@@ -146,6 +122,9 @@ class Member extends CI_Model {
 	    if($_SESSION['filtermember']['ministry'] != NULL) {
 	    	$this->db->where('ministry', $_SESSION['filtermember']['ministry']);
 	    }
+	    if($_SESSION['filtermember']['marital_status'] != NULL) {
+	    	$this->db->where('marital_status', $_SESSION['filtermember']['marital_status']);
+	    }
 		$this->db->from('members');
 		return $this->db->count_all_results();
 	}
@@ -169,8 +148,13 @@ class Member extends CI_Model {
 	    if($_SESSION['filtermember']['ministry'] != NULL) {
 	    	$this->db->where('ministry', $_SESSION['filtermember']['ministry']);
 	    }
+	    if($_SESSION['filtermember']['marital_status'] != NULL) {
+	    	$this->db->where('marital_status', $_SESSION['filtermember']['marital_status']);
+	    }
 		$this->db->order_by($attrib, $order);
-		$data = $this->db->get('members');
+		$this->db->from('members');
+		$this->db->join('membership_levels', 'members.membership_level = membership_levels.membership_level_id');
+		$data = $this->db->get();
 		return $data->result_array();			
 	}
 

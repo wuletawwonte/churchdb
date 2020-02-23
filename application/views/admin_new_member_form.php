@@ -197,7 +197,7 @@
 	                        <label> የአባልነት ደረጃ :</label>
 	                        <select name="membership_level" class="form-control s2">
 	                        	<?php foreach($membership_levels as $membership_level) { ?>
-		                        	<option value="<?= $membership_level['membership_level_id']; ?>"> <?= $membership_level['membership_level']; ?> </option>
+		                        	<option value="<?= $membership_level['membership_level_id']; ?>"> <?= $membership_level['membership_level_title']; ?> </option>
 		                        <?php } ?>
 	                        </select>
 	                    </div>
@@ -227,20 +227,19 @@
 		        </div><!-- /.box-header -->
 		        <div class="box-body">
 		            <div class="form-group col-md-6">
-		                <label> <?= lang('family_role') ?> :</label>
-		                <select name="family_role" class="form-control s2">
+		                <label> የጋብቻ ሁኔታ :</label>
+		                <select name="marital_status" class="form-control s2" id="maritalStatus">
 		                    <option value="አልተመረጠም">አልተመረጠም</option>
 		                    <option value="0" disabled>-----------------------</option>
-		                    <option value="ባል">ባል</option>
-		                    <option value="ሚስት">ሚስት</option>
-		                    <option value="ወንድ ልጅ">ወንድ ልጅ</option>
-		                    <option value="ሴት ልጅ">ሴት ልጅ</option>
+		                    <option value="ያላገባ/ች">ያላገባ/ች</option>
+		                    <option value="ያገባ/ች">ያገባ/ች</option>		                    
+		                    <option value="የፈታ/ች">የፈታ/ች</option>
 		                </select>
 		            </div>
 
 		            <div class="form-group col-md-6">
-		                <label> <?= lang('family') ?>:</label>
-		                <select name="family" class="form-control" id="spouse">
+		                <label> የትዳር አጋር:</label>
+		                <select name="spouse" class="form-control" id="spouse" disabled>
 		                    <option value="አልተመረጠም" selected>አልተመረጠም</option>
 		                    <option disabled>-----------------------</option>
 		                    <?php foreach($members as $member) { ?>
@@ -287,6 +286,17 @@
 	      radioClass: 'iradio_square-blue',
 	      increaseArea: '20%' /* optional */
 	    });
+    });
+
+    $("#maritalStatus").change(function(){
+    	var selected = $(this).val();
+    	if(selected == "ያገባ/ች") {
+    		$("#spouse").prop('disabled', false);
+    	} 
+    	else {
+    		$("#spouse").prop('disabled', true);
+    	}
+
     });
 
 
