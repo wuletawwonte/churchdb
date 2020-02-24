@@ -150,7 +150,7 @@ class Admin extends CI_Controller {
 
 		$config = array(
 				'base_url' => base_url('admin/listmembers'), 
-				'per_page' => 5,
+				'per_page' => $_SESSION['filtermember']['rows_per_page'],
 				'uri_segment'=> 3,
 				'full_tag_open' => "<ul class='pagination pagination-sm'>",
 				'full_tag_close' => "</ul>",
@@ -223,6 +223,20 @@ class Admin extends CI_Controller {
 			redirect('admin/listmembers'); 
 	}
 
+	public function changerowsperpage() {
+		$filtermember = array(
+			'search_key' => $_SESSION['filtermember']['search_key'],
+			'gender' => $_SESSION['filtermember']['gender'],
+			'job_type' => $_SESSION['filtermember']['job_type'],
+			'membership_level' => $_SESSION['filtermember']['membership_level'],
+			'ministry' => $_SESSION['filtermember']['ministry'],
+			'marital_status' => $_SESSION['filtermember']['marital_status'],
+			'rows_per_page' => $this->input->post('rowsperpage'), 
+		);
+		$this->session->set_userdata('filtermember', $filtermember);		
+		redirect('admin/listmembers');
+	}
+
 	public function savemember() {
 
 		if($this->member->add()) {
@@ -248,11 +262,6 @@ class Admin extends CI_Controller {
 	public function memberdetails($id = NULL) {
 		$data['active_menu'] = "listmembers";
 		$data['member'] = $this->member->get_one($id);
-		$family_id = $this->member->get_by_attrib('family_id', $id);
-		if($family_id != 0) {
-			$data['family'] = $this->family->get_one($family_id);
-			$data['family_members'] = $this->member->members_in_family($family_id);		
-		}
 		$data['timelines'] = $this->timeline->get_timeline($id);
 		$data['assigned_groups'] = $this->group->get_assigned_groups($id);
 		$this->load->view('admin_templates/admin_header', $data);
@@ -262,8 +271,12 @@ class Admin extends CI_Controller {
 
 	public function editmember($id = NULL) {
 		$data['active_menu'] = '';
+		$data['members'] = $this->member->get_all();		
 		$data['member'] = $this->member->get_one($id);
-		$data['families'] = $this->family->get_all('name', 'ASC');
+		$data['job_types'] = $this->job_type->get_all();		
+		$data['membership_causes'] = $this->membership_cause->get_all();
+		$data['membership_levels'] = $this->membership_level->get_all();
+		$data['ministries'] = $this->ministry->get_all();
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_edit_person_form');
 		$this->load->view('admin_templates/footer');		

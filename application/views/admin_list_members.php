@@ -101,7 +101,7 @@ table tbody td a, table tbody td span {
             <option value="" <?php if($_SESSION['filtermember']['ministry'] == NULL) echo 'selected'; ?>>የአገልግሎት ዘርፍ</option>
                     <?php foreach($ministries as $ministry) { ?>
                       <option value="<?= $ministry['ministry_id']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
-                        <?= $ministry['ministry']; ?> 
+                        <?= $ministry['ministry_title']; ?> 
                       </option>
                     <?php } ?>
           </select>
@@ -112,12 +112,24 @@ table tbody td a, table tbody td span {
 
 
 
-
-
-            <div class="row" style="margin-top: -15px;">
+            <div class="row" style="margin-top: -15px;margin-bottom: 10px;">
                 <div class="col-sm-12">
 
-                    <div class="btns" align="right">
+                    <div class="col-sm-6">
+                      <div class="dataTables_length">
+                        <form method="POST" action="<?= base_url(); ?>admin/changerowsperpage">
+                          <label style="font-weight: normal">Show 
+                            <select name="rowsperpage" class="form-control input-sm s2" onchange="form.submit();">
+                              <option value="5" <?php if($_SESSION['filtermember']['rows_per_page'] == 5) { echo 'selected'; } ?> >5</option>
+                              <option value="10" <?php if($_SESSION['filtermember']['rows_per_page'] == 10) { echo 'selected'; } ?>>10</option>
+                              <option value="15" <?php if($_SESSION['filtermember']['rows_per_page'] == 15) { echo 'selected'; } ?>>15</option>
+                            </select> entries
+                          </label>
+                        </form>
+                      </div>
+                    </div>
+                    
+                    <div class="btns col-sm-6" align="right">
                         <span style="font-size: 15px;">Export:</span>           
                         <button class="btn" tabindex="0" aria-controls="families" type="button"><i class="fa fa-file-excel-o"></i> Excel</button> 
                         <button class="btn" tabindex="0" aria-controls="families" type="button"><i class="fa fa-file-o"></i> CSV</button> 
@@ -127,15 +139,11 @@ table tbody td a, table tbody td span {
                 </div>
             </div>
 
-
-
-            <hr style="margin-top: 5px;margin-bottom: 0px;">
-
-            <table class="table table-responsive table-hover" id="user-listing-table" style="width:100%;">
+            <table class="table table-responsive table-hover table-bordered" id="user-listing-table" style="width:100%;">
                 <thead>
                 <tr>
                     <th width="80"></th>
-                    <th><?= lang('name') ?></th>
+                    <th colspan="1"><?= lang('name') ?></th>
                     <th><?= lang('birth_date') ?></th>
                     <th>የአባልነት ደረጃ</th>
                     <th><?= lang('mobile_phone') ?></th>
@@ -185,3 +193,6 @@ table tbody td a, table tbody td span {
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+
+

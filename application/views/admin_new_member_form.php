@@ -188,7 +188,7 @@
 	                        <label> አባል የሆኑበት ሁኔታ :</label>
 	                        <select name="membership_cause" class="form-control s2">
 	                        	<?php foreach($membership_causes as $membership_cause) { ?>
-		                        	<option value="<?= $membership_cause['membership_cause_id']; ?>"> <?= $membership_cause['membership_cause']; ?> </option>
+		                        	<option value="<?= $membership_cause['membership_cause_id']; ?>"> <?= $membership_cause['membership_cause_title']; ?> </option>
 		                        <?php } ?>
 	                        </select>
 	                    </div>
@@ -209,7 +209,7 @@
 	                        <label> የአገልግሎት ዘርፍ :</label>
 	                        <select name="ministry" class="form-control s2">
 	                        	<?php foreach($ministries as $ministry) { ?>
-		                        	<option value="<?= $ministry['ministry_id']; ?>"> <?= $ministry['ministry']; ?> </option>
+		                        	<option value="<?= $ministry['ministry_id']; ?>"> <?= $ministry['ministry_title']; ?> </option>
 		                        <?php } ?>
 	                        </select>
 	                    </div>
@@ -243,7 +243,7 @@
 		                    <option value="አልተመረጠም" selected>አልተመረጠም</option>
 		                    <option disabled>-----------------------</option>
 		                    <?php foreach($members as $member) { ?>
-		                    <option value="<?= $member['id']; ?>"><?= $member['firstname'].' '.$member['lastname']; ?></option>
+		                    <option value="<?= $member['id']; ?>"><?= $member['firstname'].' '.$member['middlename']; ?></option>
 		                    <?php } ?>
 		                </select>
 		            </div>

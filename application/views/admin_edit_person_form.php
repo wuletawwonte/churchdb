@@ -1,8 +1,8 @@
 
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.date.extensions.js'); ?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.phone.extensions.js'); ?>"></script>
-
+<script src="<?= base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/iCheck/square/blue.css">
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -27,23 +27,16 @@
 
 		<form method="post" action="<?= base_url('admin/savememberchanges') ?>" name="PersonEditor">
 
-<!-- 		    <div class="alert alert-info alert-dismissable">
-		        <i class="fa fa-info"></i>
-		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		        <strong><span style="color: red;"> Red text  </span></strong> indicates items inherited from the associated family record.
-		    </div>
- -->
 
-
-     <?php if($this->session->flashdata('success')) { ?>
-        <div class="callout callout-info">
-            <?php echo $this->session->flashdata('success'); ?>
-        </div>
-    <?php } else if($this->session->flashdata('error')) { ?>
-        <div class="callout callout-error">
-            <?php echo $this->session->flashdata('error'); ?>
-        </div>
-    <?php } ?>
+	     <?php if($this->session->flashdata('success')) { ?>
+	        <div class="callout callout-info">
+	            <?php echo $this->session->flashdata('success'); ?>
+	        </div>
+	    <?php } else if($this->session->flashdata('error')) { ?>
+	        <div class="callout callout-error">
+	            <?php echo $this->session->flashdata('error'); ?>
+	        </div>
+	    <?php } ?>
 
 
     		<input type="text" name='id' value="<?= $member['id'] ?>" hidden>
@@ -57,7 +50,7 @@
 		                <div class="row">
 		                    <div class="col-md-2">
 		                        <label> <?= lang('gender'); ?>  :</label>
-		                        <select name="gender" class="form-control">
+		                        <select name="gender" class="form-control s2">
 		                            <option <?php if($member['gender'] == 'ሴት') { echo 'selected'; }?> value="ሴት">ሴት</option>
 		                            <option <?php if($member['gender'] == 'ወንድ') { echo 'selected'; }?> value="ወንድ">ወንድ</option>
 		                        </select>
@@ -100,9 +93,12 @@
 				                <!-- /.input group -->
 				            </div>
 		                    <div class="col-md-2">
-		                        <label> <?= lang('hide_age'); ?>  </label><br/>
-		                        <input type="checkbox" name="hide_age" <?php if($member['hide_age'] == 'on') echo 'checked';?> >
+		                        <label> ዕድሜ ይደበቅ  </label><br/>
+		                        <div class="checkbox icheck">
+			                        <input type="checkbox" name="hide_age" <?php if($member['hide_age'] == 'on') echo 'checked';?> >
+		                    	</div>
 		                    </div>
+
 		                    <div class="col-md-6">
 		                        <label for="birth_place"> <?= lang('birth_place'); ?>  :</label>
 		                        <input type="text" name="birth_place" value="<?= $member['birth_place'] ?>" class="form-control">                    
@@ -128,7 +124,7 @@
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-earphone"></i>
 								</div>
-								<input type="text" name="mobile_phone" value="<?= $member['mobile_phone'] ?>" class="form-control inputmasked" data-inputmask='"mask": "(9999) 99-9999"' data-mask>
+								<input type="text" name="mobile_phone" value="<?= $member['mobile_phone'] ?>" class="form-control">
 							</div>
 						</div>
 
@@ -146,15 +142,13 @@
 					<div class="row">
 	                    <div class="col-md-4">
 	                        <label> <?= lang('job_type'); ?>  :</label>
-	                        <select name="job_type" class="form-control">
-	                            <option <?php if($member['job_type'] == 'የመንግስት ስራ'){echo 'selected'; } ?> value="የመንግስት ስራ"> የመንግስት ሥራ </option>
-	                            <option <?php if($member['job_type'] == 'ነጋዴ'){echo 'selected'; } ?> value="ነጋዴ"> ነጋዴ </option>
-	                            <option <?php if($member['job_type'] == 'መንግስታዊ ያልሆነ ድርጅት'){echo 'selected'; } ?> value="መንግስታዊ ያልሆነ ድርጅት"> መንግስታዊ ያልሆነ ድርጅት </option>
-	                            <option <?php if($member['job_type'] == 'የግል ሥራ'){echo 'selected'; } ?> value="የግል ሥራ"> የግል ሥራ </option>
-	                            <option <?php if($member['job_type'] == 'የቤት እመቤት'){echo 'selected'; } ?> value="የቤት እመቤት"> የቤት እመቤት </option>
-	                            <option <?php if($member['job_type'] == 'ተማሪ'){echo 'selected'; } ?> value="ተማሪ"> ተማሪ </option>
-	                            <option <?php if($member['job_type'] == 'የጉልበት ሰራተኛ'){echo 'selected'; } ?> value="የጉልበት ሰራተኛ"> የጉልበት ሠራተኛ </option>
-	                            <option <?php if($member['job_type'] == 'ሥራ የሌለው'){echo 'selected'; } ?> value="ሥራ የሌለው"> ሥራ የሌለው </option>
+	                        <select name="job_type" class="form-control s2">
+				                <?php foreach($job_types as $job_type) { ?>
+			                        <option value="<?= $job_type['job_type_id'] ?>" <?php if($member['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
+			                          <?= $job_type['job_type']; ?> 
+			                        </option>
+			                    <?php } ?>
+
 	                        </select>
 	                    </div>
 
@@ -198,20 +192,23 @@
 
 	                    <div class="col-md-4">
 	                        <label> <?= lang('cause_of_membership'); ?>  :</label>
-	                        <select name="couse_of_membership" class="form-control">
-	                        	<option <?php if($member['cause_of_membership'] == 'በጥምቀት'){echo 'selected'; }?> value="በጥምቀት"> በጥምቀት </option>
-	                            <option <?php if($member['cause_of_membership'] == 'በእምነት ማጽኛ ትምህርት'){echo 'selected'; }?> value="በእምነት ማጽኛ ትምህርት"> በእምነት ማጽኛ ትምህርት </option>
-	                            <option <?php if($member['cause_of_membership'] == 'ከሌላ መ/ኢ/ማ/ም በዝውውር'){echo 'selected'; }?> value="ከሌላ መ/ኢ/ማ/ም በዝውውር"> ከሌላ መ/ኢ/ማ/ም በዝውውር </option>
-	                            <option <?php if($member['cause_of_membership'] == 'ከሌላ ወ/አ/ክርስቲያናት በመምጣት'){echo 'selected'; }?> value="ከሌላ ወ/አ/ክርስቲያናት በመምጣት"> ከሌላ ወ/አ/ክርስቲያናት በመምጣት </option>
+	                        <select name="membership_cause" class="form-control s2">
+	                        	<?php foreach($membership_causes as $membership_cause) { ?>
+		                        	<option <?php if($membership_cause['membership_cause_id'] == $member['membership_cause']){echo 'selected'; }?> value="<?= $membership_cause['membership_cause_id']; ?>"> 
+		                        		<?= $membership_cause['membership_cause_title']; ?> 
+		                        	</option>
+		                        <?php } ?>
 	                        </select>
 	                    </div>
 
 	                    <div class="col-md-4">
 	                        <label> <?= lang('level_of_membership'); ?>  :</label>
-	                        <select name="level_of_membership" class="form-control">
-	                        	<option <?php if($member['level_of_membership'] == 'ቆራቢ አባል'){echo 'selected'; }?> value="ቆራቢ አባል"> ቆራቢ አባል </option>
-	                        	<option <?php if($member['level_of_membership'] == 'የድነት ትምህርት ተማሪ'){echo 'selected'; }?> value="የድነት ትምህርት ተማሪ"> የድነት ትምህርት ተማሪ </option>
-	                            <option <?php if($member['level_of_membership'] == 'የእምነት ማጽኛ ተማሪ'){echo 'selected'; }?> value="የእምነት ማጽኛ ተማሪ"> የእምነት ማጽኛ ተማሪ </option>
+	                        <select name="membership_level" class="form-control s2">
+	                        	<?php foreach($membership_levels as $membership_level) { ?>
+		                        	<option <?php if($membership_level['membership_level_id'] == $member['membership_level']){echo 'selected'; }?> value="<?= $membership_level['membership_level_id']; ?>"> 
+		                        		<?= $membership_level['membership_level_title']; ?> 
+		                        	</option>
+		                        <?php } ?>
 	                        </select>
 	                    </div>
 					</div>
@@ -220,12 +217,12 @@
 					<p/>
 	                    <div class="col-md-4 serving_as">
 	                        <label> <?= lang('serving_as'); ?>  :</label>
-	                        <select name="serving_as" class="form-control">
-	                        	<option <?php if($member['serving_as'] == 'አያገለግሉም'){echo 'selected'; }?> value="አያገለግሉም">አያገለግሉም</option>
-	                        	<option <?php if($member['serving_as'] == 'አስተናጋጅ'){echo 'selected'; }?> value="አስተናጋጅ">አስተናጋጅ</option>
-	                            <option <?php if($member['serving_as'] == 'ኳየር'){echo 'selected'; }?> value="ኳየር">ኳየር</option>
-	                            <option <?php if($member['serving_as'] == 'አስተዳደር'){echo 'selected'; }?> value="አስተዳደር">አስተዳደር</option>
-	                            <option <?php if($member['serving_as'] == 'ወንጌላዊ'){echo 'selected'; }?> value="ወንጌላዊ">ወንጌላዊ</option>
+	                        <select name="serving_as" class="form-control s2">
+	                        	<?php foreach($ministries as $ministry) { ?>
+		                        	<option <?php if($ministry['ministry_id'] == $member['ministry']){echo 'selected'; }?> value="<?= $ministry['ministry_id']; ?>"> 
+		                        		<?= $ministry['ministry_title']; ?> 
+		                        	</option>
+		                        <?php } ?>
 	                        </select>
 	                    </div>
 
@@ -241,32 +238,27 @@
 
 		    <div class="box box-info clearfix">
 		        <div class="box-header">
-		            <h3 class="box-title"> <?= lang('family_info') ?>  </h3>
-		            <div class="pull-right"><br/>
-		                <button class="btn btn-primary" name="PersonSubmit"><?= lang('continue') ?></button>
-		            </div>
+		            <h3 class="box-title"> የቤተሰብ መረጃ </h3>
 		        </div><!-- /.box-header -->
 		        <div class="box-body">
 		            <div class="form-group col-md-6">
-		                <label> <?= lang('family_role') ?> :</label>
-		                <select name="family_role" class="form-control">
-		                    <option <?php if($member['family_role'] == 'አልተመረጠም'){echo 'selected'; }?> value="አልተመረጠም">አልተመረጠም</option>
-		                    <option disabled>-----------------------</option>
-		                    <option <?php if($member['family_role'] == 'ባል'){echo 'selected'; }?> value="ባል">ባል</option>
-		                    <option <?php if($member['family_role'] == 'ሚስት'){echo 'selected'; }?> value="ሚስት">ሚስት</option>
-		                    <option <?php if($member['family_role'] == 'ወንድ ልጅ'){echo 'selected'; }?> value="ወንድ ልጅ">ወንድ ልጅ</option>
-		                    <option <?php if($member['family_role'] == 'ሴት ልጅ'){echo 'selected'; }?> value="ሴት ልጅ">ሴት ልጅ</option>
+		                <label> የጋብቻ ሁኔታ :</label>
+		                <select name="marital_status" class="form-control s2" id="maritalStatus">
+		                    <option value="አልተመረጠም" <?php if($member['marital_status'] == 'አልተመረጠም') { echo 'selected'; } ?> >አልተመረጠም</option>
+		                    <option value="0" disabled>-----------------------</option>
+		                    <option value="ያላገባ/ች" <?php if($member['marital_status'] == 'ያላገባ/ች') { echo 'selected'; } ?> >ያላገባ/ች</option>
+		                    <option value="ያገባ/ች" <?php if($member['marital_status'] == 'ያገባ/ች') { echo 'selected'; } ?> >ያገባ/ች</option>		                    
+		                    <option value="የፈታ/ች" <?php if($member['marital_status'] == 'የፈታ/ች') { echo 'selected'; } ?> >የፈታ/ች</option>
 		                </select>
 		            </div>
 
 		            <div class="form-group col-md-6">
-		                <label> <?= lang('family') ?>:</label>
-		                <select name="family" size="8" class="form-control">
-		                    <option <?php if($member['family_id'] == 0){echo 'selected'; }?> value="0"> <?= lang('unassigned') ?>  </option>
-		                    <option value="0"> <?= lang('create_new_family_by_name') ?>  </option>
+		                <label> የትዳር አጋር:</label>
+		                <select name="spouse" class="form-control s2" id="spouse" disabled>
+		                    <option value="አልተመረጠም" selected>አልተመረጠም</option>
 		                    <option disabled>-----------------------</option>
-		                    <?php foreach($families as $family) { ?>
-		                    <option <?php if($member['family_id'] == $family['id']){echo 'selected'; }?> value="<?= $family['id']; ?>"><?= $family['name']; ?></option>
+		                    <?php foreach($members as $m) { ?>
+		                    <option <?php if($member['spouse'] == $m['id']) { echo 'selected'; }?> value="<?= $m['id']; ?>"><?= $m['firstname'].' '.$m['middlename']; ?></option>
 		                    <?php } ?>
 		                </select>
 		            </div>
@@ -299,7 +291,31 @@
 	    else $(className).hide();
 	}
 
+    $(function () {
+        $('input').iCheck({
+	      checkboxClass: 'icheckbox_square-blue',
+	      radioClass: 'iradio_square-blue',
+	      increaseArea: '20%' /* optional */
+	    });
+    });
 
+    var mstatus = $("#maritalStatus").val();
+	if(mstatus == "ያገባ/ች") {
+		$("#spouse").prop('disabled', false);
+	} 
+	else {
+		$("#spouse").prop('disabled', true);
+	}
+
+    $("#maritalStatus").change(function(){
+    	var selected = $(this).val();
+    	if(selected == "ያገባ/ች") {
+    		$("#spouse").prop('disabled', false);
+    	} 
+    	else {
+    		$("#spouse").prop('disabled', true);
+    	}
+    });
 
 	$(".inputmasked").inputmask(); 
 

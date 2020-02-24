@@ -53,7 +53,7 @@
                     <?= $member['firstname']." ".$member['middlename']; ?></h3></a>
 
 
-        <p class="text-muted text-center">የቤተሰብ አባልነት: <b><?= $member['family_role']?></b></p>
+        <p class="text-muted text-center">የጋብቻ ሁኔታ: <b><?= $member['marital_status']?></b></p>
                   <a href="<?= base_url('admin/editmember/'.$member['id']); ?>" class="btn btn-primary btn-block" id="EditPerson"><b><?= lang('edit') ?></b></a>
               </div>
       <!-- /.box-body -->
