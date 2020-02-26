@@ -245,7 +245,7 @@
 		                <label> የጋብቻ ሁኔታ :</label>
 		                <select name="marital_status" class="form-control s2" id="maritalStatus">
 		                    <option value="አልተመረጠም" <?php if($member['marital_status'] == 'አልተመረጠም') { echo 'selected'; } ?> >አልተመረጠም</option>
-		                    <option value="0" disabled>-----------------------</option>
+		                    <option disabled>-----------------------</option>
 		                    <option value="ያላገባ/ች" <?php if($member['marital_status'] == 'ያላገባ/ች') { echo 'selected'; } ?> >ያላገባ/ች</option>
 		                    <option value="ያገባ/ች" <?php if($member['marital_status'] == 'ያገባ/ች') { echo 'selected'; } ?> >ያገባ/ች</option>		                    
 		                    <option value="የፈታ/ች" <?php if($member['marital_status'] == 'የፈታ/ች') { echo 'selected'; } ?> >የፈታ/ች</option>
@@ -267,8 +267,7 @@
 
 
             <input type="submit" class="btn btn-primary" value="<?= lang('save') ?>" Name="addchurchsubmit">
-			<input type="submit" class="btn btn-info" value="Save and Add" name="addchurchsubmit">
-			<input type="button" class="btn" value="Cancel">
+			<a href="<?= base_url(); ?>admin/listmembers" class="btn">Cancel</a>
 
 
 		</form>
@@ -285,40 +284,40 @@
 
 
 <script type="text/javaScript">
-	
-	function toggle(className, obj) {
-	    if ( obj.checked ) $(className).show();
-	    else $(className).hide();
-	}
+	$(document).ready(function() {
+		function toggle(className, obj) {
+		    if ( obj.checked ) $(className).show();
+		    else $(className).hide();
+		}
 
-    $(function () {
-        $('input').iCheck({
-	      checkboxClass: 'icheckbox_square-blue',
-	      radioClass: 'iradio_square-blue',
-	      increaseArea: '20%' /* optional */
+	    $(function () {
+	        $('input').iCheck({
+		      checkboxClass: 'icheckbox_square-blue',
+		      radioClass: 'iradio_square-blue',
+		      increaseArea: '20%' /* optional */
+		    });
 	    });
-    });
 
-    var mstatus = $("#maritalStatus").val();
-	if(mstatus == "ያገባ/ች") {
-		$("#spouse").prop('disabled', false);
-	} 
-	else {
-		$("#spouse").prop('disabled', true);
-	}
+	    var mstatus = $("#maritalStatus").val();
+		if(mstatus == "ያገባ/ች") {
+			$("#spouse").prop('disabled', false);
+		} 
+		else {
+			$("#spouse").prop('disabled', true);
+		}
 
-    $("#maritalStatus").change(function(){
-    	var selected = $(this).val();
-    	if(selected == "ያገባ/ች") {
-    		$("#spouse").prop('disabled', false);
-    	} 
-    	else {
-    		$("#spouse").prop('disabled', true);
-    	}
-    });
+	    $("#maritalStatus").change(function(){
+	    	var selected = $(this).val();
+	    	if(selected == "ያገባ/ች") {
+	    		$("#spouse").prop('disabled', false);
+	    	} 
+	    	else {
+	    		$("#spouse").prop('disabled', true);
+	    	}
+	    });
 
-	$(".inputmasked").inputmask(); 
-
+		$(".inputmasked").inputmask(); 
+	});
 </script>
 
 

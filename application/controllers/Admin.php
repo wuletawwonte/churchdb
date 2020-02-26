@@ -180,7 +180,8 @@ class Admin extends CI_Controller {
 				'job_type' => $this->input->post('job_type'), 
 				'membership_level' => $this->input->post('membership_level'),
 				'ministry' => $this->input->post('ministry'),
-				'marital_status' => $this->input->post('marital_status')
+				'marital_status' => $this->input->post('marital_status'),
+				'rows_per_page' => $_SESSION['filtermember']['rows_per_page']
 			);
 			$this->session->set_userdata('filtermember', $filtermember);
 
@@ -217,7 +218,8 @@ class Admin extends CI_Controller {
 				'job_type' => NULL,
 				'membership_level' => NULL,
 				'ministry' => NULL,
-				'marital_status' => NULL
+				'marital_status' => NULL,
+				'rows_per_page' => $_SESSION['filtermember']['rows_per_page']
 			);
 			$this->session->set_userdata('filtermember', $filtermember);		
 			redirect('admin/listmembers'); 

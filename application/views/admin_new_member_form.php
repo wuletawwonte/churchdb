@@ -48,7 +48,7 @@
 		                <div class="row">
 		                    <div class="col-md-2">
 		                        <label> ፆታ  :</label>
-		                        <select name="gender" class="form-control s2">
+		                        <select name="gender" id="gender" class="form-control s2">
 		                            <option value="ሴት"> ሴት </option>
 		                            <option value="ወንድ"> ወንድ </option>
 		                        </select>
@@ -229,11 +229,7 @@
 		            <div class="form-group col-md-6">
 		                <label> የጋብቻ ሁኔታ :</label>
 		                <select name="marital_status" class="form-control s2" id="maritalStatus">
-		                    <option value="አልተመረጠም">አልተመረጠም</option>
-		                    <option value="0" disabled>-----------------------</option>
-		                    <option value="ያላገባ/ች">ያላገባ/ች</option>
-		                    <option value="ያገባ/ች">ያገባ/ች</option>		                    
-		                    <option value="የፈታ/ች">የፈታ/ች</option>
+		                    
 		                </select>
 		            </div>
 
@@ -253,7 +249,7 @@
 
             <input type="submit" class="btn btn-primary" value="<?= lang('save') ?>" Name="addchurchsubmit">
 			<input type="submit" class="btn btn-info" value="Save and Add" name="addchurchsubmit">
-			<input type="button" class="btn" value="Cancel">
+			<a href="<?= base_url(); ?>admin/listmembers" class="btn">Cancel</a>
 
 
 		</form>
@@ -270,36 +266,54 @@
 
 
 <script type="text/javaScript">
-	
-	function toggle(className, obj) {
-	    if ( obj.checked ) $(className).show();
-	    else $(className).hide();
-	}
+	$(document).ready(function () {
+		function toggle(className, obj) {
+		    if ( obj.checked ) $(className).show();
+		    else $(className).hide();
+		}
 
-	$(".inputmasked").inputmask(); 
+		$(".inputmasked").inputmask(); 
 
-	$("#spouse").select2();
+		$("#spouse").select2();
 
-    $(function () {
-        $('input').iCheck({
-	      checkboxClass: 'icheckbox_square-blue',
-	      radioClass: 'iradio_square-blue',
-	      increaseArea: '20%' /* optional */
+	    $(function () {
+	        $('input').iCheck({
+		      checkboxClass: 'icheckbox_square-blue',
+		      radioClass: 'iradio_square-blue',
+		      increaseArea: '20%' /* optional */
+		    });
 	    });
-    });
 
-    $("#maritalStatus").change(function(){
-    	var selected = $(this).val();
-    	if(selected == "ያገባ/ች") {
-    		$("#spouse").prop('disabled', false);
-    	} 
-    	else {
-    		$("#spouse").prop('disabled', true);
-    	}
+	    $("#maritalStatus").change(function(){
+	    	var selected = $(this).val();
+	    	if(selected == "ያገባ" || selected == "ያገባች") {
+	    		$("#spouse").prop('disabled', false);
+	    	} 
+	    	else {
+	    		$("#spouse").prop('disabled', true);
+	    	}
+	    });
 
-    });
+	    function maleMaritalStatus() {
+	    	$("#maritalStatus").html("<option value='አልተመረጠም'>አልተመረጠም</option><option disabled>-----------------------</option><option value='ያላገባ'>ያላገባ</option><option value='ያገባ'>ያገባ</option><option value='የፈታ'>የፈታ</option>");    	
+	    }
 
+	    function femaleMaritalStatus() {
+	    	$("#maritalStatus").html("<option value='አልተመረጠም'>አልተመረጠም</option><option disabled>-----------------------</option><option value='ያላገባች'>ያላገባች</option><option value='ያገባች'>ያገባች</option><option value='የፈታች'>የፈታች</option>");
+	    }
 
+	    femaleMaritalStatus();
+
+	    $("#gender").change(function() {
+	    	var gender = $(this).val();
+	    	if(gender == "ወንድ") {
+	    		maleMaritalStatus();
+	    	} 
+	    	else if(gender == "ሴት") {
+	    		femaleMaritalStatus();
+	    	}
+	    });
+	});
 </script>
 
 
