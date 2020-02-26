@@ -131,10 +131,11 @@ table tbody td a, table tbody td span {
                     
                     <div class="btns col-sm-6" align="right">
                         <span style="font-size: 15px;">Export:</span>           
-                        <button class="btn" tabindex="0" aria-controls="families" type="button"><i class="fa fa-file-excel-o"></i> Excel</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button"><i class="fa fa-file-o"></i> CSV</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button"><i class="fa fa-file-pdf-o"></i> PDF</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button"><i class="fa fa-print"></i> Print</button> 
+                        <button class="btn" type="button" ><i class="fa fa-file-excel-o"></i> Excel</button> 
+                        <!-- <a href="<?= base_url(); ?>admin/export_members_csv" class="btn"><i class="fa fa-file-o"></i> CSV</a>  -->
+                        <button class="btn" type="button"><i class="fa fa-file-o"></i> CSV</button> 
+                        <button class="btn" type="button"><i class="fa fa-file-pdf-o"></i> PDF</button> 
+                        <button class="btn" type="button"><i class="fa fa-print"></i> Print</button> 
                     </div>
                 </div>
             </div>

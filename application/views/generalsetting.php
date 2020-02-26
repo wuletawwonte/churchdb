@@ -41,6 +41,11 @@
 		                    </tr>
 
 		                    <tr>
+		                        <td>Church Name:</td>
+		                        <td><input type="text" name="church_name" value="<?php echo $church_name; ?>" class="form-control" width="5"></td>
+		                    </tr>
+
+		                    <tr>
 		                        <td>Default Password:</td>
 		                        <td><input type="password" name="default_password" value="<?php echo $default_password; ?>" class="form-control" width="32"></td>
 		                    </tr>

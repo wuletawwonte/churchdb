@@ -21,7 +21,7 @@ class Admin extends CI_Controller {
 		$this->session->set_userdata('last_visited', time());
 
 		$this->load->model(array('user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
-		$this->load->helper('text');
+		$this->load->helper('text', 'file');
 
 		$this->lang->load('label_lang', 'amharic');
 	}
@@ -66,6 +66,7 @@ class Admin extends CI_Controller {
 		$data['active_menu'] = "generalsetting";
 		$data['system_name'] = $this->cnfg->get('system_name');
 		$data['system_name_short'] = $this->cnfg->get('system_name_short');
+		$data['church_name'] = $this->cnfg->get('church_name');
 		$data['default_password'] = $this->cnfg->get('default_password');
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('generalsetting');
@@ -341,6 +342,24 @@ class Admin extends CI_Controller {
 		exit;
 	}
 
+	public function export_members_csv() {
+		$filename = "churchdb_members_on_".date('Ymd').".csv";
+		header("Content-Description: File Transfer");
+		header("Content-Disposition: attachement; filename=$filename");
+		header("content-Type: application/csv;");
+		$families = $this->family->get_all_for_export();
+
+		$file = fopen('php://output', 'w');
+
+		$header = array(lang('family_name'), lang('living_subcity'), lang('living_kebele'), lang('house_number'), lang('wedding_year'), lang('home_phone'), lang('created'));
+		fputcsv($file, $header); 
+		foreach($families as $family) {
+			fputcsv($file, $family);
+		}
+		fclose($file);
+		exit;
+	}
+
 
 	public function add_group_member() {
 		$this->group_member->add_group_member();
@@ -377,6 +396,26 @@ class Admin extends CI_Controller {
 	public function remove_group_member($mid, $gid) {
 		$this->group_member->remove_group_member($mid, $gid);
 		redirect('admin/groupdetails/'.$gid);
+	}
+
+	public function listformelements() {
+		$data['active_menu'] = "formelements";
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('admin_list_form_elements');
+		$this->load->view('admin_templates/footer');								
+	}
+
+	public function adminreport() {
+		$data['active_menu'] = "adminreport";
+		$data['church_name'] = $this->cnfg->get('church_name');
+		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('admin_report');
+		$this->load->view('admin_templates/footer');								
+	}
+
+	public function adminreportprint() {
+		$data['church_name'] = $this->cnfg->get('church_name');
+		$this->load->view('admin_report_print', $data);		
 	}
 
 

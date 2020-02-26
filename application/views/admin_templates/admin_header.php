@@ -236,7 +236,7 @@
         <!-- Optionally, you can add icons to the links -->
         <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i><span><?= lang('dashboard'); ?></span></a></li>
         
-        <li <?php if($active_menu == 'personregistration' || $active_menu == 'listmembers') { ?> class="active" <?php } ?> class="treeview">
+        <li <?php if($active_menu == 'personregistration' || $active_menu == 'listmembers' || $active_menu == 'formelements') { ?> class="active" <?php } ?> class="treeview">
           <a href="#"><i class="fa fa-users"></i> <span> <?= lang('people'); ?></span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -255,7 +255,7 @@
             </li>
 
             <li <?php if($active_menu == 'formelements') { ?> class="active" <?php } ?>>
-                <a href="<?php echo base_url(); ?>admin/listmembers">
+                <a href="<?php echo base_url(); ?>admin/listformelements">
                     <i class="fa fa-angle-double-right"></i> Form elements</a>
             </li>
                                                 
@@ -274,7 +274,7 @@
           </ul>
         </li>
 
-        <li <?php if($active_menu == 'report') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-file-pdf-o"></i> <span><?= lang('data_report'); ?></span></a></li>
+        <li <?php if($active_menu == 'adminreport') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/adminreport"><i class="fa fa-file-pdf-o"></i> <span><?= lang('data_report'); ?></span></a></li>
         <li <?php if($active_menu == 'generalsetting' || $active_menu == 'users') { ?> class="active" <?php } ?> class="treeview">
           <a href="#"><i class="fa fa-cog"></i> <span><?= lang('setting'); ?></span>
             <span class="pull-right-container">
