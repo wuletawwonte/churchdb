@@ -256,7 +256,7 @@
 
             <li <?php if($active_menu == 'formelements') { ?> class="active" <?php } ?>>
                 <a href="<?php echo base_url(); ?>admin/listformelements">
-                    <i class="fa fa-angle-double-right"></i> Form elements</a>
+                    <i class="fa fa-angle-double-right"></i> የፎርም አባላት </a>
             </li>
                                                 
           </ul>
