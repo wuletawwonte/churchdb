@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html;; charset=UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> <?php echo $this->session->userdata('system_name'); ?> </title>
 
@@ -283,7 +283,6 @@
           </a>
           <ul class="treeview-menu">
             <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-angle-double-right"></i> General Setting</a></li>
-            <li <?php if($active_menu == 'usersetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-angle-double-right"></i> Self Registration</a></li>
             <li <?php if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-angle-double-right"></i> Users</a></li>
             <li><a href="#"><i class="fa fa-angle-double-right"></i> User Setting</a></li>
           </ul>

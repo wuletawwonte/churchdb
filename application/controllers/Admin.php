@@ -342,22 +342,121 @@ class Admin extends CI_Controller {
 		exit;
 	}
 
-	public function export_members_csv() {
-		$filename = "churchdb_members_on_".date('Ymd').".csv";
-		header("Content-Description: File Transfer");
-		header("Content-Disposition: attachement; filename=$filename");
-		header("content-Type: application/csv;");
-		$families = $this->family->get_all_for_export();
+	public function export_members_excel() {
+		$filename = "ChurchDb_members_".date('Ymd').".xlsx";
+		$this->load->library('excel');
 
-		$file = fopen('php://output', 'w');
+		$members = $this->member->get_members_for_export();
 
-		$header = array(lang('family_name'), lang('living_subcity'), lang('living_kebele'), lang('house_number'), lang('wedding_year'), lang('home_phone'), lang('created'));
-		fputcsv($file, $header); 
-		foreach($families as $family) {
-			fputcsv($file, $family);
+		$objPHPExcel = new PHPExcel();
+		$objPHPExcel->setActiveSheetIndex(0);
+
+		$objPHPExcel->getActiveSheet()->SetCellValue('A1', 'ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('B1', 'የአባት ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('C1', 'የአያት ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('D1', 'ፆታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('E1', 'የተወለዱበት ቀን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('F1', 'እድሜ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('G1', 'የትውልድ ሥፍራ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('H1', 'የሞባይል ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('I1', 'ኢሜል');
+		$objPHPExcel->getActiveSheet()->SetCellValue('J1', 'የሥራ አይነት');
+		$objPHPExcel->getActiveSheet()->SetCellValue('K1', 'የመሥሪያ ቤቱ ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('L1', 'የመሥሪያ ቤት ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('M1', 'የቤተክርስትያኒቱ አባል የሆኑበት ዘመን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('N1', 'የቤተክርስትያኒቱ አባል የሆኑበት ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('O1', 'በቤተክርስትያኒቱ የአባልነት ደረጃ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('P1', 'የአገልግሎት ዘርፍ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'የጋብቻ ሁኔታ');
+
+		$rowCount = 2; 
+		foreach ($members as $member) {
+			$objPHPExcel->getActiveSheet()->SetCellValue('A'. $rowCount, $member['firstname']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('B'. $rowCount, $member['middlename']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('C'. $rowCount, $member['lastname']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('D'. $rowCount, $member['gender']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('E'. $rowCount, $member['birthdate']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('F'. $rowCount, $member['age']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('G'. $rowCount, $member['birth_place']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('H'. $rowCount, $member['mobile_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('I'. $rowCount, $member['email']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('J'. $rowCount, $member['job_type_title']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('K'. $rowCount, $member['workplace_name']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('L'. $rowCount, $member['workplace_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('M'. $rowCount, $member['membership_year']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('N'. $rowCount, $member['membership_cause_title']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('O'. $rowCount, $member['membership_level_title']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('P'. $rowCount, $member['ministry_title']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('Q'. $rowCount, $member['marital_status']);
+			$rowCount++;
 		}
-		fclose($file);
-		exit;
+
+		header('Content-Type:application/vnd.ms-excel');
+		header('Content-Disposition:attachment;filename="'.$filename.'"');
+		header('Cache-Control: max-age=0');
+		$objWriter =PHPExcel_IOFactory::createWriter($objPHPExcel,'CSV');
+		$objWriter->save('php://output');
+	}
+
+	public function export_members_csv() {
+		$filename = "ChurchDb_members_".date('Ymd').".csv";
+		$this->load->library('excel');
+
+		$members = $this->member->get_members_for_export();
+
+		$objPHPExcel = new PHPExcel();
+		$objPHPExcel->setActiveSheetIndex(0);
+
+		$objPHPExcel->getActiveSheet()->SetCellValue('A1', 'ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('B1', 'የአባት ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('C1', 'የአያት ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('D1', 'ፆታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('E1', 'የተወለዱበት ቀን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('F1', 'እድሜ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('G1', 'የትውልድ ሥፍራ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('H1', 'የሞባይል ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('I1', 'ኢሜል');
+		$objPHPExcel->getActiveSheet()->SetCellValue('J1', 'የሥራ አይነት');
+		$objPHPExcel->getActiveSheet()->SetCellValue('K1', 'የመሥሪያ ቤቱ ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('L1', 'የመሥሪያ ቤት ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('M1', 'የቤተክርስትያኒቱ አባል የሆኑበት ዘመን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('N1', 'የቤተክርስትያኒቱ አባል የሆኑበት ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('O1', 'በቤተክርስትያኒቱ የአባልነት ደረጃ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('P1', 'የአገልግሎት ዘርፍ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'የጋብቻ ሁኔታ');
+
+		$rowCount = 2; 
+		foreach ($members as $member) {
+			$objPHPExcel->getActiveSheet()->SetCellValue('A'. $rowCount, $member['firstname']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('B'. $rowCount, $member['middlename']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('C'. $rowCount, $member['lastname']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('D'. $rowCount, $member['gender']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('E'. $rowCount, $member['birthdate']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('F'. $rowCount, $member['age']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('G'. $rowCount, $member['birth_place']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('H'. $rowCount, $member['mobile_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('I'. $rowCount, $member['email']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('J'. $rowCount, $member['job_type_title']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('K'. $rowCount, $member['workplace_name']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('L'. $rowCount, $member['workplace_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('M'. $rowCount, $member['membership_year']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('N'. $rowCount, $member['membership_cause_title']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('O'. $rowCount, $member['membership_level_title']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('P'. $rowCount, $member['ministry_title']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('Q'. $rowCount, $member['marital_status']);
+			$rowCount++;
+		}
+
+		header('Content-Type:application/vnd.ms-excel');
+		header('Content-Disposition:attachment;filename="'.$filename.'"');
+		header('Cache-Control: max-age=0');
+		$objWriter =PHPExcel_IOFactory::createWriter($objPHPExcel,'CSV');
+		$objWriter->save('php://output');
+	}
+
+	public function export_members_print() {
+		$data['members'] = $this->member->get_members_for_export();
+		$this->load->view('admin_members_print', $data);
 	}
 
 

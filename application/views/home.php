@@ -119,7 +119,7 @@
                     <ul class="users-list clearfix">
                             <?php foreach($latest_members as $member) { ?>
                             <li>
-                                <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']; ?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div></a>
+                                <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']; ?>"><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></div></a>
                                 <span class="user-details"><?= $member['firstname'].' '.$member['middlename']; ?></span>
                                 <span class="users-list-date">04/15/2017&nbsp;</span>
                             </li>

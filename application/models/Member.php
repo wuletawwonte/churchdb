@@ -158,6 +158,38 @@ class Member extends CI_Model {
 		return $data->result_array();			
 	}
 
+	public function get_members_for_export() {
+		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
+        $this->db
+        	->group_start()
+	        	->like('firstname', $_SESSION['filtermember']['search_key'])
+	        	->or_like('middlename', $_SESSION['filtermember']['search_key'])
+	        ->group_end();
+	    if($_SESSION['filtermember']['gender'] != NULL) {
+	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
+	    }
+	    if($_SESSION['filtermember']['job_type'] != NULL) {
+	    	$this->db->where('job_type', $_SESSION['filtermember']['job_type']);
+	    }
+	    if($_SESSION['filtermember']['membership_level'] != NULL) {
+	    	$this->db->where('membership_level', $_SESSION['filtermember']['membership_level']);
+	    }
+	    if($_SESSION['filtermember']['ministry'] != NULL) {
+	    	$this->db->where('ministry', $_SESSION['filtermember']['ministry']);
+	    }
+	    if($_SESSION['filtermember']['marital_status'] != NULL) {
+	    	$this->db->where('marital_status', $_SESSION['filtermember']['marital_status']);
+	    }
+		$this->db->order_by('firstname', 'ASC');
+		$this->db->from('members');
+		$this->db->join('membership_levels', 'members.membership_level = membership_levels.membership_level_id');
+		$this->db->join('membership_causes', 'members.membership_cause = membership_causes.membership_cause_id');
+		$this->db->join('ministries', 'members.ministry = ministries.ministry_id');
+		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
+		$data = $this->db->get();
+		return $data->result_array();					
+	}
+
 	public function get_by_attrib($attrib, $id) {
 		$this->db->where('id', $id);
 		$res = $this->db->get('members');

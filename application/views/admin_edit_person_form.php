@@ -145,7 +145,7 @@
 	                        <select name="job_type" class="form-control s2">
 				                <?php foreach($job_types as $job_type) { ?>
 			                        <option value="<?= $job_type['job_type_id'] ?>" <?php if($member['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
-			                          <?= $job_type['job_type']; ?> 
+			                          <?= $job_type['job_type_title']; ?> 
 			                        </option>
 			                    <?php } ?>
 

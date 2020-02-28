@@ -62,7 +62,7 @@ table tbody td a, table tbody td span {
               <input type="text" placeholder="Search.." name="search_key" class="form-control" style="border-radius: 3px" value="<?= $_SESSION['filtermember']['search_key']; ?>">
             </div>
             <div class="col-xs-4" style="padding-left: 0px;">
-              <input type="submit" name="submit" class="btn btn-primary" value="Apply Filter">
+              <input type="submit" name="submit" class="btn btn-primary" value="አጣራ">
             </div>
           </div>
         </td></tr>
@@ -76,7 +76,7 @@ table tbody td a, table tbody td span {
             <option value="" <?php if($_SESSION['filtermember']['job_type'] == '') echo 'selected'; ?>> የሥራ አይነት </option>
                     <?php foreach($job_types as $job_type) { ?>
                         <option value="<?= $job_type['job_type_id'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
-                          <?= $job_type['job_type']; ?> 
+                          <?= $job_type['job_type_title']; ?> 
                         </option>
                     <?php } ?>
           </select>
@@ -131,11 +131,10 @@ table tbody td a, table tbody td span {
                     
                     <div class="btns col-sm-6" align="right">
                         <span style="font-size: 15px;">Export:</span>           
-                        <button class="btn" type="button" ><i class="fa fa-file-excel-o"></i> Excel</button> 
-                        <!-- <a href="<?= base_url(); ?>admin/export_members_csv" class="btn"><i class="fa fa-file-o"></i> CSV</a>  -->
-                        <button class="btn" type="button"><i class="fa fa-file-o"></i> CSV</button> 
+                        <a href="<?= base_url(); ?>admin/export_members_excel" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Excel</a> 
+                        <a href="<?= base_url(); ?>admin/export_members_csv" class="btn btn-primary"><i class="fa fa-file-o"></i> CSV</a> 
                         <button class="btn" type="button"><i class="fa fa-file-pdf-o"></i> PDF</button> 
-                        <button class="btn" type="button"><i class="fa fa-print"></i> Print</button> 
+                        <a href="<?= base_url(); ?>admin/export_members_print" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print</a> 
                     </div>
                 </div>
             </div>
@@ -159,7 +158,7 @@ table tbody td a, table tbody td span {
 
                     <tr>
 
-                        <td><a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']; ?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div></a></td>
+                        <td><a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']; ?>"><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></div></a></td>
 
                         <td>
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"> <?= $member['firstname'].' '.$member['middlename']; ?></a>
