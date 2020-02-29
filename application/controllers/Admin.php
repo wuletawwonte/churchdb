@@ -499,6 +499,10 @@ class Admin extends CI_Controller {
 
 	public function listformelements() {
 		$data['active_menu'] = "formelements";
+		$data['job_types'] = $data['job_types'] = $this->job_type->get_all();
+		$data['membership_causes'] = $this->membership_cause->get_all();
+		$data['membership_levels'] = $this->membership_level->get_all();
+		$data['ministries'] = $this->ministry->get_all();
 		$this->load->view('admin_templates/admin_header', $data);
 		$this->load->view('admin_list_form_elements');
 		$this->load->view('admin_templates/footer');								

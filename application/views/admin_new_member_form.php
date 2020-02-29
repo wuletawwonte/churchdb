@@ -19,14 +19,11 @@
       </ol>
     </section>
 
-    <!-- Main content -->
-    <section class="content container-fluid">
 
 
 
 
-
-	<form method="post" action="<?= base_url('admin/savemember') ?>" name="PersonEditor">
+	<?php echo form_open_multipart('admin/savemember');?>
 
 
      <?php if($this->session->flashdata('success')) { ?>
@@ -39,73 +36,97 @@
         </div>
     <?php } ?>
 
-		    <div class="box box-info clearfix">
-		        <div class="box-header">
-		            <h3 class="box-title"> የግል መረጃ </h3>
-		        </div><!-- /.box-header -->
-		        <div class="box-body">
-		            <div class="form-group">
-		                <div class="row">
-		                    <div class="col-md-2">
-		                        <label> ፆታ  :</label>
-		                        <select name="gender" id="gender" class="form-control s2">
-		                            <option value="ሴት"> ሴት </option>
-		                            <option value="ወንድ"> ወንድ </option>
-		                        </select>
-		                    </div>
-		                    <div class="col-md-3">
-		                        <label for="title"> ማዕረግ  :</label>
-		                        <input type="text" name="title" class="form-control">
-		                    </div>
-		                </div>
-		                <p/>
-		                <div class="row">
-		                    <div class="col-md-4">
-		                        <label for="firstname"> ስም  :</label>
-		                        <input type="text" name="firstname" class="form-control" required>
-		        				<br><font color="red"></font>
-		                    </div>
+    <!-- Main content -->
+    <section class="content container-fluid">
 
-		                    <div class="col-md-2">
-		                        <label for="middlename"> የአባት ስም  :</label>
-		                        <input type="text" name="middlename" class="form-control" required>
+    	<div class="row">
+    		<div class="col-md-3 col-sm-3 col-lg-3">
+    			<div class="box box-info clearfix ">
+    				<div class="box-header with-border">
+    					<h3 class="box-title">የምዕመን ፎቶ</h3>
+    				</div>
+    				<div class="box-body" align="center">
+		              	<img class="img-responsive img-circle" style="border: 3px solid #d2d6de;padding: 3px;" src="<?= base_url(); ?>assets/img/user-icon.jpg" alt="User profile picture" width="130" height="130"><br>
 
-		                    </div>
+		              	<!-- <button class="btn"><i class="fa fa-tag"></i></button><p></p> -->
 
-		                    <div class="col-md-6">
-		                        <label for="lastname"> የአያት ስም :</label>
-		                        <input type="text" name="lastname" class="form-control" required>                    
-		                    </div>
-		                </div>
-		                <p/>
-		                <div class="row">
-			                <div class="col-md-4 form-group">
-				                <label>የተወለዱበት ቀን :</label>
 
-				                <div class="input-group">
-				                  <div class="input-group-addon">
-				                    <i class="glyphicon glyphicon-calendar"></i>
-				                  </div>
-				                  <input type="text" class="form-control family-head inputmasked" name="birthdate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask required>
-				                </div>
-				                <!-- /.input group -->
-				            </div>
-		                    <div class="col-md-2">
-		                        <label> ዕድሜ ይደበቅ  </label><br/>
-		                        <div class="checkbox icheck">
-			                        <input type="checkbox" name="hide_age">
-		                    	</div>
-		                    </div>
-		                    <div class="col-md-6">
-		                        <label for="birth_place"> የትውልድ ሥፍራ :</label>
-		                        <input type="text" name="birth_place" class="form-control">                    
-		                    </div>
+	                <input type="file" class="form-control" style="height: 45px;"><p></p>
 
-		                </div>
-		            </div>
-		        </div>
-		    </div>
 
+		              	<p class="text-muted text-center">የፎቶው ከ1500KB ቢያንስ ይመረጣል </p>
+    				</div>
+    			</div>
+    		</div>
+    		<div class="col-md-9 col-lg-9 col-sm-9">
+			    <div class="box box-info clearfix">
+			        <div class="box-header">
+			            <h3 class="box-title"> የግል መረጃ </h3>
+			        </div><!-- /.box-header -->
+			        <div class="box-body">
+			            <div class="form-group">
+			                <div class="row">
+			                    <div class="col-md-2">
+			                        <label> ፆታ  :</label>
+			                        <select name="gender" id="gender" class="form-control s2">
+			                            <option value="ሴት"> ሴት </option>
+			                            <option value="ወንድ"> ወንድ </option>
+			                        </select>
+			                    </div>
+			                    <div class="col-md-3">
+			                        <label for="title"> ማዕረግ  :</label>
+			                        <input type="text" name="title" class="form-control">
+			                    </div>
+			                </div>
+			                <p/>
+			                <div class="row">
+			                    <div class="col-md-4">
+			                        <label for="firstname"> ስም  :</label>
+			                        <input type="text" name="firstname" class="form-control" required>
+			        				<br><font color="red"></font>
+			                    </div>
+
+			                    <div class="col-md-2">
+			                        <label for="middlename"> የአባት ስም  :</label>
+			                        <input type="text" name="middlename" class="form-control" required>
+
+			                    </div>
+
+			                    <div class="col-md-6">
+			                        <label for="lastname"> የአያት ስም :</label>
+			                        <input type="text" name="lastname" class="form-control" required>                    
+			                    </div>
+			                </div>
+			                <p/>
+			                <div class="row">
+				                <div class="col-md-4 form-group">
+					                <label>የተወለዱበት ቀን :</label>
+
+					                <div class="input-group">
+					                  <div class="input-group-addon">
+					                    <i class="glyphicon glyphicon-calendar"></i>
+					                  </div>
+					                  <input type="text" class="form-control family-head inputmasked" name="birthdate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask required>
+					                </div>
+					                <!-- /.input group -->
+					            </div>
+			                    <div class="col-md-2">
+			                        <label> ዕድሜ ይደበቅ  </label><br/>
+			                        <div class="checkbox icheck">
+				                        <input type="checkbox" name="hide_age">
+			                    	</div>
+			                    </div>
+			                    <div class="col-md-6">
+			                        <label for="birth_place"> የትውልድ ሥፍራ :</label>
+			                        <input type="text" name="birth_place" class="form-control">                    
+			                    </div>
+
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</div>
 
 
 
@@ -252,12 +273,14 @@
 			<a href="<?= base_url(); ?>admin/listmembers" class="btn">Cancel</a>
 
 
-		</form>
+	    </section>
+	    <!-- /.content -->
+
+
+	</form>
 
 
 
-    </section>
-    <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 

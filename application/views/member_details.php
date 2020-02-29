@@ -42,7 +42,7 @@
     <div class="col-lg-3 col-md-3 col-sm-3">
         <div class="box box-primary">
             <div class="box-body box-profile">
-            	<a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']?>"><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></div></a><br>
+            	<a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']?>"><b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b></div></a><br>
               
               <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><h3 class="profile-username text-center">
                   <?php if($member['gender'] == 'ወንድ'){ ?>

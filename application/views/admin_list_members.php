@@ -46,7 +46,7 @@ table tbody td a, table tbody td span {
 
 
     <!-- Default box -->
-    <div class="box box-warning">
+    <div class="box box-primary">
         <div class="box-body">
 
 
@@ -59,7 +59,7 @@ table tbody td a, table tbody td span {
         <table align="center"><tr><td>
           <div class="row">
             <div class="col-xs-4 col-xs-offset-3" align="right" style="padding-left: 0px;padding-right: 5px;">
-              <input type="text" placeholder="Search.." name="search_key" class="form-control" style="border-radius: 3px" value="<?= $_SESSION['filtermember']['search_key']; ?>">
+              <input type="text" placeholder="ፈልግ.." name="search_key" class="form-control" style="border-radius: 3px" value="<?= $_SESSION['filtermember']['search_key']; ?>">
             </div>
             <div class="col-xs-4" style="padding-left: 0px;">
               <input type="submit" name="submit" class="btn btn-primary" value="አጣራ">
@@ -147,8 +147,8 @@ table tbody td a, table tbody td span {
                     <th><?= lang('birth_date') ?></th>
                     <th>የአባልነት ደረጃ</th>
                     <th><?= lang('mobile_phone') ?></th>
-                    <th>Created</th>
-                    <th>Actions</th>
+                    <th>የተመዘገበበት</th>
+                    <th>ስራዎች</th>
 
                 </tr>
                 </thead>
@@ -158,7 +158,7 @@ table tbody td a, table tbody td span {
 
                     <tr>
 
-                        <td><a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']; ?>"><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></div></a></td>
+                        <td><a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']; ?>"><b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b></div></a></td>
 
                         <td>
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"> <?= $member['firstname'].' '.$member['middlename']; ?></a>

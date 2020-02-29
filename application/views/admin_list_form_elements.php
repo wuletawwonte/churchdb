@@ -1,70 +1,129 @@
 
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Form Elements
+        የፎርም አባላት 
+        <small>የሚሞላው ፎርም ውስጥ ያሉ አማራጮች</small>
       </h1>
-
- 	</section>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Simple</li>
+      </ol>
+    </section>
 
     <!-- Main content -->
-    <section class="content container-fluid">
+    <section class="content">
+      <div class="row">
+        <div class="col-md-6">
 
 
-    <!-- Default box -->
-    <div class="box">
-        <div class="box-body">
-
-
-            <p></p>
-
-
-
-            <table class="table table-hover table-bordered table-striped dt-responsive" style="width:100%;">
-                <thead>
-                <tr>
-                    <th>Form Element</th>
-                    <th align="center"><?= lang('group_type') ?></th>
-                    <th align="center"><?= lang('created') ?></th>
-
-                </tr>
-                </thead>
-                <tbody>
-
-                    <?php foreach($groups as $group) {  ?>
-
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">የሥራ አይነት</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered table-hover">
+                <?php foreach($job_types as $job_type) { ?>
                     <tr>
+                        <td><?= $job_type['job_type_title']; ?></td>
                         <td style="text-align: center"> 
-                            <a href="<?= base_url('admin/groupdetails/'.$group['gid']) ?>"><i class="fa fa-search-plus"></i></a>&nbsp;&nbsp;
-                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $group['gid'] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $group['gid'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="<?= base_url() ?>"><i class="fa fa-search-plus"></i></a>&nbsp;&nbsp;
+                            <a href="<?= base_url(); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;                            
+                            <a href="<?= base_url(); ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
                         </td>
-
-                        <td>
-                            <a href="<?= base_url('admin/groupdetails/'.$group['gid']); ?>"> <?= $group['name']; ?></a>
-                        </td>
-
-                        <td><?= $group['type']; ?></td>
-                        <td><?= $group['created']; ?></td>
 
                     </tr>
+                <?php } ?>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
 
-                    <?php } ?>
 
-                </tbody>
-            </table>
-            <p><?= $links; ?></p>
+
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">የአባልነት ደረጃ</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered table-hover">
+                <?php foreach($membership_levels as $membership_level) { ?>
+                    <tr>
+                        <td><?= $membership_level['membership_level_title']; ?></td>
+                        <td style="text-align: center"> 
+                            <a href="<?= base_url() ?>"><i class="fa fa-search-plus"></i></a>&nbsp;&nbsp;
+                            <a href="<?= base_url(); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;                            
+                            <a href="<?= base_url(); ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                        </td>
+
+                    </tr>
+                <?php } ?>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">አባል የሆኑበት ሁኔታ</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered table-hover">
+                <?php foreach($membership_causes as $membership_cause) { ?>
+                    <tr>
+                        <td><?= $membership_cause['membership_cause_title']; ?></td>
+                        <td style="text-align: center"> 
+                            <a href="<?= base_url() ?>"><i class="fa fa-search-plus"></i></a>&nbsp;&nbsp;
+                            <a href="<?= base_url(); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;                            
+                            <a href="<?= base_url(); ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                        </td>
+
+                    </tr>
+                <?php } ?>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+
+
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">የአገልግሎት ዘርፍ</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered table-hover">
+                <?php foreach($ministries as $ministry) { ?>
+                    <tr>
+                        <td><?= $ministry['ministry_title']; ?></td>
+                        <td style="text-align: center"> 
+                            <a href="<?= base_url() ?>"><i class="fa fa-search-plus"></i></a>&nbsp;&nbsp;
+                            <a href="<?= base_url(); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;                            
+                            <a href="<?= base_url(); ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                        </td>
+
+                    </tr>
+                <?php } ?>
+              </table>
+            </div>
+          </div>
+          <!-- /.box -->
+
 
         </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-
-
-
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
