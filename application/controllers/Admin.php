@@ -244,7 +244,7 @@ class Admin extends CI_Controller {
 
 		$avatar = NULL; 
 
-		if(!$this->input->post('avatar_input')) {
+		if($_FILES['avatar_input']['error'] !== 4) {
 
 	        $config['upload_path']          = './assets/avatars/';
 	        $config['allowed_types']        = 'jpg|png';

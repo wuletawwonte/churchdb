@@ -61,7 +61,7 @@
 					<div class="input-group input-group-lg">
 		                <input type="file" accept="image/*" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" class="form-control" id="avatarInput" name="avatar_input"  style="border-radius: 0px;padding-top: 4px;padding-bottom: 4px;padding-left: 5px;">
 		                    <span class="input-group-btn">
-		                      <button type="button" class="btn btn-info btn-flat" onclick="document.getElementById('avatarInput').value = ''"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
+		                      <button type="button" class="btn btn-info btn-flat" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/img/user-icon.jpg'"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
 		                    </span>
 		            </div>
 	                <p></p>
