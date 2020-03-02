@@ -1,4 +1,11 @@
 
+<style type="text/css">
+	#avatar {
+		width: 130px;
+		height: 130px;
+	}
+</style>
+
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.date.extensions.js'); ?>"></script>
 <script src="<?= base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
@@ -46,12 +53,10 @@
     					<h3 class="box-title">የምዕመን ፎቶ</h3>
     				</div>
     				<div class="box-body" align="center">
-		              	<img class="img-responsive img-circle" style="border: 3px solid #d2d6de;padding: 3px;" src="<?= base_url(); ?>assets/img/user-icon.jpg" alt="User profile picture" width="130" height="130"><br>
-
-		              	<!-- <button class="btn"><i class="fa fa-tag"></i></button><p></p> -->
+		              	<img class="img-responsive img-circle" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/img/user-icon.jpg" alt="User profile picture"><br>
 
 
-	                <input type="file" class="form-control" style="height: 45px;"><p></p>
+	                <input type="file" accept="image/*" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]); document.getElementById('avatar').width = '130'; document.getElementById('avatar').height = '130'" class="form-control" id="avatarInput" style="height: 45px;"><p></p>
 
 
 		              	<p class="text-muted text-center">የፎቶው ከ1500KB ቢያንስ ይመረጣል </p>
@@ -60,7 +65,7 @@
     		</div>
     		<div class="col-md-9 col-lg-9 col-sm-9">
 			    <div class="box box-info clearfix">
-			        <div class="box-header">
+			        <div class="box-header with-border">
 			            <h3 class="box-title"> የግል መረጃ </h3>
 			        </div><!-- /.box-header -->
 			        <div class="box-body">
@@ -131,7 +136,7 @@
 
 
 			<div class="box box-info clearfix">
-				<div class="box-header">
+				<div class="box-header with-border">
 					<h3 class="box-title"> አድራሻና የሥራ ሁኔታ </h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
@@ -189,7 +194,7 @@
 
 
 			<div class="box box-info clearfix">
-				<div class="box-header">
+				<div class="box-header with-border">
 					<h3 class="box-title"> የቤተክርስትያን ተሳትፎ </h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
@@ -243,7 +248,7 @@
 
 
 		    <div class="box box-info clearfix">
-		        <div class="box-header">
+		        <div class="box-header with-border">
 		            <h3 class="box-title"> የቤተሰብ መረጃ </h3>
 		        </div><!-- /.box-header -->
 		        <div class="box-body">
@@ -290,6 +295,7 @@
 
 <script type="text/javaScript">
 	$(document).ready(function () {
+
 		function toggle(className, obj) {
 		    if ( obj.checked ) $(className).show();
 		    else $(className).hide();
@@ -336,6 +342,23 @@
 	    		femaleMaritalStatus();
 	    	}
 	    });
+
+
+	    // $(function fileupload(input) {
+	    // 	if(input.files && input.files[0]) {
+	    // 		var reader = new FileReader();
+
+	    // 		reader.onload = function(e) {
+	    // 			$("#avatar")
+	    // 			.attr("src", e.target.result)
+	    // 			.width(130)
+	    // 			.height(130);
+	    // 		};
+
+	    // 		reader.readAsDataURL(input.files[0]);
+	    // 	}
+	    // });
+
 	});
 </script>
 
