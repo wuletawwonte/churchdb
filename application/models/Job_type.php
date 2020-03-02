@@ -13,6 +13,18 @@ class Job_type extends CI_Model {
 		return $data->result_array();
 	}
 
+	public function add_choice() {
+		$data = array(
+			'job_type_title' => $this->input->post('job_type_title')
+			);
+		if($this->db->insert('job_types', $data)) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+
 
 
 

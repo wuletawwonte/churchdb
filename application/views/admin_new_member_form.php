@@ -42,7 +42,7 @@
 	            <?php echo $this->session->flashdata('success'); ?>
 	        </div>
 	    <?php } else if($this->session->flashdata('error')) { ?>
-	        <div class="callout callout-error">
+	        <div class="callout callout-danger">
 	            <?php echo $this->session->flashdata('error'); ?>
 	        </div>
 	    <?php } ?>
@@ -55,14 +55,13 @@
     					<h3 class="box-title">የምዕመን ፎቶ</h3>
     				</div>
     				<div class="box-body" align="center">
-		              	<img class="img-responsive img-circle" for="avatarInput" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/img/user-icon.jpg" alt="User profile picture"><br>
+		              	<img class="img-responsive img-circle" for="avatarInput" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/img/user.png" alt="User profile picture"><br>
 
 
-					<div class="input-group input-group-lg">
-		                <input type="file" accept="image/*" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" class="form-control" id="avatarInput" name="avatar_input"  style="border-radius: 0px;padding-top: 4px;padding-bottom: 4px;padding-left: 5px;">
-		                    <span class="input-group-btn">
-		                      <button type="button" class="btn btn-info btn-flat" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/img/user-icon.jpg'"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
-		                    </span>
+					<div class="input-group">
+		                <input type="file" accept="image/*" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" id="avatarInput" name="avatar_input" style="display: none;">
+			                    <button type="button" class="btn btn-lg btn-primary" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
+			                    <button type="button" class="btn btn-lg btn-info btn-flat" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/img/user.png'"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
 		            </div>
 	                <p></p>
 

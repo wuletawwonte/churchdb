@@ -13,18 +13,12 @@
     <!-- Main content -->
     <section class="content container-fluid">
 
-<!--     <div class="pull-right">
-        <a class="btn btn-success" role="button" href="<?= base_url('admin/familyregistration') ?>">
-        <span class="glyphicon glyphicon-plus"></span> <?= lang('add_new_group'); ?></a>
-    </div>
-    <p><br><br></p>
- -->
     <?php if($this->session->flashdata('success')) { ?>
         <div class="callout callout-info">
             <?php echo $this->session->flashdata('success'); ?>
         </div>
     <?php } else if($this->session->flashdata('error')) { ?>
-        <div class="callout callout-error">
+        <div class="callout callout-danger">
             <?php echo $this->session->flashdata('error'); ?>
         </div>
     <?php } ?>

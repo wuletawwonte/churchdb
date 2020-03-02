@@ -25,7 +25,7 @@
 
 
 
-		<form method="post" action="<?= base_url('admin/savememberchanges') ?>" name="PersonEditor">
+		<form method="post" action="<?= base_url('admin/savememberchanges') ?>" enctype="multipart/form-data" name="PersonEditor">
 
 
 	     <?php if($this->session->flashdata('success')) { ?>
@@ -33,7 +33,7 @@
 	            <?php echo $this->session->flashdata('success'); ?>
 	        </div>
 	    <?php } else if($this->session->flashdata('error')) { ?>
-	        <div class="callout callout-error">
+	        <div class="callout callout-danger">
 	            <?php echo $this->session->flashdata('error'); ?>
 	        </div>
 	    <?php } ?>
@@ -41,79 +41,107 @@
 
     		<input type="text" name='id' value="<?= $member['id'] ?>" hidden>
 
-		    <div class="box box-info clearfix">
-		        <div class="box-header">
-		            <h3 class="box-title"> <?= lang('personal_info'); ?>  </h3>
-		        </div><!-- /.box-header -->
-		        <div class="box-body">
-		            <div class="form-group">
-		                <div class="row">
-		                    <div class="col-md-2">
-		                        <label> <?= lang('gender'); ?>  :</label>
-		                        <select name="gender" class="form-control s2">
-		                            <option <?php if($member['gender'] == 'ሴት') { echo 'selected'; }?> value="ሴት">ሴት</option>
-		                            <option <?php if($member['gender'] == 'ወንድ') { echo 'selected'; }?> value="ወንድ">ወንድ</option>
-		                        </select>
-		                    </div>
-		                    <div class="col-md-3">
-		                        <label for="Title"> <?= lang('title'); ?>  :</label>
-		                        <input type="text" name="Title" value="<?= $member['title']; ?>" class="form-control">
-		                    </div>
-		                </div>
-		                <p/>
-		                <div class="row">
-		                    <div class="col-md-4">
-		                        <label for="firstname"> <?= lang('first_name'); ?>  :</label>
-		                        <input type="text" name="firstname" value="<?= $member['firstname'] ?>" class="form-control">
-		        				<br><font color="red"></font>
-		                    </div>
+    		<div class="row">
 
-		                    <div class="col-md-2">
-		                        <label for="middlename"> <?= lang('middle_name'); ?>  :</label>
-		                        <input type="text" name="middlename" value="<?= $member['middlename'] ?>" class="form-control">
+	    		<div class="col-md-3 col-sm-3 col-lg-3">
+	    			<div class="box box-info clearfix ">
+	    				<div class="box-header with-border">
+	    					<h3 class="box-title">የምዕመን ፎቶ</h3>
+	    				</div>
+	    				<div class="box-body" align="center">
+			              	<img class="img-responsive img-circle" for="avatarInput" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?php if($member['avatar'] == NULL) { echo base_url().'assets/img/user.png'; } else { echo base_url('assets/avatars/'. $member['avatar']); } ?>" alt="User profile picture"><br>
 
-		                    </div>
 
-		                    <div class="col-md-6">
-		                        <label for="lastname"> <?= lang('last_name'); ?>  :</label>
-		                        <input type="text" name="lastname" value="<?= $member['lastname'] ?>" class="form-control">                    
-		                    </div>
-		                </div>
-		                <p/>
-		                <div class="row">
-			                <div class="col-md-4 form-group">
-				                <label><?= lang('birth_date') ?>:</label>
+						<div class="input-group input-group-lg">
+			                <input type="file" accept="image/*"  class="form-control" id="avatarInput" name="avatar_input" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" style="display: none;">
+			                    <button type="button" class="btn btn-lg btn-primary" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
+		                        <button type="button" class="btn btn-lg btn-info btn-flat" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/img/user.png'"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
+			            </div>
+		                <p></p>
 
-				                <div class="input-group">
-				                  <div class="input-group-addon">
-				                    <i class="glyphicon glyphicon-calendar"></i>
-				                  </div>
-				                  <input type="text" class="form-control family-head inputmasked" name="birthdate" value="<?= $member['birthdate'] ?>" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask>
+
+			              	<p class="text-muted text-center">የፎቶው ከ1500KB ቢያንስ ይመረጣል </p>
+	    				</div>
+	    			</div>
+	    		</div>
+
+
+
+
+	    		<div class="col-md-9 col-sm-9 col-lg-9">
+				    <div class="box box-info clearfix">
+				        <div class="box-header with-border">
+				            <h3 class="box-title"> <?= lang('personal_info'); ?>  </h3>
+				        </div><!-- /.box-header -->
+				        <div class="box-body">
+				            <div class="form-group">
+				                <div class="row">
+				                    <div class="col-md-2">
+				                        <label> <?= lang('gender'); ?>  :</label>
+				                        <select name="gender" class="form-control s2">
+				                            <option <?php if($member['gender'] == 'ሴት') { echo 'selected'; }?> value="ሴት">ሴት</option>
+				                            <option <?php if($member['gender'] == 'ወንድ') { echo 'selected'; }?> value="ወንድ">ወንድ</option>
+				                        </select>
+				                    </div>
+				                    <div class="col-md-3">
+				                        <label for="Title"> <?= lang('title'); ?>  :</label>
+				                        <input type="text" name="Title" value="<?= $member['title']; ?>" class="form-control">
+				                    </div>
 				                </div>
-				                <!-- /.input group -->
+				                <p/>
+				                <div class="row">
+				                    <div class="col-md-4">
+				                        <label for="firstname"> <?= lang('first_name'); ?>  :</label>
+				                        <input type="text" name="firstname" value="<?= $member['firstname'] ?>" class="form-control">
+				        				<br><font color="red"></font>
+				                    </div>
+
+				                    <div class="col-md-2">
+				                        <label for="middlename"> <?= lang('middle_name'); ?>  :</label>
+				                        <input type="text" name="middlename" value="<?= $member['middlename'] ?>" class="form-control">
+
+				                    </div>
+
+				                    <div class="col-md-6">
+				                        <label for="lastname"> <?= lang('last_name'); ?>  :</label>
+				                        <input type="text" name="lastname" value="<?= $member['lastname'] ?>" class="form-control">                    
+				                    </div>
+				                </div>
+				                <p/>
+				                <div class="row">
+					                <div class="col-md-4 form-group">
+						                <label><?= lang('birth_date') ?>:</label>
+
+						                <div class="input-group">
+						                  <div class="input-group-addon">
+						                    <i class="glyphicon glyphicon-calendar"></i>
+						                  </div>
+						                  <input type="text" class="form-control family-head inputmasked" name="birthdate" value="<?= $member['birthdate'] ?>" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask>
+						                </div>
+						                <!-- /.input group -->
+						            </div>
+				                    <div class="col-md-2">
+				                        <label> ዕድሜ ይደበቅ  </label><br/>
+				                        <div class="checkbox icheck">
+					                        <input type="checkbox" name="hide_age" <?php if($member['hide_age'] == 'on') echo 'checked';?> >
+				                    	</div>
+				                    </div>
+
+				                    <div class="col-md-6">
+				                        <label for="birth_place"> <?= lang('birth_place'); ?>  :</label>
+				                        <input type="text" name="birth_place" value="<?= $member['birth_place'] ?>" class="form-control">                    
+				                    </div>
+
+				                </div>
 				            </div>
-		                    <div class="col-md-2">
-		                        <label> ዕድሜ ይደበቅ  </label><br/>
-		                        <div class="checkbox icheck">
-			                        <input type="checkbox" name="hide_age" <?php if($member['hide_age'] == 'on') echo 'checked';?> >
-		                    	</div>
-		                    </div>
-
-		                    <div class="col-md-6">
-		                        <label for="birth_place"> <?= lang('birth_place'); ?>  :</label>
-		                        <input type="text" name="birth_place" value="<?= $member['birth_place'] ?>" class="form-control">                    
-		                    </div>
-
-		                </div>
-		            </div>
-		        </div>
-		    </div>
-
-
+				        </div>
+				    </div>
+				</div>
+			</div>
 
 
 			<div class="box box-info clearfix">
-				<div class="box-header">
+				<div class="box-header with-border">
 					<h3 class="box-title"><?= lang('contact_and_job_info') ?></h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
@@ -174,7 +202,7 @@
 
 
 			<div class="box box-info clearfix">
-				<div class="box-header">
+				<div class="box-header  with-border">
 					<h3 class="box-title"><?= lang('church_participation') ?></h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
@@ -237,7 +265,7 @@
 
 
 		    <div class="box box-info clearfix">
-		        <div class="box-header">
+		        <div class="box-header  with-border">
 		            <h3 class="box-title"> የቤተሰብ መረጃ </h3>
 		        </div><!-- /.box-header -->
 		        <div class="box-body">
@@ -266,7 +294,7 @@
 		    </div>
 
 
-            <input type="submit" class="btn btn-primary" value="<?= lang('save') ?>" Name="addchurchsubmit">
+            <input type="submit" class="btn btn-primary" value="ቀይር" Name="addchurchsubmit">
 			<a href="<?= base_url(); ?>admin/listmembers" class="btn">Cancel</a>
 
 

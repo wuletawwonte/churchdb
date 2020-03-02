@@ -46,28 +46,53 @@ class Member extends CI_Model {
 		return true;
 	}
 
-	public function edit($id) {
-		$data = array(
-			'title' => $this->input->post('title'), 
-			'firstname' => $this->input->post('firstname'), 
-			'middlename' => $this->input->post('middlename'), 
-			'lastname' => $this->input->post('lastname'), 
-			'gender' => $this->input->post('gender'), 
-			'job_type' => $this->input->post('job_type'), 
-			'workplace_name' => $this->input->post('workplace_name'), 
-			'workplace_phone' => $this->input->post('workplace_phone'), 
-			'mobile_phone' => $this->input->post('mobile_phone'), 
-			'email' => $this->input->post('email'), 
-			'birthdate' => $this->input->post('birthdate'), 
-			'hide_age' => $this->input->post('hide_age'), 
-			'birth_place' => $this->input->post('birth_place'), 
-			'membership_year' => $this->input->post('membership_year'), 
-			'membership_cause' => $this->input->post('membership_cause'), 
-			'membership_level' => $this->input->post('membership_level'), 
-			'ministry' => $this->input->post('ministry'), 
-			'marital_status' => $this->input->post('marital_status'), 
-			'spouse' => $this->input->post('spouse') 
-			);
+	public function edit($id, $avatar) {
+		if($avatar == NULL) {
+			$data = array(
+				'title' => $this->input->post('title'), 
+				'firstname' => $this->input->post('firstname'), 
+				'middlename' => $this->input->post('middlename'), 
+				'lastname' => $this->input->post('lastname'), 
+				'gender' => $this->input->post('gender'), 
+				'job_type' => $this->input->post('job_type'), 
+				'workplace_name' => $this->input->post('workplace_name'), 
+				'workplace_phone' => $this->input->post('workplace_phone'), 
+				'mobile_phone' => $this->input->post('mobile_phone'), 
+				'email' => $this->input->post('email'), 
+				'birthdate' => $this->input->post('birthdate'), 
+				'hide_age' => $this->input->post('hide_age'), 
+				'birth_place' => $this->input->post('birth_place'), 
+				'membership_year' => $this->input->post('membership_year'), 
+				'membership_cause' => $this->input->post('membership_cause'), 
+				'membership_level' => $this->input->post('membership_level'), 
+				'ministry' => $this->input->post('ministry'), 
+				'marital_status' => $this->input->post('marital_status'), 
+				'spouse' => $this->input->post('spouse')
+				);
+		} else {
+			$data = array(
+				'title' => $this->input->post('title'), 
+				'firstname' => $this->input->post('firstname'), 
+				'middlename' => $this->input->post('middlename'), 
+				'lastname' => $this->input->post('lastname'), 
+				'gender' => $this->input->post('gender'), 
+				'job_type' => $this->input->post('job_type'), 
+				'workplace_name' => $this->input->post('workplace_name'), 
+				'workplace_phone' => $this->input->post('workplace_phone'), 
+				'mobile_phone' => $this->input->post('mobile_phone'), 
+				'email' => $this->input->post('email'), 
+				'birthdate' => $this->input->post('birthdate'), 
+				'hide_age' => $this->input->post('hide_age'), 
+				'birth_place' => $this->input->post('birth_place'), 
+				'membership_year' => $this->input->post('membership_year'), 
+				'membership_cause' => $this->input->post('membership_cause'), 
+				'membership_level' => $this->input->post('membership_level'), 
+				'ministry' => $this->input->post('ministry'), 
+				'marital_status' => $this->input->post('marital_status'), 
+				'spouse' => $this->input->post('spouse'),
+				'avatar' => $avatar
+				);
+		}
 
 		$this->db->where('id', $id);
 		$this->db->update('members', $data);

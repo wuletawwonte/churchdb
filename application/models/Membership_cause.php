@@ -13,5 +13,18 @@ class Membership_cause extends CI_Model {
 		return $data->result_array();
 	}
 
+	public function add_choice() {
+		$data = array(
+			'membership_cause_title' => $this->input->post('membership_cause_title')
+			);
+		if($this->db->insert('membership_causes', $data)) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+
+
 
 }

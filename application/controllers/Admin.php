@@ -249,8 +249,8 @@ class Admin extends CI_Controller {
 	        $config['upload_path']          = './assets/avatars/';
 	        $config['allowed_types']        = 'jpg|png';
 	        $config['max_size']             = 100;
-	        $config['max_width']            = 1024;
-	        $config['max_height']           = 768;
+	        $config['max_width']            = 1235;
+	        $config['max_height']           = 835;
 
 	        $this->load->library('upload', $config);
 
@@ -266,22 +266,49 @@ class Admin extends CI_Controller {
 	    }
 
 		if($this->member->add($avatar)) {
-			$this->session->set_flashdata('success', 'Success: Member Successfully Registered.');
+			$this->session->set_flashdata('success', 'ስኬት: የምዕመን መረጃ በትክክል ተመዝግቧል።');
 			redirect('admin/personregistration');
 		} else {
-			$this->session->set_flashdata('error', 'Error: Member Can not be Registered.');
+			$this->session->set_flashdata('error', 'ስህተት: የምዕመን መረጃ ሊመዘግብ አልተቻለም።');
 			redirect('admin/personregistration');			
 		}
 	}	
 
 	public function savememberchanges() {
 
-		if($this->member->edit($this->input->post('id'))) {
-			$this->session->set_flashdata('success', 'Success: Member Successfully Edited.');
-			redirect('admin/listmembers');
+		$avatar = NULL; 
+
+		if(!empty($_FILES['avatar_input']['name'])) {
+
+			 $new_name = "churchdb".time().$_FILES["avatar_input"]['name'];
+
+	        $config['upload_path']    = './assets/avatars/';
+	        $config['allowed_types']  = 'jpg|png';
+	        $config['max_size']       = 1000;
+	        $config['max_width']      = 1235;
+	        $config['max_height']     = 835;
+	        $config['file_name'] 	  = $new_name; 
+
+	        $this->load->library('upload', $config);
+
+	        if ( ! $this->upload->do_upload('avatar_input'))
+	        {
+				$this->session->set_flashdata('error', $this->upload->display_errors());
+				redirect('admin/editmember/'.$this->input->post('id'));			
+	        }
+	        else
+	        {
+	            $avatar = $this->upload->data('file_name');
+	        }
+	    }
+
+
+		if($this->member->edit($this->input->post('id'), $avatar)) {
+			$this->session->set_flashdata('success', 'የምዕመኑ መረጃ በትክክል ተቀይሯል።');
+			redirect('admin/editmember/'.$this->input->post('id'));
 		} else {
-			$this->session->set_flashdata('error', 'Error: Member Can not be Edited.');
-			redirect('admin/listmembers');			
+			$this->session->set_flashdata('error', 'የምዕመኑን መረጃ መቀየር አልተቻለም።');
+			redirect('admin/editmember/'.$this->input->post('id'));			
 		}
 	}
 
@@ -542,6 +569,46 @@ class Admin extends CI_Controller {
 	public function adminreportprint() {
 		$data['church_name'] = $this->cnfg->get('church_name');
 		$this->load->view('admin_report_print', $data);		
+	}
+
+	public function addmembershiplevelchoice() {
+		if($this->membership_level->add_choice()) {
+			$this->session->set_flashdata('success', 'የአባልነት ደረጃ በትክክል ተመዝግቧል።');
+			redirect('admin/listformelements');
+		} else {
+			$this->session->set_flashdata('error', 'የአባልነት ደረጃ መመዝገብ አልተቻለም።');
+			redirect('admin/listformelements');
+		}		
+	}
+
+	public function addjobtypechoice() {
+		if($this->job_type->add_choice()) {
+			$this->session->set_flashdata('success', 'የስራ አይነት በትክክል ተመዝግቧል።');
+			redirect('admin/listformelements');
+		} else {
+			$this->session->set_flashdata('error', 'የስራ አይነት መመዝገብ አልተቻለም።');
+			redirect('admin/listformelements');
+		}		
+	}
+
+	public function addmembershipcausechoice() {
+		if($this->membership_cause->add_choice()) {
+			$this->session->set_flashdata('success', 'አባል የሆኑበት ሁኔታ በትክክል ተመዝግቧል።');
+			redirect('admin/listformelements');
+		} else {
+			$this->session->set_flashdata('error', 'አባል የሆኑበት ሁኔታ መመዝገብ አልተቻለም።');
+			redirect('admin/listformelements');
+		}		
+	}
+
+	public function addministrychoice() {
+		if($this->ministry->add_choice()) {
+			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ በትክክል ተመዝግቧል።');
+			redirect('admin/listformelements');
+		} else {
+			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ መመዝገብ አልተቻለም።');
+			redirect('admin/listformelements');
+		}		
 	}
 
 

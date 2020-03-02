@@ -40,7 +40,7 @@ table tbody td a, table tbody td span {
             <?php echo $this->session->flashdata('success'); ?>
         </div>
     <?php } else if($this->session->flashdata('error')) { ?>
-        <div class="callout callout-error">
+        <div class="callout callout-danger">
             <?php echo $this->session->flashdata('error'); ?>
         </div>
     <?php } ?>
