@@ -242,7 +242,30 @@ class Admin extends CI_Controller {
 
 	public function savemember() {
 
-		if($this->member->add()) {
+		$avatar = NULL; 
+
+		if(!$this->input->post('avatar_input')) {
+
+	        $config['upload_path']          = './assets/avatars/';
+	        $config['allowed_types']        = 'jpg|png';
+	        $config['max_size']             = 100;
+	        $config['max_width']            = 1024;
+	        $config['max_height']           = 768;
+
+	        $this->load->library('upload', $config);
+
+	        if ( ! $this->upload->do_upload('avatar_input'))
+	        {
+				$this->session->set_flashdata('error', $this->upload->display_errors());
+				redirect('admin/personregistration');			
+	        }
+	        else
+	        {
+	            $avatar = $this->upload->data('file_name');
+	        }
+	    }
+
+		if($this->member->add($avatar)) {
 			$this->session->set_flashdata('success', 'Success: Member Successfully Registered.');
 			redirect('admin/personregistration');
 		} else {

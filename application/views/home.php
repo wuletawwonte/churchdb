@@ -8,7 +8,7 @@
   width: 75px;
   height: 75px;
   border-radius: 50%;
-  border: 3px solid #d2d6de;
+  border: 2px solid #d2d6de;
   font-size: 30px;
   color: #fff;
   text-align: center;
@@ -29,8 +29,8 @@
         <?= lang('welcome') ?>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">Home</li>
+        <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
+        <li class="active"> ዋና ግፅ </li>
       </ol>
     </section>
 
@@ -107,7 +107,18 @@
                     <ul class="users-list clearfix">
                         <?php foreach($latest_members as $member) { ?>
                         <li>
-                            <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']; ?>"><b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b></div></a>
+                            <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
+                                <?php if($member['avatar'] == NULL) { ?>
+                                    <div class="profile-image" style="background: <?= $member['profile_color']; ?>">
+                                        <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
+                                    </div>
+                                <?php } else { ?>
+                                    <div>
+                                        <img class="img-circle" style="border: 2px solid <?= $member['profile_color']; ?>;padding: 2px;height: 75px; width: 75px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
+                                    </div>
+                                <?php } ?>
+
+                            </a>
                             <span class="user-details"><?= $member['firstname'].' '.$member['middlename']; ?></span>
                             <span class="users-list-date">04/15/2017&nbsp;</span>
                         </li>

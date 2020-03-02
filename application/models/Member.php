@@ -8,7 +8,7 @@ class Member extends CI_Model {
 		
 	}
 
-	public function add() {
+	public function add($avatar) {
 		$colors = array('#00c0ef', '#0073b7', '#3c8dbc', '#39cccc', '#f39c12', '#ff851b', '#00a65a', '#01ff70', '#dd4b39', '#605ca8', '#f012be', '#777777', '#001f3f');		
 		$data = array(
 			'title' => $this->input->post('title'), 
@@ -30,6 +30,7 @@ class Member extends CI_Model {
 			'ministry' => $this->input->post('ministry'), 
 			'marital_status' => $this->input->post('marital_status'), 
 			'spouse' => $this->input->post('spouse'),
+			'avatar' => $avatar,
 			'profile_color' => $colors[array_rand($colors, 1)] 
 			);
 

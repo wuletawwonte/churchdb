@@ -42,7 +42,18 @@
     <div class="col-lg-3 col-md-3 col-sm-3">
         <div class="box box-primary">
             <div class="box-body box-profile">
-            	<a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']?>"><b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b></div></a><br>
+                <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
+                	<?php if($member['avatar'] == NULL) { ?>
+                        <div class="profile-image" style="background: <?= $member['profile_color']?>">
+                            <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
+                        </div>
+                    <?php } else { ?>
+                        <div style="margin: 0 auto;height: 130px; width: 130px;margin-top: 15px;">
+                            <img class="img-circle" style="border: 3px solid <?= $member['profile_color']; ?>;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
+                        </div>
+
+                    <?php } ?>
+                </a><br>
               
               <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><h3 class="profile-username text-center">
                   <?php if($member['gender'] == 'ወንድ'){ ?>

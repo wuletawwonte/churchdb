@@ -21,7 +21,7 @@
         <?= lang('person_registration'); ?>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>"><i class="glyphicon glyphicon-user"></i> <?= lang('people'); ?></a></li>
+        <li><a href="#"><i class="fa fa-users"></i> <?= lang('people'); ?></a></li>
         <li class="active"><?= lang('add_new_person'); ?></li>
       </ol>
     </section>
@@ -33,18 +33,20 @@
 	<?php echo form_open_multipart('admin/savemember');?>
 
 
-     <?php if($this->session->flashdata('success')) { ?>
-        <div class="callout callout-info">
-            <?php echo $this->session->flashdata('success'); ?>
-        </div>
-    <?php } else if($this->session->flashdata('error')) { ?>
-        <div class="callout callout-error">
-            <?php echo $this->session->flashdata('error'); ?>
-        </div>
-    <?php } ?>
 
     <!-- Main content -->
     <section class="content container-fluid">
+
+	     <?php if($this->session->flashdata('success')) { ?>
+	        <div class="callout callout-info">
+	            <?php echo $this->session->flashdata('success'); ?>
+	        </div>
+	    <?php } else if($this->session->flashdata('error')) { ?>
+	        <div class="callout callout-error">
+	            <?php echo $this->session->flashdata('error'); ?>
+	        </div>
+	    <?php } ?>
+
 
     	<div class="row">
     		<div class="col-md-3 col-sm-3 col-lg-3">
@@ -53,10 +55,16 @@
     					<h3 class="box-title">የምዕመን ፎቶ</h3>
     				</div>
     				<div class="box-body" align="center">
-		              	<img class="img-responsive img-circle" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/img/user-icon.jpg" alt="User profile picture"><br>
+		              	<img class="img-responsive img-circle" for="avatarInput" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/img/user-icon.jpg" alt="User profile picture"><br>
 
 
-	                <input type="file" accept="image/*" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]); document.getElementById('avatar').width = '130'; document.getElementById('avatar').height = '130'" class="form-control" id="avatarInput" style="height: 45px;"><p></p>
+					<div class="input-group input-group-lg">
+		                <input type="file" accept="image/*" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" class="form-control" id="avatarInput" name="avatar_input"  style="border-radius: 0px;padding-top: 4px;padding-bottom: 4px;padding-left: 5px;">
+		                    <span class="input-group-btn">
+		                      <button type="button" class="btn btn-info btn-flat" onclick="document.getElementById('avatarInput').value = ''"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
+		                    </span>
+		            </div>
+	                <p></p>
 
 
 		              	<p class="text-muted text-center">የፎቶው ከ1500KB ቢያንስ ይመረጣል </p>

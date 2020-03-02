@@ -6,7 +6,6 @@
   border-radius: 50%;
   border: 2px solid #d2d6de;
   font-size: 20px;
-  /*font-weight: bold;*/
   color: #fff;
   text-align: center;
   line-height: 60px;
@@ -25,10 +24,13 @@ table tbody td a, table tbody td span {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <?= lang('members') ?>
+        <?= lang('welcome') ?>
       </h1>
-
- 	</section>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-users"></i> <?= lang('people'); ?></a></li>
+        <li class="active"> ምዕመናን </li>
+      </ol>
+    </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
@@ -105,7 +107,7 @@ table tbody td a, table tbody td span {
                       </option>
                     <?php } ?>
           </select>
-            <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning">Clear Filters</a><BR><BR>
+            <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning"> ፍለጋውን አጥፋ </a><BR><BR>
           </td></tr>
         </table></form>
       <p/>
@@ -158,7 +160,19 @@ table tbody td a, table tbody td span {
 
                     <tr>
 
-                        <td><a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><div class="profile-image" style="background: <?= $member['profile_color']; ?>"><b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b></div></a></td>
+                        <td>
+                            <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
+                                <?php if($member['avatar'] == NULL) { ?>
+                                    <div class="profile-image" style="background: <?= $member['profile_color']; ?>">
+                                        <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
+                                    </div>
+                                <?php } else { ?>
+                                    <div>
+                                        <img class="img-circle" style="border: 2px solid <?= $member['profile_color']; ?>;padding: 2px;height: 60px; width: 60px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
+                                    </div>
+                                <?php } ?>
+                            </a>
+                        </td>
 
                         <td>
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"> <?= $member['firstname'].' '.$member['middlename']; ?></a>
