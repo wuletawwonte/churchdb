@@ -20,7 +20,10 @@ class User extends CI_Model {
 		$query = $this->db->get('users');
 
 		if($query->num_rows() == 1){
-			return true;
+			$data = $query->result_array();
+			$this->db->where('username', $username);
+			$this->db->update('users', array('login_count' => $data[0]['login_count']+1));
+			return true;			
 		} else {
 			return false;
 		}
