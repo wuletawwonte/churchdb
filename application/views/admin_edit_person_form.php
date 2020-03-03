@@ -244,8 +244,8 @@
 					<div class="row">
 					<p/>
 	                    <div class="col-md-4 serving_as">
-	                        <label> <?= lang('serving_as'); ?>  :</label>
-	                        <select name="serving_as" class="form-control s2">
+	                        <label> የአገልግሎት ዘርፍ :</label>
+	                        <select name="ministry" class="form-control s2">
 	                        	<?php foreach($ministries as $ministry) { ?>
 		                        	<option <?php if($ministry['ministry_id'] == $member['ministry']){echo 'selected'; }?> value="<?= $ministry['ministry_id']; ?>"> 
 		                        		<?= $ministry['ministry_title']; ?> 

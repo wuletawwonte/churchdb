@@ -21,8 +21,18 @@ class Ministry extends CI_Model {
 			return true;
 		} else {
 			return false;
+		}		
+	}
+
+	public function delete_choice($mid) {
+		$this->db->where('ministry_id', $mid);
+		if($this->db->delete('ministries')) {
+			$this->db->where('ministry', $mid);
+			$this->db->update('members', array('ministry' => 1));
+			return true;
+		} else {
+			return false;
 		}
-		
 	}
 
 

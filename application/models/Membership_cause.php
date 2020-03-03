@@ -21,8 +21,18 @@ class Membership_cause extends CI_Model {
 			return true;
 		} else {
 			return false;
+		}		
+	}
+
+	public function delete_choice($mcid) {
+		$this->db->where('membership_cause_id', $mcid);
+		if($this->db->delete('membership_causes')) {
+			$this->db->where('membership_cause', $mcid);
+			$this->db->update('members', array('membership_cause' => 1));
+			return true;
+		} else {
+			return false;
 		}
-		
 	}
 
 

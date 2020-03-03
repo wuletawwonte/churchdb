@@ -613,7 +613,7 @@ class Admin extends CI_Controller {
 
 	public function deletemembershiplevelchoice($mlid) {
 		if($this->membership_level->delete_choice($mlid)) {
-			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ ምርጫው ጠፍቷል።');
+			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ ምርጫው በትክክል ጠፍቷል።');
 			redirect('admin/listformelements');
 		} else {
 			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ ምርጫውን ማጥፋት አልተቻለም።');
@@ -623,12 +623,32 @@ class Admin extends CI_Controller {
 
 	public function deletejobtypechoice($jtid) {
 		if($this->job_type->delete_choice($jtid)) {
-			$this->session->set_flashdata('success', 'የስራ አይነት ምርጫው ጠፍቷል።');
+			$this->session->set_flashdata('success', 'የስራ አይነት ምርጫው በትክክል ጠፍቷል።');
 			redirect('admin/listformelements');
 		} else {
 			$this->session->set_flashdata('error', 'የስራ አይነት ምርጫውን ማጥፋት አልተቻለም።');
 			redirect('admin/listformelements');
 		}				
+	}
+
+	public function deletemembershipcausechoice($mcid) {
+		if($this->membership_cause->delete_choice($mcid)) {
+			$this->session->set_flashdata('success', 'አባል የሆኑበት ሁኔታ ምርጫው በትክክል ጠፍቷል።');
+			redirect('admin/listformelements');
+		} else {
+			$this->session->set_flashdata('error', 'አባል የሆኑበት ሁኔታ ለሚለው ምርጫውን ማጥፋት አልተቻለም።');
+			redirect('admin/listformelements');
+		}						
+	}
+
+	public function deleteministrychoice($mid) {
+		if($this->ministry->delete_choice($mid)) {
+			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ ምርጫው በትክክል ጠፍቷል።');
+			redirect('admin/listformelements');
+		} else {
+			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ ለሚለው ምርጫውን ማጥፋት አልተቻለም።');
+			redirect('admin/listformelements');
+		}						
 	}
 
 }
