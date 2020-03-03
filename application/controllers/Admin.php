@@ -611,5 +611,24 @@ class Admin extends CI_Controller {
 		}		
 	}
 
+	public function deletemembershiplevelchoice($mlid) {
+		if($this->membership_level->delete_choice($mlid)) {
+			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ ምርጫው ጠፍቷል።');
+			redirect('admin/listformelements');
+		} else {
+			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ ምርጫውን ማጥፋት አልተቻለም።');
+			redirect('admin/listformelements');
+		}		
+	}	
+
+	public function deletejobtypechoice($jtid) {
+		if($this->job_type->delete_choice($jtid)) {
+			$this->session->set_flashdata('success', 'የስራ አይነት ምርጫው ጠፍቷል።');
+			redirect('admin/listformelements');
+		} else {
+			$this->session->set_flashdata('error', 'የስራ አይነት ምርጫውን ማጥፋት አልተቻለም።');
+			redirect('admin/listformelements');
+		}				
+	}
 
 }

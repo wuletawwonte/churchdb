@@ -21,8 +21,19 @@ class Membership_level extends CI_Model {
 			return true;
 		} else {
 			return false;
+		}	
+	}
+
+	public function delete_choice($mlid) { 
+		$this->db->where('membership_level_id', $mlid);
+		if($this->db->delete('membership_levels')) {
+			$this->db->where('Membership_level', $mlid);
+			$this->db->update('members', array('membership_level' => 1));
+			return true;
+		} else {
+			return false;
 		}
-		
+
 	}
 
 }

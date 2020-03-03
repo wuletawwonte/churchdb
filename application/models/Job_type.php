@@ -21,8 +21,18 @@ class Job_type extends CI_Model {
 			return true;
 		} else {
 			return false;
+		}		
+	}
+
+	public function delete_choice($jtid) {
+		$this->db->where('Job_type_id', $jtid);
+		if($this->db->delete('job_types')) {
+			$this->db->where('job_type', $jtid);
+			$this->db->update('members', array('job_type' => 1));
+			return true;
+		} else {
+			return false;
 		}
-		
 	}
 
 
