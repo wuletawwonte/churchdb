@@ -32,9 +32,9 @@ class Admin extends CI_Controller {
 		$data['total_groups'] = $this->group->record_count();
 		$data['latest_members'] = $this->member->latest_members();
 		$data['active_menu'] = "dashboard";
-		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('templates/header', $data);
 		$this->load->view('home');
-		$this->load->view('admin_templates/footer');
+		$this->load->view('templates/footer');
 
 	}
 
@@ -45,19 +45,17 @@ class Admin extends CI_Controller {
 
 		$data['active_menu'] = "users";
 		$data['users'] = $this->user->get_all();
-		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('templates/header', $data);
 		$this->load->view('users');
-		$this->load->view('admin_templates/footer');
-
+		$this->load->view('templates/footer');
 	}
 
 	public function newuserform() {
 
 		$data['active_menu'] = "";
-		$data['churches'] = $this->church->get_all();
-		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('newuserform');
-		$this->load->view('admin_templates/footer');
+		$this->load->view('templates/header', $data);
+		$this->load->view('new_user_form');
+		$this->load->view('templates/footer');
 
 	}
 
@@ -68,9 +66,9 @@ class Admin extends CI_Controller {
 		$data['system_name_short'] = $this->cnfg->get('system_name_short');
 		$data['church_name'] = $this->cnfg->get('church_name');
 		$data['default_password'] = $this->cnfg->get('default_password');
-		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('templates/header', $data);
 		$this->load->view('generalsetting');
-		$this->load->view('admin_templates/footer');
+		$this->load->view('templates/footer');
 
 	}
 
@@ -78,9 +76,9 @@ class Admin extends CI_Controller {
 
 		$data['active_menu'] = "usersetting";
 		$data['users'] = $this->user->get_all();
-		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('templates/header', $data);
 		$this->load->view('usersetting');
-		$this->load->view('admin_templates/footer');
+		$this->load->view('templates/footer');
 
 	}
 
@@ -88,14 +86,10 @@ class Admin extends CI_Controller {
 	public function registeruser() {
 
 		if($this->user->add()) {
-			$this->session->set_flashdata('success', 'Success: User Account Successfully Created.');
-			if($this->input->post('addusersubmit') == 'Save') {
-				redirect('admin/users');
-			} else if($this->input->post('addusersubmit') == 'Save and Add') {
-				redirect('admin/newuserform');
-			}
+			$this->session->set_flashdata('success', 'ስኬት: የተጠቃሚው አካውንት በትክክል ተከፍቷል።');
+			redirect('admin/users');
 		} else {
-			$this->session->set_flashdata('error', '');
+			$this->session->set_flashdata('error', 'ስህተት፡ የተጠቃሚውን አካውንት መክፈት አልተቻለም።');
 			$this->newuserform();
 		}
 	
@@ -106,9 +100,9 @@ class Admin extends CI_Controller {
 		$data['active_menu'] = "";
 		$data['user'] = $this->user->get_user('id', $userid);
 		$data['churches'] = $this->church->get_all();		
-		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('templates/header', $data);
 		$this->load->view('edituserform');
-		$this->load->view('admin_templates/footer');
+		$this->load->view('templates/footer');
 	}
 
 	public function savesetting() {
@@ -141,9 +135,9 @@ class Admin extends CI_Controller {
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
 		$data['ministries'] = $this->ministry->get_all();
-		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('admin_new_member_form', $data);
-		$this->load->view('admin_templates/footer');
+		$this->load->view('templates/header', $data);
+		$this->load->view('new_member_form', $data);
+		$this->load->view('templates/footer');
 
 	}
 
@@ -192,9 +186,9 @@ class Admin extends CI_Controller {
 			$data['links'] = $this->pagination->create_links();
 			$data['active_menu'] = "listmembers";
 			$data['members'] = $this->member->get_filtered_sorted('created', 'DESC', $config['per_page'], $page);
-			$this->load->view('admin_templates/admin_header', $data);
-			$this->load->view('admin_list_members');
-			$this->load->view('admin_templates/footer');
+			$this->load->view('templates/header', $data);
+			$this->load->view('list_members');
+			$this->load->view('templates/footer');
 
 		} else {
 			$config['total_rows'] = $this->member->filtered_members_count();
@@ -206,9 +200,9 @@ class Admin extends CI_Controller {
 			$data['links'] = $this->pagination->create_links();
 			$data['active_menu'] = "listmembers";
 			$data['members'] = $this->member->get_filtered_sorted('created', 'DESC', $config['per_page'], $page);
-			$this->load->view('admin_templates/admin_header', $data);
-			$this->load->view('admin_list_members');
-			$this->load->view('admin_templates/footer');
+			$this->load->view('templates/header', $data);
+			$this->load->view('list_members');
+			$this->load->view('templates/footer');
 		}
 	}
 
@@ -317,9 +311,9 @@ class Admin extends CI_Controller {
 		$data['member'] = $this->member->get_one($id);
 		$data['timelines'] = $this->timeline->get_timeline($id);
 		$data['assigned_groups'] = $this->group->get_assigned_groups($id);
-		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('templates/header', $data);
 		$this->load->view('member_details');
-		$this->load->view('admin_templates/footer');		
+		$this->load->view('templates/footer');		
 	}
 
 	public function editmember($id = NULL) {
@@ -330,9 +324,9 @@ class Admin extends CI_Controller {
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
 		$data['ministries'] = $this->ministry->get_all();
-		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('admin_edit_person_form');
-		$this->load->view('admin_templates/footer');		
+		$this->load->view('templates/header', $data);
+		$this->load->view('edit_person_form');
+		$this->load->view('templates/footer');		
 	}
 
 	public function listgroups() {
@@ -364,9 +358,9 @@ class Admin extends CI_Controller {
 		$data['links'] = $this->pagination->create_links();
 		$data['active_menu'] = "groups";
 		$data['groups'] = $this->group->get_all('created', 'DESC', $config["per_page"], $page);
-		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('admin_list_groups');
-		$this->load->view('admin_templates/footer');		
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_groups');
+		$this->load->view('templates/footer');		
 	}
 
 	public function savegroup() {
@@ -506,7 +500,7 @@ class Admin extends CI_Controller {
 
 	public function export_members_print() {
 		$data['members'] = $this->member->get_members_for_export();
-		$this->load->view('admin_members_print', $data);
+		$this->load->view('members_print', $data);
 	}
 
 
@@ -529,17 +523,17 @@ class Admin extends CI_Controller {
 		$data['group'] = $this->group->get_one($id);
 		$data['group_members'] = $this->member->get_group_members($id);
 		$data['non_group_members'] = $this->member->get_non_group_members($id);
-		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('templates/header', $data);
 		$this->load->view('group_details');
-		$this->load->view('admin_templates/footer');				
+		$this->load->view('templates/footer');				
 	}
 
 	public function sunday_school_classes() {
 		$data['active_menu'] = "sunday_school";
 		$data['sunday_school_classes'] = $this->group->get_sunday_classes();
-		$this->load->view('admin_templates/admin_header', $data);
+		$this->load->view('templates/header', $data);
 		$this->load->view('sunday_school_classes');
-		$this->load->view('admin_templates/footer');						
+		$this->load->view('templates/footer');						
 	}
 
 	public function remove_group_member($mid, $gid) {
@@ -553,22 +547,22 @@ class Admin extends CI_Controller {
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
 		$data['ministries'] = $this->ministry->get_all();
-		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('admin_list_form_elements');
-		$this->load->view('admin_templates/footer');								
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_form_elements');
+		$this->load->view('templates/footer');								
 	}
 
 	public function adminreport() {
 		$data['active_menu'] = "adminreport";
 		$data['church_name'] = $this->cnfg->get('church_name');
-		$this->load->view('admin_templates/admin_header', $data);
-		$this->load->view('admin_report');
-		$this->load->view('admin_templates/footer');								
+		$this->load->view('templates/header', $data);
+		$this->load->view('report');
+		$this->load->view('templates/footer');								
 	}
 
 	public function adminreportprint() {
 		$data['church_name'] = $this->cnfg->get('church_name');
-		$this->load->view('admin_report_print', $data);		
+		$this->load->view('report_print', $data);		
 	}
 
 	public function addmembershiplevelchoice() {

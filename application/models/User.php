@@ -6,7 +6,6 @@ class User extends CI_Model {
 	public function __construct() {
 		parent::__construct();
 
-		
 	}
 
 	public function user_can_log_in($username, $password) {
@@ -22,7 +21,11 @@ class User extends CI_Model {
 		if($query->num_rows() == 1){
 			$data = $query->result_array();
 			$this->db->where('username', $username);
-			$this->db->update('users', array('login_count' => $data[0]['login_count']+1));
+			$input_data = array(
+				'login_count' => $data[0]['login_count']+1, 
+				'last_login' => date('Y-m-d h:m:s')
+				);
+			$this->db->update('users', $input_data);
 			return true;			
 		} else {
 			return false;
@@ -37,15 +40,26 @@ class User extends CI_Model {
 	}
 
 	public function add() {
+		$this->load->model('cnfg');		
+		$psw = $this->cnfg->get('default_password');
+		$user_type = 'standard';
+		if($this->input->post('administrator')) {
+			$user_type = "administrator";
+		}
+
 		$data = array(
 			'firstname' => $this->input->post('firstname'), 
 			'lastname' => $this->input->post('lastname'), 
 			'username' => $this->input->post('username'), 
-			'password' => md5($this->input->post('password')), 
-			'role' => $this->input->post('role'), 
-			'church' => $this->input->post('church'), 
-			'user_type' => 'administrator' 
-			);
+			'password' => md5($psw),  
+			'user_type' => $user_type,
+			'p_register_member' => $this->input->post('p_register_member'),
+			'p_edit_member' => $this->input->post('p_edit_member'),
+			'p_delete_member' => $this->input->post('p_delete_member'),
+			'p_manage_form' => $this->input->post('p_manage_form'),
+			'p_manage_group' => $this->input->post('p_manage_group'),
+			'p_generate_member_report' => $this->input->post('p_generate_member_report'),
+			);		
 		if($this->db->insert('users', $data)) {
 			return true;
 		} else {

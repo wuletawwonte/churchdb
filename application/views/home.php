@@ -120,7 +120,7 @@
 
                             </a>
                             <span class="user-details"><?= $member['firstname'].' '.$member['middlename']; ?></span>
-                            <span class="users-list-date">04/15/2017&nbsp;</span>
+                            <span class="users-list-date"><?= $member['created']; ?>&nbsp;</span>
                         </li>
                         <?php } ?>
                 </ul>
@@ -138,7 +138,8 @@
       <!-- DONUT CHART -->
       <div class="box box-danger">
         <div class="box-header with-border">
-          <h3 class="box-title">Donut Chart</h3>
+          <i class="fa fa-address-card-o"></i>
+          <h3 class="box-title"> የፆታ ተዋፅኦ </h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -147,15 +148,15 @@
           </div>
         </div>
         <div class="box-body">
-          <canvas id="pieChart" style="height:250px"></canvas>
+          <canvas id="pieChart" style="height: 256px; width: 513px;" height="256" width="513"></canvas>
         </div>
         <!-- /.box-body -->
+        <div class="box-footer">
+          <div id="gender-donut-legend" class="chart-legend pull-right"><span style="color: white;padding-right: 4px;padding-left: 2px;background-color:#003399">ወንድ</span> <span style="color: white;padding-right: 4px;padding-left: 2px;background-color:#9900ff">ሴት</span> <span style="color: white;padding-right: 4px;padding-left: 2px;background-color:#3399ff">ወንድ ልጆች</span> <span style="color: white;padding-right: 4px;padding-left: 2px;background-color:#009933">ሴት ልጆች</span> </div>
+
+        </div>
       </div>
       <!-- /.box -->
-    </div>
-
-</div>
-
 
 
 

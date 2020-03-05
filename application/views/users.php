@@ -7,12 +7,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Users
-        <small>List of Registered Users</small>
+        የሲስተም ተጠቃሚዎች
+        <small>የሲስተም ተጠቃሚዎች ዝርዝር</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>sadmin/users"><i class="glyphicon glyphicon-users"></i> Users</a></li>
-        <li class="active">List</li>
+        <li><a href="<?php echo base_url(); ?>"><i class="fa fa-cog"></i> መቼት</a></li>
+        <li class="active"><a href="<?php echo base_url(); ?>admin/users"> የሲስተም ተጠቃሚዎች</a></li>
       </ol>
     </section>
 
@@ -35,41 +35,44 @@
     <!-- Default box -->
     <div class="box box-primary">
         <div class="box-header">
-            <a href="<?php echo base_url(); ?>sadmin/newuserform" class="btn btn-app"><i class="glyphicon glyphicon-user"></i>New User</a>
-            <a href="SettingsUser.php" class="btn btn-app"><i class="glyphicon glyphicon-wrench"></i>User Settings</a>
+            <a href="<?php echo base_url(); ?>admin/newuserform" class="btn btn-app"><i class="fa fa-user-plus"></i> አዲስ ተጠቃሚ </a>
+            <a href="SettingsUser.php" class="btn btn-app"><i class="fa fa-wrench"></i>የተጠቃሚዎች መቼት</a>
         </div>
+    </div>
 
+    <div class="box">
         <div class="box-body">
-            <table class="table table-hover dt-responsive" id="user-listing-table" style="width:100%;">
+            <table class="table table-hover table-bordered dt-responsive table-striped" id="user-listing-table" style="width:100%;">
                 <thead>
                 <tr>
-                    <th>Actions</th>
-                    <th>Name</th>
-                    <th align="center">Last Login</th>
-                    <th align="center">Total Logins</th>
-                    <th align="center">Date Created</th>
-                    <th align="center">Password</th>
+                    <th>ተግባራት</th>
+                    <th>ስም</th>
+                    <th align="center">ለመጨረሻ ጊዜ የተገባበት</th>
+                    <th align="center">ስንት ጊዜ ተገባ</th>
+                    <th align="center">የተፈጠረበት ቀንና ሰዓት</th>
+                    <th align="center">የይለፍ ቃል</th>
 
                 </tr>
                 </thead>
                 <tbody>
 
-                    <?php foreach($users as $user) {  
-                            if($user['user_type'] != 'super_administrator') { ?>
-
+                    <?php foreach($users as $user) {  ?>
                     <tr>
                         <td>
-                            <a href="<?php echo base_url(); ?>sadmin/edituserform/<?= $user['id'] ?>"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a href="#"><i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a onclick=""><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                            <?php if($user['user_type'] != 'super_administrator') { ?>
+
+                                <a href="<?php echo base_url(); ?>sadmin/edituserform/<?= $user['id'] ?>"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                                <a href="#"><i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                                <a onclick=""><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                            <?php } ?>
                         </td>
 
                         <td>
                             <a href="#"> <?php echo $user['firstname'].' '.$user['lastname']; ?></a>
                         </td>
 
-                        <td>Jan 23, 2018</td>
-                        <td align="center">20</td>
+                        <td><?= $user['last_login']; ?></td>
+                        <td align="center"><?= $user['login_count']; ?></td>
                         <td><?php echo $user['created']; ?></td>
 
                         <td>
@@ -79,7 +82,7 @@
 
                     </tr>
 
-                    <?php } } ?>
+                    <?php } ?>
 
                 </tbody>
             </table>

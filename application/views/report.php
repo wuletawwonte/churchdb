@@ -3,19 +3,19 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        General Report
-        <small>#007612</small>
+        ጠቅላላ ሪፖርት
+        <!-- <small>#007612</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">Report</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
+        <li class="active">ሪፖርት</li>
       </ol>
     </section>
 
     <div class="pad margin no-print">
       <div class="callout callout-info" style="margin-bottom: 0!important;">
-        <h4><i class="fa fa-info"></i> Note:</h4>
-        This page has been enhanced for printing. Click the print button at the bottom of the report.
+        <h4> ልብ ይበሉ:</h4>
+        ይህ ገፅ ለህተመት የተስተካከለ ነው። ከስር ህትመት የሚለውን ይጫኑ።
       </div>
     </div>
 
@@ -26,7 +26,7 @@
         <div class="col-xs-12">
           <h2 class="page-header">
             <i class="fa fa-globe"></i> <?php echo $this->session->userdata('system_name'); ?>, Inc.
-            <small class="pull-right">Date: <?= date('M-d-Y'); ?></small>
+            <small class="pull-right">ቀን: <?= date('d-m-Y'); ?> እ.አ.አ</small>
           </h2>
         </div>
         <!-- /.col -->
@@ -36,9 +36,9 @@
         <div class="col-sm-4 invoice-col">
           From
           <address>
-            <strong>Admin, Inc.</strong><br>
-            Church<br>
-            San Francisco, CA 94107<br>
+            <strong>ዋና የሲስተም ተቆጣጣሪ</strong><br>
+            የቤተክርስቲያኒቱ ስም<br>
+            የቤተክርስቲያኒቱ አድራሻ<br>
             Phone: (804) 123-5432<br>
             Email: info@almasaeedstudio.com
           </address>
@@ -49,7 +49,7 @@
           <address>
             <strong><?= $_SESSION['name']; ?></strong><br>
             <?= $church_name; ?><br>
-            San Francisco, CA 94107<br>
+            አርባሚንጭ፣ ሲቀላ<br>
             Phone: (555) 539-1037<br>
             Email: john.doe@example.com
           </address>
@@ -161,7 +161,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="<?= base_url(); ?>admin/adminreportprint" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+          <a href="<?= base_url(); ?>admin/adminreportprint" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> ህትመት </a>
           <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
           </button>
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
