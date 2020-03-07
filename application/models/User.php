@@ -121,7 +121,18 @@ class User extends CI_Model {
 		} else {
 			return false;
 		}
+	}
 
+	public function users_count() {
+		$data = $this->db->get('users');
+		return $data->num_rows();
+	}
+
+	public function get_all_users($limit = NULL, $start = NULL) {
+		$this->db->limit($limit, $start);
+		$data = $this->db->get('users');
+
+		return $data->result_array();
 	}
 
 

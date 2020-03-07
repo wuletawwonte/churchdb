@@ -43,8 +43,34 @@ class Admin extends CI_Controller {
 
 	public function users() {
 
+		$config = array(
+				'base_url' => base_url('admin/users'), 
+				'per_page' => 8,
+				'uri_segment'=> 3,
+				'full_tag_open' => "<ul class='pagination pagination-sm'>",
+				'full_tag_close' => "</ul>",
+				'num_tag_open' => '<li>',
+				'num_tag_close' => '</li>',
+				'cur_tag_open' => "<li class='disabled'><li class='active'><a href='#'>",
+				'cur_tag_close' => "<span class='sr-only'></span></a></li>",
+				'next_tag_open' => "<li>",
+				'next_tagl_close' => "</li>",
+				'prev_tag_open' => "<li>",
+				'prev_tagl_close' => "</li>",
+				'first_tag_open' => "<li>",
+				'first_tagl_close' => "</li>",
+				'last_tag_open' => "<li>",
+				'last_tagl_close' => "</li>",
+				'total_rows' => $this->user->users_count()
+			);
+
+		$this->pagination->initialize($config);
+
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+		$data['links'] = $this->pagination->create_links();
 		$data['active_menu'] = "users";
-		$data['users'] = $this->user->get_all();
+		$data['users'] = $this->user->get_all_users($config['per_page'], $page);
 		$this->load->view('templates/header', $data);
 		$this->load->view('users');
 		$this->load->view('templates/footer');

@@ -118,7 +118,9 @@
 
                     </tbody>
                 </table>
+            <div style="text-align: end;"><p><?= $links; ?></p></div>
         </div>
+
         <!-- /.box-body -->
     </div>
     <!-- /.box -->
