@@ -11,7 +11,7 @@
         	ተጠቃሚ ምዝገባ
       	</h1>
       	<ol class="breadcrumb">
-        	<li><a href="<?php echo base_url(); ?>admin/listusers"><i class="fa fa-cog"></i> ጠቅላላ መቼት </a></li>
+        	<li><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-cog"></i> ጠቅላላ መቼት </a></li>
         	<li class="active">ተጠቃሚ ምዝገባ</li>
       	</ol>
     </section>
@@ -29,57 +29,57 @@
 		        </div>
 
 
-		        <form method="post" action="<?php echo base_url(); ?>admin/registeruser">
+		        <form method="post" action="<?php echo base_url(); ?>admin/edituser/<?= $user['id']; ?>">
 		            <div class="table-responsive">
 		                <table class="table table-hover">
 
 		                    <tr>
 		                        <td>ስም:</td>
-		                        <td><input type="text" name="firstname" class="form-control" required></td>
+		                        <td><input type="text" value="<?= $user['firstname']; ?>" name="firstname" class="form-control" required></td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>የአባት ስም:</td>
-		                        <td><input type="text" name="lastname" class="form-control" required></td>
+		                        <td><input type="text" value="<?= $user['lastname']; ?>" name="lastname" class="form-control" required></td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>የሲስተም መግቢያ ስም:</td>
-		                        <td><input type="text" name="username" class="form-control" required></td>
+		                        <td><input type="text" value="<?= $user['username']; ?>" name="username" class="form-control" required></td>
 		                    </tr>
 
 		                    <tr>
 		                        <td><b>የሲስተም አስተዳደር:</b></td>
-		                        <td><input type="checkbox" name="administrator" id="admincheck">&nbsp;<span class="SmallText"> (ሁሉንም ተግባራት ማከናወን ይችላል።)</span></td>
+		                        <td><input type="checkbox" name="administrator" id="admincheck" <?php if($user['user_type'] == 'administrator'){ echo 'checked'; } ?> >&nbsp;<span class="SmallText"> (ሁሉንም ተግባራት ማከናወን ይችላል።)</span></td>
 		                    </tr>
 		                    <tr>
 		                        <td>ምዕመን መመዝገብ:</td>
-		                        <td><input type="checkbox" class="permissions"  value="allow" name="p_register_member">&nbsp;</td>
+		                        <td><input type="checkbox" class="permissions"  value="allow" name="p_register_member" <?php if($user['p_register_member'] == 'allow'){ echo 'checked'; } ?>>&nbsp;</td>
 		                    </tr>
 		                    <tr>
 		                        <td>የምዕመን መረጃ ማስተካከል:</td>
-		                        <td><input type="checkbox" class="permissions" value="allow" name="p_edit_member">&nbsp;</td>
+		                        <td><input type="checkbox" class="permissions" value="allow" name="p_edit_member" <?php if($user['p_edit_member'] == 'allow'){ echo 'checked'; } ?> >&nbsp;</td>
 		                    </tr>
 		                    <tr>
 		                        <td>የምዕመን መረጃ ማጥፋት:</td>
-		                        <td><input type="checkbox" class="permissions" value="allow" name="p_delete_member">&nbsp;</td>
+		                        <td><input type="checkbox" class="permissions" value="allow" name="p_delete_member" <?php if($user['p_delete_member'] == 'allow'){ echo 'checked'; } ?> >&nbsp;</td>
 		                    </tr>
 		                    <tr>
 		                        <td>የቅፅ ማስተካከያ ፈቃድ:</td>
-		                        <td><input type="checkbox" class="permissions" value="allow" name="p_manage_form">&nbsp;</td>
+		                        <td><input type="checkbox" class="permissions" value="allow" name="p_manage_form" <?php if($user['p_manage_form'] == 'allow'){ echo 'checked'; } ?> >&nbsp;</td>
 		                    </tr>
 		                    <tr>
 		                        <td>ቡድን የማስተዳደር ፈቃድ:</td>
-		                        <td><input type="checkbox" class="permissions" value="allow" name="p_manage_group">&nbsp;</td>
+		                        <td><input type="checkbox" class="permissions" value="allow" name="p_manage_group" <?php if($user['p_manage_group'] == 'allow'){ echo 'checked'; } ?> >&nbsp;</td>
 		                    </tr>
 		                    <tr>
 		                        <td>ሪፖርት የማዘዝ ፈቃድ:</td>
-		                        <td><input type="checkbox" class="permissions" value="allow" name="p_generate_member_report">&nbsp;<span class="SmallText"> (የምዕመናንን ሪፖርት የማዘዝ ፍቃድ።)</span></td>
+		                        <td><input type="checkbox" class="permissions" value="allow" name="p_generate_member_report" <?php if($user['p_generate_member_report'] == 'allow'){ echo 'checked'; } ?> >&nbsp;<span class="SmallText"> (የምዕመናንን ሪፖርት የማዘዝ ፍቃድ።)</span></td>
 		                    </tr>
 		                    <tr>
-		                        <td colspan="2" align="center">
-		                            <input type="submit" class="btn btn-primary" value="መዝግብ">&nbsp;
-		                            <input type="reset" class="btn" value="አጥፋ">
+		                    	<td></td>
+		                        <td>
+		                            <input type="submit" class="btn btn-primary" value="ቀይር">&nbsp;
 		                        </td>
 		                    </tr>
 		                </table>
@@ -120,5 +120,9 @@
     	$(".permissions").iCheck('uncheck');    	
     });
 
+    if($("#admincheck").is(":checked")) {
+    	$(".permissions").iCheck('check');
+    	$(".permissions").iCheck('disable');
+    }
 
 </script>

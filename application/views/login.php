@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="wrapper">
 	<div class="login-box main-rapper">
 	  <div class="login-logo">
-	    <a href="<?= base_url(); ?>"><b><?php echo $system_name; ?></a>
+	    <a href="<?= base_url(); ?>"><?php echo $system_name; ?></a>
 	  </div>
 	  <!-- /.login-logo -->
 	  <div class="login-box-body">

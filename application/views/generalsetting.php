@@ -6,10 +6,11 @@
     <section class="content-header">
     	<h1>
         	ጠቅላላ መቼት
+        	<small>ዋና የሲስተም ለውጦች ማስተካከያ</small>
       	</h1>
       	<ol class="breadcrumb">
-        	<li><a href="<?php echo base_url(); ?>sadmin/generalsetting"><i class="glyphicon glyphicon-cog"></i> General Settings</a></li>
-        	<li class="active">General</li>
+        	<li><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-gears"></i> መቼት </a></li>
+        	<li class="active">ጠቅላላ መቼት </li>
       	</ol>
     </section>
 
@@ -22,12 +23,22 @@
 		    <div class="box-body">
 
 		        <div class="callout callout-info">
-		            ልብ ይበሉ: አጠቃላይ መቼት ዋና የሚባሉ የሲስተም ለውጦችን ያደርጋል።
+		            ልብ ይበሉ: አጠቃላይ መቼት ዋና የሚባሉ የሲስተም ለውጦችን የሚያድርግ ሲሆን ለውጦቹን ለማየት እንደገና መግባት ያስፈልጋል።
 		        </div>
 
 
+			     <?php if($this->session->flashdata('success')) { ?>
+			        <div class="callout callout-info">
+			            <?php echo $this->session->flashdata('success'); ?>
+			        </div>
+			    <?php } else if($this->session->flashdata('error')) { ?>
+			        <div class="callout callout-danger">
+			            <?php echo $this->session->flashdata('error'); ?>
+			        </div>
+			    <?php } ?>
+
 		        <form method="post" action="<?php echo base_url(); ?>admin/savesetting">
-		            <div class="table-responsive">
+		            <div class="table-responsive" width="100%">
 		                <table class="table table-hover">
 
 		                    <tr>
@@ -51,9 +62,10 @@
 		                    </tr>
 
 		                    <tr>
-		                        <td colspan="2" align="center">
-		                            <input type="submit" class="btn btn-primary" value="Save" name="save">&nbsp;
-		                            <input type="button" class="btn" name="Cancel" value="Cancel">
+		                    	<td></td>
+		                        <td colspan="2">
+		                            <input type="submit" class="btn btn-primary" value="መዝግብ" name="save">&nbsp;
+		                            <input type="reset" class="btn" value="አጥፋ">
 		                        </td>
 		                    </tr>
 		                </table>

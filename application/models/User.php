@@ -67,16 +67,25 @@ class User extends CI_Model {
 		}
 	}
 
-	public function update_user() {
+	public function edit($uid) {
+		$user_type = 'standard';
+		if($this->input->post('administrator')) {
+			$user_type = "administrator";
+		}
+
 		$data = array(
 			'firstname' => $this->input->post('firstname'), 
 			'lastname' => $this->input->post('lastname'), 
 			'username' => $this->input->post('username'), 
-			'role' => $this->input->post('role'), 
-			'church' => $this->input->post('church'), 
-			'user_type' => 'administrator' 
-			);
-		$this->db->where('id', $this->input->post('id'));
+			'user_type' => $user_type,
+			'p_register_member' => $this->input->post('p_register_member'),
+			'p_edit_member' => $this->input->post('p_edit_member'),
+			'p_delete_member' => $this->input->post('p_delete_member'),
+			'p_manage_form' => $this->input->post('p_manage_form'),
+			'p_manage_group' => $this->input->post('p_manage_group'),
+			'p_generate_member_report' => $this->input->post('p_generate_member_report'),
+			);		
+		$this->db->where('id', $uid);
 		if($this->db->update('users', $data)) {
 			return true;
 		} else {
@@ -90,7 +99,7 @@ class User extends CI_Model {
 	}
 
 	public function get_my($attrib) {
-		$this->db->where('username', $this->session->userdata('username'));
+		$this->db->where('username', $this->session->userdata('current_user')['username']);
 		$data = $this->db->get('users');
 		$data = $data->result_array(); 
 
@@ -101,8 +110,18 @@ class User extends CI_Model {
 		$data = array(
 			$attrib => $value
 			);
-		$this->db->where('username', $this->session->userdata('username'));
+		$this->db->where('username', $this->session->userdata('current_user')['username']);
 		$this->db->update('users', $data);
+	}
+
+	public function delete_user($uid) {
+		$this->db->where('id', $uid);
+		if($this->db->delete('users')) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 

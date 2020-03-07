@@ -35,6 +35,11 @@
 <div class="content-wrapper">
     <section class="content-header">
       <h1><?= lang('person_profile') ?></h1>
+        <ol class="breadcrumb">
+          <li><a href="<?php echo base_url(); ?>admin/listmembers"><i class="fa fa-users"></i> ምዕመናን </a></li>
+          <li class="active"> ምዕመን </li>
+        </ol>
+
     </section>
     <!-- Main content -->
     <section class="content">
@@ -109,7 +114,8 @@
           <a class="btn btn-app" href="/master/WhyCameEditor.php?PersonID=59"><i class="fa fa-money"></i> <?= lang('tithes_info') ?></a>
           <a class="btn btn-app" href="/master/NoteEditor.php?PersonID=59"><i class="fa fa-sticky-note"></i> <?= lang('note_info') ?></a>
           <a class="btn btn-app" id="addGroup"><i class="fa fa-users"></i> <?= lang('assign_new_group') ?> </a>
-          <a class="btn btn-app bg-maroon delete-person" data-person_name="Franklin Beck" data-person_id="59"><i class="fa fa-trash-o"></i> <?= lang('delete_this_member') ?> </a>
+          <a class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> ምዕመን አጥፋ </a>
+          <a class="btn btn-app" href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-user-secret"></i> መረጃ ቀይር </a>
           <a class="btn btn-app" role="button" href="/master/SelectList.php?mode=person"><i class="fa fa-list"></i> List Members</span></a>
         </div>
       </div>
@@ -117,8 +123,7 @@
         <div class="nav-tabs-custom">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">Timeline</a></li>
-            <li role="presentation"><a href="#family" aria-controls="family" role="tab" data-toggle="tab">Family</a></li>
+            <li role="presentation" class="active"><a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">የጊዜ መስመር</a></li>
             <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Assigned Groups</a></li>
             <li role="presentation"><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">Assigned Properties</a></li>
             <li role="presentation"><a href="#volunteer" aria-controls="volunteer" role="tab" data-toggle="tab">Volunteer Opportunities</a></li>
@@ -127,93 +132,44 @@
 
             <!-- Tab panes -->
             <div class="tab-content">
-              <div role="tab-pane fade" class="tab-pane active" id="timeline">
-                <ul class="timeline">
-                  <!-- timeline time label -->
-                  <li class="time-label">
-                    <span class="bg-red">
-                      2019-02-04                    </span>
-                    </li>
-                    <!-- /.timeline-label -->
-                    <?php foreach ($timelines as $timeline) { 
-                    if($timeline['change_occured'] == 'created') { ?>
-                      <li>
-                        <!-- timeline icon -->
-                        <i class="fa fa-plus bg-blue"></i>
-                        <div class="timeline-item">
-                          <span class="time">
-                            <i class="fa fa-clock-o"></i> <?= $timeline['date']; ?></span>
-                            <h4 class="timeline-header">Created by <?= $timeline['by_user']; ?></h4>
-                        </div>
-                      </li>
-                    <?php } else if($timeline['change_occured'] == 'updated') { ?>
-                      <li>
-                        <!-- timeline icon -->
-                        <i class="fa fa-pencil bg-blue"></i>
-                        <div class="timeline-item">
-                          <span class="time">
-                            <i class="fa fa-clock-o"></i> <?= $timeline['date']; ?></span>
-                            <h4 class="timeline-header">Edited by <?= $timeline['by_user']; ?></h4>
-                        </div>
-                      </li>
-                    <?php } } ?>
 
-                                <!-- END timeline item -->
-                              </ul>
-                            </div>
-                          
+                      <div role="tab-pane fade" class="tab-pane active" id="timeline">
+                          <div style="max-height: 450px;overflow-y: scroll;">
+                            <ul class="timeline">
+                                <!-- timeline time label -->
+                                <li class="time-label">
+                                  <span class="bg-red">
+                                    <?= date('Y-m-d'); ?>                    </span>
+                                  </li>
+                                  <!-- /.timeline-label -->
+                                  <?php foreach ($timelines as $timeline) { 
+                                  if($timeline['change_occured'] == 'created') { ?>
+                                    <li>
+                                      <!-- timeline icon -->
+                                      <i class="fa fa-plus bg-blue"></i>
+                                      <div class="timeline-item">
+                                        <span class="time">
+                                          <i class="fa fa-clock-o"></i> <?= $timeline['date']; ?></span>
+                                          <h4 class="timeline-header">በ<?= $timeline['by_user']; ?> ተመዘገበ።</h4>
+                                      </div>
+                                    </li>
+                                  <?php } else if($timeline['change_occured'] == 'updated') { ?>
+                                    <li>
+                                      <!-- timeline icon -->
+                                      <i class="fa fa-pencil bg-blue"></i>
+                                      <div class="timeline-item">
+                                        <span class="time">
+                                          <i class="fa fa-clock-o"></i> <?= $timeline['date']; ?></span>
+                                          <h4 class="timeline-header">በ<?= $timeline['by_user']; ?> ተቀየረ</h4>
+                                      </div>
+                                    </li>
+                                  <?php } } ?>
 
-
-
-
-                          <div role="tab-pane fade" class="tab-pane" id="family">
-
-                          <?php if(isset($family_members)) { ?>
-                            <table class="table user-list table-hover">
-                              <thead>
-                                <tr>
-                                  <th></th>
-                                  <th><span><?= lang('name') ?></span></th>
-                                  <th class="text-center"><span>Role</span></th>
-                                  <th><span>Birthday</span></th>
-                                  <th><span>Email</span></th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              <?php foreach($family_members as $member) {?>
-                                <tr>
-                                  <td>
-                                    <div class="member-profile-image" style="background: <?= $member['profile_color']; ?>"><?= $member['firstname'][0].$member['middlename'][0]; ?></div>
-                                  </td>
-                                  <td>                      
-                                    <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"
-                                    class="user-link"><?= $member['firstname'].' '.$member['middlename'];?> </a>
-                                  </td>
-                                  <td class="text-center">
-                                    <span style="line-height: 50px;" class='label label-default'><?= $member['family_role']?> </span>
-                                  </td>
-                                  <td>
-                                    <span> <?= $member['birthdate']?> </span>                                
-                                  </td>
-                                  <td>
-                                    <a href="mailto:wuletaw.wonte@amu.edu.et"><?= $member['email'] ?></a>
-                                  </td>
-                                </tr>
-                              <?php } ?>
-                        </tbody>
-                      </table><p/><hr> <?php } else { ?>
-                                <div class="main-box clearfix">
-                                  <div class="main-box-body clearfix">
-                                    <br>
-                                    <div class="alert alert-warning">
-                                      <i class="fa fa-question-circle fa-fw fa-lg"></i> <span>Not Member of Any Family.</span>
-                                    </div>
-                                  </div>
-                                </div>
-
-                              <?php } ?>
-
+                              <!-- END timeline item -->
+                            </ul>
                           </div>
+                      </div>
+                          
 
 
 

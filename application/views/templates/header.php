@@ -7,14 +7,14 @@
 
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2.min.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2-bootstrap.min.css') ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/skins/skin-blue-light.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/css/skins/skin-blue-light.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/css/AdminLTE.min.css'); ?>">
 
-  <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>">
+  <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.ico'); ?>">
   
   <style type="text/css">
     
@@ -31,14 +31,9 @@
   </style>
 
 <!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3 -->
-<script src="<?php echo base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?php echo base_url(); ?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
-<!-- Select2 -->
+<script src="<?= base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
+<script src="<?= base_url(); ?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?= base_url('assets/vendors/select2/js/select2.min.js') ?>"></script>
-  
 
 </head>
 
@@ -132,7 +127,7 @@
               <!-- The user image in the navbar-->
               <img src="<?php echo base_url(); ?>assets/img/user-icon.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs"><?php echo $this->session->userdata('name'); ?></span>
+              <span class="hidden-xs"><?php echo $this->session->userdata('current_user')['firstname'].' '.$this->session->userdata('current_user')['lastname']; ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -141,7 +136,7 @@
 
                 <p>
                   <?php echo $this->session->userdata('system_name'); ?> - Admin
-                  <small>Member since Nov. 2012</small>
+                  <small><?= $this->session->userdata('church_name'); ?></small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -187,7 +182,7 @@
           <img src="<?php echo base_url(); ?>assets/img/user-icon.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php echo $this->session->userdata('name'); ?></p>
+          <p><?php echo $this->session->userdata('current_user')['firstname'].' '.$this->session->userdata('current_user')['lastname']; ?></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> በመስመር ላይ</a>
         </div>
@@ -239,7 +234,7 @@
 
         <li <?php if($active_menu == 'adminreport') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/adminreport"><i class="fa fa-file-pdf-o"></i> <span><?= lang('data_report'); ?></span></a></li>
         <li <?php if($active_menu == 'generalsetting' || $active_menu == 'users') { ?> class="active" <?php } ?> class="treeview">
-          <a href="#"><i class="fa fa-cog"></i> <span> መቼት </span>
+          <a href="#"><i class="fa fa-gears"></i> <span> መቼት </span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>

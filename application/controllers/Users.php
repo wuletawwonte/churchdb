@@ -40,20 +40,18 @@ class Users extends CI_Controller {
 				'rows_per_page' => 5
 			);
 			$data = array(
-				'name' => $userdata['firstname'].' '.$userdata['lastname'],
-				'username' => $this->input->post('username'),
+				'current_user' => $userdata,
 				'is_logged_in' => TRUE,
-				'user_type' => $userdata['user_type'],
 				'last_visited' => time(),
+				'church_name' => $this->cnfg->get('church_name'),
+				'system_name' => $this->cnfg->get('system_name'),
+				'system_name_short' => $this->cnfg->get('system_name_short'),
 				'filtermember' => $filtermember
 				);
 
 			$this->session->set_userdata($data);
 			
-			if($this->session->userdata('user_type') == "administrator") {
-
-				$this->session->set_userdata('system_name', $this->cnfg->get('system_name'));
-				$this->session->set_userdata('system_name_short', $this->cnfg->get('system_name_short'));
+			if($this->session->userdata('current_user')['user_type'] == "administrator") {
 
 				redirect('admin/index');
 

@@ -61,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- lockscreen credentials (contains the form) -->
     <form class="lockscreen-credentials" method="POST" action="<?= base_url('users/login'); ?>">
-      <input type="text" name="username" value="<?= $this->session->userdata('username'); ?>" hidden>
+      <input type="text" name="username" value="<?= $this->session->userdata('current_user')['username']; ?>" hidden>
       <div class="input-group">
         <input type="password" name="password" class="form-control" placeholder="password">
 

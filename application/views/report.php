@@ -47,7 +47,7 @@
         <div class="col-sm-4 invoice-col">
           To
           <address>
-            <strong><?= $_SESSION['name']; ?></strong><br>
+            <strong><?= $_SESSION['current_user']['firstname'].' '.$_SESSION['current_user']['lastname']; ?></strong><br>
             <?= $church_name; ?><br>
             አርባሚንጭ፣ ሲቀላ<br>
             Phone: (555) 539-1037<br>

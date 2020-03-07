@@ -92,16 +92,24 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error', 'ስህተት፡ የተጠቃሚውን አካውንት መክፈት አልተቻለም።');
 			$this->newuserform();
 		}
-	
+	}
+
+	public function edituser($uid) {
+		if($this->user->edit($uid)) {
+			$this->session->set_flashdata('success', 'የተጠቃሚው አካውንት በትክክል ተቀይሯል።');
+			redirect('admin/users');
+		} else {
+			$this->session->set_flashdata('error', 'የተጠቃሚውን አካውንት መቀየር አልተቻለም።');
+			$this->newuserform();
+		}
 	}
 
 
 	public function edituserform($userid) {
 		$data['active_menu'] = "";
 		$data['user'] = $this->user->get_user('id', $userid);
-		$data['churches'] = $this->church->get_all();		
 		$this->load->view('templates/header', $data);
-		$this->load->view('edituserform');
+		$this->load->view('edit_user_form', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -109,22 +117,14 @@ class Admin extends CI_Controller {
 		
 		$this->cnfg->edit_one('system_name', $this->input->post('system_name'));
 		$this->cnfg->edit_one('system_name_short', $this->input->post('system_name_short'));
+		$this->cnfg->edit_one('church_name', $this->input->post('church_name'));
+		$this->cnfg->edit_one('default_password', $this->input->post('default_password'));
+
+		$this->session->set_flashdata('success', 'ስኬት፡ የሲስተም ለውጦች በትክክል ተመዝግበዋል።');
 
 		redirect('admin/generalsetting');
 
 	}
-
-	public function edituser() {
-	
-		if($this->user->update_user()) {
-			$this->session->set_flashdata('success', 'Success, User account information successfully updated.');
-		} else {
-			$this->session->set_flashdata('error', 'Error, Something went wrong please check fill carefully.');
-		}
-
-		redirect('admin/users');
-	}
-
 
 
 	public function personregistration() {
@@ -643,6 +643,16 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ ለሚለው ምርጫውን ማጥፋት አልተቻለም።');
 			redirect('admin/listformelements');
 		}						
+	}
+
+	public function deleteuser($uid) {
+		if($this->user->delete_user($uid)) {
+			$this->session->set_flashdata('success', 'የተጠቃሚው አካውንት በትክክል ጠፍቷል።');
+			redirect('admin/users');
+		} else {
+			$this->session->set_flashdata('error', 'የተጠቃሚው አካውንት ማጥፋት አልተቻለም።');
+			redirect('admin/users');
+		}
 	}
 
 }

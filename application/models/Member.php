@@ -37,7 +37,7 @@ class Member extends CI_Model {
 		$this->db->insert('members', $data);
 		$last_id = $this->db->insert_id();
 		$tracked_change = array(
-			'by_user' => $this->session->userdata('name'),
+			'by_user' => $this->session->userdata('current_user')['firstname'].' '.$this->session->userdata('current_user')['lastname'],
 			'change_occured' => "created",
 			'member_id' => $last_id
 			);
@@ -97,7 +97,7 @@ class Member extends CI_Model {
 		$this->db->where('id', $id);
 		$this->db->update('members', $data);
 		$tracked_change = array(
-			'by_user' => $this->session->userdata('name'),
+			'by_user' => $this->session->userdata('current_user')['firstname'].' '.$this->session->userdata('current_user')['lastname'],
 			'change_occured' => "updated",
 			'member_id' => $id
 			);

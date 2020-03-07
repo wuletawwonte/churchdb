@@ -13,8 +13,8 @@
         <?= lang('person_registration'); ?>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>"><i class="glyphicon glyphicon-user"></i> <?= lang('people'); ?></a></li>
-        <li class="active"><?= lang('add_new_person'); ?></li>
+        <li><a href="<?php echo base_url(); ?>admin/memberdetails/<?= $member['id']; ?>"><i class="fa fa-user"></i> የምዕመን መረጃ </a></li>
+        <li class="active"> መረጃ ቀይር </li>
       </ol>
     </section>
 
