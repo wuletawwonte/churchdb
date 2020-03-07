@@ -193,58 +193,16 @@
         <!-- <li class="header"><?= lang('menu'); ?></li> -->
         <!-- Optionally, you can add icons to the links -->
         <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i><span><?= lang('dashboard'); ?></span></a></li>
-        
-        <li <?php if($active_menu == 'personregistration' || $active_menu == 'listmembers' || $active_menu == 'formelements') { ?> class="active" <?php } ?> class="treeview">
-          <a href="#"><i class="fa fa-users"></i> <span> <?= lang('people'); ?></span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            
-            <li <?php if($active_menu == 'personregistration') { ?> class="active" <?php } ?>>
-                <a href="<?php echo base_url(); ?>admin/personregistration">
-                    <i class="fa fa-angle-double-right"></i> <?= lang('add_new_person'); ?></a>
-            </li>
-            
-            <li <?php if($active_menu == 'listmembers') { ?> class="active" <?php } ?>>
-                <a href="<?php echo base_url(); ?>admin/listmembers">
-                    <i class="fa fa-angle-double-right"></i> <?= lang('members'); ?></a>
-            </li>
-
-            <li <?php if($active_menu == 'formelements') { ?> class="active" <?php } ?>>
-                <a href="<?php echo base_url(); ?>admin/listformelements">
-                    <i class="fa fa-angle-double-right"></i> የቅፅ ማስተካከያ </a>
-            </li>
-                                                
-          </ul>
-        </li>
-
-        <li <?php if($active_menu == 'groups' || $active_menu == 'sunday_school') { ?> class="active" <?php } ?> class="treeview">
-          <a href="#"><i class="fa fa-tag"></i> <span><?= lang('group'); ?></span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li <?php if($active_menu == 'groups') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/listgroups"><i class="fa fa-angle-double-right"></i> <span><?= lang('groups'); ?></span></a></li>
-            <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/sunday_school_classes"><i class="fa fa-child"></i> <span><?= lang('sunday_school'); ?></span></a></li>
-          </ul>
-        </li>
+        <li <?php if($active_menu == 'personregistration') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/personregistration"><i class="fa fa-user-plus"></i> <?= lang('add_new_person'); ?></a></li>
+        <li <?php if($active_menu == 'listmembers') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/listmembers"><i class="fa fa-users"></i> <?= lang('members'); ?></a></li>      
+        <li <?php if($active_menu == 'groups') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/listgroups"><i class="fa fa-object-group"></i> <span><?= lang('groups'); ?></span></a></li>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/sunday_school_classes"><i class="fa fa-child"></i> <span><?= lang('sunday_school'); ?></span></a></li>
 
         <li <?php if($active_menu == 'adminreport') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/adminreport"><i class="fa fa-file-pdf-o"></i> <span><?= lang('data_report'); ?></span></a></li>
-        <li <?php if($active_menu == 'generalsetting' || $active_menu == 'users') { ?> class="active" <?php } ?> class="treeview">
-          <a href="#"><i class="fa fa-gears"></i> <span> መቼት </span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-angle-double-right"></i> ጠቅላላ መቼት </a></li>
-            <li <?php if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-angle-double-right"></i> የሲስተም ተጠቃሚዎች </a></li>
-            <!-- <li><a href="#"><i class="fa fa-angle-double-right"></i> የተጠቃሚ መቼት </a></li> -->
-          </ul>
-        </li>
+        <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-gear"></i> ጠቅላላ መቼት </a></li>
+        <li <?php if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-user-secret"></i> የሲስተም ተጠቃሚዎች </a></li>
+        <li <?php if($active_menu == 'formelements') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/listformelements"><i class="fa fa-tags"></i> የቅፅ ማስተካከያ </a></li>
+
       
       </ul>
       <!-- /.sidebar-menu -->
