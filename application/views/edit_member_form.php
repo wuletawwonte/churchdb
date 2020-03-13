@@ -10,7 +10,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <?= lang('person_registration'); ?>
+        የምዕመን መራጃ ማስተካከያ
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>admin/memberdetails/<?= $member['id']; ?>"><i class="fa fa-user"></i> የምዕመን መረጃ </a></li>
@@ -28,7 +28,7 @@
 		<form method="post" action="<?= base_url('admin/savememberchanges') ?>" enctype="multipart/form-data" name="PersonEditor">
 
 
-	     <?php if($this->session->flashdata('success')) { ?>
+	    <?php if($this->session->flashdata('success')) { ?>
 	        <div class="callout callout-info">
 	            <?php echo $this->session->flashdata('success'); ?>
 	        </div>
@@ -212,7 +212,7 @@
 	                    <div class="col-md-4">
 	                        <label for="Title"> <?= lang('membership_year'); ?>  :</label>
 	                        <div class="input-group">
-	                        	<input type="text" name="membership_year" value="<?= $member['membership_year'] ?>" class="form-control inputmasked" data-inputmask='"mask": "9999"' data-mask>
+	                        	<input type="text" name="membership_year" value="<?php if($member['membership_year']) { echo $member['membership_year']; } ?>" class="form-control inputmasked" data-inputmask='"mask": "9999"' data-mask>
 	                    		<div class="input-group-addon">ዓ.ም</div>
 
 	                    	</div>

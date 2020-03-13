@@ -13,7 +13,6 @@
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2-bootstrap.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/skins/skin-blue-light.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/AdminLTE.min.css'); ?>">
-
   <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.ico'); ?>">
   
   <style type="text/css">
@@ -135,32 +134,17 @@
                 <img src="<?php echo base_url(); ?>assets/img/user-icon.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $this->session->userdata('system_name'); ?> - Admin
-                  <small><?= $this->session->userdata('church_name'); ?></small>
+                  <?php echo $this->session->userdata('system_name'); ?>
+                  <small><?= $this->session->userdata('current_user')['user_type']; ?></small>
                 </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat"><i class="fa fa-user"></i>  Profile</a>
+                  <a href="<?= base_url(); ?>admin/profile" class="btn btn-default btn-flat"><i class="fa fa-user"></i>  አካውንት </a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?php echo base_url(); ?>users/logout" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Sign out</a>
+                  <a href="<?php echo base_url(); ?>users/logout" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> ዘግተው ይውጡ</a>
                 </div>
               </li>
             </ul>
@@ -190,18 +174,22 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <!-- <li class="header"><?= lang('menu'); ?></li> -->
-        <!-- Optionally, you can add icons to the links -->
-        <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i><span><?= lang('dashboard'); ?></span></a></li>
-        <li <?php if($active_menu == 'personregistration') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/personregistration"><i class="fa fa-user-plus"></i> <?= lang('add_new_person'); ?></a></li>
-        <li <?php if($active_menu == 'listmembers') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/listmembers"><i class="fa fa-users"></i> <?= lang('members'); ?></a></li>      
-        <li <?php if($active_menu == 'groups') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/listgroups"><i class="fa fa-object-group"></i> <span><?= lang('groups'); ?></span></a></li>
-        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/sunday_school_classes"><i class="fa fa-child"></i> <span><?= lang('sunday_school'); ?></span></a></li>
 
-        <li <?php if($active_menu == 'adminreport') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/adminreport"><i class="fa fa-file-pdf-o"></i> <span><?= lang('data_report'); ?></span></a></li>
-        <li <?php if($active_menu == 'generalsetting') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-gear"></i> ጠቅላላ መቼት </a></li>
-        <li <?php if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-user-secret"></i> የሲስተም ተጠቃሚዎች </a></li>
-        <li <?php if($active_menu == 'formelements') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/listformelements"><i class="fa fa-tags"></i> የቅፅ ማስተካከያ </a></li>
+        <li class="header"> ዋና ምርጫዎች </li>
+
+        <li <?php if($active_menu == 'dashboard') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i><span><?= lang('dashboard'); ?></span></a></li>
+        <li <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_register_member'] != 'allow'){ echo 'hidden'; } if($active_menu == 'personregistration') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/personregistration"><i class="fa fa-user-plus"></i> <span><?= lang('add_new_person'); ?></span></a></li>
+        <li <?php if($active_menu == 'listmembers') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/listmembers"><i class="fa fa-users"></i> <span><?= lang('members'); ?></span></a></li>      
+        <li <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_manage_group'] != 'allow'){ echo 'hidden'; } if($active_menu == 'groups') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/listgroups"><i class="fa fa-object-group"></i> <span><?= lang('groups'); ?></span></a></li>
+        <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/sunday_school_classes"><i class="fa fa-child"></i> <span><?= lang('sunday_school'); ?></span></a></li>
+        <li <?php if($active_menu == 'adminreport') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/adminreport"><i class="fa fa-file-pdf-o"></i><span> መረጃ/ሪፖርት </span></a></li>
+        
+        <li class="header"> ማስተካከያ </li>
+
+        <li <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' || $_SESSION['current_user']['user_type'] == 'የሲስተም አስተዳደር') { echo 'hidden'; } if($active_menu == 'generalsetting') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-gear"></i><span> አጠቃላይ ማስተካከያዎች </span></a></li>
+        <li <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' || $_SESSION['current_user']['user_type'] == 'የሲስተም አስተዳደር') { echo 'hidden'; } if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-user-secret"></i><span> የሲስተም ተጠቃሚዎች </span></a></li>
+        <li <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_manage_form'] != 'allow'){ echo 'hidden'; } if($active_menu == 'formelements') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/listformelements"><i class="fa fa-tags"></i><span> የቅፅ ማስተካከያ </span></a></li>
+        <li <?php if($active_menu == 'account') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/profile"><i class="fa fa-user"></i><span> የአካውንት ማስተካከያ </span></a></li>
 
       
       </ul>

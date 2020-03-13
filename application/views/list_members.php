@@ -27,8 +27,8 @@ table tbody td a, table tbody td span {
         <?= lang('welcome') ?>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-users"></i> <?= lang('people'); ?></a></li>
-        <li class="active"> ምዕመናን </li>
+          <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
+          <li class="active"> ምዕመናን </li>
       </ol>
     </section>
 
@@ -131,7 +131,7 @@ table tbody td a, table tbody td span {
                       </div>
                     </div>
                     
-                    <div class="btns col-sm-6" align="right">
+                    <div class="btns col-sm-6" align="right" <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_generate_member_report'] != 'allow'){ echo 'hidden'; } ?>
                         <span style="font-size: 15px;">Export:</span>           
                         <a href="<?= base_url(); ?>admin/export_members_excel" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Excel</a> 
                         <a href="<?= base_url(); ?>admin/export_members_csv" class="btn btn-primary"><i class="fa fa-file-o"></i> CSV</a> 
@@ -184,7 +184,7 @@ table tbody td a, table tbody td span {
                         <td><span><?= $member['created']?></span></td>
                         <td>
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'hidden'; } ?> href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a onclick=""><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
 

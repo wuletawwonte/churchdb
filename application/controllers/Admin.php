@@ -72,7 +72,7 @@ class Admin extends CI_Controller {
 		$data['active_menu'] = "users";
 		$data['users'] = $this->user->get_all_users($config['per_page'], $page);
 		$this->load->view('templates/header', $data);
-		$this->load->view('users');
+		$this->load->view('list_users');
 		$this->load->view('templates/footer');
 	}
 
@@ -93,7 +93,7 @@ class Admin extends CI_Controller {
 		$data['church_name'] = $this->cnfg->get('church_name');
 		$data['default_password'] = $this->cnfg->get('default_password');
 		$this->load->view('templates/header', $data);
-		$this->load->view('generalsetting');
+		$this->load->view('general_setting');
 		$this->load->view('templates/footer');
 
 	}
@@ -325,7 +325,7 @@ class Admin extends CI_Controller {
 
 		if($this->member->edit($this->input->post('id'), $avatar)) {
 			$this->session->set_flashdata('success', 'የምዕመኑ መረጃ በትክክል ተቀይሯል።');
-			redirect('admin/editmember/'.$this->input->post('id'));
+			redirect('admin/memberdetails/'.$this->input->post('id'));
 		} else {
 			$this->session->set_flashdata('error', 'የምዕመኑን መረጃ መቀየር አልተቻለም።');
 			redirect('admin/editmember/'.$this->input->post('id'));			
@@ -351,7 +351,7 @@ class Admin extends CI_Controller {
 		$data['membership_levels'] = $this->membership_level->get_all();
 		$data['ministries'] = $this->ministry->get_all();
 		$this->load->view('templates/header', $data);
-		$this->load->view('edit_person_form');
+		$this->load->view('edit_member_form');
 		$this->load->view('templates/footer');		
 	}
 
@@ -678,6 +678,34 @@ class Admin extends CI_Controller {
 		} else {
 			$this->session->set_flashdata('error', 'የተጠቃሚው አካውንት ማጥፋት አልተቻለም።');
 			redirect('admin/users');
+		}
+	}
+
+	public function profile() {
+		$data['active_menu'] = "account";
+		$this->load->view('templates/header', $data);
+		$this->load->view('profile');
+		$this->load->view('templates/footer');							
+	}
+
+	public function saveprofilechange() {
+	}
+
+	public function savepasswordchange() {
+		if(md5($this->input->post('current_password')) != $_SESSION['current_user']['password']) {
+			$this->session->set_flashdata('password-change-failure', 'ያስገቡት የይለፍ ቃል ትክክል አይደለም እንደገና ይሞክሩ።');
+			redirect('admin/profile');			
+		} else if($this->input->post('new_password') != $this->input->post('confirm_password')) {
+			$this->session->set_flashdata('password-change-failure', 'አዲሱ የይለፍ ቃል ከድጋሚው ጋር አንድ አይደለም በትክክል በድጋሚ ያስገቡ።');
+			redirect('admin/profile');						
+		} 
+
+		if($this->user->changepassword()) {
+			$this->session->set_flashdata('password-change-success', 'የይለፍ ቃል በትክክል ተቀይሯ።');
+			redirect('admin/profile');			
+		} else {
+			$this->session->set_flashdata('password-change-failure', 'የየለፍ ቃሉን መቀየር አልተቻለም።');
+			redirect('admin/profile');			
 		}
 	}
 

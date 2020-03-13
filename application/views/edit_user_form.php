@@ -50,7 +50,7 @@
 
 		                    <tr>
 		                        <td><b>የሲስተም አስተዳደር:</b></td>
-		                        <td><input type="checkbox" name="administrator" id="admincheck" <?php if($user['user_type'] == 'administrator'){ echo 'checked'; } ?> >&nbsp;<span class="SmallText"> (ሁሉንም ተግባራት ማከናወን ይችላል።)</span></td>
+		                        <td><input type="checkbox" name="administrator" id="admincheck" <?php if($user['user_type'] == 'የሲስተም አስተዳደር'){ echo 'checked'; } ?> >&nbsp;<span class="SmallText"> (ሁሉንም ተግባራት ማከናወን ይችላል።)</span></td>
 		                    </tr>
 		                    <tr>
 		                        <td>ምዕመን መመዝገብ:</td>

@@ -21,8 +21,8 @@
         <?= lang('person_registration'); ?>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-users"></i> <?= lang('people'); ?></a></li>
-        <li class="active"><?= lang('add_new_person'); ?></li>
+        	<li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
+	        <li class="active"><?= lang('add_new_person'); ?></li>
       </ol>
     </section>
 

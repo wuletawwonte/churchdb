@@ -50,17 +50,7 @@ class Users extends CI_Controller {
 				);
 
 			$this->session->set_userdata($data);
-			
-			if($this->session->userdata('current_user')['user_type'] == "administrator") {
-
-				redirect('admin/index');
-
-			} else {
-				$this->session->unset_userdata('is_logged_id');
-				$this->session->set_flashdata("login_failed", "ያስገቡት መረጃ ትክክል አይደለም");
-				redirect('users/index');
-			}
-
+			redirect('admin/index');
 		} else {
 			$this->session->unset_userdata('is_logged_id');
 			$this->session->set_flashdata("login_failed", "ይቅርታ, ያስገቡት መረጃ ትክክል አይደለም");

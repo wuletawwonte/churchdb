@@ -7,8 +7,8 @@
         <!-- <small>#007612</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
-        <li class="active">ሪፖርት</li>
+          <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
+          <li class="active">ሪፖርት</li>
       </ol>
     </section>
 

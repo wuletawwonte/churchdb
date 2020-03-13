@@ -11,7 +11,7 @@
         <small>የሲስተም ተጠቃሚዎች ዝርዝር</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>"><i class="fa fa-cog"></i> መቼት</a></li>
+        <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
         <li class="active"><a href="<?php echo base_url(); ?>admin/users"> የሲስተም ተጠቃሚዎች</a></li>
       </ol>
     </section>
@@ -65,7 +65,7 @@
                         <?php foreach($users as $user) {  ?>
                         <tr>
                             <td>
-                                <?php if($user['user_type'] != 'super_administrator') { ?>
+                                <?php if($user['user_type'] != 'ዋና የሲስተም አስተዳደር') { ?>
 
                                     <a href="<?php echo base_url(); ?>admin/edituserform/<?= $user['id'] ?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
                                     <a data-toggle="modal" href="#myModal<?= $user['id']?>"><i class="fa fa-trash" style="color: #dd4b39;"></i></a>

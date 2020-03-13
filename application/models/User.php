@@ -42,9 +42,9 @@ class User extends CI_Model {
 	public function add() {
 		$this->load->model('cnfg');		
 		$psw = $this->cnfg->get('default_password');
-		$user_type = 'standard';
+		$user_type = 'መደበኛ ተጠቃሚ';
 		if($this->input->post('administrator')) {
-			$user_type = "administrator";
+			$user_type = "የሲስተም አስተዳደር";
 		}
 
 		$data = array(
@@ -68,9 +68,9 @@ class User extends CI_Model {
 	}
 
 	public function edit($uid) {
-		$user_type = 'standard';
+		$user_type = 'መደበኛ ተጠቃሚ';
 		if($this->input->post('administrator')) {
-			$user_type = "administrator";
+			$user_type = "የሲስተም አስተዳደር";
 		}
 
 		$data = array(
@@ -133,6 +133,18 @@ class User extends CI_Model {
 		$data = $this->db->get('users');
 
 		return $data->result_array();
+	}
+
+	public function changepassword() {
+		$data = array(
+			'password' => md5($this->input->post('new_password'))
+			);
+		$this->db->where('id', $_SESSION['current_user']['id']);
+		if($this->db->update('users', $data)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 

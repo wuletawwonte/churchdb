@@ -28,10 +28,6 @@
       <h1>
         <?= lang('welcome') ?>
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
-        <li class="active"> ዋና ግፅ </li>
-      </ol>
     </section>
 
     <!-- Main content -->

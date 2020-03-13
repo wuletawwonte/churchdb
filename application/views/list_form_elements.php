@@ -11,8 +11,8 @@
         <small>የሚሞላው ፎርም ውስጥ ያሉ አማራጮች</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-users"></i> <?= lang('people'); ?></a></li>
-        <li class="active"> የቅፅ ማስተካከያ </li>
+          <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
+          <li class="active"> የቅፅ ማስተካከያ </li>
       </ol>
     </section>
 

@@ -5,12 +5,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
     	<h1>
-        	ጠቅላላ መቼት
+        	አጠቃላይ ማስተካከያዎች
         	<small>ዋና የሲስተም ለውጦች ማስተካከያ</small>
       	</h1>
       	<ol class="breadcrumb">
-        	<li><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-gears"></i> መቼት </a></li>
-        	<li class="active">ጠቅላላ መቼት </li>
+        	<li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
+        	<li class="active">አጠቃላይ ማስተካከያዎች </li>
       	</ol>
     </section>
 
@@ -58,7 +58,7 @@
 
 		                    <tr>
 		                        <td>ዋና የይለፍ ቃል:</td>
-		                        <td><input type="password" name="default_password" value="<?php echo $default_password; ?>" class="form-control" width="32"></td>
+		                        <td><input type="text" name="default_password" value="<?php echo $default_password; ?>" class="form-control" width="32"></td>
 		                    </tr>
 
 		                    <tr>

@@ -9,7 +9,7 @@ class Member extends CI_Model {
 	}
 
 	public function add($avatar) {
-		$colors = array('#00c0ef', '#0073b7', '#3c8dbc', '#39cccc', '#f39c12', '#ff851b', '#00a65a', '#01ff70', '#dd4b39', '#605ca8', '#f012be', '#777777', '#001f3f');		
+		$colors = array('#00c0ef', '#0073b7', '#3c8dbc', '#39cccc', '#f39c12', '#ff851b', '#00a65a', '#01ff70', '#dd4b39', '#605ca8', '#f012be', '#777777', '#001f3f');	
 		$data = array(
 			'title' => $this->input->post('title'), 
 			'firstname' => $this->input->post('firstname'), 
@@ -125,7 +125,13 @@ class Member extends CI_Model {
 
 	public function get_one($id = NULL) {
 		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
-		$res = $this->db->get_where('members', array('id' => $id));
+		$this->db->from('members');
+		$this->db->where('id', $id);
+		$this->db->join('membership_levels', 'members.membership_level = membership_levels.membership_level_id');
+		$this->db->join('membership_causes', 'members.membership_cause = membership_causes.membership_cause_id');
+		$this->db->join('ministries', 'members.ministry = ministries.ministry_id');
+		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
+		$res = $this->db->get();
 		$res = $res->result_array();
 		return  $res[0];
 	}
@@ -245,14 +251,18 @@ class Member extends CI_Model {
 	public function get_non_group_members($id) {
 		$this->db->where('group_id', $id);
 		$res = $this->db->get('group_members')->result_array();
+		if(sizeof($res) == 0) {
+			return $this->get_all();
+		}
 		$coll = [];
 		foreach ($res as $key) {
 			# code...
 			array_push($coll, $key['member_id']);
 		}
 		$this->db->where_not_in('id', $coll);
-		$result = $this->db->get('members');
-		return $result->result_array();
+		$this->db->order_by('firstname', 'ASC');
+		$result = $this->db->get('members')->result_array();
+		return $result;
 	}
 
 
