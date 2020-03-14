@@ -147,6 +147,37 @@ class User extends CI_Model {
 		}
 	}
 
+	public function saveprofilechange($profile_picture) {
+		$current_user = $this->get_current_user();
+		$data = array(
+			'firstname' => $this->input->post('firstname'), 
+			'lastname' => $this->input->post('lastname'), 
+			'username' => $this->input->post('username'), 
+			'profile_picture' => $profile_picture
+			);
+		if($profile_picture == NULL) {
+			$data = array(
+				'firstname' => $this->input->post('firstname'), 
+				'lastname' => $this->input->post('lastname'), 
+				'username' => $this->input->post('username'), 
+				'profile_picture' => $current_user['profile_picture']
+				);
+		}
+
+		$this->db->where('id', $_SESSION['current_user']['id']);
+		if($this->db->update('users', $data)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function get_current_user() {
+		$this->db->where('id', $_SESSION['current_user']['id']);
+		$data = $this->db->get('users');
+		return $data->result_array()[0];
+	}
+
 
 
 

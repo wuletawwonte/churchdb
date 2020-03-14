@@ -76,7 +76,7 @@
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="<?php echo base_url(); ?>assets/img/admin.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= base_url(); ?>assets/<?php if($_SESSION['current_user']['profile_picture'] == NULL) { echo 'img/user-icon.jpg'; } else { echo 'profile_pictures/'.$_SESSION['current_user']['profile_picture']; } ?>'" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -124,7 +124,7 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="<?php echo base_url(); ?>assets/img/user-icon.jpg" class="user-image" alt="User Image">
+              <img src="<?= base_url(); ?>assets/<?php if($_SESSION['current_user']['profile_picture'] == NULL) { echo 'img/user-icon.jpg'; } else { echo 'profile_pictures/'.$_SESSION['current_user']['profile_picture']; } ?>" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs"><?php echo $this->session->userdata('current_user')['firstname'].' '.$this->session->userdata('current_user')['lastname']; ?></span>
             </a>
@@ -163,7 +163,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url(); ?>assets/img/user-icon.jpg" class="img-circle" alt="User Image">
+          <img src="<?= base_url(); ?>assets/<?php if($_SESSION['current_user']['profile_picture'] == NULL) { echo 'img/user-icon.jpg'; } else { echo 'profile_pictures/'.$_SESSION['current_user']['profile_picture']; } ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('current_user')['firstname'].' '.$this->session->userdata('current_user')['lastname']; ?></p>

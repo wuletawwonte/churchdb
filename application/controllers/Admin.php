@@ -683,12 +683,45 @@ class Admin extends CI_Controller {
 
 	public function profile() {
 		$data['active_menu'] = "account";
+		$data['current_user'] = $this->user->get_current_user(); 
 		$this->load->view('templates/header', $data);
 		$this->load->view('profile');
 		$this->load->view('templates/footer');							
 	}
 
 	public function saveprofilechange() {
+		$profile_picture = NULL; 
+
+		if(!empty($_FILES['profile_picture_input']['name'])) {
+
+			$new_name = "churchdb".time().$_FILES["profile_picture_input"]['name'];
+
+	        $config['upload_path']    = './assets/profile_pictures/';
+	        $config['allowed_types']  = 'jpg|png';
+	        $config['max_size']       = 1000;
+	        $config['max_width']      = 1235;
+	        $config['max_height']     = 835;
+	        $config['file_name'] 	  = $new_name; 
+
+	        $this->load->library('upload', $config);
+
+	        if ( ! $this->upload->do_upload('profile_picture_input')) {
+				$this->session->set_flashdata('error', $this->upload->display_errors());
+				redirect('admin/profile');			
+	        } else {
+	            $profile_picture = $this->upload->data('file_name');
+	        }
+	    }
+
+
+		if($this->user->saveprofilechange($profile_picture)) {
+			$this->session->set_flashdata('success', 'የዚህ አካውንት መረጃ በትክክል ተቀይሯል።');
+			redirect('admin/profile');
+		} else {
+			$this->session->set_flashdata('error', 'የተጠቃሚውን መረጃ መቀየር አልተቻለም።');
+			redirect('admin/profile');			
+		}
+
 	}
 
 	public function savepasswordchange() {
