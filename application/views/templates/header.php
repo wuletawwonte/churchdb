@@ -131,7 +131,7 @@
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="<?php echo base_url(); ?>assets/img/user-icon.jpg" class="img-circle" alt="User Image">
+                <img src="<?= base_url(); ?>assets/<?php if($_SESSION['current_user']['profile_picture'] == NULL) { echo 'img/user-icon.jpg'; } else { echo 'profile_pictures/'.$_SESSION['current_user']['profile_picture']; } ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $this->session->userdata('system_name'); ?>

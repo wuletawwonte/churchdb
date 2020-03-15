@@ -88,7 +88,7 @@
 <div class="row">
     <div class="col-lg-7">
         <div class="box box-solid">
-            <div class="box box-danger">
+            <div class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title"><?= lang('latest_members'); ?></h3>
                     <div class="box-tools pull-right">
@@ -129,31 +129,44 @@
         </div>
     </div>
 
-
     <div class="col-lg-5">
-      <!-- DONUT CHART -->
-      <div class="box box-danger">
-        <div class="box-header with-border">
-          <i class="fa fa-address-card-o"></i>
-          <h3 class="box-title"> የፆታ ተዋፅኦ </h3>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-          <canvas id="pieChart" style="height: 256px; width: 513px;" height="256" width="513"></canvas>
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          <div id="gender-donut-legend" class="chart-legend pull-right"><span style="color: white;padding-right: 4px;padding-left: 2px;background-color:#003399">ወንድ</span> <span style="color: white;padding-right: 4px;padding-left: 2px;background-color:#9900ff">ሴት</span> <span style="color: white;padding-right: 4px;padding-left: 2px;background-color:#3399ff">ወንድ ልጆች</span> <span style="color: white;padding-right: 4px;padding-left: 2px;background-color:#009933">ሴት ልጆች</span> </div>
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title"> የፆታ ተዋፅኦ </h3>
 
-        </div>
-      </div>
-      <!-- /.box -->
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
 
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="chart-responsive">
+                            <canvas id="pieChart" height="160" width="207" style="width: 207px; height: 160px;"></canvas>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="chart-legend clearfix">
+                            <li><i class="fa fa-circle-o text-red"></i> ወንድ </li>
+                            <li><i class="fa fa-circle-o text-green"></i> ሴት </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#">United States of America <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
+                    <li><a href="#">India <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a></li>
+                    <li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -177,40 +190,16 @@
     var pieChart       = new Chart(pieChartCanvas)
     var PieData        = [
       {
-        value    : 700,
+        value    : <?= $total_male; ?>,
         color    : '#f56954',
         highlight: '#f56954',
-        label    : 'Chrome'
+        label    : 'ወንድ'
       },
       {
-        value    : 500,
+        value    : <?= $total_female; ?>,
         color    : '#00a65a',
         highlight: '#00a65a',
-        label    : 'IE'
-      },
-      {
-        value    : 400,
-        color    : '#f39c12',
-        highlight: '#f39c12',
-        label    : 'FireFox'
-      },
-      {
-        value    : 600,
-        color    : '#00c0ef',
-        highlight: '#00c0ef',
-        label    : 'Safari'
-      },
-      {
-        value    : 300,
-        color    : '#3c8dbc',
-        highlight: '#3c8dbc',
-        label    : 'Opera'
-      },
-      {
-        value    : 100,
-        color    : '#d2d6de',
-        highlight: '#d2d6de',
-        label    : 'Navigator'
+        label    : 'ሴት'
       }
     ]
     var pieOptions     = {
@@ -229,7 +218,7 @@
       //Boolean - Whether we animate the rotation of the Doughnut
       animateRotate        : true,
       //Boolean - Whether we animate scaling the Doughnut from the centre
-      animateScale         : false,
+      animateScale         : true,
       //Boolean - whether to make the chart responsive to window resizing
       responsive           : true,
       // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container

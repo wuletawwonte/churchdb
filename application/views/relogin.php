@@ -55,7 +55,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="lockscreen-item">
     <!-- lockscreen image -->
     <div class="lockscreen-image">
-      <img src="<?= base_url('assets/img/user-icon.jpg'); ?>" alt="User Image">
+      <img src="<?= base_url(); ?>assets/<?php if($_SESSION['current_user']['profile_picture'] == NULL) { echo 'img/user-icon.jpg'; } else { echo 'profile_pictures/'.$_SESSION['current_user']['profile_picture']; } ?>" alt="User Image">
     </div>
     <!-- /.lockscreen-image -->
 
@@ -63,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <form class="lockscreen-credentials" method="POST" action="<?= base_url('users/login'); ?>">
       <input type="text" name="username" value="<?= $this->session->userdata('current_user')['username']; ?>" hidden>
       <div class="input-group">
-        <input type="password" name="password" class="form-control" placeholder="password">
+        <input type="password" name="password" class="form-control" placeholder="የይለፍ ቃል">
 
         <div class="input-group-btn">
           <button type="submit" class="btn"><i class="glyphicon glyphicon-arrow-right text-muted"></i></button>
@@ -75,13 +75,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </div>
   <!-- /.lockscreen-item -->
   <div class="help-block text-center">
-    Enter your password to retrieve your session
+    ወዳ አካውንቶ ለመመለስ የይለፍ ቃሎን ያስገቡ
   </div>
   <div class="text-center">
-    <a href="<?= base_url('users/logout'); ?>">Or sign in as a different user</a>
+    <a href="<?= base_url('users/logout'); ?>">ወይም በሌላ አካውንት ይግቡ</a>
   </div>
   <div class="lockscreen-footer text-center">
-<strong><?= lang('copyright') ?> &copy; 2019 <a href="#"><b>Grace</b>Soft webdesign</a>.</strong> <?= lang('all_rights_reserved') ?>.  
+<strong><?= lang('copyright') ?> &copy; <?= date('Y'); ?> <a href="#"><b>Grace</b>Soft webdesign</a>.</strong> <?= lang('all_rights_reserved') ?>.  
 </div>
 </div>
 <!-- /.center -->

@@ -31,6 +31,9 @@ class Admin extends CI_Controller {
 		$data['total_members'] = $this->member->record_count();
 		$data['total_groups'] = $this->group->record_count();
 		$data['latest_members'] = $this->member->latest_members();
+		$data['total_male'] = $this->member->total_male();
+		$data['total_female'] = $this->member->total_female();
+		$data['membership_levels'] = $this->member->get_membership_level_stat();
 		$data['active_menu'] = "dashboard";
 		$this->load->view('templates/header', $data);
 		$this->load->view('home');

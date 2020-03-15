@@ -265,10 +265,24 @@ class Member extends CI_Model {
 		return $result;
 	}
 
+	public function total_male() {
+		$this->db->where('gender', 'ወንድ');
+		$data = $this->db->get('members');
 
+		return $data->num_rows();
+	}
 
+	public function total_female() {
+		$this->db->where('gender', 'ሴት');
+		$data = $this->db->get('members');
 
+		return $data->num_rows();
+	}
 
+	public function get_membership_level_stat() {
+		
+
+	}
 
 
 
