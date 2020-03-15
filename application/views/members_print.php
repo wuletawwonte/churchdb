@@ -70,7 +70,7 @@
 						<td><?= $member['job_type_title']; ?></td>
 						<td><?= $member['workplace_name']; ?></td>
 						<td><?= $member['workplace_phone']; ?></td>
-						<td><?= $member['membership_year']; ?></td>
+						<td><?php if($member['membership_year']) { echo $member['membership_year']; } ?></td>
 						<td><?= $member['membership_cause_title']; ?></td>
 						<td><?= $member['membership_level_title']; ?></td>
 						<td><?= $member['ministry_title']; ?></td>
