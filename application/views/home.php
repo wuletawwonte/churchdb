@@ -5,14 +5,14 @@
 <style type="text/css">
 
 .profile-image {
-  width: 75px;
-  height: 75px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   border: 2px solid #d2d6de;
   font-size: 30px;
   color: #fff;
   text-align: center;
-  line-height: 75px;
+  line-height: 70px;
   margin: 0 auto; 
 }
 
@@ -86,7 +86,7 @@
 
 
 <div class="row">
-    <div class="col-lg-7">
+    <div class="col-lg-6">
         <div class="box box-solid">
             <div class="box box-info">
                 <div class="box-header with-border">
@@ -102,7 +102,7 @@
                 <div class="box-body no-padding">
                     <ul class="users-list clearfix">
                         <?php foreach($latest_members as $member) { ?>
-                        <li>
+                        <li style="padding-left: 0px; padding-right: 0px;">
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
                                 <?php if($member['avatar'] == NULL) { ?>
                                     <div class="profile-image" style="background: <?= $member['profile_color']; ?>">
@@ -110,13 +110,13 @@
                                     </div>
                                 <?php } else { ?>
                                     <div>
-                                        <img class="img-circle" style="border: 2px solid <?= $member['profile_color']; ?>;padding: 2px;height: 75px; width: 75px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
+                                        <img class="img-circle" style="border: 2px solid <?= $member['profile_color']; ?>;padding: 2px;height: 70px; width: 70px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
                                     </div>
                                 <?php } ?>
 
                             </a>
                             <span class="user-details"><?= $member['firstname'].' '.$member['middlename']; ?></span>
-                            <span class="users-list-date"><?= $member['created']; ?>&nbsp;</span>
+                            <span class="users-list-date"><?= timespan(human_to_unix($member['created']), null, 1).' በፊት'; ?>&nbsp;</span>
                         </li>
                         <?php } ?>
                 </ul>
@@ -129,11 +129,11 @@
         </div>
     </div>
 
-    <div class="col-lg-5">
+    <div class="col-lg-6">
 
         <div class="box box-info">
             <div class="box-header with-border">
-                <h3 class="box-title"> የፆታ ተዋፅኦ </h3>
+                <h3 class="box-title"> የአባልነት ደራጃ ተዋፅኦ </h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -144,26 +144,54 @@
 
             <div class="box-body">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="chart-responsive">
                             <canvas id="pieChart" height="160" width="207" style="width: 207px; height: 160px;"></canvas>
-
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <ul class="chart-legend clearfix">
-                            <li><i class="fa fa-circle-o text-red"></i> ወንድ </li>
-                            <li><i class="fa fa-circle-o text-green"></i> ሴት </li>
+                        <?php foreach($membership_levels as $membership_level) { ?>
+                            <li><i class="fa fa-circle-o" style="color: <?= $membership_level['color']; ?>;"></i> <?= $membership_level['title']; ?> </li>
+                        <?php } ?>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="box-footer no-padding">
-                <ul class="nav nav-pills nav-stacked">
-                    <li><a href="#">United States of America <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-                    <li><a href="#">India <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a></li>
-                    <li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-                </ul>
+
+        </div>
+
+            <div class="info-box bg-yellow">
+                <span class="info-box-icon"><i class="fa fa-female"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text"> ሴት </span>
+                    <span class="info-box-number"><?= $gender_count['female']; ?></span>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width: <?php echo ($gender_count['female']/$total_members)*100; ?>%"></div>
+                    </div>
+                    <span class="progress-description">
+                        በፐርሰንት ሲቀመጥ፡ <?php echo round(($gender_count['female']/$total_members)*100); ?>%
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <div class="info-box bg-purple">
+                <span class="info-box-icon"><i class="fa fa-male"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text"> ወንድ </span>
+                    <span class="info-box-number"><?= $gender_count['male']; ?></span>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width: <?php echo ($gender_count['male']/$total_members)*100; ?>%"></div>
+                    </div>
+                    <span class="progress-description">
+                        በፐርሰንት ሲቀመጥ፡ <?php echo round(($gender_count['male']/$total_members)*100); ?>%
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
             </div>
         </div>
     </div>
@@ -189,18 +217,14 @@
     var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
     var pieChart       = new Chart(pieChartCanvas)
     var PieData        = [
+    <?php foreach($membership_levels as $membership_level) { ?>
       {
-        value    : <?= $total_male; ?>,
-        color    : '#f56954',
-        highlight: '#f56954',
-        label    : 'ወንድ'
+        value    : <?= $membership_level['count']?>,
+        color    : '<?= $membership_level['color']?>',
+        highlight: '<?= $membership_level['color']?>',
+        label    : "<?= $membership_level['title']?>"
       },
-      {
-        value    : <?= $total_female; ?>,
-        color    : '#00a65a',
-        highlight: '#00a65a',
-        label    : 'ሴት'
-      }
+    <?php } ?>
     ]
     var pieOptions     = {
       //Boolean - Whether we should show a stroke on each segment

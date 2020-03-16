@@ -37,20 +37,20 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['date_year'] = 'Year';
-$lang['date_years'] = 'Years';
-$lang['date_month'] = 'Month';
-$lang['date_months'] = 'Months';
-$lang['date_week'] = 'Week';
-$lang['date_weeks'] = 'Weeks';
-$lang['date_day'] = 'Day';
-$lang['date_days'] = 'Days';
-$lang['date_hour'] = 'Hour';
-$lang['date_hours'] = 'Hours';
-$lang['date_minute'] = 'Minute';
-$lang['date_minutes'] = 'Minutes';
-$lang['date_second'] = 'Second';
-$lang['date_seconds'] = 'Seconds';
+$lang['date_year'] = 'ዓመት';
+$lang['date_years'] = 'ዓመታት';
+$lang['date_month'] = 'ወር';
+$lang['date_months'] = 'ወራት';
+$lang['date_week'] = 'ሳምንት';
+$lang['date_weeks'] = 'ሳምንታት';
+$lang['date_day'] = 'ቀን';
+$lang['date_days'] = 'ቀናት';
+$lang['date_hour'] = 'ሰዓት';
+$lang['date_hours'] = 'ሰዓታት';
+$lang['date_minute'] = 'ደቂቃ';
+$lang['date_minutes'] = 'ዲቂቃዎች';
+$lang['date_second'] = 'ሰከንድ';
+$lang['date_seconds'] = 'ሰከንዶች';
 
 $lang['UM12']	= '(UTC -12:00) Baker/Howland Island';
 $lang['UM11']	= '(UTC -11:00) Niue';

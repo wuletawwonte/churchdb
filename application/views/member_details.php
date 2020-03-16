@@ -113,7 +113,7 @@
         <div class="box box-primary box-body">
           <a class="btn btn-app" href="/master/PrintView.php?PersonID=59"><i class="fa fa-print"></i> <?= lang('printable_page') ?></a>
           <a class="btn btn-app" href="/master/WhyCameEditor.php?PersonID=59"><i class="fa fa-money"></i> <?= lang('tithes_info') ?></a>
-          <a class="btn btn-app" href="/master/NoteEditor.php?PersonID=59"><i class="fa fa-sticky-note"></i> <?= lang('note_info') ?></a>
+          <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
           <a class="btn btn-app" id="addGroup"><i class="fa fa-users"></i> <?= lang('assign_new_group') ?> </a>
           <a class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> ምዕመን አጥፋ </a>
           <a class="btn btn-app <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-user-secret"></i> መረጃ ቀይር </a>
@@ -123,12 +123,11 @@
         <div class="nav-tabs-custom">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">ዝርዝር መረጃ</a></li>
+            <li role="presentation" <?php if($active_tab == NULL) { echo "class='active'"; } ?> ><a href="#details" aria-controls="details" role="tab" data-toggle="tab">ዝርዝር መረጃ</a></li>
             <li role="presentation"><a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">የጊዜ መስመር</a></li>
             <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">የተመድቡበት ቡድን</a></li>
             <li role="presentation"><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">Assigned Properties</a></li>
-            <li role="presentation"><a href="#volunteer" aria-controls="volunteer" role="tab" data-toggle="tab">Volunteer Opportunities</a></li>
-            <li role="presentation"><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a></li>
+            <li role="presentation" <?php if($active_tab == "notes") { echo "class='active'"; } ?>><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">ማስታወሻዎች</a></li>
           </ul>
 
             <!-- Tab panes -->
@@ -136,7 +135,7 @@
 
                 <!-- ዝርዝር መረጃ tab starts here -->
 
-                <div role="tab-pane fade" class="tab-pane active" id="details">
+                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == NULL) { echo "active"; } ?>" id="details">
                     <div class="row"><br>
                         <blockquote>
                             <p>የምዕመን ዝርዝር መረጃ የሚያካትታቸው ዝርዝሮች የሚከተሉትን ብቻ ሳይሆን የቡድን መረጃ እንዲሁም የማስታወሻ ጽሁፎችንም ያካትታ</p>
@@ -235,10 +234,7 @@
                     </div>
                 </div>
                           
-
-
                 <!-- ቡድኖች tab starts here -->
-
 
                 <div role="tab-pane fade" class="tab-pane" id="groups">
                     <?php if($assigned_groups != false) { ?>
@@ -277,9 +273,7 @@
                     <?php } ?>
                 </div>
 
-
                 <!-- Assigned properties tab starts here -->
-
 
                 <div role="tab-pane fade" class="tab-pane" id="properties">
                     <div class="main-box clearfix">
@@ -309,32 +303,81 @@
                             </form>
                         </div>
                     </div>
-                </div>
-
-
-                <!-- Volunteer Opportunities tab starts here -->
-
-                <div role="tab-pane fade" class="tab-pane" id="volunteer">
-                    <div class="main-box clearfix">
-                        <div class="main-box-body clearfix"><br>
-                            <div class="alert alert-warning">
-                              <i class="fa fa-question-circle fa-fw fa-lg"></i> <span>No volunteer opportunity assignments.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+                </div>                
 
                 <!-- Notes tab starts here -->
 
+                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'notes') { echo "active"; } ?>" id="notes">
 
-                <div role="tab-pane fade" class="tab-pane" id="notes">
-                    <ul class="timeline">
-                    <!-- note time label -->
-                        <li class="time-label">
-                           <span class="bg-yellow"> 2019-02-04 </span>
-                        </li>
-                    </ul>
+
+                    <?php if($this->session->flashdata('note-save-success')) { ?>
+                        <div class="callout callout-info">
+                            <?php echo $this->session->flashdata('note-save-success'); ?>
+                        </div>
+                    <?php } else if($this->session->flashdata('note-save-error')) { ?>
+                        <div class="callout callout-danger">
+                            <?php echo $this->session->flashdata('note-save-error'); ?>
+                        </div>
+                    <?php } ?>
+
+
+                    <div>                        
+                        <ul class="timeline">
+                            <li class="time-label">
+                                <span class="bg-red">
+                                    <?= date('d M. Y'); ?>
+                                </span>
+                            </li>
+
+
+                            <li>
+                              <i class="fa fa-comments bg-yellow"></i>
+
+                              <div class="timeline-item">
+                                <span class="time"><i class="fa fa-clock-o"></i> አሁን </span>
+
+                                <h3 class="timeline-header"><a href="#"><?= $_SESSION['current_user']['firstname']." ".$_SESSION['current_user']['lastname']; ?></a> አዲስ ማስታወሻ ያዝ</h3>
+                                <div class="timeline-body">
+                                    <form method="post" action="<?= base_url(); ?>admin/savenote">
+                                    <input type="text" name="member_id" value="<?= $member['id']?>" hidden>
+                                    <div class="form-group" style="margin-bottom: 0px;">
+                                        <textarea class="form-control" rows="3" name="note_content" placeholder="ማስታወሻ መያዣ ..." spellcheck="false" required></textarea>
+                                    </div>                                
+                                </div>
+                                <div class="timeline-footer">
+                                    <input type="submit" class="btn btn-primary btn-flat" value="መዝግብ" />
+                                    </form>
+                                </div>
+                              </div>
+                            </li>
+
+                            <?php foreach($notes as $note) { ?>
+                            <li>
+                              <i class="fa fa-newspaper-o bg-blue"></i>
+
+                              <div class="timeline-item">
+                                <span class="time"><i class="fa fa-clock-o"></i>  <?php echo timespan(human_to_unix($note['date'])).' በፊት'; ?></span>
+
+                                <h3 class="timeline-header"><a href="#"><?= $note['firstname'].' '.$note['lastname']; ?></a> ማስታወሻ ይዟል</h3>
+
+                                <div class="timeline-body"><?= $note['note_content']?></div>
+                                <div class="timeline-footer">
+                                  <a class="btn btn-warning btn-flat btn-xs">View comment</a>
+                                </div>
+                              </div>
+                            </li>
+                            <?php } ?>
+
+                            <li>
+                              <i class="fa fa-clock-o bg-gray"></i>
+                            </li>
+                        </ul>
+
+                    </div>
+
+
+
+
                 </div>
 
 

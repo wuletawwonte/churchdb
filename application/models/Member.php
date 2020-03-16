@@ -265,23 +265,35 @@ class Member extends CI_Model {
 		return $result;
 	}
 
-	public function total_male() {
+	public function gender_count() {		
 		$this->db->where('gender', 'ወንድ');
-		$data = $this->db->get('members');
+		$data['male'] = $this->db->get('members')->num_rows();
 
-		return $data->num_rows();
-	}
-
-	public function total_female() {
 		$this->db->where('gender', 'ሴት');
-		$data = $this->db->get('members');
+		$data['female'] = $this->db->get('members')->num_rows();
 
-		return $data->num_rows();
+		return $data;
 	}
 
-	public function get_membership_level_stat() {
-		
+	public function membership_level_count() {
+		$result = $this->db->get('membership_levels')->result_array();
+		$data = [];
+		$colors = array('#001f3f', '#00a65a', '#0073b7', '#39cccc', '#f39c12', '#ff851b' , '#01ff70', '#dd4b39', '#605ca8', '#f012be', '#777777');	
 
+		$index = 0;
+		foreach($result as $res) {
+			$this->db->where('membership_level', $res['membership_level_id']);
+			$count = $this->db->get('members')->num_rows();
+			$arrayRecord = array(
+				'title' => $res['membership_level_title'], 
+				'count' => $count,
+				'color' => $colors[$index]
+				); 
+			array_push($data, $arrayRecord);
+			$index++;
+		}		
+
+		return $data;
 	}
 
 

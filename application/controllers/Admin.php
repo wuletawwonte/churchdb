@@ -20,7 +20,7 @@ class Admin extends CI_Controller {
 
 		$this->session->set_userdata('last_visited', time());
 
-		$this->load->model(array('user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
+		$this->load->model(array('note', 'user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
 		$this->load->helper('text', 'file');
 
 		$this->lang->load('label_lang', 'amharic');
@@ -31,9 +31,8 @@ class Admin extends CI_Controller {
 		$data['total_members'] = $this->member->record_count();
 		$data['total_groups'] = $this->group->record_count();
 		$data['latest_members'] = $this->member->latest_members();
-		$data['total_male'] = $this->member->total_male();
-		$data['total_female'] = $this->member->total_female();
-		$data['membership_levels'] = $this->member->get_membership_level_stat();
+		$data['gender_count'] = $this->member->gender_count();
+		$data['membership_levels'] = $this->member->membership_level_count();
 		$data['active_menu'] = "dashboard";
 		$this->load->view('templates/header', $data);
 		$this->load->view('home');
@@ -335,11 +334,13 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function memberdetails($id = NULL) {
+	public function memberdetails($id = NULL, $active_tab=NULL) {
 		$data['active_menu'] = "listmembers";
+		$data['active_tab'] = $active_tab;
 		$data['member'] = $this->member->get_one($id);
 		$data['timelines'] = $this->timeline->get_timeline($id);
 		$data['assigned_groups'] = $this->group->get_assigned_groups($id);
+		$data['notes'] = $this->note->get_notes($id);
 		$this->load->view('templates/header', $data);
 		$this->load->view('member_details');
 		$this->load->view('templates/footer');		
@@ -742,6 +743,16 @@ class Admin extends CI_Controller {
 		} else {
 			$this->session->set_flashdata('password-change-failure', 'የየለፍ ቃሉን መቀየር አልተቻለም።');
 			redirect('admin/profile');			
+		}
+	}
+
+	public function savenote() {
+		if($this->note->add()) {
+			$this->session->set_flashdata('note-save-success', 'የፃፉት ማስታወሻ በትክክል ተመዝግቧል።');
+			redirect('admin/memberdetails/'.$this->input->post('member_id').'/notes');
+		} else {
+			$this->session->set_flashdata('note-save-error', 'የፃፉትን ማስታወሻ መመዝገብ አልተቻለም።');
+			redirect('admin/memberdetails/'.$this->input->post('member_id').'/notes');
 		}
 	}
 
