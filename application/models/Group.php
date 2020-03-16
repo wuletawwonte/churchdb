@@ -20,6 +20,17 @@ class Group extends CI_Model {
 		return $data->result_array();	
 	}
 
+	public function deletegroup($gid) {
+		$this->db->where('group_id', $gid);
+		$this->db->delete('group_members');
+		$this->db->where('gid', $gid);
+		if($this->db->delete('groups')) {
+			return true;
+		} else {
+			return false;
+		}		
+	}
+
 	public function add() {
 		$data = array(
 			'type' => $this->input->post('type'), 

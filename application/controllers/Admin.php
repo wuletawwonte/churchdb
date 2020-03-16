@@ -756,4 +756,14 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function deletegroup($gid) {
+		if($this->group->deletegroup($gid)) {
+			$this->session->set_flashdata('success', 'ቡድኑ በትክክል ጠፍቷል።');			
+			redirect('admin/listgroups');
+		} else {
+			$this->session->set_flashdata('error', 'የቡድኑን መረጃ ማጥፋት አልተቻለም።');			
+			redirect('admin/listgroups');			
+		}
+	}
+
 }

@@ -18,12 +18,13 @@
   margin-top: 15px;
   width: 130px;
   height: 130px;
+  padding: 3px;
   border-radius: 50%;
   border: 3px solid #d2d6de; 
   font-size: 50px;
   color: #fff;
   text-align: center;
-  line-height: 130px;
+  line-height: 118px;
 }
 
 .user-list tbody td a, .user-list tbody td span {
@@ -48,8 +49,10 @@
             <div class="box-body box-profile">
                 <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
                 	<?php if($member['avatar'] == NULL) { ?>
-                        <div class="profile-image" style="background: <?= $member['profile_color']?>">
-                            <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
+                        <div class="profile-image">
+                            <div style="width: 100%; height: 100%; border-radius: 50%; background: <?= $member['profile_color']; ?>">
+                                <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
+                            </div>
                         </div>
                     <?php } else { ?>
                         <div style="margin: 0 auto;height: 130px; width: 130px;margin-top: 15px;">

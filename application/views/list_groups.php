@@ -44,7 +44,7 @@
 					<input type="text" name="name" maxlength="48"  class="form-control" required>
 				</div>
 				<div class="col-md-2">
-					<input type="submit" class="btn btn-primary" name="" value="<?= lang('save') ?>">
+					<input type="submit" class="btn btn-primary btn-flat" name="" value="<?= lang('save') ?>">
 				</div>
 			</form>
 			</div>	            
@@ -54,27 +54,11 @@
 
     <!-- Default box -->
     <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">የቡድኖች ዝርዝር</h3>
+        </div>
         <div class="box-body">
 
-
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="btns">          
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">Copy</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">Excel</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">CSV</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">PDF</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">Print</button> 
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                </div>
-                <div class="col-sm-4">
-                    <div class="pull-right">
-                        <label class="sr-only">Search:</label><input type="search" placeholder="<?= lang('search') ?>" class="form-control" aria-controls="families">
-                    </div>
-                </div>
-            </div>
 
             <p></p>
 
@@ -97,7 +81,8 @@
                     <tr>
                         <td style="text-align: center"> 
                             <a href="<?= base_url('admin/groupdetails/'.$group['gid']) ?>"><i class="fa fa-search-plus"></i></a>&nbsp;&nbsp;
-                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $group['gid'] ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;                            <a href="<?php echo base_url(); ?>sadmin/editfamilyform/<?= $group['gid'] ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="<?= base_url('admin/groupdetails/'.$group['gid']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;                            
+                            <a href="<?= base_url(); ?>admin/deletegroup/<?= $group['gid'] ?>" onclick="return confirm('Are you sure? ')"><i class="fa fa-trash" style="color: red;" aria-hidden="true"></i></a>&nbsp;&nbsp;
                         </td>
 
                         <td>

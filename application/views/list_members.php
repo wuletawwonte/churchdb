@@ -3,12 +3,13 @@
 .profile-image {
   width: 60px;
   height: 60px;
+  padding: 2px;
   border-radius: 50%;
   border: 2px solid #d2d6de;
   font-size: 20px;
   color: #fff;
+  line-height: 52px;
   text-align: center;
-  line-height: 60px;
   margin: 0 0; 
 }
 
@@ -163,8 +164,10 @@ table tbody td a, table tbody td span {
                         <td>
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
                                 <?php if($member['avatar'] == NULL) { ?>
-                                    <div class="profile-image" style="background: <?= $member['profile_color']; ?>">
-                                        <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
+                                    <div class="profile-image" >
+                                        <div style="width: 100%; height: 100%; border-radius: 50%; background: <?= $member['profile_color']; ?>">
+                                            <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
+                                        </div>
                                     </div>
                                 <?php } else { ?>
                                     <div>
