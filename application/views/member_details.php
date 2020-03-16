@@ -1,17 +1,5 @@
 <style type="text/css">
 
-.member-profile-image {
-  margin: 0 auto;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 3px solid #d2d6de; 
-  font-size: 15px;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;  
-}
-
 
 .profile-image {
   margin: 0 auto;
@@ -24,7 +12,7 @@
   font-size: 50px;
   color: #fff;
   text-align: center;
-  line-height: 118px;
+  line-height: 128px;
 }
 
 .user-list tbody td a, .user-list tbody td span {
@@ -114,7 +102,7 @@
 
       <div class="col-lg-9 col-md-9 col-sm-9">
         <div class="box box-primary box-body">
-          <a class="btn btn-app" href="/master/PrintView.php?PersonID=59"><i class="fa fa-print"></i> <?= lang('printable_page') ?></a>
+          <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetailsprint/<?= $member['id']; ?>"><i class="fa fa-print"></i> የሚታተም ገፅ </a>
           <a class="btn btn-app" href="/master/WhyCameEditor.php?PersonID=59"><i class="fa fa-money"></i> <?= lang('tithes_info') ?></a>
           <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
           <a class="btn btn-app" id="addGroup"><i class="fa fa-users"></i> <?= lang('assign_new_group') ?> </a>

@@ -14,7 +14,7 @@
 }
 
 table tbody td a, table tbody td span {
-    line-height: 60px;
+    line-height: 52px;
 }
 
 </style>

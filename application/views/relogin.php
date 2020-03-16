@@ -46,10 +46,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
   <div class="lockscreen-logo">
-    <a href="../../index2.html"><?= $this->session->userdata('system_name'); ?></a>
+    <a href="<?= base_url('users/relogin'); ?>"><?= $this->session->userdata('system_name'); ?></a>
   </div>
   <!-- User name -->
-  <div class="lockscreen-name"><?= $this->session->userdata('name'); ?></div>
+  <div class="lockscreen-name"><?= $_SESSION['current_user']['firstname'].' '.$_SESSION['current_user']['lastname']?></div>
 
   <!-- START LOCK SCREEN ITEM -->
   <div class="lockscreen-item">
@@ -81,7 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <a href="<?= base_url('users/logout'); ?>">ወይም በሌላ አካውንት ይግቡ</a>
   </div>
   <div class="lockscreen-footer text-center">
-<strong><?= lang('copyright') ?> &copy; <?= date('Y'); ?> <a href="#"><b>Grace</b>Soft webdesign</a>.</strong> <?= lang('all_rights_reserved') ?>.  
+<strong><?= lang('copyright') ?> &copy; <?= date('Y'); ?> <a href="https://www.facebook.com/gracesoftwebdesign" target="blank"><b>Grace</b>Soft webdesign</a>.</strong> <?= lang('all_rights_reserved') ?>.  
 </div>
 </div>
 <!-- /.center -->

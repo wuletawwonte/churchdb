@@ -595,6 +595,14 @@ class Admin extends CI_Controller {
 		$this->load->view('report_print', $data);		
 	}
 
+	public function memberdetailsprint($mid) {
+		$data['assigned_groups'] = $this->group->get_assigned_groups($mid);
+		$data['member'] = $this->member->get_one($mid);
+		$data['church_name'] = $this->cnfg->get('church_name');
+		$this->load->view('member_details_print', $data);		
+	}
+
+
 	public function addmembershiplevelchoice() {
 		if($this->membership_level->add_choice()) {
 			$this->session->set_flashdata('success', 'የአባልነት ደረጃ በትክክል ተመዝግቧል።');
@@ -765,5 +773,7 @@ class Admin extends CI_Controller {
 			redirect('admin/listgroups');			
 		}
 	}
+
+
 
 }
