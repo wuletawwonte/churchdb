@@ -39,7 +39,7 @@
         $(".s2").select2({
           minimumResultsForSearch: Infinity
           });
-     
+        $(".s2searchable").select2();
      });
    
 </script>

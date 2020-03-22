@@ -20,7 +20,7 @@ class Admin extends CI_Controller {
 
 		$this->session->set_userdata('last_visited', time());
 
-		$this->load->model(array('note', 'user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
+		$this->load->model(array('kifle_ketema', 'mender', 'kebele', 'note', 'user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
 		$this->load->helper('text', 'file');
 
 		$this->lang->load('label_lang', 'amharic');
@@ -114,10 +114,10 @@ class Admin extends CI_Controller {
 	public function registeruser() {
 
 		if($this->user->add()) {
-			$this->session->set_flashdata('success', 'ስኬት: የተጠቃሚው አካውንት በትክክል ተከፍቷል።');
+			$this->session->set_flashdata('success', 'የተጠቃሚው አካውንት በትክክል ተከፍቷል።');
 			redirect('admin/users');
 		} else {
-			$this->session->set_flashdata('error', 'ስህተት፡ የተጠቃሚውን አካውንት መክፈት አልተቻለም።');
+			$this->session->set_flashdata('error', 'የተጠቃሚውን አካውንት መክፈት አልተቻለም።');
 			$this->newuserform();
 		}
 	}
@@ -148,7 +148,7 @@ class Admin extends CI_Controller {
 		$this->cnfg->edit_one('church_name', $this->input->post('church_name'));
 		$this->cnfg->edit_one('default_password', $this->input->post('default_password'));
 
-		$this->session->set_flashdata('success', 'ስኬት፡ የሲስተም ለውጦች በትክክል ተመዝግበዋል።');
+		$this->session->set_flashdata('success', 'የሲስተም ለውጦች በትክክል ተመዝግበዋል።');
 
 		redirect('admin/generalsetting');
 
@@ -162,6 +162,9 @@ class Admin extends CI_Controller {
 		$data['job_types'] = $this->job_type->get_all();
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
+		$data['kifle_ketemas'] = $this->kifle_ketema->get_all();
+		$data['kebeles'] = $this->kebele->get_all();
+		$data['menders'] = $this->mender->get_all();
 		$data['ministries'] = $this->ministry->get_all();
 		$this->load->view('templates/header', $data);
 		$this->load->view('new_member_form', $data);
@@ -288,10 +291,10 @@ class Admin extends CI_Controller {
 	    }
 
 		if($this->member->add($avatar)) {
-			$this->session->set_flashdata('success', 'ስኬት: የምዕመን መረጃ በትክክል ተመዝግቧል።');
+			$this->session->set_flashdata('success', 'የምዕመን መረጃ በትክክል ተመዝግቧል።');
 			redirect('admin/personregistration');
 		} else {
-			$this->session->set_flashdata('error', 'ስህተት: የምዕመን መረጃ ሊመዘግብ አልተቻለም።');
+			$this->session->set_flashdata('error', 'የምዕመን መረጃ ሊመዘግብ አልተቻለም።');
 			redirect('admin/personregistration');			
 		}
 	}	
@@ -354,6 +357,9 @@ class Admin extends CI_Controller {
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
 		$data['ministries'] = $this->ministry->get_all();
+		$data['kifle_ketemas'] = $this->kifle_ketema->get_all();
+		$data['kebeles'] = $this->kebele->get_all();
+		$data['menders'] = $this->mender->get_all();
 		$this->load->view('templates/header', $data);
 		$this->load->view('edit_member_form');
 		$this->load->view('templates/footer');		
@@ -771,6 +777,16 @@ class Admin extends CI_Controller {
 		} else {
 			$this->session->set_flashdata('error', 'የቡድኑን መረጃ ማጥፋት አልተቻለም።');			
 			redirect('admin/listgroups');			
+		}
+	}
+
+	public function changestatus() {
+		if($this->member->changestatus()) {
+			$this->session->set_flashdata('status_change_success', 'የምዕመን ሁኔታ በትክክል ተቀይሯል።');			
+			redirect('admin/memberdetails/'.$this->input->post('id').'/status');			
+		} else {
+			$this->session->set_flashdata('status_change_error', 'የምዕመን ሁኔታ መቀየር አልተቻለም።');			
+			redirect('admin/memberdetails/'.$this->input->post('id').'/status');						
 		}
 	}
 

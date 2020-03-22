@@ -30,7 +30,7 @@
 
 </head>
 
-<body style="background-color: #eee;padding: 10px;">
+<body style="background-color: #eee;padding: 10px;" onload="window.print();">
 
 <table style="background-color: white;" height="100%" width="100%" border="0" cellpadding="5" cellspacing="0" align="center">
   <tr>
@@ -155,15 +155,15 @@
                     <?php if($assigned_groups != false) { ?>
                         <table cellpadding=5 cellspacing=0 width="100%">
 							<tr class="TableHeader">
-                                <td><span><?= lang('name') ?></span></td>
-                                <td  class="text-center"><span>type</span></td>
-                                <td><span>role</span></td>
-                                <td><span>Created</span></td>
+                                <td><span>ስም</span></td>
+                                <td  class="text-center"><span>የቡድን አይነት</span></td>
+                                <td><span>አባልነት</span></td>
+                                <td><span>የተፈጠረበት</span></td>
                             </tr>
                             <?php foreach($assigned_groups as $group) {?>
                                 <tr>
                                     <td>                      
-                                        <a href="<?= base_url('admin/groupdetails/'.$group['gid']); ?>"><?= $group['name'];?> </a>
+                                    	<?= $group['name'];?>
                                     </td>
                                     <td class="text-center">
                                         <span class='label label-default'><?= $group['type']?> </span>

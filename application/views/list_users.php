@@ -41,13 +41,17 @@
     </div>
 
     <div class="box">
-        <div class="box-header" align="right">
+<!--         <div class="box-header" align="right">
             <button class="btn"><i class="fa fa-file-excel-o"></i> Excel</button>
             <button class="btn"><i class="fa fa-file-o"></i> CSV</button>
             <button class="btn"><i class="fa fa-file-pdf-o"></i> PDF</button>
             <button class="btn"><i class="fa fa-print"></i> Print</button>
-        </div>
-        <div class="box-body">
+        </div>        
+ -->        
+            <div class="box-header with-border">
+                <h3 class="box-title">የተጠቃሚዎች ዝርዝር</h3>
+            </div>
+            <div class="box-body">
                 <table class="table table-bordered table-striped" id="user-listing-table">
                     <thead>
                     <tr>

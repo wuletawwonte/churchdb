@@ -115,8 +115,8 @@ table tbody td a, table tbody td span {
 
 
 
-            <div class="row" style="margin-top: -15px;margin-bottom: 10px;">
-                <div class="col-sm-12">
+        <div class="row" style="margin-top: -15px;margin-right: 0px;margin-left: 0px;">
+            <div class="col-sm-12">
 
                     <div class="col-sm-6">
                       <div class="dataTables_length">
@@ -132,17 +132,16 @@ table tbody td a, table tbody td span {
                       </div>
                     </div>
                     
-                    <div class="btns col-sm-6" align="right" <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_generate_member_report'] != 'allow'){ echo 'hidden'; } ?>
+                    <div class="btns col-sm-6" align="right" <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_generate_member_report'] != 'allow'){ echo 'hidden'; } ?> >
                         <span style="font-size: 15px;">Export:</span>           
-                        <a href="<?= base_url(); ?>admin/export_members_excel" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Excel</a> 
-                        <a href="<?= base_url(); ?>admin/export_members_csv" class="btn btn-primary"><i class="fa fa-file-o"></i> CSV</a> 
-                        <button class="btn" type="button"><i class="fa fa-file-pdf-o"></i> PDF</button> 
-                        <a href="<?= base_url(); ?>admin/export_members_print" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print</a> 
+                        <a href="<?= base_url(); ?>admin/export_members_excel" class="btn btn-primary btn-flat"><i class="fa fa-file-excel-o"></i> Excel</a> 
+                        <a href="<?= base_url(); ?>admin/export_members_csv" class="btn btn-primary btn-flat"><i class="fa fa-file-o"></i> CSV</a> 
+                        <a href="<?= base_url(); ?>admin/export_members_print" target="_blank" class="btn btn-primary btn-flat"><i class="fa fa-file-pdf-o"></i> PDF</a> 
+                        <a href="<?= base_url(); ?>admin/export_members_print" target="_blank" class="btn btn-primary btn-flat"><i class="fa fa-print"></i> Print</a> 
                     </div>
-                </div>
             </div>
 
-            <table class="table table-responsive table-hover table-bordered" id="user-listing-table" style="width:100%;">
+            <table class="table table-hover table-bordered" id="user-listing-table">
                 <thead>
                 <tr>
                     <th width="80"></th>
@@ -197,10 +196,12 @@ table tbody td a, table tbody td span {
 
                 </tbody>
             </table>
-            <div style="text-align: end;"><p><?= $links; ?></p></div>
 
         </div>
         <!-- /.box-body -->
+        <div class="box-footer">
+            <div style="text-align: end;"><p><?= $links; ?></p></div>
+        </div>
     </div>
     <!-- /.box -->
 

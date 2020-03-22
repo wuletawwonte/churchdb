@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  </div>
 	  <!-- /.login-logo -->
 	  <div class="login-box-body">
-	    <p class="login-box-msg">Sign in to start your session</p>
+	    <p class="login-box-msg">ወደ አካውንቶ ይግቡ</p>
 
 	    <form action="<?php echo base_url(); ?>users/login" method="post">
 	      <div class="form-group has-feedback">
@@ -72,12 +72,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Remember Me
+              <input type="checkbox"> አስታውሰኝ
             </label>
           </div>
 
 	        <div>
-	          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+	          <button type="submit" class="btn btn-primary btn-block btn-flat">ይዝለቁ</button>
 	        </div>
 
 	    </form>
@@ -88,7 +88,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-	    <br><a href="#">I forgot my password</a><br>
+	    <br><a href="#">የይለፍ ቃሌን ረስቻለው</a><br>
 
 	  </div>
 	  <!-- /.login-box-body -->

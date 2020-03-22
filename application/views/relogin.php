@@ -74,6 +74,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   </div>
   <!-- /.lockscreen-item -->
+    <?php if($this->session->flashdata('login_failed')) { ?>
+        <div class="callout callout-danger">
+            <?php echo $this->session->flashdata('login_failed'); ?>
+        </div>
+    <?php } ?>
+
   <div class="help-block text-center">
     ወዳ አካውንቶ ለመመለስ የይለፍ ቃሎን ያስገቡ
   </div>

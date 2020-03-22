@@ -48,35 +48,34 @@
 	    <?php } ?>
 
 
-    	<div class="row">
-    		<div class="col-md-3 col-sm-3 col-lg-3">
-    			<div class="box box-info clearfix ">
-    				<div class="box-header with-border">
-    					<h3 class="box-title">የምዕመን ፎቶ</h3>
-    				</div>
-    				<div class="box-body" align="center">
-		              	<img class="img-responsive img-circle" for="avatarInput" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/img/user.png" alt="User profile picture"><br>
+	    	<div class="row">
+	    		<div class="col-md-3 col-sm-3 col-lg-3">
+	    			<div class="box box-info clearfix ">
+	    				<div class="box-header with-border">
+	    					<h3 class="box-title">የምዕመን ፎቶ</h3>
+	    				</div>
+	    				<div class="box-body" align="center">
+			              	<img class="img-responsive img-circle" for="avatarInput" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/img/user.png" alt="User profile picture"><br>
 
 
-					<div class="input-group">
-		                <input type="file" accept="image/*" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" id="avatarInput" name="avatar_input" style="display: none;">
-			                    <button type="button" class="btn btn-lg btn-primary" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
-			                    <button type="button" class="btn btn-lg btn-info btn-flat" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/img/user.png'"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
-		            </div>
-	                <p></p>
+						<div class="input-group">
+			                <input type="file" accept="image/*" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" id="avatarInput" name="avatar_input" style="display: none;">
+				                    <button type="button" class="btn btn-lg btn-primary" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
+				                    <button type="button" class="btn btn-lg btn-info btn-flat" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/img/user.png'"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
+			            </div>
+		                <p></p>
 
 
-		              	<p class="text-muted text-center">የፎቶው ከ1500KB ቢያንስ ይመረጣል </p>
-    				</div>
-    			</div>
-    		</div>
-    		<div class="col-md-9 col-lg-9 col-sm-9">
-			    <div class="box box-info clearfix">
-			        <div class="box-header with-border">
-			            <h3 class="box-title"> የግል መረጃ </h3>
-			        </div><!-- /.box-header -->
-			        <div class="box-body">
-			            <div class="form-group">
+			              	<p class="text-muted text-center">የፎቶው ከ1500KB ቢያንስ ይመረጣል </p>
+	    				</div>
+	    			</div>
+	    		</div>
+	    		<div class="col-md-9 col-lg-9 col-sm-9">
+				    <div class="box box-info clearfix">
+				        <div class="box-header with-border">
+				            <h3 class="box-title"> የግል መረጃ </h3>
+				        </div><!-- /.box-header -->
+				        <div class="box-body">
 			                <div class="row">
 			                    <div class="col-md-2">
 			                        <label> ፆታ  :</label>
@@ -89,8 +88,7 @@
 			                        <label for="title"> ማዕረግ  :</label>
 			                        <input type="text" name="title" class="form-control">
 			                    </div>
-			                </div>
-			                <p/>
+			                </div><br>
 			                <div class="row">
 			                    <div class="col-md-4">
 			                        <label for="firstname"> ስም  :</label>
@@ -108,8 +106,7 @@
 			                        <label for="lastname"> የአያት ስም :</label>
 			                        <input type="text" name="lastname" class="form-control" required>                    
 			                    </div>
-			                </div>
-			                <p/>
+			                </div><br>
 			                <div class="row">
 				                <div class="col-md-4 form-group">
 					                <label>የተወለዱበት ቀን :</label>
@@ -125,29 +122,75 @@
 			                    <div class="col-md-2">
 			                        <label> ዕድሜ ይደበቅ  </label><br/>
 			                        <div class="checkbox icheck">
-				                        <input type="checkbox" name="hide_age">
+				                        <input type="checkbox" name="hide_age" value="on">
 			                    	</div>
 			                    </div>
 			                    <div class="col-md-6">
 			                        <label for="birth_place"> የትውልድ ሥፍራ :</label>
 			                        <input type="text" name="birth_place" class="form-control">                    
 			                    </div>
-
 			                </div>
-			            </div>
-			        </div>
-			    </div>
+				        </div>
+				    </div>
+				</div>
 			</div>
-		</div>
 
 
 
 			<div class="box box-info clearfix">
 				<div class="box-header with-border">
-					<h3 class="box-title"> አድራሻና የሥራ ሁኔታ </h3>
+					<h3 class="box-title"> የምዕመኑ አድራሻ </h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
 					<div class="row">
+
+	                    <div class="col-md-4">
+	                        <label> ክፍለ ከተማ: </label>
+	                        <select name="kifle_ketema" class="form-control s2">
+	                        	<?php foreach($kifle_ketemas as $kifle_ketema) { ?>
+		                        	<option value="<?= $kifle_ketema['kifle_ketema_id']; ?>"> <?= $kifle_ketema['kifle_ketema_title']; ?> </option>
+		                        <?php } ?>
+	                        </select>
+	                    </div>
+
+	                    <div class="col-md-4">
+	                        <label> ቀበሌ: </label>
+	                        <select name="kebele" class="form-control s2">
+	                        	<?php foreach($kebeles as $kebele) { ?>
+		                        	<option value="<?= $kebele['kebele_id']; ?>"> <?= $kebele['kebele_title']; ?> </option>
+		                        <?php } ?>
+	                        </select>
+	                    </div>
+
+	                    <div class="col-md-4">
+	                        <label> መንደር: </label>
+	                        <select name="mender" class="form-control s2">
+	                        	<?php foreach($menders as $mender) { ?>
+		                        	<option value="<?= $mender['mender_id']; ?>"> <?= $mender['mender_title']; ?> </option>
+		                        <?php } ?>
+	                        </select>
+	                    </div>
+					</div><br>
+					<div class="row">
+
+	                    <div class="col-md-2">
+	                        <label for="house_number"> የቤት ቁጥር: </label>
+	                        <input type="text" name="house_number" class="form-control">                    
+	                    </div>
+
+						<div class="form-group col-md-4">
+							<label for="home_phone"> የመኖርያ ቤት ስልክ ቁጥር: </label>
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-tty"></i>
+								</div>
+								<input type="text" name="home_phone" class="form-control" placeholder="046..">
+							</div>
+						</div>
+
+					</div><br>
+					<div class="row">
+
 						<div class="form-group col-md-6">
 							<label>የሞባይል ስልክ ቁጥር:</label>
 							<div class="input-group">
@@ -159,7 +202,7 @@
 						</div>
 
 						<div class="form-group col-md-6">
-							<label>ኢሜል :</label>
+							<label>ኢሜል:</label>
 							<div class="input-group">
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-envelope"></i>
@@ -168,10 +211,42 @@
 							</div>
 						</div>
 
-					</div><p/>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="box box-info clearfix">
+				<div class="box-header with-border">
+					<h3 class="box-title"> የምዕመን የስራ ሁኔታ </h3>
+				</div><!-- /.box-header -->
+				<div class="box-body">
+					<div class="row">
+
+						<div class="col-md-6">
+							<label>የትምህርት ደረጃ:</label>
+	                        <select name="level_of_education" class="form-control s2">
+		                        <option value="አልተመረጠም"> አልተመረጠም </option>
+		                        <option value="8ኛ ያጠናቀቀ"> 8ኛ ያጠናቀቀ </option>
+		                        <option value="10ኛ ያጠናቀቀ"> 10ኛ ያጠናቀቀ </option>
+		                        <option value="10+2"> 10+2 </option>
+		                        <option value="ዲፕሎማ"> ዲፕሎማ </option>
+		                        <option value="የመጀመርያ ዲግሪ"> የመጀመርያ ዲግሪ </option>
+		                        <option value="የማስተርስ ዲግሪ"> የማስተርስ ዲግሪ </option>
+		                        <option value="ሶስተኛ ዲግሪ"> ሶስተኛ ዲግሪ </option>
+		                        <option value="ፕሮፌሰር"> ፕሮፌሰር </option>
+	                        </select>
+						</div>
+
+						<div class="col-md-6">
+							<label>የሰለጠኑበት ሙያ መስክ:</label>
+							<input type="text" Name="field_of_study" class="form-control" maxlength="50">
+						</div>
+
+					</div><br>
 					<div class="row">
 	                    <div class="col-md-4">
-	                        <label> የሥራ አይነት  :</label>
+	                        <label> የሥራ መስክ: </label>
 	                        <select name="job_type" class="form-control s2">
 	                        	<?php foreach($job_types as $job_type) { ?>
 		                            <option value="<?= $job_type['job_type_id'] ?>"> <?= $job_type['job_type_title']; ?> </option>
@@ -195,7 +270,20 @@
 							</div>
 						</div>
 
+					</div><br>
+					<div class="row">
+
+	                    <div class="col-md-4">
+	                        <label for="monthly_income"> ወርሐዊ ገቢ:</label>
+	                        <div class="input-group">
+	                        	<input type="tel" name="monthly_income" class="form-control">
+	                    		<div class="input-group-addon">ብር</div>
+
+	                    	</div>
+	                    </div>
+
 					</div>
+
 				</div>
 			</div>
 

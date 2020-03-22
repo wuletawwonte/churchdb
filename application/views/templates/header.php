@@ -27,6 +27,10 @@
       background: url(<?= base_url('assets/img/ripple.gif'); ?>) center no-repeat #eee;
     }
 
+    textarea {
+      resize: none;
+    }
+
   </style>
 
 <!-- REQUIRED JS SCRIPTS -->

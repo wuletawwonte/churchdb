@@ -68,18 +68,30 @@
     <!-- About Me Box -->
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title text-center"><?= lang('about_me') ?></h3>
+        <h3 class="box-title text-center"> ስለ እኔ </h3>
       </div>
       <!-- /.box-header -->
-      <div class="box-body">
+      <div class="box-body" style="overflow-x: hidden;">
         <ul class="fa-ul">
             <li><i class="fa-li fa fa-user"></i>የጋብቻ ሁኔታ: <?= $member['marital_status']?></li>
-            <li><i class="fa-li fa fa-calendar"></i><?= lang('birth_date') ?>: <?= $member['birthdate']; ?>                            <span></span><?php if(!$member['hide_age'] == 'on') { echo '('.$member['age'].' yrs old)'; } ?></li>
-            <li><i class="fa-li fa fa-mobile-phone"></i><?= lang('mobile_phone') ?>: <span><?= $member['mobile_phone']; ?></span></li>
-            <li><i class="fa-li fa fa-phone"></i><?= lang('home_phone') ?>: <span>(237)-926-6342</span></li>
-            <li><i class="fa-li fa fa-envelope"></i><?= lang('email') ?>: <span><?= $member['email']; ?></span></li>
+            <li><i class="fa-li fa fa-calendar"></i>የትውልድ ቀን: <?= $member['birthdate']; ?></li>
+            <?php if(!$member['hide_age']) { ?> 
+                <li><i class="fa-li fa fa-heartbeat"></i> እድሜ: <span><?= $member['age'].' yrs old';?></span></li>
+            <?php } ?>
+            <li><i class="fa-li fa fa-phone"></i>የሞባይል ስልክ ቁጥር: <span><?= $member['mobile_phone']; ?></span></li>
+            <li><i class="fa-li fa fa-tty"></i>የቤት ስልክ ቁጥር: <span><?= $member['home_phone']; ?></span></li>
+            <li><i class="fa-li fa fa-envelope"></i>ኢሜል: <span><?= $member['email']; ?></span></li>
             <li><i class="fa-li fa fa-info"></i>የአባልነት ደረጃ: <span><?= $member['membership_level_title']; ?></span></li>
-        </ul>
+        </ul><hr>
+        <strong>
+            <i class="fa fa-book margin-r-5"></i>
+            የትምህርት ሁኔታ
+        </strong>
+        <p class="text-muted">
+            <b>የትምህርት ደረጃ፡</b> <?= $member['level_of_education']?>
+            <b>የሰለጠኑበት ሙያ መስክ:</b> <?= $member['field_of_study']?>
+        </p>
+
       </div>
     </div>
     
@@ -102,8 +114,9 @@
 
       <div class="col-lg-9 col-md-9 col-sm-9">
         <div class="box box-primary box-body">
-          <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetailsprint/<?= $member['id']; ?>"><i class="fa fa-print"></i> የሚታተም ገፅ </a>
-          <a class="btn btn-app" href="/master/WhyCameEditor.php?PersonID=59"><i class="fa fa-money"></i> <?= lang('tithes_info') ?></a>
+          <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetailsprint/<?= $member['id']; ?>" target="_blank" ><i class="fa fa-print"></i> የሚታተም ገፅ </a>
+          <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/tithe"><i class="fa fa-money"></i> የአስራት መረጃ </a>
+          <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/status"><i class="fa fa-user"></i> የምዕመን ሁኔታ </a>
           <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
           <a class="btn btn-app" id="addGroup"><i class="fa fa-users"></i> <?= lang('assign_new_group') ?> </a>
           <a class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> ምዕመን አጥፋ </a>
@@ -117,7 +130,8 @@
             <li role="presentation" <?php if($active_tab == NULL) { echo "class='active'"; } ?> ><a href="#details" aria-controls="details" role="tab" data-toggle="tab">ዝርዝር መረጃ</a></li>
             <li role="presentation"><a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">የጊዜ መስመር</a></li>
             <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">የተመድቡበት ቡድን</a></li>
-            <li role="presentation"><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">Assigned Properties</a></li>
+            <li role="presentation" <?php if($active_tab == 'tithe') { echo "class='active'"; } ?> ><a href="#tithe" aria-controls="tithes" role="tab" data-toggle="tab"> የአስራት መረጃ </a></li>
+            <li role="presentation" <?php if($active_tab == 'status') { echo "class='active'"; } ?>><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">የምዕመን ሁኔታ</a></li>
             <li role="presentation" <?php if($active_tab == "notes") { echo "class='active'"; } ?>><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">ማስታወሻዎች</a></li>
           </ul>
 
@@ -132,6 +146,42 @@
                             <p>የምዕመን ዝርዝር መረጃ የሚያካትታቸው ዝርዝሮች የሚከተሉትን ብቻ ሳይሆን የቡድን መረጃ እንዲሁም የማስታወሻ ጽሁፎችንም ያካትታ</p>
                             <small>የበተክርስቲያኒቱ ዋና የሲስተም አስተዳደር <cite title="Source Title">ፀጋ ዲዛይን</cite></small>
                         </blockquote>
+
+                        <div class="col-md-6">
+                          <div class="box box-solid">
+                            <div class="box-header with-border">
+                              <i class="fa fa-info"></i>
+
+                              <h3 class="box-title">አድራሻና የሥራ ሁኔታ</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <dl class="dl-horizontal">
+                                    <dt> ክፍለ ከተማ </dt>
+                                    <dd> <?= $member['kifle_ketema_title']; ?></dd>
+                                    <dt> ቀበሌ </dt>
+                                    <dd> <?= $member['kebele_title']; ?></dd>
+                                    <dt> መንደር </dt>
+                                    <dd> <?= $member['mender_title']; ?> </dd>
+                                    <dt> የቤት ቁጥር </dt>
+                                    <dd> <?= $member['house_number']; ?> </dd>
+                                    <dt> የሞባይል ስልክ ቁጥር </dt>
+                                    <dd> <?= $member['mobile_phone']; ?> </dd>
+                                    <dt> ኢሜል </dt>
+                                    <dd> <?= $member['email']?> </dd>
+                                    <dt> የሥራ አይነት </dt>
+                                    <dd> <?= $member['job_type_title']?> </dd>
+                                    <dt> የመሥሪያ ቤቱ ስም </dt>
+                                    <dd> <?= $member['workplace_name']?> </dd>
+                                    <dt> የመሥሪያ ቤት ስልክ ቁጥር </dt>
+                                    <dd> <?= $member['workplace_phone']?> </dd>
+                                </dl>                        
+                            </div>
+                            <!-- /.box-body -->
+                          </div>
+                          <!-- /.box -->
+                        </div>
+
                         <div class="col-md-6">
                           <div class="box box-solid">
                             <div class="box-header with-border">
@@ -157,32 +207,6 @@
                           <!-- /.box -->
                         </div>
 
-                        <div class="col-md-6">
-                          <div class="box box-solid">
-                            <div class="box-header with-border">
-                              <i class="fa fa-info"></i>
-
-                              <h3 class="box-title">አድራሻና የሥራ ሁኔታ</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <dl class="dl-horizontal">
-                                    <dt>የሞባይል ስልክ ቁጥር</dt>
-                                    <dd><?= $member['mobile_phone']; ?></dd>
-                                    <dt>ኢሜል</dt>
-                                    <dd><?= $member['email']?></dd>
-                                    <dt>የሥራ አይነት</dt>
-                                    <dd><?= $member['job_type_title']?></dd>
-                                    <dt>የመሥሪያ ቤቱ ስም</dt>
-                                    <dd><?= $member['workplace_name']?></dd>
-                                    <dt>የመሥሪያ ቤት ስልክ ቁጥር</dt>
-                                    <dd><?= $member['workplace_phone']?></dd>
-                                </dl>                        
-                            </div>
-                            <!-- /.box-body -->
-                          </div>
-                          <!-- /.box -->
-                        </div>
                     </div>
                 </div>
 
@@ -264,31 +288,121 @@
                     <?php } ?>
                 </div>
 
+                <!-- የአስራት መረጃ tab starts here -->
+
+                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'tithe') { echo "active"; } ?>" id="tithe">
+                    <div class="main-box clearfix">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> ወር :</label>
+                                <select name="month" class="form-control s2searchable">
+                                    <option value="መስከረም"> መስከረም </option>
+                                    <option value="ጥቅምት"> ጥቅምት </option>
+                                    <option value="ሕዳር"> ሕዳር </option>
+                                    <option value="ታህሳስ"> ታህሳስ </option>
+                                    <option value="ጥር"> ጥር </option>
+                                    <option value="የካቲት"> የካቲት </option>
+                                    <option value="መጋቢት"> መጋቢት </option>
+                                    <option value="ሚያዝያ"> ሚያዝያ </option>
+                                    <option value="ግንቦት"> ግንቦት </option>
+                                    <option value="ሰኔ"> ሰኔ </option>
+                                    <option value="ሐምሌ"> ሐምሌ </option>
+                                    <option value="ነሀሴ"> ነሀሴ </option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="title"> ማዕረግ  :</label>
+                                <input type="text" name="title" class="form-control">
+                            </div>
+                        </div><br>
+
+
+                        <div class="box-body table-responsive" style="padding: 0px;">
+                            <table class="table table-hover table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>User</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Reason</th>
+                                    </tr>
+                                    <tr>
+                                        <td>183</td>
+                                        <td>John Doe</td>
+                                        <td>11-7-2014</td>
+                                        <td><span class="label label-success">Approved</span></td>
+                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>219</td>
+                                        <td>Alexander Pierce</td>
+                                        <td>11-7-2014</td>
+                                        <td><span class="label label-warning">Pending</span></td>
+                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>657</td>
+                                        <td>Bob Doe</td>
+                                        <td>11-7-2014</td>
+                                        <td><span class="label label-primary">Approved</span></td>
+                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
                 <!-- Assigned properties tab starts here -->
 
-                <div role="tab-pane fade" class="tab-pane" id="properties">
+                 <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'status') { echo "active"; } ?>" id="properties">
                     <div class="main-box clearfix">
                         <div class="main-box-body clearfix"><br>
-                            <div class="alert alert-warning">
-                              <i class="fa fa-question-circle fa-fw fa-lg"></i> <span>No property assignments.</span>
+
+                            <?php if($this->session->flashdata('status_change_success')) { ?>
+                                <div class="callout callout-info">
+                                    <?php echo $this->session->flashdata('status_change_success'); ?>
+                                </div>
+                            <?php } else if($this->session->flashdata('status_change_error')) { ?>
+                                <div class="callout callout-danger">
+                                    <?php echo $this->session->flashdata('status_change_error'); ?>
+                                </div>
+                            <?php } ?>
+
+
+                            <div>
+                                <div class="info-box col-md-6" style="padding-left: 0px;">
+                                    <span class="info-box-icon <?php if($member['status'] == 'ያለ') echo 'bg-aqua'; else echo 'bg-red'; ?>"><i class="fa fa-bookmark-o"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">የምእመን ሁኔታ</span>
+                                        <span class="info-box-number"><?= $member['status']?></span>
+                                        <?php if($member['status'] == 'የሌለ') { ?>
+                                            <p class="text-muted"><b>ምክንያት፡</b> <?= $member['status_remark']?></p>
+                                        <?php } ?>
+                                    </div>
+                                </div>
                             </div>
 
-                            <h4><strong>Assign a New Property:</strong></h4>
+                            <h4><strong>የምዕመን ሁኔታ:</strong></h4>
 
-                            <form method="post" action="/master/api/properties/persons/assign" id="assign-property-form">
-                                <input type="hidden" name="PersonId" value="59" >
+                            <form method="post" action="<?= base_url(); ?>admin/changestatus" id="assign-property-form">
+                                <input type="hidden" name="id" value="<?= $member['id']?>" >
                                 <div class="row">
-                                    <div class="form-group col-xs-12 col-md-7">
-                                        <select name="PropertyId" id="input-person-properties" class="form-control select2" style="width:100%" data-placeholder="Select ...">
-                                            <option disabled selected> -- select an option -- </option>
-                                            <option value="1" data-pro_Prompt="What is the nature of the disability?" data-pro_Value="" >Disabled</option>
-                                        </select>                                                    </select>
+                                    <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                                        <div class="form-group col-xs-12">
+                                            <select name="status" id="status" class="form-control s2" style="width:100%">
+                                                <option value="ያለ">ያለ</option>
+                                                <option value="የሌለ">የሌለ</option>
+                                            </select>    
+                                        </div>
+                                        <div class="form-group col-xs-12" id="statusRemarkDiv" hidden>
+                                            <textarea class="form-control" name="status_remark" id="statusRemark" rows="2" placeholder="ምርመራ ..."></textarea>
+                                        </div>
                                     </div>
-                                    <div id="prompt-box" class="col-xs-12 col-md-7">
-
-                                    </div>
-                                    <div class="form-group col-xs-12 col-md-7">
-                                      <input id="assign-property-btn" type="submit" class="btn btn-primary" value="Assign" name="Submit">
+                                    <div class="form-group col-xs-12 col-md-6">
+                                      <input id="assign-property-btn" type="submit" class="btn btn-primary btn-flat" value="ቀይር">
                                     </div>
                                 </div>
                             </form>
@@ -322,7 +436,7 @@
 
 
                             <li>
-                              <i class="fa fa-comments bg-yellow"></i>
+                              <i class="fa fa-newspaper-o bg-yellow"></i>
 
                               <div class="timeline-item">
                                 <span class="time"><i class="fa fa-clock-o"></i> አሁን </span>
@@ -347,7 +461,7 @@
                               <i class="fa fa-newspaper-o bg-blue"></i>
 
                               <div class="timeline-item">
-                                <span class="time"><i class="fa fa-clock-o"></i>  <?php echo timespan(human_to_unix($note['date'])).' በፊት'; ?></span>
+                                <span class="time"><i class="fa fa-clock-o"></i>  <?php echo timespan(human_to_unix($note['date']), null, 1).' በፊት'; ?></span>
 
                                 <h3 class="timeline-header"><a href="#"><?= $note['firstname'].' '.$note['lastname']; ?></a> ማስታወሻ ይዟል</h3>
 
@@ -378,3 +492,21 @@
         </div>
     </section>
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#status").change(function(){
+            var selected = $(this).val();
+            if(selected == "የሌለ") {
+                $("#statusRemarkDiv").prop('hidden', false);
+            } else {
+                $("#statusRemarkDiv").prop('hidden', true);   
+                $("#statusRemark").val('');             
+            }
+        });
+
+
+    });
+</script>

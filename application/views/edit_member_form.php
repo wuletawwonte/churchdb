@@ -146,6 +146,54 @@
 				</div><!-- /.box-header -->
 				<div class="box-body">
 					<div class="row">
+
+	                    <div class="col-md-4">
+	                        <label> ክፍለ ከተማ: </label>
+	                        <select name="kifle_ketema" class="form-control s2">
+	                        	<?php foreach($kifle_ketemas as $kifle_ketema) { ?>
+		                        	<option value="<?= $kifle_ketema['kifle_ketema_id']?>" <?php if($member['kifle_ketema'] == $kifle_ketema['kifle_ketema_id']) echo 'selected'; ?> > <?= $kifle_ketema['kifle_ketema_title']; ?> </option>
+		                        <?php } ?>
+	                        </select>
+	                    </div>
+
+	                    <div class="col-md-4">
+	                        <label> ቀበሌ: </label>
+	                        <select name="kebele" class="form-control s2">
+	                        	<?php foreach($kebeles as $kebele) { ?>
+		                        	<option value="<?= $kebele['kebele_id'] ?>" <?php if($member['kebele'] == $kebele['kebele_id']) echo 'selected'; ?> > <?= $kebele['kebele_title']; ?> </option>
+		                        <?php } ?>
+	                        </select>
+	                    </div>
+
+	                    <div class="col-md-4">
+	                        <label> መንደር: </label>
+	                        <select name="mender" class="form-control s2">
+	                        	<?php foreach($menders as $mender) { ?>
+		                        	<option value="<?= $mender['mender_id']; ?>" <?php if($member['mender'] == $mender['mender_id']) echo 'selected'; ?> > <?= $mender['mender_title']; ?> </option>
+		                        <?php } ?>
+	                        </select>
+	                    </div>
+					</div><br>
+					<div class="row">
+
+	                    <div class="col-md-2">
+	                        <label for="house_number"> የቤት ቁጥር: </label>
+	                        <input type="text" name="house_number" value="<?= $member['house_number']?>" class="form-control">                    
+	                    </div>
+
+						<div class="form-group col-md-4">
+							<label for="home_phone"> የመኖርያ ቤት ስልክ ቁጥር: </label>
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-tty"></i>
+								</div>
+								<input type="text" name="home_phone" value="<?= $member['home_phone']?>" class="form-control" placeholder="046..">
+							</div>
+						</div>
+
+					</div><br>
+
+					<div class="row">
 						<div class="form-group col-md-6">
 							<label><?= lang('mobile_phone') ?>:</label>
 							<div class="input-group">
@@ -167,9 +215,39 @@
 						</div>
 
 					</div><p/>
+				</div>
+			</div>
+			<div class="box box-info clearfix">
+				<div class="box-header with-border">
+					<h3 class="box-title"> የምዕመን የስራ ሁኔታ </h3>
+				</div><!-- /.box-header -->
+				<div class="box-body">
+					<div class="row">
+
+						<div class="col-md-6">
+							<label>የትምህርት ደረጃ:</label>
+	                        <select name="level_of_education" class="form-control s2">
+		                        <option <?php if($member['level_of_education'] == 'አልተመረጠም') echo 'selected'; ?> value="አልተመረጠም"> አልተመረጠም </option>
+		                        <option <?php if($member['level_of_education'] == '8ኛ ያጠናቀቀ') echo 'selected'; ?> value="8ኛ ያጠናቀቀ"> 8ኛ ያጠናቀቀ </option>
+		                        <option <?php if($member['level_of_education'] == '10ኛ ያጠናቀቀ') echo 'selected'; ?> value="10ኛ ያጠናቀቀ"> 10ኛ ያጠናቀቀ </option>
+		                        <option <?php if($member['level_of_education'] == '10+2') echo 'selected'; ?> value="10+2"> 10+2 </option>
+		                        <option <?php if($member['level_of_education'] == 'ዲፕሎማ') echo 'selected'; ?> value="ዲፕሎማ"> ዲፕሎማ </option>
+		                        <option <?php if($member['level_of_education'] == 'የመጀመርያ ዲግሪ') echo 'selected'; ?> value="የመጀመርያ ዲግሪ"> የመጀመርያ ዲግሪ </option>
+		                        <option <?php if($member['level_of_education'] == 'የማስተርስ ዲግሪ') echo 'selected'; ?> value="የማስተርስ ዲግሪ"> የማስተርስ ዲግሪ </option>
+		                        <option <?php if($member['level_of_education'] == 'ሶስተኛ ዲግሪ') echo 'selected'; ?> value="ሶስተኛ ዲግሪ"> ሶስተኛ ዲግሪ </option>
+		                        <option <?php if($member['level_of_education'] == 'ፕሮፌሰር') echo 'selected'; ?> value="ፕሮፌሰር"> ፕሮፌሰር </option>
+	                        </select>
+						</div>
+
+						<div class="col-md-6">
+							<label>የሰለጠኑበት ሙያ መስክ:</label>
+							<input type="text" name="field_of_study" value="<?= $member['field_of_study']?>" class="form-control" maxlength="50">
+						</div>
+
+					</div><br>
 					<div class="row">
 	                    <div class="col-md-4">
-	                        <label> <?= lang('job_type'); ?>  :</label>
+	                        <label> የሥራ መስክ: </label>
 	                        <select name="job_type" class="form-control s2">
 				                <?php foreach($job_types as $job_type) { ?>
 			                        <option value="<?= $job_type['job_type_id'] ?>" <?php if($member['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
@@ -181,13 +259,13 @@
 	                    </div>
 
 	                    <div class="col-md-4">
-	                        <label for="workplace_name"> <?= lang('workplace_name'); ?>  :</label>
+	                        <label for="workplace_name"> የመሥሪያ ቤቱ ስም: </label>
 	                        <input type="text" name="workplace_name" value="<?= $member['workplace_name'] ?>" class="form-control">                    
 	                    </div>
 
 
 						<div class="form-group col-md-4">
-							<label><?= lang('work_phone') ?>:</label>
+							<label> የመሥሪያ ቤት ስልክ ቁጥር: </label>
 							<div class="input-group">
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-phone-alt"></i>
@@ -196,9 +274,24 @@
 							</div>
 						</div>
 
+					</div><br>
+					<div class="row">
+
+	                    <div class="col-md-4">
+	                        <label for="monthly_income"> ወርሐዊ ገቢ: </label>
+	                        <div class="input-group">
+	                        	<input type="tel" name="monthly_income" value="<?php if($member['monthly_income']) echo $member['monthly_income']; ?>" class="form-control">
+	                    		<div class="input-group-addon">ብር</div>
+
+	                    	</div>
+	                    </div>
+
 					</div>
+
 				</div>
 			</div>
+
+
 
 
 			<div class="box box-info clearfix">

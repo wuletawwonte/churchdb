@@ -16,9 +16,17 @@ class Member extends CI_Model {
 			'middlename' => $this->input->post('middlename'), 
 			'lastname' => $this->input->post('lastname'), 
 			'gender' => $this->input->post('gender'), 
+			'kifle_ketema' => $this->input->post('kifle_ketema'), 
+			'kebele' => $this->input->post('kebele'), 
+			'mender' => $this->input->post('mender'), 
+			'house_number' => $this->input->post('house_number'), 
+			'home_phone' => $this->input->post('home_phone'), 
+			'level_of_education' => $this->input->post('level_of_education'), 
+			'field_of_study' => $this->input->post('field_of_study'), 
 			'job_type' => $this->input->post('job_type'), 
 			'workplace_name' => $this->input->post('workplace_name'), 
 			'workplace_phone' => $this->input->post('workplace_phone'), 
+			'monthly_income' => $this->input->post('monthly_income'), 
 			'mobile_phone' => $this->input->post('mobile_phone'), 
 			'email' => $this->input->post('email'), 
 			'birthdate' => $this->input->post('birthdate'), 
@@ -54,9 +62,17 @@ class Member extends CI_Model {
 				'middlename' => $this->input->post('middlename'), 
 				'lastname' => $this->input->post('lastname'), 
 				'gender' => $this->input->post('gender'), 
+				'kifle_ketema' => $this->input->post('kifle_ketema'), 
+				'kebele' => $this->input->post('kebele'), 
+				'mender' => $this->input->post('mender'), 
+				'house_number' => $this->input->post('house_number'), 
+				'home_phone' => $this->input->post('home_phone'), 
+				'level_of_education' => $this->input->post('level_of_education'), 
+				'field_of_study' => $this->input->post('field_of_study'), 
 				'job_type' => $this->input->post('job_type'), 
 				'workplace_name' => $this->input->post('workplace_name'), 
 				'workplace_phone' => $this->input->post('workplace_phone'), 
+				'monthly_income' => $this->input->post('monthly_income'), 
 				'mobile_phone' => $this->input->post('mobile_phone'), 
 				'email' => $this->input->post('email'), 
 				'birthdate' => $this->input->post('birthdate'), 
@@ -76,9 +92,17 @@ class Member extends CI_Model {
 				'middlename' => $this->input->post('middlename'), 
 				'lastname' => $this->input->post('lastname'), 
 				'gender' => $this->input->post('gender'), 
+				'kifle_ketema' => $this->input->post('kifle_ketema'), 
+				'kebele' => $this->input->post('kebele'), 
+				'mender' => $this->input->post('mender'), 
+				'house_number' => $this->input->post('house_number'), 
+				'home_phone' => $this->input->post('home_phone'), 
+				'level_of_education' => $this->input->post('level_of_education'), 
+				'field_of_study' => $this->input->post('field_of_study'), 
 				'job_type' => $this->input->post('job_type'), 
 				'workplace_name' => $this->input->post('workplace_name'), 
 				'workplace_phone' => $this->input->post('workplace_phone'), 
+				'monthly_income' => $this->input->post('monthly_income'), 
 				'mobile_phone' => $this->input->post('mobile_phone'), 
 				'email' => $this->input->post('email'), 
 				'birthdate' => $this->input->post('birthdate'), 
@@ -131,6 +155,9 @@ class Member extends CI_Model {
 		$this->db->join('membership_causes', 'members.membership_cause = membership_causes.membership_cause_id');
 		$this->db->join('ministries', 'members.ministry = ministries.ministry_id');
 		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
+		$this->db->join('kifle_ketemas', 'members.kifle_ketema = kifle_ketemas.kifle_ketema_id');
+		$this->db->join('kebeles', 'members.kebele = kebeles.kebele_id');
+		$this->db->join('menders', 'members.mender = menders.mender_id');
 		$res = $this->db->get();
 		$res = $res->result_array();
 		return  $res[0];
@@ -294,6 +321,19 @@ class Member extends CI_Model {
 		}		
 
 		return $data;
+	}
+
+	public function changestatus() {
+		$data = array(
+			'status' => $this->input->post('status'),
+			'status_remark' => $this->input->post('status_remark') 
+			);
+		$this->db->where('id', $this->input->post('id'));
+		if($this->db->update('members', $data)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 
