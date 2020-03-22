@@ -32,108 +32,107 @@
     <!-- Main content -->
     <section class="content">
     <div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-3">
-        <div class="box box-primary">
-            <div class="box-body box-profile">
-                <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
-                	<?php if($member['avatar'] == NULL) { ?>
-                        <div class="profile-image">
-                            <div style="width: 100%; height: 100%; border-radius: 50%; background: <?= $member['profile_color']; ?>">
-                                <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
+        <div class="col-lg-3 col-md-3 col-sm-3">
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
+                    	<?php if($member['avatar'] == NULL) { ?>
+                            <div class="profile-image">
+                                <div style="width: 100%; height: 100%; border-radius: 50%; background: <?= $member['profile_color']; ?>">
+                                    <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
+                                </div>
                             </div>
-                        </div>
-                    <?php } else { ?>
-                        <div style="margin: 0 auto;height: 130px; width: 130px;margin-top: 15px;">
-                            <img class="img-circle" style="border: 3px solid <?= $member['profile_color']; ?>;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
-                        </div>
+                        <?php } else { ?>
+                            <div style="margin: 0 auto;height: 130px; width: 130px;margin-top: 15px;">
+                                <img class="img-circle" style="border: 3px solid <?= $member['profile_color']; ?>;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
+                            </div>
 
-                    <?php } ?>
-                </a><br>
-              
-              <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><h3 class="profile-username text-center">
-                  <?php if($member['gender'] == 'ወንድ'){ ?>
-                    <i class="fa fa-male"></i>
-                  <?php } else {?>
-                    <i class="fa fa-female"></i>
-                  <?php } ?>
-                    <?= $member['firstname']." ".$member['middlename']; ?></h3></a>
+                        <?php } ?>
+                    </a><br>
+                  
+                  <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><h3 class="profile-username text-center">
+                      <?php if($member['gender'] == 'ወንድ'){ ?>
+                        <i class="fa fa-male"></i>
+                      <?php } else {?>
+                        <i class="fa fa-female"></i>
+                      <?php } ?>
+                        <?= $member['firstname']." ".$member['middlename']; ?></h3></a>
 
 
-                  <a  href="<?= base_url('admin/editmember/'.$member['id']); ?>" class="btn btn-primary btn-block <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" id="EditPerson"><b><?= lang('edit') ?></b></a>
-              </div>
-      <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
-
-    <!-- About Me Box -->
-    <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title text-center"> ስለ እኔ </h3>
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body" style="overflow-x: hidden;">
-        <ul class="fa-ul">
-            <li><i class="fa-li fa fa-user"></i>የጋብቻ ሁኔታ: <?= $member['marital_status']?></li>
-            <li><i class="fa-li fa fa-calendar"></i>የትውልድ ቀን: <?= $member['birthdate']; ?></li>
-            <?php if(!$member['hide_age']) { ?> 
-                <li><i class="fa-li fa fa-heartbeat"></i> እድሜ: <span><?= $member['age'].' yrs old';?></span></li>
-            <?php } ?>
-            <li><i class="fa-li fa fa-phone"></i>የሞባይል ስልክ ቁጥር: <span><?= $member['mobile_phone']; ?></span></li>
-            <li><i class="fa-li fa fa-tty"></i>የቤት ስልክ ቁጥር: <span><?= $member['home_phone']; ?></span></li>
-            <li><i class="fa-li fa fa-envelope"></i>ኢሜል: <span><?= $member['email']; ?></span></li>
-            <li><i class="fa-li fa fa-info"></i>የአባልነት ደረጃ: <span><?= $member['membership_level_title']; ?></span></li>
-        </ul><hr>
-        <strong>
-            <i class="fa fa-book margin-r-5"></i>
-            የትምህርት ሁኔታ
-        </strong>
-        <p class="text-muted">
-            <b>የትምህርት ደረጃ፡</b> <?= $member['level_of_education']?>
-            <b>የሰለጠኑበት ሙያ መስክ:</b> <?= $member['field_of_study']?>
-        </p>
-
-      </div>
-    </div>
-    
-    <div class="alert alert-info alert-dismissable">
-        <i class="fa fa-fw fa-tree"></i> indicates items inherited from the associated family record.        </div>
-    </div>
-
-      <div class="col-lg-9 col-md-9 col-sm-9">
-        <?php if($this->session->flashdata('success')) { ?>
-            <div class="callout callout-info">
-                <?php echo $this->session->flashdata('success'); ?>
-            </div>
-        <?php } else if($this->session->flashdata('error')) { ?>
-            <div class="callout callout-danger">
-                <?php echo $this->session->flashdata('error'); ?>
-            </div>
-        <?php } ?>
-
-      </div>
-
-      <div class="col-lg-9 col-md-9 col-sm-9">
-        <div class="box box-primary box-body">
-          <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetailsprint/<?= $member['id']; ?>" target="_blank" ><i class="fa fa-print"></i> የሚታተም ገፅ </a>
-          <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/tithe"><i class="fa fa-money"></i> የአስራት መረጃ </a>
-          <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/status"><i class="fa fa-user"></i> የምዕመን ሁኔታ </a>
-          <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
-          <a class="btn btn-app" id="addGroup"><i class="fa fa-users"></i> <?= lang('assign_new_group') ?> </a>
-          <a class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> ምዕመን አጥፋ </a>
-          <a class="btn btn-app <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-user-secret"></i> መረጃ ቀይር </a>
+                      <a  href="<?= base_url('admin/editmember/'.$member['id']); ?>" class="btn btn-primary btn-block <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" id="EditPerson"><b><?= lang('edit') ?></b></a>
+                  </div>
+          <!-- /.box-body -->
         </div>
-      </div>
-      <div class="col-lg-9 col-md-9 col-sm-9">
-        <div class="nav-tabs-custom">
-          <!-- Nav tabs -->
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" <?php if($active_tab == NULL) { echo "class='active'"; } ?> ><a href="#details" aria-controls="details" role="tab" data-toggle="tab">ዝርዝር መረጃ</a></li>
-            <li role="presentation"><a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">የጊዜ መስመር</a></li>
-            <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">የተመድቡበት ቡድን</a></li>
-            <li role="presentation" <?php if($active_tab == 'tithe') { echo "class='active'"; } ?> ><a href="#tithe" aria-controls="tithes" role="tab" data-toggle="tab"> የአስራት መረጃ </a></li>
-            <li role="presentation" <?php if($active_tab == 'status') { echo "class='active'"; } ?>><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">የምዕመን ሁኔታ</a></li>
-            <li role="presentation" <?php if($active_tab == "notes") { echo "class='active'"; } ?>><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">ማስታወሻዎች</a></li>
-          </ul>
+        <!-- /.box -->
+
+        <!-- About Me Box -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title text-center"> ስለ እኔ </h3>
+            </div>
+          
+            <div class="box-body" style="overflow-x: hidden;">
+                <ul class="fa-ul">
+                    <li><i class="fa-li fa fa-user"></i>የጋብቻ ሁኔታ: <?= $member['marital_status']?></li>
+                    <li><i class="fa-li fa fa-calendar"></i>የትውልድ ቀን: <?= $member['birthdate']; ?></li>
+                    <?php if(!$member['hide_age']) { ?> 
+                        <li><i class="fa-li fa fa-heartbeat"></i> እድሜ: <span><?= $member['age'].' yrs old';?></span></li>
+                    <?php } ?>
+                    <li><i class="fa-li fa fa-phone"></i>የሞባይል ስልክ ቁጥር: <span><?= $member['mobile_phone']; ?></span></li>
+                    <li><i class="fa-li fa fa-tty"></i>የቤት ስልክ ቁጥር: <span><?= $member['home_phone']; ?></span></li>
+                    <li><i class="fa-li fa fa-envelope"></i>ኢሜል: <span><?= $member['email']; ?></span></li>
+                    <li><i class="fa-li fa fa-info"></i>የአባልነት ደረጃ: <span><?= $member['membership_level_title']; ?></span></li>
+                </ul><hr>
+                <strong>
+                    <i class="fa fa-book margin-r-5"></i>
+                    የትምህርት ሁኔታ
+                </strong>
+                <p class="text-muted">
+                    <b>የትምህርት ደረጃ፡</b> <?= $member['level_of_education']?>
+                    <b>የሰለጠኑበት ሙያ መስክ:</b> <?= $member['field_of_study']?>
+                </p>
+
+            </div>
+        </div>
+        
+        <div class="alert alert-info alert-dismissable">
+            <i class="fa fa-fw fa-tree"></i> indicates items inherited from the associated family record.        </div>
+        </div>
+
+        <div class="col-lg-9 col-md-9 col-sm-9">
+            <?php if($this->session->flashdata('success')) { ?>
+                <div class="callout callout-info">
+                    <?php echo $this->session->flashdata('success'); ?>
+                </div>
+            <?php } else if($this->session->flashdata('error')) { ?>
+                <div class="callout callout-danger">
+                    <?php echo $this->session->flashdata('error'); ?>
+                </div>
+            <?php } ?>
+        </div>
+
+        <div class="col-lg-9 col-md-9 col-sm-9">
+            <div class="box box-primary box-body">
+                <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetailsprint/<?= $member['id']; ?>" target="_blank"><i class="fa fa-print"></i> የሚታተም ገፅ </a>
+                <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/tithe"><i class="fa fa-money"></i> የአስራት መረጃ </a>
+                <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/status"><i class="fa fa-user"></i> የምዕመን ሁኔታ </a>
+                <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
+                <a class="btn btn-app" id="addGroup"><i class="fa fa-users"></i> <?= lang('assign_new_group') ?> </a>
+                <a class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> ምዕመን አጥፋ </a>
+                <a class="btn btn-app <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-user-secret"></i> መረጃ ቀይር </a>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9">
+            <div class="nav-tabs-custom">
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" <?php if($active_tab == NULL) { echo "class='active'"; } ?> ><a href="#details" aria-controls="details" role="tab" data-toggle="tab">ዝርዝር መረጃ</a></li>
+                <li role="presentation"><a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">የጊዜ መስመር</a></li>
+                <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">የተመድቡበት ቡድን</a></li>
+                <li role="presentation" <?php if($active_tab == 'tithe') { echo "class='active'"; } ?> ><a href="#tithe" aria-controls="tithes" role="tab" data-toggle="tab"> የአስራት መረጃ </a></li>
+                <li role="presentation" <?php if($active_tab == 'status') { echo "class='active'"; } ?>><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">የምዕመን ሁኔታ</a></li>
+                <li role="presentation" <?php if($active_tab == "notes") { echo "class='active'"; } ?>><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">ማስታወሻዎች</a></li>
+            </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
@@ -290,12 +289,20 @@
 
                 <!-- የአስራት መረጃ tab starts here -->
 
-                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'tithe') { echo "active"; } ?>" id="tithe">
+                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'tithe') { echo 'active'; } ?>" id="tithe">
                     <div class="main-box clearfix">
+
+                        <blockquote>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                            <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+                        </blockquote>
+
                         <div class="row">
+
                             <div class="col-md-6">
-                                <label> ወር :</label>
+                                <label for="month"> ወር: </label>
                                 <select name="month" class="form-control s2searchable">
+                                    <option disabled selected>ወሩን ይምረጡ</option>
                                     <option value="መስከረም"> መስከረም </option>
                                     <option value="ጥቅምት"> ጥቅምት </option>
                                     <option value="ሕዳር"> ሕዳር </option>
@@ -310,6 +317,7 @@
                                     <option value="ነሀሴ"> ነሀሴ </option>
                                 </select>
                             </div>
+
                             <div class="col-md-3">
                                 <label for="title"> ማዕረግ  :</label>
                                 <input type="text" name="title" class="form-control">
