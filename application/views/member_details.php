@@ -114,7 +114,7 @@
         <div class="col-lg-9 col-md-9 col-sm-9">
             <div class="box box-primary box-body">
                 <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetailsprint/<?= $member['id']; ?>" target="_blank"><i class="fa fa-print"></i> የሚታተም ገፅ </a>
-                <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/tithe"><i class="fa fa-money"></i> የአስራት መረጃ </a>
+                <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/payment"><i class="fa fa-money"></i> የክፍያ መረጃ </a>
                 <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/status"><i class="fa fa-user"></i> የምዕመን ሁኔታ </a>
                 <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
                 <a class="btn btn-app" id="addGroup"><i class="fa fa-users"></i> <?= lang('assign_new_group') ?> </a>
@@ -129,7 +129,7 @@
                 <li role="presentation" <?php if($active_tab == NULL) { echo "class='active'"; } ?> ><a href="#details" aria-controls="details" role="tab" data-toggle="tab">ዝርዝር መረጃ</a></li>
                 <li role="presentation"><a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">የጊዜ መስመር</a></li>
                 <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">የተመድቡበት ቡድን</a></li>
-                <li role="presentation" <?php if($active_tab == 'tithe') { echo "class='active'"; } ?> ><a href="#tithe" aria-controls="tithes" role="tab" data-toggle="tab"> የአስራት መረጃ </a></li>
+                <li role="presentation" <?php if($active_tab == 'payment') { echo "class='active'"; } ?> ><a href="#payment" aria-controls="payment" role="tab" data-toggle="tab"> የክፍያ መረጃ </a></li>
                 <li role="presentation" <?php if($active_tab == 'status') { echo "class='active'"; } ?>><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">የምዕመን ሁኔታ</a></li>
                 <li role="presentation" <?php if($active_tab == "notes") { echo "class='active'"; } ?>><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">ማስታወሻዎች</a></li>
             </ul>
@@ -289,73 +289,108 @@
 
                 <!-- የአስራት መረጃ tab starts here -->
 
-                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'tithe') { echo 'active'; } ?>" id="tithe">
-                    <div class="main-box clearfix">
+                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'payment') { echo 'active'; } ?>" id="payment">
+                    <div class="main-box">
 
-                        <blockquote>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                            <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
-                        </blockquote>
 
-                        <div class="row">
 
-                            <div class="col-md-6">
-                                <label for="month"> ወር: </label>
-                                <select name="month" class="form-control s2searchable">
-                                    <option disabled selected>ወሩን ይምረጡ</option>
-                                    <option value="መስከረም"> መስከረም </option>
-                                    <option value="ጥቅምት"> ጥቅምት </option>
-                                    <option value="ሕዳር"> ሕዳር </option>
-                                    <option value="ታህሳስ"> ታህሳስ </option>
-                                    <option value="ጥር"> ጥር </option>
-                                    <option value="የካቲት"> የካቲት </option>
-                                    <option value="መጋቢት"> መጋቢት </option>
-                                    <option value="ሚያዝያ"> ሚያዝያ </option>
-                                    <option value="ግንቦት"> ግንቦት </option>
-                                    <option value="ሰኔ"> ሰኔ </option>
-                                    <option value="ሐምሌ"> ሐምሌ </option>
-                                    <option value="ነሀሴ"> ነሀሴ </option>
-                                </select>
+                        <?php if($this->session->flashdata('payment_save_success')) { ?>
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-check"></i> ማስታወሻ!</h4>
+                                <?php echo $this->session->flashdata('payment_save_success'); ?><br>
+                                <button class="btn btn-outline btn-default">ደረሰኝ አትም</button>                            
                             </div>
-
-                            <div class="col-md-3">
-                                <label for="title"> ማዕረግ  :</label>
-                                <input type="text" name="title" class="form-control">
+                        <?php } else if($this->session->flashdata('payment_save_error')) { ?>
+                            <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="fa fa-ban"></i> ይቅርታ</h4>
+                                <?php echo $this->session->flashdata('payment_save_error'); ?>
                             </div>
-                        </div><br>
+                        <?php } ?>
+
+
+                        <div class="box">
+
+                            <div class="box-header with-border">
+                                <span>ክፍያ መዝግብ</span>
+                            </div>
+                            <div class="box-body">
+                                <form method="post" action="<?= base_url(); ?>admin/savepayment">    
+                                    <input type="text" name="member_id" value="<?= $member['id']?>" hidden> 
+
+                                    <div class="col-md-3">
+                                        <select name="payment_type" class="form-control s2" style="width: 100%;" tabindex="-1" area-hidden="true" required>
+                                            <option disabled selected>ምክንያት</option>
+                                            <option value="አስራት"> አስራት </option>
+                                            <option value="የፍቅር ስጦታ"> የፍቅር ስጦታ </option>
+                                            <option value="በኩራት"> በኩራት </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="input-group">
+                                            <input type="tel" name="payment_amount" placeholder="የገንዘብ መጠን" class="form-control" required>
+                                            <div class="input-group-addon">ብር</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-2">
+                                        <a data-toggle="modal" href="#savepayment" class="btn btn-primary btn-flat">መዝግብ</a>
+                                    </div>
+
+
+                                    <!-- pre payment saving modal massage -->
+                                    <div id="savepayment" class="modal modal-info fade" role="dialog">
+                                        <div class="modal-dialog modal-sm">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-body" align="left">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>መልሶ ማስተካከል አይቻልም</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline btn-flat pull-left" data-dismiss="modal">አይ</button>
+                                                    <input type="submit" class="btn btn-outline btn-flat" value="አዎ">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                </form>
+                            </div><br>
+                        </div>
 
 
                         <div class="box-body table-responsive" style="padding: 0px;">
-                            <table class="table table-hover table-bordered">
+                            <table class="table table-hover table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>መለያ</th>
+                                        <th>ምክንያት</th>
+                                        <th>መጠን</th>
+                                        <th>ቀን (GC)</th>
+                                    </tr>
+                                </thead>
                                 <tbody>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Reason</th>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-warning">Pending</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-primary">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
+                                    <?php if(empty($payments)) { ?>
+                                        <tr>
+                                            <td colspan="4" class="dataTables_empty" style="text-align: center; background-color: #eee;border-bottom-color: black;">ምንም አይነት የክፍያ መረጃ የለም</td>
+                                        </tr>
+                                    <?php } else { foreach($payments as $payment) { ?>
+                                        <tr>
+                                            <td><?= $payment['id']?></td>
+                                            <td><?= $payment['payment_type']?></td>
+                                            <td><?= $payment['payment_amount']?> ብር </td>
+                                            <td><?= nice_date($payment['date_issued'], 'M d, Y')?></td>                                        
+                                        </tr>
+                                    <?php } } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -363,9 +398,9 @@
                     </div>
                 </div>
 
-                <!-- Assigned properties tab starts here -->
+                <!-- የምዕመን ሁኔታ tab starts here -->
 
-                 <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'status') { echo "active"; } ?>" id="properties">
+                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'status') { echo "active"; } ?>" id="properties">
                     <div class="main-box clearfix">
                         <div class="main-box-body clearfix"><br>
 

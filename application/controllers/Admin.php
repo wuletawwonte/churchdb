@@ -15,12 +15,11 @@ class Admin extends CI_Controller {
 			} else if($interval > 7200) {
 				redirect('users/logout');
 			}
-
 		}
 
 		$this->session->set_userdata('last_visited', time());
 
-		$this->load->model(array('kifle_ketema', 'mender', 'kebele', 'note', 'user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
+		$this->load->model(array('payment', 'kifle_ketema', 'mender', 'kebele', 'note', 'user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
 		$this->load->helper('text', 'file');
 
 		$this->lang->load('label_lang', 'amharic');
@@ -344,6 +343,7 @@ class Admin extends CI_Controller {
 		$data['timelines'] = $this->timeline->get_timeline($id);
 		$data['assigned_groups'] = $this->group->get_assigned_groups($id);
 		$data['notes'] = $this->note->get_notes($id);
+		$data['payments'] = $this->payment->get_payments($id);
 		$this->load->view('templates/header', $data);
 		$this->load->view('member_details');
 		$this->load->view('templates/footer');		
@@ -789,6 +789,38 @@ class Admin extends CI_Controller {
 			redirect('admin/memberdetails/'.$this->input->post('id').'/status');						
 		}
 	}
+
+	public function savepayment() {
+		if($this->payment->add()) { 
+			$this->session->set_flashdata('payment_save_success', 'የክፍያው መረጃ በትክክል ተመዝግቧል።');			
+			redirect('admin/memberdetails/'.$this->input->post('member_id').'/payment');			
+		} else {
+			$this->session->set_flashdata('payment_save_error', 'የክፍያውን መረጃ መመዝገብ አልተቻለም።');			
+			redirect('admin/memberdetails/'.$this->input->post('member_id').'/payment');						
+		}
+	}
+
+	public function listpayments() {
+		$data['active_menu'] = "listpayments";
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_payments');
+		$this->load->view('templates/footer');									
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
