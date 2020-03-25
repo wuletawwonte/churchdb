@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="<?= base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2.min.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2-bootstrap.min.css') ?>">
-  <link rel="stylesheet" href="<?= base_url('assets/css/skins/skin-blue-light.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/css/skins/skin-yellow.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/AdminLTE.min.css'); ?>">
   <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.ico'); ?>">
   
@@ -40,7 +40,7 @@
 
 </head>
 
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body class="hold-transition skin-yellow sidebar-mini">
 <div class="se-pre-con"></div>
 <div class="wrapper">
 
