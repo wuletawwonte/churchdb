@@ -299,7 +299,7 @@
                                 <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
                                 <h4><i class="icon fa fa-check"></i> ማስታወሻ!</h4>
                                 <?php echo $this->session->flashdata('payment_save_success'); ?><br>
-                                <button class="btn btn-outline btn-default">ደረሰኝ አትም</button>                            
+                                <a href="<?= base_url()?>admin/printreceipt/<?= $this->session->flashdata('transaction_id'); ?>" target="_blank" class="btn btn-outline" style="text-decoration: none;"><i class="fa fa-print"></i> ደረሰኝ አትም</a>                            
                             </div>
                         <?php } else if($this->session->flashdata('payment_save_error')) { ?>
                             <div class="alert alert-danger">

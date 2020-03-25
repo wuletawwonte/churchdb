@@ -791,8 +791,10 @@ class Admin extends CI_Controller {
 	}
 
 	public function savepayment() {
-		if($this->payment->add()) { 
+		$ret = $this->payment->add();
+		if($ret) { 
 			$this->session->set_flashdata('payment_save_success', 'የክፍያው መረጃ በትክክል ተመዝግቧል።');			
+			$this->session->set_flashdata('transaction_id', $ret);
 			redirect('admin/memberdetails/'.$this->input->post('member_id').'/payment');			
 		} else {
 			$this->session->set_flashdata('payment_save_error', 'የክፍያውን መረጃ መመዝገብ አልተቻለም።');			
@@ -805,6 +807,11 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/header', $data);
 		$this->load->view('list_payments');
 		$this->load->view('templates/footer');									
+	}
+
+	public function printreceipt($pid) {
+		$data['details'] = $this->payment->get_details($pid);
+		$this->load->view('payment_receipt_print', $data);
 	}
 
 
