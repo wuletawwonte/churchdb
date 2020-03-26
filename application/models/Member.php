@@ -130,6 +130,7 @@ class Member extends CI_Model {
 	}
 
 	public function get_all() {
+		$this->db->where('status', 'ያለ');
 		$this->db->order_by('firstname', 'ASC');
 		$data = $this->db->get('members');
 
@@ -163,27 +164,8 @@ class Member extends CI_Model {
 		return  $res[0];
 	}
 
-	public function filtered_members_count() {
-	    if($_SESSION['filtermember']['gender'] != NULL) {
-	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
-	    }
-	    if($_SESSION['filtermember']['job_type'] != NULL) {
-	    	$this->db->where('job_type', $_SESSION['filtermember']['job_type']);
-	    }
-	    if($_SESSION['filtermember']['membership_level'] != NULL) {
-	    	$this->db->where('membership_level', $_SESSION['filtermember']['membership_level']);
-	    }
-	    if($_SESSION['filtermember']['ministry'] != NULL) {
-	    	$this->db->where('ministry', $_SESSION['filtermember']['ministry']);
-	    }
-	    if($_SESSION['filtermember']['marital_status'] != NULL) {
-	    	$this->db->where('marital_status', $_SESSION['filtermember']['marital_status']);
-	    }
-		$this->db->from('members');
-		return $this->db->count_all_results();
-	}
-
 	public function get_filtered_sorted() {
+		$this->db->where('status', 'ያለ');
 	    if($_SESSION['filtermember']['gender'] != NULL) {
 	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
 	    }

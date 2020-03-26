@@ -29,11 +29,13 @@
 
 
 	    <?php if($this->session->flashdata('success')) { ?>
-	        <div class="callout callout-info">
+	        <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
 	            <?php echo $this->session->flashdata('success'); ?>
 	        </div>
 	    <?php } else if($this->session->flashdata('error')) { ?>
-	        <div class="callout callout-danger">
+		    <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
 	            <?php echo $this->session->flashdata('error'); ?>
 	        </div>
 	    <?php } ?>
@@ -54,7 +56,7 @@
 
 						<div class="input-group input-group-lg">
 			                <input type="file" accept="image/*"  class="form-control" id="avatarInput" name="avatar_input" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" style="display: none;">
-			                    <button type="button" class="btn btn-lg btn-primary" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
+			                    <button type="button" class="btn btn-lg btn-primary btn-flat" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
 		                        <button type="button" class="btn btn-lg btn-info btn-flat" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/<?php if($member['avatar'] == NULL) { echo '/img/user.png'; } else { echo 'avatars/'.$member['avatar']; } ?>'"  style="border-radius: 0px;"><i class="fa fa-refresh"></i></button>
 			            </div>
 		                <p></p>

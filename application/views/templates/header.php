@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="<?= base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/vendors/pace/pace.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2.min.css') ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2-bootstrap.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/skins/skin-yellow.min.css'); ?>">
@@ -17,16 +18,6 @@
   
   <style type="text/css">
     
-    .se-pre-con {
-      position: fixed;
-      left: 0px;
-      top: 0px;
-      width: 100%;
-      height: 100%;
-      z-index: 9999;
-      background: url(<?= base_url('assets/img/ripple.gif'); ?>) center no-repeat #eee;
-    }
-
     textarea {
       resize: none;
     }
@@ -37,6 +28,7 @@
 <script src="<?= base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
 <script src="<?= base_url(); ?>assets/vendors/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?= base_url('assets/vendors/select2/js/select2.min.js') ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/vendors/pace/pace.min.js') ?>"></script>
 
 </head>
 

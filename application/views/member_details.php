@@ -458,9 +458,35 @@
                                             <textarea class="form-control" name="status_remark" id="statusRemark" rows="2" placeholder="ምርመራ ..."></textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group col-xs-12 col-md-6">
-                                      <input id="assign-property-btn" type="submit" class="btn btn-primary btn-flat" value="ቀይር">
+
+
+
+                                    <div class="col-md-6">
+                                        <a data-toggle="modal" href="#changeMemberStatus" class="btn btn-primary btn-flat">ቀይር</a>
                                     </div>
+
+
+                                    <!-- pre payment saving modal massage -->
+                                    <div id="changeMemberStatus" class="modal modal-warning fade" role="dialog">
+                                        <div class="modal-dialog modal-sm">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-body" align="left">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>ይህ ማስተካከያ በምዕመኑ መረጃ ላይ ትልቅ ተፅዕኖ አለው።</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline btn-flat pull-left" data-dismiss="modal">አይ</button>
+                                                    <input type="submit" class="btn btn-outline btn-flat" value="አዎ">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
                                 </div>
                             </form>
                         </div>
