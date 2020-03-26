@@ -242,12 +242,17 @@ class Admin extends CI_Controller {
 	        }
 	    }
 
-		if($this->member->add($avatar)) {
-			$this->session->set_flashdata('success', 'የምዕመን መረጃ በትክክል ተመዝግቧል።');
-			redirect('admin/personregistration');
+	    if($this->member->check_member()) {
+			if($this->member->add($avatar)) {
+				$this->session->set_flashdata('success', 'የምዕመን መረጃ በትክክል ተመዝግቧል።');
+				redirect('admin/personregistration');
+			} else {
+				$this->session->set_flashdata('error', 'የምዕመን መረጃ ሊመዘግብ አልተቻለም።');
+				redirect('admin/personregistration');			
+			}
 		} else {
-			$this->session->set_flashdata('error', 'የምዕመን መረጃ ሊመዘግብ አልተቻለም።');
-			redirect('admin/personregistration');			
+			$this->session->set_flashdata('error', 'በዚህ ስም የተመዘገበ ምዕመን አለ።');
+			redirect('admin/personregistration');						
 		}
 	}	
 
@@ -785,7 +790,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function saveagegroup() {
-		
+
 	}
 
 

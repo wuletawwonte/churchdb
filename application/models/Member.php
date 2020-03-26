@@ -54,6 +54,18 @@ class Member extends CI_Model {
 		return true;
 	}
 
+	public function check_member() {
+		$this->db->where('firstname', $this->input->post('firstname'))
+					->where('middlename', $this->input->post('middlename'))
+					->where('lastname', $this->input->post('lastname'));
+		$res = $this->db->get('members')->result_array();
+		if(empty($res)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public function edit($id, $avatar) {
 		if($avatar == NULL) {
 			$data = array(
