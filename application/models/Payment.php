@@ -33,6 +33,14 @@ class Payment extends CI_Model {
 		return $res->result_array()[0];
 	}
 
+	public function get_all() {
+		$this->db->select('*, payments.id as pid');
+		$this->db->from('payments');
+		$this->db->join('members', 'members.id = payments.member_id');
+		$res = $this->db->get();
+		return $res->result_array();
+	}
+
 
 
 

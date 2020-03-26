@@ -1,24 +1,29 @@
+
+<script src="<?= base_url(); ?>assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+
 <style type="text/css">
 
+    .profile-image {
+      margin: 0 auto;
+      margin-top: 15px;
+      width: 130px;
+      height: 130px;
+      padding: 3px;
+      border-radius: 50%;
+      border: 3px solid #d2d6de; 
+      font-size: 50px;
+      color: #fff;
+      text-align: center;
+      line-height: 128px;
+    }
 
-.profile-image {
-  margin: 0 auto;
-  margin-top: 15px;
-  width: 130px;
-  height: 130px;
-  padding: 3px;
-  border-radius: 50%;
-  border: 3px solid #d2d6de; 
-  font-size: 50px;
-  color: #fff;
-  text-align: center;
-  line-height: 128px;
-}
-
-.user-list tbody td a, .user-list tbody td span {
-    line-height: 50px;
-}
-
+    .user-list tbody td a, .user-list tbody td span {
+        line-height: 50px;
+    }
 </style>
 
 <div class="content-wrapper">
@@ -369,7 +374,7 @@
 
 
                         <div class="box-body table-responsive" style="padding: 0px;">
-                            <table class="table table-hover table-striped table-bordered">
+                            <table id="paymentsTable" class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th>መለያ</th>
@@ -392,6 +397,14 @@
                                         </tr>
                                     <?php } } ?>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>መለያ</th>
+                                        <th>ምክንያት</th>
+                                        <th>መጠን</th>
+                                        <th>ቀን (GC)</th>
+                                    </tr>                                    
+                                </tfoot>
                             </table>
                         </div>
 
@@ -549,6 +562,26 @@
                 $("#statusRemark").val('');             
             }
         });
+
+          $(function () {
+            $('#paymentsTable').DataTable({
+                'paging'    : true,
+                'lengthChange'  : false,
+                'searching' : false,
+                'ordering'  : true,
+                'info'      : true,
+                'autoWidth' : true
+                })
+            // $('#example2').DataTable({
+            //   'paging'      : true,
+            //   'lengthChange': false,
+            //   'searching'   : false,
+            //   'ordering'    : true,
+            //   'info'        : true,
+            //   'autoWidth'   : false
+            // })
+          })
+
 
 
     });

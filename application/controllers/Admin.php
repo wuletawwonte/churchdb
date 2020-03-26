@@ -804,6 +804,7 @@ class Admin extends CI_Controller {
 
 	public function listpayments() {
 		$data['active_menu'] = "listpayments";
+		$data['payments'] = $this->payment->get_all();
 		$this->load->view('templates/header', $data);
 		$this->load->view('list_payments');
 		$this->load->view('templates/footer');									

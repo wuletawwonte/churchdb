@@ -1,3 +1,11 @@
+
+<script src="<?= base_url(); ?>assets/vendors/bootstrap-slider/bootstrap-slider.js"></script>
+
+<link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/bootstrap-slider/slider.css">
+
+
+
+
   
 
 <!-- Content Wrapper. Contains page content -->
@@ -75,10 +83,40 @@
 		    <!-- /.box-body -->
 		</div>
 		<!-- /.box -->
+		<div class="box box-default">
+			<div class="box-header with-border">
+				<span>የእድሜ ቡድን</span>
+			</div>
+			<div class="box-body">
+				<div width="100%">
+					<table class="table">
+						<tr>
+							<td>የእድሜ ቡድን ስም</td>
+	                        <td><input type="text" name="default_password" class="form-control" width="32"></td>
+						</tr>
+						<tr>
+							<td> የእድሜ ገደብ </td>
+							<td width="50%">
+					            <input type="text" value="" class="slider form-control" data-slider-min="0" data-slider-max="120"
+				                         data-slider-step="2" data-slider-value="[50,100]" data-slider-orientation="horizontal"
+				                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
+			                </td>
+		                </tr>
+	                </table>
+				</div>
+				
+			</div>
+			
+		</div>
 	</section>
 	<!-- /.section -->
 </div>
 
 
 
-
+<script>
+  $(function () {
+    /* BOOTSTRAP SLIDER */
+    $('.slider').slider()
+  })
+</script>
