@@ -173,25 +173,6 @@ class Admin extends CI_Controller {
 
 	public function listmembers() {
 
-		$config = array(
-				'base_url' => base_url('admin/listmembers'), 
-				'per_page' => $_SESSION['filtermember']['rows_per_page'],
-				'uri_segment'=> 3,
-				'full_tag_open' => "<ul class='pagination pagination-sm'>",
-				'full_tag_close' => "</ul>",
-				'num_tag_open' => '<li>',
-				'num_tag_close' => '</li>',
-				'cur_tag_open' => "<li class='disabled'><li class='active'><a href='#'>",
-				'cur_tag_close' => "<span class='sr-only'></span></a></li>",
-				'next_tag_open' => "<li>",
-				'next_tagl_close' => "</li>",
-				'prev_tag_open' => "<li>",
-				'prev_tagl_close' => "</li>",
-				'first_tag_open' => "<li>",
-				'first_tagl_close' => "</li>",
-				'last_tag_open' => "<li>",
-				'last_tagl_close' => "</li>"
-			);
 		$data['job_types'] = $this->job_type->get_all();
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
@@ -200,36 +181,24 @@ class Admin extends CI_Controller {
 		if(isset($_POST['submit'])) {
 
 			$filtermember = array(
-				'search_key' => $this->input->post('search_key'),
 				'gender' => $this->input->post('gender'),
 				'job_type' => $this->input->post('job_type'), 
 				'membership_level' => $this->input->post('membership_level'),
 				'ministry' => $this->input->post('ministry'),
-				'marital_status' => $this->input->post('marital_status'),
-				'rows_per_page' => $_SESSION['filtermember']['rows_per_page']
+				'marital_status' => $this->input->post('marital_status')
 			);
 			$this->session->set_userdata('filtermember', $filtermember);
 
-			$config['total_rows'] = $this->member->filtered_members_count();
-			$this->pagination->initialize($config);
-			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-			$data['links'] = $this->pagination->create_links();
 			$data['active_menu'] = "listmembers";
-			$data['members'] = $this->member->get_filtered_sorted('created', 'DESC', $config['per_page'], $page);
+			$data['members'] = $this->member->get_filtered_sorted();
 			$this->load->view('templates/header', $data);
 			$this->load->view('list_members');
 			$this->load->view('templates/footer');
 
 		} else {
-			$config['total_rows'] = $this->member->filtered_members_count();
 
-			$this->pagination->initialize($config);
-
-			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-			$data['links'] = $this->pagination->create_links();
 			$data['active_menu'] = "listmembers";
-			$data['members'] = $this->member->get_filtered_sorted('created', 'DESC', $config['per_page'], $page);
+			$data['members'] = $this->member->get_filtered_sorted();
 			$this->load->view('templates/header', $data);
 			$this->load->view('list_members');
 			$this->load->view('templates/footer');
@@ -238,30 +207,14 @@ class Admin extends CI_Controller {
 
 	public function clearfilter () {
 			$filtermember = array(
-				'search_key' => NULL,
 				'gender' => NULL,
 				'job_type' => NULL,
 				'membership_level' => NULL,
 				'ministry' => NULL,
-				'marital_status' => NULL,
-				'rows_per_page' => $_SESSION['filtermember']['rows_per_page']
+				'marital_status' => NULL
 			);
 			$this->session->set_userdata('filtermember', $filtermember);		
 			redirect('admin/listmembers'); 
-	}
-
-	public function changerowsperpage() {
-		$filtermember = array(
-			'search_key' => $_SESSION['filtermember']['search_key'],
-			'gender' => $_SESSION['filtermember']['gender'],
-			'job_type' => $_SESSION['filtermember']['job_type'],
-			'membership_level' => $_SESSION['filtermember']['membership_level'],
-			'ministry' => $_SESSION['filtermember']['ministry'],
-			'marital_status' => $_SESSION['filtermember']['marital_status'],
-			'rows_per_page' => $this->input->post('rowsperpage'), 
-		);
-		$this->session->set_userdata('filtermember', $filtermember);		
-		redirect('admin/listmembers');
 	}
 
 	public function savemember() {
@@ -795,15 +748,24 @@ class Admin extends CI_Controller {
 		if($ret) { 
 			$this->session->set_flashdata('payment_save_success', 'የክፍያው መረጃ በትክክል ተመዝግቧል።');			
 			$this->session->set_flashdata('transaction_id', $ret);
-			redirect('admin/memberdetails/'.$this->input->post('member_id').'/payment');			
+			if($this->input->post('page') == 'memberdetails') { 
+				redirect('admin/memberdetails/'.$this->input->post('member_id').'/payment'); 
+			} else { 
+				redirect('admin/listpayments');
+			}			
 		} else {
 			$this->session->set_flashdata('payment_save_error', 'የክፍያውን መረጃ መመዝገብ አልተቻለም።');			
-			redirect('admin/memberdetails/'.$this->input->post('member_id').'/payment');						
+			if($this->input->post('page') == 'memberdetails') { 
+				redirect('admin/memberdetails/'.$this->input->post('member_id').'/payment'); 
+			} else { 
+				redirect('admin/listpayments');
+			}			
 		}
 	}
 
 	public function listpayments() {
 		$data['active_menu'] = "listpayments";
+		$data['members'] = $this->member->get_all();
 		$data['payments'] = $this->payment->get_all();
 		$this->load->view('templates/header', $data);
 		$this->load->view('list_payments');
@@ -813,6 +775,13 @@ class Admin extends CI_Controller {
 	public function printreceipt($pid) {
 		$data['details'] = $this->payment->get_details($pid);
 		$this->load->view('payment_receipt_print', $data);
+	}
+
+	public function membersexport() {
+		$data['active_menu'] = "membersexport";
+		$this->load->view('templates/header', $data);
+		$this->load->view('export_members');
+		$this->load->view('templates/footer');											
 	}
 
 

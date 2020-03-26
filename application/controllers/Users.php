@@ -31,13 +31,11 @@ class Users extends CI_Controller {
 		if($this->form_validation->run()){
 			$userdata = $this->user->get_user('username', $this->input->post('username'));
 			$filtermember = array(
-				'search_key' => NULL, 
 				'gender' => NULL,
 				'job_type' => NULL,
 				'membership_level' => NULL,
 				'ministry' => NULL,
-				'marital_status' => NULL,
-				'rows_per_page' => 5
+				'marital_status' => NULL
 			);
 			$data = array(
 				'current_user' => $userdata,

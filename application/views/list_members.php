@@ -1,22 +1,28 @@
+
+<script src="<?= base_url(); ?>assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+
 <style type="text/css">
 
-.profile-image {
-  width: 60px;
-  height: 60px;
-  padding: 2px;
-  border-radius: 50%;
-  border: 2px solid #d2d6de;
-  font-size: 20px;
-  color: #fff;
-  line-height: 52px;
-  text-align: center;
-  margin: 0 0; 
-}
-
-table tbody td a, table tbody td span {
+  .profile-image {
+    width: 60px;
+    height: 60px;
+    padding: 2px;
+    border-radius: 50%;
+    border: 2px solid #d2d6de;
+    font-size: 20px;
+    color: #fff;
     line-height: 52px;
-}
+    text-align: center;
+    margin: 0 0; 
+  }
 
+  table tbody td a, table tbody td span {
+      line-height: 52px;
+  }
 </style>
 
 
@@ -57,89 +63,64 @@ table tbody td a, table tbody td span {
 
 
 
-    <form method="post" action="<?= base_url(); ?>admin/listmembers" id="PersonList">
-      <p align="center">
-        <table align="center"><tr><td>
-          <div class="row">
-            <div class="col-xs-4 col-xs-offset-3" align="right" style="padding-left: 0px;padding-right: 5px;">
-              <input type="text" placeholder="ፈልግ.." name="search_key" class="form-control" style="border-radius: 3px" value="<?= $_SESSION['filtermember']['search_key']; ?>">
-            </div>
-            <div class="col-xs-4" style="padding-left: 0px;">
-              <input type="submit" name="submit" class="btn btn-primary" value="አጣራ">
-            </div>
-          </div>
-        </td></tr>
-        <tr><td align="center" style="padding-top: 3px;">
-          <select name="gender" form="PersonList" class="s2">
-            <option value="" <?php if($_SESSION['filtermember']['gender'] == '') echo 'selected'; ?>> ወንድ እና ሴት </option>
-            <option value="ወንድ" <?php if($_SESSION['filtermember']['gender'] == 'ወንድ') echo 'selected'; ?>> ወንድ </option>
-            <option value="ሴት" <?php if($_SESSION['filtermember']['gender'] == 'ሴት') echo 'selected'; ?>> ሴት </option>
-          </select>  
-          <select name="job_type" class="s2">
-            <option value="" <?php if($_SESSION['filtermember']['job_type'] == '') echo 'selected'; ?>> የሥራ አይነት </option>
-                    <?php foreach($job_types as $job_type) { ?>
-                        <option value="<?= $job_type['job_type_id'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
-                          <?= $job_type['job_type_title']; ?> 
-                        </option>
-                    <?php } ?>
-          </select>
-          <select name="marital_status" class="s2">
-            <option value="" <?php if($_SESSION['filtermember']['marital_status'] == '') echo 'selected'; ?>> የጋብቻ ሁኔታ </option>
-                    <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['marital_status'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
-                    <option value="0" disabled>-----------------------</option>
-                    <option value="ያላገባ/ች" <?php if($_SESSION['filtermember']['marital_status'] == 'ያላገባ/ች') echo 'selected'; ?> > ያላገባ/ች </option>
-                    <option value="ያገባ/ች" <?php if($_SESSION['filtermember']['marital_status'] == 'ያገባ/ች') echo 'selected'; ?> >ያገባ/ች</option>                        
-                    <option value="የፈታ/ች" <?php if($_SESSION['filtermember']['marital_status'] == 'የፈታ/ች') echo 'selected'; ?> > የፈታ/ች</option>
+        <form method="post" action="<?= base_url(); ?>admin/listmembers" id="PersonList">
+            <p align="center">
+            <table align="center">
+                <tr>
+                    <td align="center" style="padding-top: 3px;">
+                        <select name="gender" form="PersonList" class="s2">
+                            <option value="" <?php if($_SESSION['filtermember']['gender'] == '') echo 'selected'; ?>> ወንድ እና ሴት </option>
+                            <option value="ወንድ" <?php if($_SESSION['filtermember']['gender'] == 'ወንድ') echo 'selected'; ?>> ወንድ </option>
+                            <option value="ሴት" <?php if($_SESSION['filtermember']['gender'] == 'ሴት') echo 'selected'; ?>> ሴት </option>
+                        </select>  
+                        
+                        <select name="job_type" class="s2">
+                            <option value="" <?php if($_SESSION['filtermember']['job_type'] == '') echo 'selected'; ?>> የሥራ አይነት </option>
+                                    <?php foreach($job_types as $job_type) { ?>
+                                        <option value="<?= $job_type['job_type_id'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
+                                          <?= $job_type['job_type_title']; ?> 
+                                        </option>
+                                    <?php } ?>
+                        </select>
+                        
+                        <select name="marital_status" class="s2">
+                            <option value="" <?php if($_SESSION['filtermember']['marital_status'] == '') echo 'selected'; ?>> የጋብቻ ሁኔታ </option>
+                                    <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['marital_status'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
+                                    <option value="0" disabled>-----------------------</option>
+                                    <option value="ያላገባ/ች" <?php if($_SESSION['filtermember']['marital_status'] == 'ያላገባ/ች') echo 'selected'; ?> > ያላገባ/ች </option>
+                                    <option value="ያገባ/ች" <?php if($_SESSION['filtermember']['marital_status'] == 'ያገባ/ች') echo 'selected'; ?> >ያገባ/ች</option>                        
+                                    <option value="የፈታ/ች" <?php if($_SESSION['filtermember']['marital_status'] == 'የፈታ/ች') echo 'selected'; ?> > የፈታ/ች</option>
 
-          </select>
-          <select name="membership_level" class="s2">
-            <option value="" <?php if($_SESSION['filtermember']['membership_level'] == NULL) echo 'selected'; ?>>የአባልነት ደረጃ</option>
-                    <?php foreach($membership_levels as $membership_level) { ?>
-                      <option value="<?= $membership_level['membership_level_id']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $membership_level['membership_level_id']) echo 'selected'; ?>> 
-                        <?= $membership_level['membership_level_title']; ?> 
-                      </option>
-                    <?php } ?>
-          </select>
-          <select name="ministry" class="s2">
-            <option value="" <?php if($_SESSION['filtermember']['ministry'] == NULL) echo 'selected'; ?>>የአገልግሎት ዘርፍ</option>
-                    <?php foreach($ministries as $ministry) { ?>
-                      <option value="<?= $ministry['ministry_id']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
-                        <?= $ministry['ministry_title']; ?> 
-                      </option>
-                    <?php } ?>
-          </select>
-            <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning"> ፍለጋውን አጥፋ </a><BR><BR>
-          </td></tr>
-        </table></form>
-      <p/>
+                        </select>
+                          
+                        <select name="membership_level" class="s2">
+                            <option value="" <?php if($_SESSION['filtermember']['membership_level'] == NULL) echo 'selected'; ?>>የአባልነት ደረጃ</option>
+                                    <?php foreach($membership_levels as $membership_level) { ?>
+                                      <option value="<?= $membership_level['membership_level_id']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $membership_level['membership_level_id']) echo 'selected'; ?>> 
+                                        <?= $membership_level['membership_level_title']; ?> 
+                                      </option>
+                                    <?php } ?>
+                        </select>
+                          
+                        <select name="ministry" class="s2">
+                            <option value="" <?php if($_SESSION['filtermember']['ministry'] == NULL) echo 'selected'; ?>>የአገልግሎት ዘርፍ</option>
+                                    <?php foreach($ministries as $ministry) { ?>
+                                      <option value="<?= $ministry['ministry_id']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
+                                        <?= $ministry['ministry_title']; ?> 
+                                      </option>
+                                    <?php } ?>
+                        </select>
+                        
+                        <input type="submit" name="submit" class="btn btn-primary btn-flat" value="አጣራ">
+                        <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning btn-flat"> ፍለጋውን አጥፋ </a><BR>
+                    </td>
+                </tr>
+            </table>
+        </form><hr><br>
+            
 
 
-
-        <div class="row" style="margin-top: -15px;margin-right: 0px;margin-left: 0px;">
-            <div class="col-sm-12">
-
-                    <div class="col-sm-6">
-                      <div class="dataTables_length">
-                        <form method="POST" action="<?= base_url(); ?>admin/changerowsperpage">
-                          <label style="font-weight: normal">Show 
-                            <select name="rowsperpage" class="form-control input-sm s2" onchange="form.submit();">
-                              <option value="5" <?php if($_SESSION['filtermember']['rows_per_page'] == 5) { echo 'selected'; } ?> >5</option>
-                              <option value="10" <?php if($_SESSION['filtermember']['rows_per_page'] == 10) { echo 'selected'; } ?>>10</option>
-                              <option value="15" <?php if($_SESSION['filtermember']['rows_per_page'] == 15) { echo 'selected'; } ?>>15</option>
-                            </select> entries
-                          </label>
-                        </form>
-                      </div>
-                    </div>
-                    
-                    <div class="btns col-sm-6" align="right" <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_generate_member_report'] != 'allow'){ echo 'hidden'; } ?> >
-                        <span style="font-size: 15px;">Export:</span>           
-                        <a href="<?= base_url(); ?>admin/export_members_excel" class="btn btn-primary btn-flat"><i class="fa fa-file-excel-o"></i> Excel</a> 
-                        <a href="<?= base_url(); ?>admin/export_members_csv" class="btn btn-primary btn-flat"><i class="fa fa-file-o"></i> CSV</a> 
-                        <a href="<?= base_url(); ?>admin/export_members_print" target="_blank" class="btn btn-primary btn-flat"><i class="fa fa-file-pdf-o"></i> PDF</a> 
-                        <a href="<?= base_url(); ?>admin/export_members_print" target="_blank" class="btn btn-primary btn-flat"><i class="fa fa-print"></i> Print</a> 
-                    </div>
-            </div>
+        <div class="row" style="margin-right: 0px;margin-left: 0px;">
 
             <table class="table table-hover table-bordered" id="user-listing-table">
                 <thead>
@@ -198,10 +179,6 @@ table tbody td a, table tbody td span {
             </table>
 
         </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-            <div style="text-align: end;"><p><?= $links; ?></p></div>
-        </div>
     </div>
     <!-- /.box -->
 
@@ -211,6 +188,22 @@ table tbody td a, table tbody td span {
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+
+
+<script>
+
+    $(function () {
+        $('#user-listing-table').DataTable({
+        'paging'    : true,
+        'lengthChange'  : true,
+        'searching' : true,
+        'ordering'  : true,
+        'info'      : true,
+        'autoWidth' : true
+        })
+  })
+</script>
 
 
 

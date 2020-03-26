@@ -128,7 +128,8 @@
         <li <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_manage_group'] != 'allow'){ echo 'hidden'; } if($active_menu == 'groups') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/listgroups"><i class="fa fa-object-group"></i> <span><?= lang('groups'); ?></span></a></li>
         <li <?php if($active_menu == 'sunday_school') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/sunday_school_classes"><i class="fa fa-child"></i> <span> የሰንበት ትምህርት </span></a></li>
         <li <?php if($active_menu == 'listpayments') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/listpayments"><i class="fa fa-money"></i> <span> ክፍያ </span></a></li>
-        <li <?php if($active_menu == 'adminreport') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/adminreport"><i class="fa fa-file-pdf-o"></i><span> መረጃ/ሪፖርት </span></a></li>
+        <li <?php if($active_menu == 'adminreport') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/adminreport"><i class="fa fa-book"></i><span> ጠቅላላ መረጃ </span></a></li>
+        <li <?php if($active_menu == 'membersexport') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/membersexport"><i class="fa fa-file-pdf-o"></i><span> ምእመናን ሪፖርት </span></a></li>
         
         <li class="header"> ማስተካከያ </li>
 

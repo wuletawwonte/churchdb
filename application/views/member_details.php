@@ -322,6 +322,7 @@
                             </div>
                             <div class="box-body">
                                 <form method="post" action="<?= base_url(); ?>admin/savepayment">    
+                                    <input type="text" name="page" value="memberdetails" hidden> 
                                     <input type="text" name="member_id" value="<?= $member['id']?>" hidden> 
 
                                     <div class="col-md-3">
@@ -563,7 +564,7 @@
             }
         });
 
-          $(function () {
+        $(function () {
             $('#paymentsTable').DataTable({
                 'paging'    : true,
                 'lengthChange'  : false,
@@ -572,15 +573,7 @@
                 'info'      : true,
                 'autoWidth' : true
                 })
-            // $('#example2').DataTable({
-            //   'paging'      : true,
-            //   'lengthChange': false,
-            //   'searching'   : false,
-            //   'ordering'    : true,
-            //   'info'        : true,
-            //   'autoWidth'   : false
-            // })
-          })
+        })
 
 
 

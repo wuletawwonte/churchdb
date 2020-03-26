@@ -164,11 +164,6 @@ class Member extends CI_Model {
 	}
 
 	public function filtered_members_count() {
-        $this->db
-        	->group_start()
-	        	->like('firstname', $_SESSION['filtermember']['search_key'])
-	        	->or_like('middlename', $_SESSION['filtermember']['search_key'])
-	        ->group_end();
 	    if($_SESSION['filtermember']['gender'] != NULL) {
 	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
 	    }
@@ -188,13 +183,7 @@ class Member extends CI_Model {
 		return $this->db->count_all_results();
 	}
 
-	public function get_filtered_sorted($attrib, $order, $limit = NULL, $start = NULL) {
-        $this->db->limit($limit, $start);
-        $this->db
-        	->group_start()
-	        	->like('firstname', $_SESSION['filtermember']['search_key'])
-	        	->or_like('middlename', $_SESSION['filtermember']['search_key'])
-	        ->group_end();
+	public function get_filtered_sorted() {
 	    if($_SESSION['filtermember']['gender'] != NULL) {
 	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
 	    }
@@ -210,7 +199,6 @@ class Member extends CI_Model {
 	    if($_SESSION['filtermember']['marital_status'] != NULL) {
 	    	$this->db->where('marital_status', $_SESSION['filtermember']['marital_status']);
 	    }
-		$this->db->order_by($attrib, $order);
 		$this->db->from('members');
 		$this->db->join('membership_levels', 'members.membership_level = membership_levels.membership_level_id');
 		$data = $this->db->get();
@@ -219,11 +207,6 @@ class Member extends CI_Model {
 
 	public function get_members_for_export() {
 		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
-        $this->db
-        	->group_start()
-	        	->like('firstname', $_SESSION['filtermember']['search_key'])
-	        	->or_like('middlename', $_SESSION['filtermember']['search_key'])
-	        ->group_end();
 	    if($_SESSION['filtermember']['gender'] != NULL) {
 	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
 	    }
