@@ -313,6 +313,22 @@ class Member extends CI_Model {
 		}
 	}
 
+	public function delete_member($id) {
+		$this->db->where('id', $id);
+		if($this->db->update('members', array('status' => 'የጠፋ', 'status_remark' => ''))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function get_inactive_members() {
+		$this->db->where('status', 'የሌለ')->or_where('status', 'የጠፋ');
+		$res = $this->db->get('members');
+
+		return $res->result_array();
+	}
+
 
 
 

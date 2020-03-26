@@ -43,11 +43,15 @@
     <section class="content container-fluid">
 
     <?php if($this->session->flashdata('success')) { ?>
-        <div class="callout callout-info">
+        <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-check"></i> ጥሩ!</h4>
             <?php echo $this->session->flashdata('success'); ?>
         </div>
     <?php } else if($this->session->flashdata('error')) { ?>
-        <div class="callout callout-danger">
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="fa fa-ban"></i> ይቅርታ</h4>
             <?php echo $this->session->flashdata('error'); ?>
         </div>
     <?php } ?>
@@ -164,7 +168,7 @@
                         <td><span><?= $member['birthdate']?></span></td>
                         <td><span><?= $member['membership_level_title']?></span></td>
                         <td><span><?= $member['mobile_phone']?></span></td>
-                        <td><span><?= $member['created']?></span></td>
+                        <td><span><?= nice_date($member['created'], 'M d, Y')?></span></td>
                         <td>
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'hidden'; } ?> href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;

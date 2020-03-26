@@ -128,6 +128,7 @@
         <li <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' || $_SESSION['current_user']['user_type'] == 'የሲስተም አስተዳደር') { echo 'hidden'; } if($active_menu == 'generalsetting') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/generalsetting"><i class="fa fa-gear"></i><span> አጠቃላይ ማስተካከያዎች </span></a></li>
         <li <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' || $_SESSION['current_user']['user_type'] == 'የሲስተም አስተዳደር') { echo 'hidden'; } if($active_menu == 'users') { ?> class="active" <?php } ?>><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-user-secret"></i><span> የሲስተም ተጠቃሚዎች </span></a></li>
         <li <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_manage_form'] != 'allow'){ echo 'hidden'; } if($active_menu == 'formelements') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/listformelements"><i class="fa fa-tags"></i><span> የቅፅ ማስተካከያ </span></a></li>
+        <li <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' || $_SESSION['current_user']['user_type'] == 'የሲስተም አስተዳደር') { echo 'hidden'; } if($active_menu == 'recyclebin') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/recyclebin"><i class="fa fa-trash"></i><span> ቆሼ </span></a></li>
 
 <!--         <li <?php if($active_menu == 'account') { ?> class="active" <?php } ?> ><a href="<?php echo base_url(); ?>admin/profile"><i class="fa fa-user"></i><span> የአካውንት ማስተካከያ </span></a></li>
  -->

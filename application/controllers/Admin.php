@@ -789,8 +789,22 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/footer');											
 	}
 
-	public function saveagegroup() {
+	public function deletemember($id) {
+		if($this->member->delete_member($id)) {
+			$this->session->set_flashdata('success', 'የምዕመኑ መረጃ በትክክል ጠፍቷል።');			
+			redirect('admin/listmembers'); 
+		} else {
+			$this->session->set_flashdata('error', 'የምዕመኑ መረጃ ማጥፋት አልተቻለም።');			
+			redirect('admin/listmembers'); 			
+		}
+	}
 
+	public function recyclebin() {
+		$data['active_menu'] = "recyclebin";
+		$data['members'] = $this->member->get_inactive_members();
+		$this->load->view('templates/header', $data);
+		$this->load->view('recyclebin');
+		$this->load->view('templates/footer');													
 	}
 
 
