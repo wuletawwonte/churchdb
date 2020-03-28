@@ -76,13 +76,12 @@
 
            	<div class="box-footer">
                     
-                    <div class="col-md-6"></div>
-                    <div class="btns col-md-6" align="right" <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_generate_member_report'] != 'allow'){ echo 'hidden'; } ?> >
+                    <div class="btns col-md-12" align="center" <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_generate_member_report'] != 'allow'){ echo 'hidden'; } ?> >
                         <span style="font-size: 15px;">Export:</span>           
-                        <a href="<?= base_url(); ?>admin/export_members_excel" class="btn btn-primary btn-flat"><i class="fa fa-file-excel-o"></i> Excel</a> 
-                        <a href="<?= base_url(); ?>admin/export_members_csv" class="btn btn-primary btn-flat"><i class="fa fa-file-o"></i> CSV</a> 
-                        <a href="<?= base_url(); ?>admin/export_members_print" target="_blank" class="btn btn-primary btn-flat"><i class="fa fa-file-pdf-o"></i> PDF</a> 
-                        <a href="<?= base_url(); ?>admin/export_members_print" target="_blank" class="btn btn-primary btn-flat"><i class="fa fa-print"></i> Print</a> 
+                        <a href="<?= base_url(); ?>admin/export_members_excel" class="btn btn-default btn-flat"><i class="fa fa-file-excel-o"></i> Excel</a> 
+                        <a href="<?= base_url(); ?>admin/export_members_csv" class="btn btn-default btn-flat"><i class="fa fa-file-o"></i> CSV</a> 
+                        <a href="<?= base_url(); ?>admin/export_members_print" target="_blank" class="btn btn-default btn-flat"><i class="fa fa-file-pdf-o"></i> PDF</a> 
+                        <a href="<?= base_url(); ?>admin/export_members_print" target="_blank" class="btn btn-default btn-flat"><i class="fa fa-print"></i> Print</a> 
             		</div>
             </div>
 

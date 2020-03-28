@@ -92,14 +92,42 @@
 					<form method="post" action="<?= base_url(); ?>admin/saveagegroup">
 						<table class="table">
 							<tr>
-								<td>የእድሜ ቡድን ስም</td>
-		                        <td><input type="text" name="age_group_name" class="form-control" width="32"></td>
-							</tr>
-							<tr>
-								<td> የእድሜ ገደብ </td>
+								<td> ህፃን </td>
 								<td width="50%">
-						            <input type="text" value="" name="age_range" class="slider form-control" data-slider-min="0" data-slider-max="120"
-					                         data-slider-step="2" data-slider-value="[50,100]" data-slider-orientation="horizontal"
+						            <input type="range" value="" name="age_range" class="slider form-control" data-slider-min="0" data-slider-max="120"
+					                         data-slider-step="2" data-slider-value="[0,18]" data-slider-orientation="horizontal"
+					                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
+				                </td>
+			                </tr>
+							<tr>
+								<td> ወጣት </td>
+								<td width="50%">
+						            <input type="range" value="" name="age_range" class="slider form-control" data-slider-min="0" data-slider-max="120"
+					                         data-slider-step="2" data-slider-value="[18,30]" data-slider-orientation="horizontal"
+					                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
+				                </td>
+			                </tr>
+							<tr>
+								<td> ጎልማሳ </td>
+								<td width="50%">
+						            <input type="range" value="" name="age_range" class="slider form-control" data-slider-min="0" data-slider-max="120"
+					                         data-slider-step="2" data-slider-value="[30,50]" data-slider-orientation="horizontal"
+					                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
+				                </td>
+			                </tr>
+							<tr>
+								<td> አዋቂ </td>
+								<td width="50%">
+						            <input type="range" value="" name="age_range" class="slider form-control" data-slider-min="0" data-slider-max="120"
+					                         data-slider-step="2" data-slider-value="[50,70]" data-slider-orientation="horizontal"
+					                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
+				                </td>
+			                </tr>
+							<tr>
+								<td> ሽማግሌ </td>
+								<td width="50%">
+						            <input type="range" value="" name="age_range" class="slider form-control" data-slider-min="0" data-slider-max="120"
+					                         data-slider-step="2" data-slider-value="[70,120]" data-slider-orientation="horizontal"
 					                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
 				                </td>
 			                </tr>

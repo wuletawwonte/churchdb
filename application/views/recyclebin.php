@@ -32,16 +32,18 @@
                             <th>ስም</th>
                             <th>የምዕመን ሁኔታ</th>
                             <th>የተመዘገበበት</th>
+                            <th>ትግባራት</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if(empty($members)) { ?>
-                            <tr class="odd"><td colspan="5" class="dataTables_empty" valign="top">ምንም መረጃ አልተገኘም።</td></tr>
+                            <tr class="odd"><td colspan="4" class="dataTables_empty" valign="top">ምንም መረጃ አልተገኘም።</td></tr>
                         <?php } else { foreach($members as $member) { ?>
                             <tr>
                                 <td><a href="<?= base_url()?>admin/memberdetails/<?= $member['id']; ?>"><?= $member['firstname'].' '.$member['middlename']?></td></a>
-                                <td><?= $member['status']?></td>
+                                <td><span class="label <?php if($member['status'] == 'የጠፋ') { echo 'label-danger'; } else if($member['status'] == 'የሌለ') { echo 'label-warning'; } ?>"><?= $member['status']?></span></td>
                                 <td><?= nice_date($member['created'], 'M d, Y'); ?></td>
+                                <td><a class="btn btn-danger btn-xs" href="#"><i class="fa fa-trash"></i></a></td>
                             </tr>
                         <?php } } ?>
                     </tbody>

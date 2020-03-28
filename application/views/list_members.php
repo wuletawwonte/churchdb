@@ -1,8 +1,7 @@
 
-<script src="<?= base_url(); ?>assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?= base_url(); ?>assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?= base_url(); ?>assets/vendors/DataTables/datatables.min.js"></script>
 
-<link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/DataTables/datatables.min.css">
 
 
 <style type="text/css">
@@ -61,9 +60,6 @@
     <!-- Default box -->
     <div class="box box-primary">
         <div class="box-body">
-
-
-
 
 
 
@@ -199,14 +195,18 @@
 
     $(function () {
         $('#user-listing-table').DataTable({
-        'paging'    : true,
-        'lengthChange'  : true,
-        'searching' : true,
-        'ordering'  : true,
-        'info'      : true,
-        'autoWidth' : true
+            responsive: true,
+            dom: 'Bfrtip',
+            language: {
+                url: '<?= base_url()?>assets/vendors/DataTables/locale/Amharic.json'
+            },
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         })
   })
+
+
 </script>
 
 
