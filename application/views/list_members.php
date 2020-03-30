@@ -6,22 +6,27 @@
 
 <style type="text/css">
 
-  .profile-image {
-    width: 60px;
-    height: 60px;
-    padding: 2px;
-    border-radius: 50%;
-    border: 2px solid #d2d6de;
-    font-size: 20px;
-    color: #fff;
-    line-height: 52px;
-    text-align: center;
-    margin: 0 0; 
-  }
+    .profile-image {
+        width: 60px;
+        height: 60px;
+        padding: 2px;
+        border-radius: 50%;
+        border: 2px solid #d2d6de;
+        font-size: 20px;
+        color: #fff;
+        line-height: 52px;
+        text-align: center;
+        margin: 0 0; 
+    }
 
-  table tbody td a, table tbody td span {
-      line-height: 52px;
-  }
+    table tbody td a, table tbody td span {
+        line-height: 52px;
+    }
+
+    table {
+        white-space: nowrap;
+    }
+
 </style>
 
 
@@ -125,13 +130,31 @@
             <table class="table table-hover table-bordered" id="user-listing-table">
                 <thead>
                 <tr>
-                    <th width="80"></th>
-                    <th colspan="1"><?= lang('name') ?></th>
-                    <th><?= lang('birth_date') ?></th>
-                    <th>የአባልነት ደረጃ</th>
-                    <th><?= lang('mobile_phone') ?></th>
+                    <th width="80">ፎቶ</th>
+                    <th colspan="1"> ስም </th>
+                    <th>ፆታ</th>
+                    <th>የተወለዱበት ቀን</th>
+                    <th>እድሜ</th>
+                    <th>የትውልድ ስፍራ</th>
+                    <th>የሞባይል ስልክ ቁጥር</th>
+                    <th>ኢሜል</th>
                     <th>የተመዘገበበት</th>
-                    <th>ስራዎች</th>
+                    <th data-priority="4" >ስራዎች</th>
+                    <th>የአባልነት ደረጃ</th>
+                    <th>ክፍለ ከተማ</th>
+                    <th>ቀበሌ</th>
+                    <th>መንደር</th>
+                    <th>የቤት ቁጥር</th>
+                    <th>የመኖርያ ቤት ስልክ ቁጥር</th>
+                    <th>የትምህርት ደረጃ</th>
+                    <th>የሰለጠኑበት ሙያ መስክ</th>
+                    <th>የሥራ መስክ</th>
+                    <th>የመሥሪያ ቤቱ ስም</th>
+                    <th>የመሥሪያ ቤት ስልክ ቁጥር</th>
+                    <th>ወርሐዊ ገቢ</th>
+                    <th>አባል የሆኑበት ዘመን</th>
+                    <th>አባል የሆኑበት ሁኔታ</th>
+                    <th>የአባልነት ደረጃ</th>
 
                 </tr>
                 </thead>
@@ -161,15 +184,33 @@
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"> <?= $member['firstname'].' '.$member['middlename']; ?></a>
                         </td>
 
+                        <td><span><?= $member['gender']?></span></td>
                         <td><span><?= $member['birthdate']?></span></td>
-                        <td><span><?= $member['membership_level_title']?></span></td>
+                        <td><span><?= $member['age']?></span></td>
+                        <td><span><?= $member['birth_place']?></span></td>
                         <td><span><?= $member['mobile_phone']?></span></td>
+                        <td><span><?= $member['email']?></span></td>
                         <td><span><?= nice_date($member['created'], 'M d, Y')?></span></td>
                         <td>
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'hidden'; } ?> href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a onclick=""><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
+                        <td><span><?= $member['membership_level_title']?></span></td>
+                        <td><span><?= $member['kifle_ketema_title']?></span></td>
+                        <td><span><?= $member['kebele_title']?></span></td>
+                        <td><span><?= $member['mender_title']?></span></td>
+                        <td><span><?= $member['house_number']?></span></td>
+                        <td><span><?= $member['home_phone']?></span></td>
+                        <td><span><?= $member['level_of_education']?></span></td>
+                        <td><span><?= $member['field_of_study']?></span></td>
+                        <td><span><?= $member['job_type_title']?></span></td>
+                        <td><span><?= $member['workplace_name']?></span></td>
+                        <td><span><?= $member['workplace_phone']?></span></td>
+                        <td><span><?= $member['monthly_income']?></span></td>
+                        <td><span><?= $member['membership_year']?></span></td>
+                        <td><span><?= $member['membership_cause_title']?></span></td>
+                        <td><span><?= $member['membership_level_title']?></span></td>
 
                     </tr>
 
@@ -195,8 +236,21 @@
 
     $(function () {
         $('#user-listing-table').DataTable({
-            responsive: true,
-            dom: 'Bfrtip',
+            responsive: {
+                details: {
+                    display: $.fn.dataTable.Responsive.display.modal( {
+                        header: function ( row ) {
+                            var data = row.data();
+                            return data[0]+' '+data[1];
+                        }
+                    } ),
+                    renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+                        tableClass: 'table'
+                    } )
+                }
+            },
+            // dom: 'Bfrtip',
+            dom: '<"row"<"col-sm-6 pull-left"B><"col-sm-6 pull-right"f>>rt<"row"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',            
             language: {
                 url: '<?= base_url()?>assets/vendors/DataTables/locale/Amharic.json'
             },
