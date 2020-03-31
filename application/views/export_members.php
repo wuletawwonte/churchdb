@@ -30,6 +30,16 @@
 			            <option value="ወንድ" <?php if($_SESSION['filtermember']['gender'] == 'ወንድ') echo 'selected'; ?>> ወንድ </option>
 			            <option value="ሴት" <?php if($_SESSION['filtermember']['gender'] == 'ሴት') echo 'selected'; ?>> ሴት </option>
 			          </select>  
+
+                        <select name="age_group" class="s2">
+                            <option value="" <?php if($_SESSION['filtermember']['age_group'] == '') echo 'selected'; ?>> የእድሜ ቡድን </option>
+                                    <?php foreach($age_groups as $ag) { ?>
+                                        <option value="<?= $ag['ag_id'] ?>" <?php if($_SESSION['filtermember']['age_group'] == $ag['ag_id']) echo 'selected'; ?>> 
+                                          <?= $ag['age_group_name']; ?> 
+                                        </option>
+                                    <?php } ?>
+                        </select>
+
 			          <select name="job_type" class="s2">
 			            <option value="" <?php if($_SESSION['filtermember']['job_type'] == '') echo 'selected'; ?>> የሥራ አይነት </option>
 			                    <?php foreach($job_types as $job_type) { ?>

@@ -104,10 +104,10 @@
 				<div class="row">
 					<form method="post" action="<?= base_url()?>admin/editagegroup">
                     <div class="col-md-3">
-                        <select name="id" id="ageGroupId" class="form-control s2" required>
+                        <select name="ag_id" id="ageGroupId" class="form-control s2" required>
                             <option value=''> የእድሜ ቡድን </option>
                             <?php foreach($age_groups as $ag) { ?>
-	                            <option value="<?= $ag['id']?>"> <?= $ag['age_group_name']?> </option>
+	                            <option value="<?= $ag['ag_id']?>"> <?= $ag['age_group_name']?> </option>
 	                        <?php } ?>
                         </select>
                     </div>
@@ -165,7 +165,7 @@
 			} else {
 				for(i=0; i < kk.length; i++) {
 
-					if(ag == kk[i].id) {
+					if(ag == kk[i].ag_id) {
 						$('#startAge').val(kk[i].start_age);
 						$('#endAge').val(kk[i].end_age);
 					}

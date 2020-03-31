@@ -173,6 +173,7 @@ class Admin extends CI_Controller {
 	public function listmembers() {
 
 		$data['job_types'] = $this->job_type->get_all();
+		$data['age_groups'] = $this->age_group->get_all();
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
 		$data['ministries'] = $this->ministry->get_all();
@@ -184,7 +185,8 @@ class Admin extends CI_Controller {
 				'job_type' => $this->input->post('job_type'), 
 				'membership_level' => $this->input->post('membership_level'),
 				'ministry' => $this->input->post('ministry'),
-				'marital_status' => $this->input->post('marital_status')
+				'marital_status' => $this->input->post('marital_status'),
+				'age_group' => $this->input->post('age_group')
 			);
 			$this->session->set_userdata('filtermember', $filtermember);
 
@@ -210,7 +212,8 @@ class Admin extends CI_Controller {
 				'job_type' => NULL,
 				'membership_level' => NULL,
 				'ministry' => NULL,
-				'marital_status' => NULL
+				'marital_status' => NULL,
+				'age_group' => NULL
 			);
 			$this->session->set_userdata('filtermember', $filtermember);		
 			redirect('admin/listmembers'); 
@@ -782,6 +785,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function membersexport() {
+		$data['age_groups'] = $this->age_group->get_all();
 		$data['active_menu'] = "membersexport";
 		$this->load->view('templates/header', $data);
 		$this->load->view('export_members');

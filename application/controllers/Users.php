@@ -35,7 +35,8 @@ class Users extends CI_Controller {
 				'job_type' => NULL,
 				'membership_level' => NULL,
 				'ministry' => NULL,
-				'marital_status' => NULL
+				'marital_status' => NULL,
+				'age_group'	=> NULL
 			);
 			$data = array(
 				'current_user' => $userdata,

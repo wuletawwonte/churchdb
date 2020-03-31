@@ -13,12 +13,12 @@ class Age_group extends CI_Model {
 		return $res->result_array();
 	}
 
-	public function editagegrouop() {
+	public function editagegroup() {
 		$data = array(
 			'start_age' => $this->input->post('start_age'), 
 			'end_age' => $this->input->post('end_age')
 			);
-		$this->db->where('id', $this->input->post('id'));
+		$this->db->where('ag_id', $this->input->post('ag_id'));
 		if($this->db->update('age_groups', $data)) {
 			return true;
 		} else {
@@ -26,6 +26,14 @@ class Age_group extends CI_Model {
 		}
 	}
 
+	public function get_one($id){
+		$this->db->where('age_groups.ag_id', $id);
+		$res = $this->db->get('age_groups');
+
+		return $res->result_array()[0];
+	}
+
 
 
 }
+ 
