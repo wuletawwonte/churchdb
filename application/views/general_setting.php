@@ -88,55 +88,60 @@
 				<span>የእድሜ ቡድን</span>
 			</div>
 			<div class="box-body">
+
+			     <?php if($this->session->flashdata('edit_age_group_success')) { ?>
+			        <div class="alert alert-info alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
+			            <?php echo $this->session->flashdata('edit_age_group_success'); ?>
+			        </div>
+			    <?php } else if($this->session->flashdata('edit_age_group_error')) { ?>
+			        <div class="callout callout-danger">
+                        <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
+			            <?php echo $this->session->flashdata('edit_age_group_error'); ?>
+			        </div>
+			    <?php } ?>
+
+				<div class="row">
+					<form method="post" action="<?= base_url()?>admin/editagegroup">
+                    <div class="col-md-3">
+                        <select name="id" id="ageGroupId" class="form-control s2" required>
+                            <option value=''> የእድሜ ቡድን </option>
+                            <?php foreach($age_groups as $ag) { ?>
+	                            <option value="<?= $ag['id']?>"> <?= $ag['age_group_name']?> </option>
+	                        <?php } ?>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="text" name="start_age" id="startAge" class="form-control" placeholder="መነሻ እድሜ">
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="text" name="end_age" id="endAge" class="form-control" placeholder="ማለቂያ እድሜ">
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="submit" class="btn btn-primary btn-flat" value="ቀይር">
+                    </div>
+
+				</div><br>
 				<div width="100%">
 					<form method="post" action="<?= base_url(); ?>admin/saveagegroup">
-						<table class="table">
-							<tr>
-								<td> ህፃን </td>
-								<td width="50%">
-						            <input type="range" value="" name="age_range" class="slider form-control" data-slider-min="0" data-slider-max="120"
-					                         data-slider-step="2" data-slider-value="[0,18]" data-slider-orientation="horizontal"
-					                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
-				                </td>
-			                </tr>
-							<tr>
-								<td> ወጣት </td>
-								<td width="50%">
-						            <input type="range" value="" name="age_range" class="slider form-control" data-slider-min="0" data-slider-max="120"
-					                         data-slider-step="2" data-slider-value="[18,30]" data-slider-orientation="horizontal"
-					                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
-				                </td>
-			                </tr>
-							<tr>
-								<td> ጎልማሳ </td>
-								<td width="50%">
-						            <input type="range" value="" name="age_range" class="slider form-control" data-slider-min="0" data-slider-max="120"
-					                         data-slider-step="2" data-slider-value="[30,50]" data-slider-orientation="horizontal"
-					                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
-				                </td>
-			                </tr>
-							<tr>
-								<td> አዋቂ </td>
-								<td width="50%">
-						            <input type="range" value="" name="age_range" class="slider form-control" data-slider-min="0" data-slider-max="120"
-					                         data-slider-step="2" data-slider-value="[50,70]" data-slider-orientation="horizontal"
-					                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
-				                </td>
-			                </tr>
-							<tr>
-								<td> ሽማግሌ </td>
-								<td width="50%">
-						            <input type="range" value="" name="age_range" class="slider form-control" data-slider-min="0" data-slider-max="120"
-					                         data-slider-step="2" data-slider-value="[70,120]" data-slider-orientation="horizontal"
-					                         data-slider-selection="before" data-slider-tooltip="show" data-slider-id="green">
-				                </td>
-			                </tr>
-			                <tr>
-			                	<td></td>
-			                	<td>
-									<input type="submit" value="መዝግብ" class="btn btn-primary btn-flat">		                		
-			                	</td>
-			                </tr>
+						<table class="table table-bordered">
+							<thead>
+								<th> የእድሜ ቡድን </th>
+								<th> መነሻ እድሜ </th>
+								<th> ማለቂያ እድሜ </th>
+							</thead>
+							<tbody>
+								<?php foreach($age_groups as $age_group) {?>
+									<tr>
+										<td> <?= $age_group['age_group_name']?> </td>
+										<td width="30%"> <?= $age_group['start_age']?> </td>
+										<td width="30%"> <?= $age_group['end_age']?> </td>
+					                </tr>
+					            <?php } ?>
+			                </tbody>
 		                </table>
 		            </form>
 				</div>				
@@ -148,10 +153,26 @@
 </div>
 
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		var kk = <?= json_encode($age_groups); ?>
 
-<script>
-  $(function () {
-    /* BOOTSTRAP SLIDER */
-    $('.slider').slider()
-  })
+		$('#ageGroupId').change(function() {
+			var ag = $(this).val();
+			if(ag == '') {
+				$('#startAge').val('');
+				$('#endAge').val('');				
+			} else {
+				for(i=0; i < kk.length; i++) {
+
+					if(ag == kk[i].id) {
+						$('#startAge').val(kk[i].start_age);
+						$('#endAge').val(kk[i].end_age);
+					}
+				}
+			}
+		});
+
+
+	});
 </script>

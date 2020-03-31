@@ -241,7 +241,7 @@
                     display: $.fn.dataTable.Responsive.display.modal( {
                         header: function ( row ) {
                             var data = row.data();
-                            return data[0]+' '+data[1];
+                            return data[1];
                         }
                     } ),
                     renderer: $.fn.dataTable.Responsive.renderer.tableAll( {

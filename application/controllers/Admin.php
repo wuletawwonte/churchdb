@@ -19,7 +19,7 @@ class Admin extends CI_Controller {
 
 		$this->session->set_userdata('last_visited', time());
 
-		$this->load->model(array('payment', 'kifle_ketema', 'mender', 'kebele', 'note', 'user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
+		$this->load->model(array('age_group', 'payment', 'kifle_ketema', 'mender', 'kebele', 'note', 'user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
 		$this->load->helper('text', 'file');
 
 		$this->lang->load('label_lang', 'amharic');
@@ -36,7 +36,6 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/header', $data);
 		$this->load->view('home');
 		$this->load->view('templates/footer');
-
 	}
 
 
@@ -93,10 +92,10 @@ class Admin extends CI_Controller {
 		$data['system_name_short'] = $this->cnfg->get('system_name_short');
 		$data['church_name'] = $this->cnfg->get('church_name');
 		$data['default_password'] = $this->cnfg->get('default_password');
+		$data['age_groups']	= $this->age_group->get_all();
 		$this->load->view('templates/header', $data);
 		$this->load->view('general_setting');
 		$this->load->view('templates/footer');
-
 	}
 
 	public function usersetting() {
@@ -806,6 +805,43 @@ class Admin extends CI_Controller {
 		$this->load->view('recyclebin');
 		$this->load->view('templates/footer');													
 	}
+
+	public function backupdatabase() {
+		$data['active_menu'] = "backupdatabase";
+		$this->load->view('templates/header', $data);
+		$this->load->view('backup_database');
+		$this->load->view('templates/footer');													
+	}
+
+	public function generatebackup() {
+		$this->load->dbutil();
+		$prefs = array(
+			'format' => 'txt', 
+			'filename' => 'mybackup.sql',
+			'newline' => '\n'
+			);
+
+		$backup = $this->dbutil->backup($prefs);
+
+		$this->load->helper('file');
+		write_file('database/mybackup.txt', $backup);
+
+		$this->load->helper('download');
+		force_download('mybackup.txt', $backup);
+	}
+
+	public function editagegroup() {
+		if($this->age_group->editagegrouop()) {
+			$this->session->set_flashdata('edit_age_group_success', 'የምዕመን እድሜ በድን መረጃ በትክክል ተቀይሯል።');			
+			redirect('admin/generalsetting'); 
+		} else {
+			$this->session->set_flashdata('edit_age_group_error', 'የምዕመን እድሜ በድን መረጃ መቀየር አልተቻለም።');			
+			redirect('admin/generalsetting'); 			
+		}
+
+	}
+
+
 
 
 
