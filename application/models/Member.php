@@ -176,7 +176,7 @@ class Member extends CI_Model {
 		return  $res[0];
 	}
 
-	public function get_filtered_sorted() {
+	public function get_filtered_sorted($sage=NULL, $eage=NULL) {
 		$this->load->model('age_group');
 		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
 		$this->db->where('status', 'ያለ');
@@ -195,9 +195,9 @@ class Member extends CI_Model {
 	    if($_SESSION['filtermember']['marital_status'] != NULL) {
 	    	$this->db->where('marital_status', $_SESSION['filtermember']['marital_status']);
 	    }
-	    if($_SESSION['filtermember']['age_group'] != NULL) {
-	    	$res = $this->age_group->get_one($_SESSION['filtermember']['age_group']);
-	    	$this->db->where('age >', $res['start_age']);
+	    if($sage != NULL) {
+	    	$this->db->where('TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) >', $sage);
+	    	$this->db->where('TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) <', $eage);
 	    }
 		$this->db->from('members');
 		$this->db->join('membership_levels', 'members.membership_level = membership_levels.membership_level_id');

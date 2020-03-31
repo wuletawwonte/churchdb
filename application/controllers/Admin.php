@@ -189,17 +189,31 @@ class Admin extends CI_Controller {
 				'age_group' => $this->input->post('age_group')
 			);
 			$this->session->set_userdata('filtermember', $filtermember);
+			$sage = null;
+			$eage = null;
+			if($this->input->post('age_group')) {
+				$sage = $this->age_group->get_one($this->input->post('age_group'))['start_age'];
+				$eage = $this->age_group->get_one($this->input->post('age_group'))['end_age'];
+			}
 
 			$data['active_menu'] = "listmembers";
-			$data['members'] = $this->member->get_filtered_sorted();
+			$data['members'] = $this->member->get_filtered_sorted($sage, $eage);
 			$this->load->view('templates/header', $data);
 			$this->load->view('list_members');
 			$this->load->view('templates/footer');
 
 		} else {
 
+			$sage = null;
+			$eage = null;
+			if($_SESSION['filtermember']['age_group']) {
+				$sage = $this->age_group->get_one($_SESSION['filtermember']['age_group'])['start_age'];
+				$eage = $this->age_group->get_one($_SESSION['filtermember']['age_group'])['end_age'];
+			}
+
+
 			$data['active_menu'] = "listmembers";
-			$data['members'] = $this->member->get_filtered_sorted();
+			$data['members'] = $this->member->get_filtered_sorted($sage, $eage);
 			$this->load->view('templates/header', $data);
 			$this->load->view('list_members');
 			$this->load->view('templates/footer');
