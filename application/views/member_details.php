@@ -620,7 +620,10 @@
                 'searching' : false,
                 'ordering'  : true,
                 'info'      : true,
-                'autoWidth' : true
+                'autoWidth' : true,
+                'language': {
+                        url: '<?= base_url()?>assets/vendors/DataTables/locale/Amharic.json'
+                    }
                 })
         })
 
