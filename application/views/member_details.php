@@ -122,9 +122,8 @@
                 <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/payment"><i class="fa fa-money"></i> የክፍያ መረጃ </a>
                 <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/status"><i class="fa fa-user"></i> የምዕመን ሁኔታ </a>
                 <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
-                <a class="btn btn-app" id="addGroup"><i class="fa fa-users"></i> <?= lang('assign_new_group') ?> </a>
-                <a data-toggle="modal" href="#deleteMember" class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> ምዕመን አጥፋ </a>
                 <a class="btn btn-app <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-user-secret"></i> መረጃ ቀይር </a>
+                <a data-toggle="modal" href="#deleteMember" class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> ምዕመን አጥፋ </a>
             </div>
 
             <!-- ምዕመን አጥፋ Dialogue -->
@@ -574,6 +573,7 @@
                                 <div class="timeline-body"><?= $note['note_content']?></div>
                                 <div class="timeline-footer">
                                   <a class="btn btn-warning btn-flat btn-xs">View comment</a>
+                                  <a class="btn btn-danger btn-flat btn-xs">አጥፋ</a>
                                 </div>
                               </div>
                             </li>
