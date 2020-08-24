@@ -150,6 +150,7 @@ class Member extends CI_Model {
 	}
 
 	public function latest_members(){
+		$this->db->where('status', 'ያለ');
 		$this->db->limit(12);
 		$this->db->order_by('created', 'DESC');
 		$res = $this->db->get('members')->result_array();
@@ -157,7 +158,10 @@ class Member extends CI_Model {
 	}
 
 	public function record_count() {
-		return $this->db->count_all('members');
+		$this->db->where('status', 'ያለ');
+		$res = $this->db->get('members');
+		return $res->num_rows();
+		// return $this->db->count_all('members');
 	}
 
 	public function get_one($id = NULL) {
@@ -282,9 +286,11 @@ class Member extends CI_Model {
 	}
 
 	public function gender_count() {		
+		$this->db->where('status', 'ያለ');
 		$this->db->where('gender', 'ወንድ');
 		$data['male'] = $this->db->get('members')->num_rows();
 
+		$this->db->where('status', 'ያለ');
 		$this->db->where('gender', 'ሴት');
 		$data['female'] = $this->db->get('members')->num_rows();
 
@@ -298,6 +304,7 @@ class Member extends CI_Model {
 
 		$index = 0;
 		foreach($result as $res) {
+			$this->db->where('status', 'ያለ');
 			$this->db->where('membership_level', $res['membership_level_id']);
 			$count = $this->db->get('members')->num_rows();
 			$arrayRecord = array(

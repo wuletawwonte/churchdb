@@ -14,7 +14,7 @@
         border: 2px solid #d2d6de;
         font-size: 20px;
         color: #fff;
-        line-height: 52px;
+        line-height: 60px;
         text-align: center;
         margin: 0 0; 
     }
