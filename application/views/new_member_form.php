@@ -148,7 +148,8 @@
 
 	                    <div class="col-md-4">
 	                        <label> ክፍለ ከተማ: </label>
-	                        <select name="kifle_ketema" class="form-control s2">
+	                        <select name="kifle_ketema" id="kifle_ketema" class="form-control s2">
+	                        	<option value="">አልተመረጠም</option>
 	                        	<?php foreach($kifle_ketemas as $kifle_ketema) { ?>
 		                        	<option value="<?= $kifle_ketema['kifle_ketema_id']; ?>"> <?= $kifle_ketema['kifle_ketema_title']; ?> </option>
 		                        <?php } ?>
@@ -157,19 +158,15 @@
 
 	                    <div class="col-md-4">
 	                        <label> ቀበሌ: </label>
-	                        <select name="kebele" class="form-control s2">
-	                        	<?php foreach($kebeles as $kebele) { ?>
-		                        	<option value="<?= $kebele['kebele_id']; ?>"> <?= $kebele['kebele_title']; ?> </option>
-		                        <?php } ?>
+	                        <select name="kebele" id="kebele" class="form-control s2">
+	                        	<option value="">አልተመረጠም</option>
 	                        </select>
 	                    </div>
 
 	                    <div class="col-md-4">
 	                        <label> መንደር: </label>
-	                        <select name="mender" class="form-control s2">
-	                        	<?php foreach($menders as $mender) { ?>
-		                        	<option value="<?= $mender['mender_id']; ?>"> <?= $mender['mender_title']; ?> </option>
-		                        <?php } ?>
+	                        <select name="mender" id="mender" class="form-control s2">
+	                        	<option value="">አልተመረጠም</option>
 	                        </select>
 	                    </div>
 					</div><br>
@@ -439,6 +436,42 @@
 	    		femaleMaritalStatus();
 	    	}
 	    });
+
+
+	    $("#kifle_ketema").change(function(){
+	    	var kifle_ketema_id = $("#kifle_ketema").val();
+	    	if(kifle_ketema_id != '') {
+	    		$.ajax({
+	    			url: "<?php echo base_url(); ?>admin/fetch_kebeles",
+	    			method: "POST",
+	    			data: {kifle_ketema_id: kifle_ketema_id},
+	    			success: function(data) {
+	    				$("#kebele").html(data);
+			    		$("#mender").html('<option value="">አልተመረጠም</option>');
+	    			}
+	    		});
+	    	} else {
+	    		$("#kebele").html('<option value="">አልተመረጠም</option>');
+	    		$("#mender").html('<option value="">አልተመረጠም</option>');
+	    	}
+	    });
+
+	    $("#kebele").change(function(){
+	    	var kebele_id = $("#kebele").val();
+	    	if(kebele_id != ''){
+	    		$.ajax({
+	    			url: "<?php echo base_url(); ?>admin/fetch_menders",
+	    			method: "POST",
+	    			data:{kebele_id: kebele_id},
+	    			success: function(data) {
+	    				$("#mender").html(data);
+	    			}
+	    		});
+	    	} else {
+	    		$("#mender").html('<option value="">አልተመረጠም</option>');
+	    	}
+	    });
+
 
 
 	    // $(function fileupload(input) {

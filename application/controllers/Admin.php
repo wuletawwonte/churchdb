@@ -161,8 +161,6 @@ class Admin extends CI_Controller {
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
 		$data['kifle_ketemas'] = $this->kifle_ketema->get_all();
-		$data['kebeles'] = $this->kebele->get_all();
-		$data['menders'] = $this->mender->get_all();
 		$data['ministries'] = $this->ministry->get_all();
 		$this->load->view('templates/header', $data);
 		$this->load->view('new_member_form', $data);
@@ -856,9 +854,20 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('edit_age_group_error', 'የምዕመን እድሜ በድን መረጃ መቀየር አልተቻለም።');			
 			redirect('admin/generalsetting'); 			
 		}
-
 	}
 
+	// AJAX function
+	public function fetch_kebeles() {
+		if($this->input->post('kifle_ketema_id')) {
+			echo $this->kebele->fetch_kebeles($this->input->post('kifle_ketema_id'));
+		}
+	}
+	// Ajax function
+	public function fetch_menders() {
+		if($this->input->post('kebele_id')) {
+			echo $this->mender->fetch_menders($this->input->post('kebele_id'));
+		}
+	}
 
 
 
