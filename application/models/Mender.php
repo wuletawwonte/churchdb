@@ -9,16 +9,17 @@ class Mender extends CI_Model {
 	}
 
 
-	public function fetch_menders($kebele_id) {
-		$this->db->where('kebele_id', $kebele_id);
+	public function fetch_menders($kebele_title) {
+		$this->db->where('kebele_title', $kebele_title);
 		$this->db->order_by('mender_title', 'ASC');
 		$res = $this->db->get('menders');
 		$output = '<option value="">አልተመረጠም</option>';
 		foreach($res->result() as $row) {
-			$output .= '<option value="'.$row->mender_id.'">'.$row->mender_title.'</option>';
+			$output .= '<option value="'.$row->mender_title.'">'.$row->mender_title.'</option>';
 		}
 		return $output;
 	}
+
 
 
 

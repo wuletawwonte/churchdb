@@ -858,14 +858,14 @@ class Admin extends CI_Controller {
 
 	// AJAX function
 	public function fetch_kebeles() {
-		if($this->input->post('kifle_ketema_id')) {
-			echo $this->kebele->fetch_kebeles($this->input->post('kifle_ketema_id'));
+		if($this->input->post('kifle_ketema_title')) {
+			echo $this->kebele->fetch_kebeles($this->input->post('kifle_ketema_title'));
 		}
 	}
 	// Ajax function
 	public function fetch_menders() {
-		if($this->input->post('kebele_id')) {
-			echo $this->mender->fetch_menders($this->input->post('kebele_id'));
+		if($this->input->post('kebele_title')) {
+			echo $this->mender->fetch_menders($this->input->post('kebele_title'));
 		}
 	}
 

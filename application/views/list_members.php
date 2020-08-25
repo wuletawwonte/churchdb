@@ -125,8 +125,13 @@
                                     <?php } ?>
                         </select>
                         
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 10px;">
                         <input type="submit" name="submit" class="btn btn-primary btn-flat" value="አጣራ">
                         <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning btn-flat"> ፍለጋውን አጥፋ </a><BR>
+
                     </td>
                 </tr>
             </table>
@@ -206,9 +211,9 @@
                             <a onclick=""><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                         <td><span><?= $member['membership_level_title']?></span></td>
-                        <td><span><?= $member['kifle_ketema_title']?></span></td>
-                        <td><span><?= $member['kebele_title']?></span></td>
-                        <td><span><?= $member['mender_title']?></span></td>
+                        <td><span><?= $member['kifle_ketema']?></span></td>
+                        <td><span><?= $member['kebele']?></span></td>
+                        <td><span><?= $member['mender']?></span></td>
                         <td><span><?= $member['house_number']?></span></td>
                         <td><span><?= $member['home_phone']?></span></td>
                         <td><span><?= $member['level_of_education']?></span></td>

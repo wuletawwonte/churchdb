@@ -8,18 +8,16 @@ class Kebele extends CI_Model {
 		
 	}
 
-	public function fetch_kebeles($kifle_ketema_id) {
-		$this->db->where('kifle_ketema_id', $kifle_ketema_id);
+	public function fetch_kebeles($kifle_ketema_title) {
+		$this->db->where('kifle_ketema_title', $kifle_ketema_title);
 		$this->db->order_by('kebele_title', 'ASC');
 		$res = $this->db->get('kebeles');
 		$output = '<option value="">አልተመረጠም</option>';
 		foreach($res->result() as $row) {
-			$output .= '<option value="'.$row->kebele_id.'">'.$row->kebele_title.'</option>';
+			$output .= '<option value="'.$row->kebele_title.'">'.$row->kebele_title.'</option>';
 		}
 		return $output;
 	}
-
-
 
 
 

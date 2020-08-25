@@ -151,7 +151,7 @@
 	                        <select name="kifle_ketema" id="kifle_ketema" class="form-control s2">
 	                        	<option value="">አልተመረጠም</option>
 	                        	<?php foreach($kifle_ketemas as $kifle_ketema) { ?>
-		                        	<option value="<?= $kifle_ketema['kifle_ketema_id']; ?>"> <?= $kifle_ketema['kifle_ketema_title']; ?> </option>
+		                        	<option value="<?= $kifle_ketema['kifle_ketema_title']; ?>"> <?= $kifle_ketema['kifle_ketema_title']; ?> </option>
 		                        <?php } ?>
 	                        </select>
 	                    </div>
@@ -439,12 +439,12 @@
 
 
 	    $("#kifle_ketema").change(function(){
-	    	var kifle_ketema_id = $("#kifle_ketema").val();
-	    	if(kifle_ketema_id != '') {
+	    	var kifle_ketema_title = $("#kifle_ketema").val();
+	    	if(kifle_ketema_title != '') {
 	    		$.ajax({
 	    			url: "<?php echo base_url(); ?>admin/fetch_kebeles",
 	    			method: "POST",
-	    			data: {kifle_ketema_id: kifle_ketema_id},
+	    			data: {kifle_ketema_title: kifle_ketema_title},
 	    			success: function(data) {
 	    				$("#kebele").html(data);
 			    		$("#mender").html('<option value="">አልተመረጠም</option>');
@@ -457,12 +457,12 @@
 	    });
 
 	    $("#kebele").change(function(){
-	    	var kebele_id = $("#kebele").val();
-	    	if(kebele_id != ''){
+	    	var kebele_title = $("#kebele").val();
+	    	if(kebele_title != ''){
 	    		$.ajax({
 	    			url: "<?php echo base_url(); ?>admin/fetch_menders",
 	    			method: "POST",
-	    			data:{kebele_id: kebele_id},
+	    			data:{kebele_title: kebele_title},
 	    			success: function(data) {
 	    				$("#mender").html(data);
 	    			}

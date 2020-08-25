@@ -18,5 +18,4 @@ class Kifle_ketema extends CI_Model {
 
 
 
-
 }

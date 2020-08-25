@@ -184,11 +184,11 @@
                             <div class="box-body">
                                 <dl class="dl-horizontal">
                                     <dt> ክፍለ ከተማ </dt>
-                                    <dd> <?= $member['kifle_ketema_title']; ?></dd>
+                                    <dd> <?= $member['kifle_ketema']; ?></dd>
                                     <dt> ቀበሌ </dt>
-                                    <dd> <?= $member['kebele_title']; ?></dd>
+                                    <dd> <?= $member['kebele']; ?></dd>
                                     <dt> መንደር </dt>
-                                    <dd> <?= $member['mender_title']; ?> </dd>
+                                    <dd> <?= $member['mender']; ?> </dd>
                                     <dt> የቤት ቁጥር </dt>
                                     <dd> <?= $member['house_number']; ?> </dd>
                                     <dt> የሞባይል ስልክ ቁጥር </dt>

@@ -6,6 +6,7 @@ class Member extends CI_Model {
 	public function __construct() {
 		parent::__construct();
 		
+		$this->load->model('kifle_ketema','kebele','mender');
 	}
 
 	public function add($avatar) {
@@ -172,9 +173,6 @@ class Member extends CI_Model {
 		$this->db->join('membership_causes', 'members.membership_cause = membership_causes.membership_cause_id');
 		$this->db->join('ministries', 'members.ministry = ministries.ministry_id');
 		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
-		$this->db->join('kifle_ketemas', 'members.kifle_ketema = kifle_ketemas.kifle_ketema_id');
-		$this->db->join('kebeles', 'members.kebele = kebeles.kebele_id');
-		$this->db->join('menders', 'members.mender = menders.mender_id');
 		$res = $this->db->get();
 		$res = $res->result_array();
 		return  $res[0];
@@ -208,9 +206,9 @@ class Member extends CI_Model {
 		$this->db->join('membership_causes', 'members.membership_cause = membership_causes.membership_cause_id');
 		$this->db->join('ministries', 'members.ministry = ministries.ministry_id');
 		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
-		$this->db->join('kifle_ketemas', 'members.kifle_ketema = kifle_ketemas.kifle_ketema_id');
-		$this->db->join('kebeles', 'members.kebele = kebeles.kebele_id');
-		$this->db->join('menders', 'members.mender = menders.mender_id');
+		// $this->db->join('kifle_ketemas', 'members.kifle_ketema = kifle_ketemas.kifle_ketema_id', 'OUTER JOIN');
+		// $this->db->join('kebeles', 'members.kebele = kebeles.kebele_id');
+		// $this->db->join('menders', 'members.mender = menders.mender_id');
 		$data = $this->db->get();
 		return $data->result_array();			
 	}
