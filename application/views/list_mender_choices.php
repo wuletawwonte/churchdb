@@ -98,7 +98,7 @@
 
 
 
-                                    <div id="deleteMender<?= $choice['mender_id']?>" class="modal fade" role="dialog">
+                                    <div id="deleteMender<?= $choice['mender_id']?>" class="modal modal-danger fade" role="dialog">
                                       <div class="modal-dialog modal-sm">
 
                                         <!-- Modal content-->
@@ -109,7 +109,7 @@
                                           </div>
                                           <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">አይ</button>
-                                            <a href="<?= base_url(); ?>admin/deletemembershiplevelchoice" class="btn btn-primary">አዎ</a>
+                                            <a href="<?= base_url(); ?>admin/deletemender/<?= $choice['mender_id']; ?>/<?= $kebele['kebele_id']; ?>" class="btn btn-danger">አዎ</a>
                                           </div>
                                         </div>
 

@@ -25,6 +25,12 @@ class Mender extends CI_Model {
 		return $data->result_array();
 	}
 
+	public function from_id($id) {
+		$this->db->where('mender_id', $id);
+		$res = $this->db->get('menders')->result_array();
+
+		return $res[0];
+	}
 
 	public function get_from_kebele($kebele) {
 		$this->db->where('kebele_title', $kebele);
@@ -53,6 +59,14 @@ class Mender extends CI_Model {
 		$this->db->update('members', array('mender' => $this->input->post('mender_new_title')));
 		return true;
 
+	}
+
+	public function delete_mender($id, $title) {
+		$this->db->where('mender_id', $id);
+		$this->db->delete('menders');
+		$this->db->where('mender', $title);
+		$this->db->update('members', array('mender' => ''));
+		return true;
 	}
 
 

@@ -42,6 +42,22 @@ class Kifle_ketema extends CI_Model {
 		return true;
 	}
 
+	public function delete_kifle_ketema($id, $title) {
+		$this->db->where('kifle_ketema_id', $id);
+		$this->db->delete('kifle_ketemas');
+		$this->db->where('kifle_ketema_title', $title);
+		$res = $this->db->get('kebeles')->result_array();
+		foreach($res as $kebele) {
+			$this->db->where('kebele_title', $kebele['kebele_title']);
+			$this->db->delete('menders');
+		}
+		$this->db->where('kifle_ketema_title', $title);
+		$this->db->delete('kebeles');
+		$this->db->where('kifle_ketema', $title);
+		$this->db->update('members', array('kifle_ketema' => '', 'kebele' => '', 'mender' => ''));
+		return true;
+	}
+
 
 
 }

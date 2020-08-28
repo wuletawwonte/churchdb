@@ -61,6 +61,15 @@ class Kebele extends CI_Model {
 
 	}
 
+	public function delete_kebele($id, $title) {
+		$this->db->where('kebele_id', $id);
+		$this->db->delete('kebeles');
+		$this->db->where('kebele_title', $title);
+		$this->db->delete('menders');
+		$this->db->where('kebele', $title);
+		$this->db->update('members', array('kebele' => '', 'mender' => ''));
+		return true;
+	}
 
 
 

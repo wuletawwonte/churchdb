@@ -978,6 +978,39 @@ class Admin extends CI_Controller {
 		}						
 	}
 
+	public function deletekifleketema($id) {
+		$data = $this->kifle_ketema->from_id($id);
+		if($this->kifle_ketema->delete_kifle_ketema($id, $data['kifle_ketema_title'])) {
+			$this->session->set_flashdata('success', 'የክፍለ ከተማው መረጃ በትክክል ጠፍቷል።');
+			redirect('admin/editkifleketemas');
+		} else {
+			$this->session->set_flashdata('error', 'የክፈለ ከተማውን መረጃ ማጥፋት አልተቻለም።');
+			redirect('admin/editkifleketemas');
+		}								
+	}
+
+	public function deletekebele($kebele_id, $kifle_ketema_id) {
+		$data = $this->kebele->from_id($kebele_id);
+		if($this->kebele->delete_kebele($kebele_id, $data['kebele_title'])) {
+			$this->session->set_flashdata('success', 'የቀበሌው መረጃ በትክክል ጠፍቷል።');
+			redirect('admin/editkebeles/'.$kifle_ketema_id);
+		} else {
+			$this->session->set_flashdata('error', 'የቀበሌውን መረጃ ማጥፋት አልተቻለም።');
+			redirect('admin/editkebeles/'.$kifle_ketema_id);
+		}								
+	}
+
+	public function deletemender($mender_id, $kebele_id) {
+		$data = $this->mender->from_id($mender_id);
+		if($this->mender->delete_mender($mender_id, $data['mender_title'])) {
+			$this->session->set_flashdata('success', 'የመንደር መረጃ በትክክል ጠፍቷል።');
+			redirect('admin/editmenders/'.$kebele_id);
+		} else {
+			$this->session->set_flashdata('error', 'የመንደሩን መረጃ ማጥፋት አልተቻለም።');
+			redirect('admin/editmenders/'.$kebele_id);
+		}								
+	}
+
 
 
 

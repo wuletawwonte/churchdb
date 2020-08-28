@@ -96,7 +96,7 @@
 
 
 
-                                    <div id="deleteKifleKetema<?= $choice['kifle_ketema_id']?>" class="modal fade" role="dialog">
+                                    <div id="deleteKifleKetema<?= $choice['kifle_ketema_id']?>" class="modal modal-danger fade" role="dialog">
                                       <div class="modal-dialog modal-sm">
 
                                         <!-- Modal content-->
@@ -107,7 +107,7 @@
                                           </div>
                                           <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">አይ</button>
-                                            <a href="<?= base_url(); ?>admin/deletemembershiplevelchoice" class="btn btn-primary">አዎ</a>
+                                            <a href="<?= base_url(); ?>admin/deletekifleketema/<?= $choice['kifle_ketema_id']; ?>" class="btn btn-danger">አዎ</a>
                                           </div>
                                         </div>
 
