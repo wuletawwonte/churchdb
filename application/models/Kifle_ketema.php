@@ -32,6 +32,16 @@ class Kifle_ketema extends CI_Model {
 		return $res[0];
 	}
 
+	public function update_kifle_ketema() {
+		$this->db->where('kifle_ketema_title', $this->input->post('kifle_ketema_old_title'));
+		$this->db->update('kifle_ketemas', array('kifle_ketema_title' => $this->input->post('kifle_ketema_new_title')));
+		$this->db->where('kifle_ketema_title', $this->input->post('kifle_ketema_old_title'));
+		$this->db->update('kebeles', array('kifle_ketema_title' => $this->input->post('kifle_ketema_new_title')));
+		$this->db->where('kifle_ketema', $this->input->post('kifle_ketema_old_title'));
+		$this->db->update('members', array('kifle_ketema' => $this->input->post('kifle_ketema_new_title')));
+		return true;
+	}
+
 
 
 }

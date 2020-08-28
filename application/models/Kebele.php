@@ -50,6 +50,17 @@ class Kebele extends CI_Model {
 		}
 	}
 
+	public function update_kebele() {
+		$this->db->where('kebele_title', $this->input->post('kebele_old_title'));
+		$this->db->update('kebeles', array('kebele_title' => $this->input->post('kebele_new_title')));
+		$this->db->where('kebele_title', $this->input->post('kebele_old_title'));
+		$this->db->update('menders', array('kebele_title' => $this->input->post('kebele_new_title')));
+		$this->db->where('kebele', $this->input->post('kebele_old_title'));
+		$this->db->update('members', array('kebele' => $this->input->post('kebele_new_title')));
+		return true;
+
+	}
+
 
 
 

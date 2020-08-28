@@ -948,6 +948,36 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/footer');									
 	}
 
+	public function editkifleketemachoice() {
+		if($this->kifle_ketema->update_kifle_ketema()) {
+			$this->session->set_flashdata('success', 'የክፍለ ከተማው መረጃ በትክክል ተቀይሯል።');
+			redirect('admin/editkifleketemas');
+		} else {
+			$this->session->set_flashdata('error', 'የክፈለ ከተማውን መረጃ መቀየር አልተቻለም።');
+			redirect('admin/editkifleketemas');
+		}						
+	}
+
+	public function editkebelechoice() {
+		if($this->kebele->update_kebele()) {
+			$this->session->set_flashdata('success', 'የቀበሌው መረጃ በትክክል ተቀይሯል።');
+			redirect('admin/editkebeles/'.$this->input->post('kifle_ketema_id'));
+		} else {
+			$this->session->set_flashdata('error', 'የቀበሌውን መረጃ መቀየር አልተቻለም።');
+			redirect('admin/editkebeles/'.$this->input->post('kifle_ketema_id'));
+		}						
+	}
+
+	public function editmenderchoice() {
+		if($this->mender->update_mender()) {
+			$this->session->set_flashdata('success', 'የመንደሩ መረጃ በትክክል ተቀይሯል።');
+			redirect('admin/editmenders/'.$this->input->post('kebele_id'));
+		} else {
+			$this->session->set_flashdata('error', 'የመንደሩን መረጃ መቀየር አልተቻለም።');
+			redirect('admin/editmenders/'.$this->input->post('kebele_id'));
+		}						
+	}
+
 
 
 

@@ -62,7 +62,61 @@
                                 </a>
                             </td>
                             <td style="text-align: center">
-                                <a href="<?= base_url(); ?>admin/editministries"><i class="fa fa-pencil"  style="color: #00c0ef;" aria-hidden="true"></i></a>
+                                <a data-toggle="modal" href="#editKebele<?= $choice['kebele_id']; ?>" ><i class="fa fa-pencil"  style="color: #00c0ef;" aria-hidden="true"></i></a>
+                                <a data-toggle="modal" href="#deleteKebele<?= $choice['kebele_id']; ?>" ><i class="fa fa-trash"  style="color: #dd4b39;" aria-hidden="true"></i></a>
+
+
+
+                                    <div id="editKebele<?= $choice['kebele_id']?>" class="modal fade" role="dialog">
+                                      <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                          <div class="modal-header" align="left">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">ቀበሌ ማስተካከያ</h4><p>እባክዎ በጥንቃቄ ይሙሉ</p>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div class="row">
+                                                <form method="POST" action="<?= base_url('admin/editkebelechoice'); ?>" id="#editForm<?= $choice['kebele_id']; ?>">
+                                                    <input type="text" name="kebele_old_title" value="<?= $choice['kebele_title']; ?>" hidden>
+                                                    <input type="text" name="kifle_ketema_title" value="<?= $kifle_ketema['kifle_ketema_title']; ?>" hidden>
+                                                    <input type="text" name="kifle_ketema_id" value="<?= $kifle_ketema['kifle_ketema_id']; ?>" hidden>
+                                                    <div class="col-md-5">
+                                                        <input type="text" name="kebele_new_title" maxlength="48" value="<?= $choice['kebele_title']; ?>" class="form-control" required>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">ይቅር</button>
+                                            <input type="submit" form="#editForm<?= $choice['kebele_id']; ?>" class="btn btn-info btn-flat" name="" value="አስተካክል">
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>
+
+
+
+
+                                    <div id="deleteKebele<?= $choice['kebele_id']?>" class="modal fade" role="dialog">
+                                      <div class="modal-dialog modal-sm">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                          <div class="modal-header" align="left">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>መልሶ ማስተካከል አይቻልም</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">አይ</button>
+                                            <a href="<?= base_url(); ?>admin/deletemembershiplevelchoice" class="btn btn-primary">አዎ</a>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>
                             </td>
                         </tr>
 

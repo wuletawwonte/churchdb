@@ -46,5 +46,15 @@ class Mender extends CI_Model {
 		}
 	}
 
+	public function update_mender() {
+		$this->db->where('mender_title', $this->input->post('mender_old_title'));
+		$this->db->update('menders', array('mender_title' => $this->input->post('mender_new_title')));
+		$this->db->where('mender', $this->input->post('mender_old_title'));
+		$this->db->update('members', array('mender' => $this->input->post('mender_new_title')));
+		return true;
+
+	}
+
+
 
 }
