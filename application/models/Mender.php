@@ -20,9 +20,31 @@ class Mender extends CI_Model {
 		return $output;
 	}
 
+	public function get_all() {
+		$data = $this->db->get('kifle_ketemas');
+		return $data->result_array();
+	}
 
 
+	public function get_from_kebele($kebele) {
+		$this->db->where('kebele_title', $kebele);
+		$res = $this->db->get('menders');
 
+		return $res->result_array();
+	}
+
+
+	public function add_choice() {
+		$data = array(
+			'mender_title' => $this->input->post('mender_title'), 
+			'kebele_title' => $this->input->post('kebele_title')
+		);
+		if($this->db->insert('menders', $data)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 
 }

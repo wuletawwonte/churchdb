@@ -19,6 +19,36 @@ class Kebele extends CI_Model {
 		return $output;
 	}
 
+	public function get_all() {
+		$data = $this->db->get('kebeles');
+		return $data->result_array();
+	}
+
+	public function get_from_kifle_ketema($kifle_ketema) {
+		$this->db->where('kifle_ketema_title', $kifle_ketema);
+		$res = $this->db->get('kebeles');
+
+		return $res->result_array();
+	}
+
+	public function from_id($id) {
+		$this->db->where('kebele_id', $id);
+		$res = $this->db->get('kebeles')->result_array();
+
+		return $res[0];
+	}
+
+	public function add_choice() {
+		$data = array(
+			'kebele_title' => $this->input->post('kebele_title'), 
+			'kifle_ketema_title' => $this->input->post('kifle_ketema_title')
+		);
+		if($this->db->insert('kebeles', $data)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 
 

@@ -261,7 +261,7 @@ class Admin extends CI_Controller {
 				$this->session->set_flashdata('success', 'የምዕመን መረጃ በትክክል ተመዝግቧል።');
 				redirect('admin/personregistration');
 			} else {
-				$this->session->set_flashdata('error', 'የምዕመን መረጃ ሊመዘግብ አልተቻለም።');
+				$this->session->set_flashdata('error', 'የምዕመን መረጃ ሊመዘገብ አልተቻለም።');
 				redirect('admin/personregistration');			
 			}
 		} else {
@@ -580,43 +580,12 @@ class Admin extends CI_Controller {
 		$this->load->view('member_details_print', $data);		
 	}
 
-
-	public function addmembershiplevelchoice() {
-		if($this->membership_level->add_choice()) {
-			$this->session->set_flashdata('success', 'የአባልነት ደረጃ በትክክል ተመዝግቧል።');
-			redirect('admin/listformelements');
-		} else {
-			$this->session->set_flashdata('error', 'የአባልነት ደረጃ መመዝገብ አልተቻለም።');
-			redirect('admin/listformelements');
-		}		
-	}
-
 	public function addjobtypechoice() {
 		if($this->job_type->add_choice()) {
 			$this->session->set_flashdata('success', 'የስራ አይነት በትክክል ተመዝግቧል።');
 			redirect('admin/listformelements');
 		} else {
 			$this->session->set_flashdata('error', 'የስራ አይነት መመዝገብ አልተቻለም።');
-			redirect('admin/listformelements');
-		}		
-	}
-
-	public function addmembershipcausechoice() {
-		if($this->membership_cause->add_choice()) {
-			$this->session->set_flashdata('success', 'አባል የሆኑበት ሁኔታ በትክክል ተመዝግቧል።');
-			redirect('admin/listformelements');
-		} else {
-			$this->session->set_flashdata('error', 'አባል የሆኑበት ሁኔታ መመዝገብ አልተቻለም።');
-			redirect('admin/listformelements');
-		}		
-	}
-
-	public function addministrychoice() {
-		if($this->ministry->add_choice()) {
-			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ በትክክል ተመዝግቧል።');
-			redirect('admin/listformelements');
-		} else {
-			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ መመዝገብ አልተቻለም።');
 			redirect('admin/listformelements');
 		}		
 	}
@@ -869,7 +838,115 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function editmembershiplevels() {
+		$data['active_menu'] = "formelements";
+		$data['membership_level_choices'] = $this->membership_level->get_all();
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_membership_level_choices');
+		$this->load->view('templates/footer');			
+	}
 
+	public function editmembershipcauses() {
+		$data['active_menu'] = "formelements";
+		$data['membership_cause_choices'] = $this->membership_cause->get_all();
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_membership_cause_choices');
+		$this->load->view('templates/footer');			
+	}
+
+	public function addmembershiplevelchoice() {
+		if($this->membership_level->add_choice()) {
+			$this->session->set_flashdata('success', 'የአባልነት ደረጃ በትክክል ተመዝግቧል።');
+			redirect('admin/editmembershiplevels');
+		} else {
+			$this->session->set_flashdata('error', 'የአባልነት ደረጃ መመዝገብ አልተቻለም።');
+			redirect('admin/editmembershiplevels');
+		}		
+	}
+
+	public function addmembershipcausechoice() {
+		if($this->membership_cause->add_choice()) {
+			$this->session->set_flashdata('success', 'አባል የሆኑበት ምክንያት በትክክል ተመዝግቧል።');
+			redirect('admin/editmembershipcauses');
+		} else {
+			$this->session->set_flashdata('error', 'አባል የሆኑበት ምክንያት መመዝገብ አልተቻለም።');
+			redirect('admin/editmembershipcauses');
+		}		
+	}
+
+	public function addministrychoice() {
+		if($this->ministry->add_choice()) {
+			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ በትክክል ተመዝግቧል።');
+			redirect('admin/editministries');
+		} else {
+			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ መመዝገብ አልተቻለም።');
+			redirect('admin/editministries');
+		}		
+	}
+
+	public function addkifleketemachoice() {
+		if($this->kifle_ketema->add_choice()) {
+			$this->session->set_flashdata('success', 'ክፍለ ከተማው በትክክል ተመዝግቧል።');
+			redirect('admin/editkifleketemas');
+		} else {
+			$this->session->set_flashdata('error', 'ክፍለ ከተማውን መመዝገብ አልተቻለም።');
+			redirect('admin/editkifleketemas');
+		}				
+	}
+
+	public function addkebelechoice() {
+		if($this->kebele->add_choice()) {
+			$this->session->set_flashdata('success', 'ቀበሌው በትክክል ተመዝግቧል።');
+			redirect('admin/editkebeles/'.$this->input->post('kifle_ketema_id'));
+		} else {
+			$this->session->set_flashdata('error', 'ቀበሌውን መመዝገብ አልተቻለም።');
+			redirect('admin/editkebeles/'.$this->input->post('kifle_ketema_id'));
+		}						
+	}
+
+	public function addmenderchoice() {
+		if($this->mender->add_choice()) {
+			$this->session->set_flashdata('success', 'መንደሩ በትክክል ተመዝግቧል።');
+			redirect('admin/editmenders/'.$this->input->post('kebele_id'));
+		} else {
+			$this->session->set_flashdata('error', 'መንደሩን መመዝገብ አልተቻለም።');
+			redirect('admin/editmenders/'.$this->input->post('kebele_id'));
+		}						
+	}
+
+	public function editministries() {
+		$data['active_menu'] = "formelements";
+		$data['ministries'] = $this->ministry->get_all();
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_ministry_choices');
+		$this->load->view('templates/footer');					
+	}
+
+	public function editkifleketemas() {
+		$data['active_menu'] = "formelements";
+		$data['kifle_ketemas'] = $this->kifle_ketema->get_all();
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_kifle_ketema_choices');
+		$this->load->view('templates/footer');							
+	}
+
+	public function editkebeles($kifle_ketema_id) {
+		$data['active_menu'] = "formelements";
+		$data['kifle_ketema'] = $this->kifle_ketema->from_id($kifle_ketema_id);
+		$data['kebeles'] = $this->kebele->get_from_kifle_ketema($data['kifle_ketema']['kifle_ketema_title']);
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_kebele_choices');
+		$this->load->view('templates/footer');									
+	}
+
+	public function editmenders($kebele_id) {
+		$data['active_menu'] = "formelements";
+		$data['kebele'] = $this->kebele->from_id($kebele_id);
+		$data['menders'] = $this->mender->get_from_kebele($data['kebele']['kebele_title']);
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_mender_choices');
+		$this->load->view('templates/footer');									
+	}
 
 
 

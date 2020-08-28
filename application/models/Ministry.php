@@ -9,6 +9,7 @@ class Ministry extends CI_Model {
 	}
 
 	public function get_all() {
+		$this->db->order_by('ministry_id', 'DESC');
 		$data = $this->db->get('ministries');
 		return $data->result_array();
 	}

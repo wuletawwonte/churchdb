@@ -9,6 +9,7 @@ class Membership_level extends CI_Model {
 	}
 
 	public function get_all() {
+		$this->db->order_by('membership_level_id', 'DESC');
 		$data = $this->db->get('membership_levels');
 		return $data->result_array();
 	}

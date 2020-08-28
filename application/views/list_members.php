@@ -109,9 +109,9 @@
                           
                         <select name="membership_level" class="s2">
                             <option value="" <?php if($_SESSION['filtermember']['membership_level'] == NULL) echo 'selected'; ?>>የአባልነት ደረጃ</option>
-                                    <?php foreach($membership_levels as $membership_level) { ?>
-                                      <option value="<?= $membership_level['membership_level_id']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $membership_level['membership_level_id']) echo 'selected'; ?>> 
-                                        <?= $membership_level['membership_level_title']; ?> 
+                                    <?php foreach($membership_levels as $level) { ?>
+                                      <option value="<?= $level['membership_level_title']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $level['membership_level_title']) echo 'selected'; ?>> 
+                                        <?= $level['membership_level_title']; ?> 
                                       </option>
                                     <?php } ?>
                         </select>
@@ -119,7 +119,7 @@
                         <select name="ministry" class="s2">
                             <option value="" <?php if($_SESSION['filtermember']['ministry'] == NULL) echo 'selected'; ?>>የአገልግሎት ዘርፍ</option>
                                     <?php foreach($ministries as $ministry) { ?>
-                                      <option value="<?= $ministry['ministry_id']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
+                                      <option value="<?= $ministry['ministry_title']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
                                         <?= $ministry['ministry_title']; ?> 
                                       </option>
                                     <?php } ?>
@@ -154,7 +154,6 @@
                     <th>ኢሜል</th>
                     <th>የተመዘገበበት</th>
                     <th data-priority="4" >ስራዎች</th>
-                    <th>የአባልነት ደረጃ</th>
                     <th>ክፍለ ከተማ</th>
                     <th>ቀበሌ</th>
                     <th>መንደር</th>
@@ -210,7 +209,6 @@
                             <a <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'hidden'; } ?> href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a onclick=""><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
-                        <td><span><?= $member['membership_level_title']?></span></td>
                         <td><span><?= $member['kifle_ketema']?></span></td>
                         <td><span><?= $member['kebele']?></span></td>
                         <td><span><?= $member['mender']?></span></td>
@@ -223,8 +221,8 @@
                         <td><span><?= $member['workplace_phone']?></span></td>
                         <td><span><?= $member['monthly_income']?></span></td>
                         <td><span><?= $member['membership_year']?></span></td>
-                        <td><span><?= $member['membership_cause_title']?></span></td>
-                        <td><span><?= $member['membership_level_title']?></span></td>
+                        <td><span><?= $member['membership_cause']?></span></td>
+                        <td><span><?= $member['membership_level']?></span></td>
 
                     </tr>
 

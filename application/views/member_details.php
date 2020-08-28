@@ -86,7 +86,7 @@
                     <li><i class="fa-li fa fa-phone"></i>የሞባይል ስልክ ቁጥር: <span><?= $member['mobile_phone']; ?></span></li>
                     <li><i class="fa-li fa fa-tty"></i>የቤት ስልክ ቁጥር: <span><?= $member['home_phone']; ?></span></li>
                     <li><i class="fa-li fa fa-envelope"></i>ኢሜል: <span><?= $member['email']; ?></span></li>
-                    <li><i class="fa-li fa fa-info"></i>የአባልነት ደረጃ: <span><?= $member['membership_level_title']; ?></span></li>
+                    <li><i class="fa-li fa fa-info"></i>የአባልነት ደረጃ: <span><?= $member['membership_level']; ?></span></li>
                 </ul><hr>
                 <strong>
                     <i class="fa fa-book margin-r-5"></i>
@@ -221,11 +221,11 @@
                                     <dt>አባል የሆኑበት ዘመን</dt>
                                     <dd><?php if($member['membership_year']) { echo $member['membership_year']; } else { echo ""; }?></dd>
                                     <dt>የአባልነት ደረጃ</dt>
-                                    <dd><?= $member['membership_level_title']?></dd>
+                                    <dd><?= $member['membership_level']?></dd>
                                     <dt>አባል የሆኑበት ሁኔታ</dt>
-                                    <dd><?= $member['membership_cause_title']?></dd>
+                                    <dd><?= $member['membership_cause']?></dd>
                                     <dt>የአገልግሎት ዘርፍ</dt>
-                                    <dd><?= $member['ministry_title']?></dd>
+                                    <dd><?= $member['ministry']?></dd>
                                 </dl>                        
                             </div>
                             <!-- /.box-body -->

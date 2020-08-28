@@ -167,11 +167,8 @@ class Member extends CI_Model {
 
 	public function get_one($id = NULL) {
 		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
-		$this->db->from('members');
 		$this->db->where('id', $id);
-		$this->db->join('membership_levels', 'members.membership_level = membership_levels.membership_level_id');
-		$this->db->join('membership_causes', 'members.membership_cause = membership_causes.membership_cause_id');
-		$this->db->join('ministries', 'members.ministry = ministries.ministry_id');
+		$this->db->from('members');
 		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
 		$res = $this->db->get();
 		$res = $res->result_array();
@@ -202,13 +199,7 @@ class Member extends CI_Model {
 	    	$this->db->where('TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) <', $eage);
 	    }
 		$this->db->from('members');
-		$this->db->join('membership_levels', 'members.membership_level = membership_levels.membership_level_id');
-		$this->db->join('membership_causes', 'members.membership_cause = membership_causes.membership_cause_id');
-		$this->db->join('ministries', 'members.ministry = ministries.ministry_id');
 		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
-		// $this->db->join('kifle_ketemas', 'members.kifle_ketema = kifle_ketemas.kifle_ketema_id', 'OUTER JOIN');
-		// $this->db->join('kebeles', 'members.kebele = kebeles.kebele_id');
-		// $this->db->join('menders', 'members.mender = menders.mender_id');
 		$data = $this->db->get();
 		return $data->result_array();			
 	}
@@ -297,13 +288,16 @@ class Member extends CI_Model {
 
 	public function membership_level_count() {
 		$result = $this->db->get('membership_levels')->result_array();
-		$data = [];
+		$this->db->where('status', 'ያለ');
+		$this->db->where('membership_level', NULL)->or_where('membership_level', '');
+		$resCount = $this->db->get('members')->num_rows();
+		$data = [array('title' => "አልተረጠም",'count' => $resCount,'color' => '#D3D3D3')];
 		$colors = array('#001f3f', '#00a65a', '#0073b7', '#39cccc', '#f39c12', '#ff851b' , '#01ff70', '#dd4b39', '#605ca8', '#f012be', '#777777');	
 
 		$index = 0;
 		foreach($result as $res) {
 			$this->db->where('status', 'ያለ');
-			$this->db->where('membership_level', $res['membership_level_id']);
+			$this->db->where('membership_level', $res['membership_level_title']);
 			$count = $this->db->get('members')->num_rows();
 			$arrayRecord = array(
 				'title' => $res['membership_level_title'], 
@@ -349,4 +343,8 @@ class Member extends CI_Model {
 
 
 
+
 }
+
+
+
