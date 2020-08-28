@@ -1011,6 +1011,26 @@ class Admin extends CI_Controller {
 		}								
 	}
 
+	public function editmembershiplevelchoice() {
+		if($this->membership_level->update_membership_level()) {
+			$this->session->set_flashdata('success', 'የአባልነት ደረጃ በትክክል ተቀይሯል።');
+			redirect('admin/editmembershiplevels');
+		} else {
+			$this->session->set_flashdata('error', 'የአባልነት ደረጃ መቀየር አልተቻለም።');
+			redirect('admin/editmembershiplevels');
+		}						
+	}
+
+	public function deletemembershiplevel($id) {
+		$data = $this->membership_level->from_id($id);
+		if($this->membership_level->delete_membership_level($id, $data['membership_level_title'])) {
+			$this->session->set_flashdata('success', 'የአባልነት ደረጃ በትክክል ጠፍቷል።');
+			redirect('admin/editmembershiplevels');
+		} else {
+			$this->session->set_flashdata('error', 'የአባልነት ደረጃ ማጥፋት አልተቻለም።');
+			redirect('admin/editmembershiplevels');
+		}										
+	}
 
 
 
