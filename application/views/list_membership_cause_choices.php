@@ -58,7 +58,60 @@
                                 <?= $choice['membership_cause_title']; ?>
                             </td>
                             <td style="text-align: center">
-                                <a href="<?= base_url(); ?>admin/editmembershiplevels"><i class="fa fa-pencil"  style="color: #00c0ef;" aria-hidden="true"></i></a>
+                                <a data-toggle="modal" href="#editMCause<?= $choice['membership_cause_id']; ?>" ><i class="fa fa-pencil"  style="color: #00c0ef;" aria-hidden="true"></i></a>
+                                <a data-toggle="modal" href="#deleteMCause<?= $choice['membership_cause_id']; ?>" ><i class="fa fa-trash"  style="color: #dd4b39;" aria-hidden="true"></i></a>
+
+
+
+                                    <div id="editMCause<?= $choice['membership_cause_id']?>" class="modal fade" role="dialog">
+                                      <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                          <div class="modal-header" align="left">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">አባል የሆኑበት ሁኔታ  ማስተካከያ</h4><p>እባክዎ በጥንቃቄ ይሙሉ</p>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div class="row">
+                                                <form method="POST" action="<?= base_url('admin/editmembershipcausechoice'); ?>" id="#editForm<?= $choice['membership_cause_id']; ?>">
+                                                    <input type="text" name="membership_cause_old_title" value="<?= $choice['membership_cause_title']; ?>" hidden>
+                                                    <div class="col-md-5">
+                                                        <input type="text" name="membership_cause_new_title" maxlength="48" value="<?= $choice['membership_cause_title']; ?>" class="form-control" required>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">ይቅር</button>
+                                            <input type="submit" form="#editForm<?= $choice['membership_cause_id']; ?>" class="btn btn-info btn-flat" name="" value="አስተካክል">
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>
+
+
+
+
+                                    <div id="deleteMCause<?= $choice['membership_cause_id']?>" class="modal modal-danger fade" role="dialog">
+                                      <div class="modal-dialog modal-sm">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                          <div class="modal-header" align="left">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>መልሶ ማስተካከል አይቻልም</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">አይ</button>
+                                            <a href="<?= base_url(); ?>admin/deletemembershipcause/<?= $choice['membership_cause_id']; ?>" class="btn btn-danger">አዎ</a>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>                            
+
                             </td>
                         </tr>
 

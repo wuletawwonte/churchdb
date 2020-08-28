@@ -1032,7 +1032,47 @@ class Admin extends CI_Controller {
 		}										
 	}
 
+	public function editmembershipcausechoice() {
+		if($this->membership_cause->update_membership_cause()) {
+			$this->session->set_flashdata('success', 'አባል የሆኑበት ሁኔታ በትክክል ተቀይሯል።');
+			redirect('admin/editmembershipcauses');
+		} else {
+			$this->session->set_flashdata('error', 'አባል የሆኑበት ሁኔታ መቀየር አልተቻለም።');
+			redirect('admin/editmembershipcauses');
+		}						
+	}
 
+	public function deletemembershipcause($id) {
+		$data = $this->membership_cause->from_id($id);
+		if($this->membership_cause->delete_membership_cause($id, $data['membership_cause_title'])) {
+			$this->session->set_flashdata('success', 'አባል የሆኑበት ሁኔታ በትክክል ጠፍቷል።');
+			redirect('admin/editmembershipcauses');
+		} else {
+			$this->session->set_flashdata('error', 'አባል የሆኑበት ሁኔታ ማጥፋት አልተቻለም።');
+			redirect('admin/editmembershipcauses');
+		}										
+	}
+
+	public function editministrychoice() {
+		if($this->ministry->update_ministry()) {
+			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ በትክክል ተቀይሯል።');
+			redirect('admin/editministries');
+		} else {
+			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ መቀየር አልተቻለም።');
+			redirect('admin/editministries');
+		}						
+	}
+
+	public function deleteministry($id) {
+		$data = $this->ministry->from_id($id);
+		if($this->ministry->delete_ministry($id, $data['membership_cause_title'])) {
+			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ በትክክል ጠፍቷል።');
+			redirect('admin/editministries');
+		} else {
+			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ ማጥፋት አልተቻለም።');
+			redirect('admin/editministries');
+		}										
+	}
 
 
 

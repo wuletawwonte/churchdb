@@ -37,4 +37,30 @@ class Ministry extends CI_Model {
 	}
 
 
+	public function update_ministry() {
+		$this->db->where('ministry_title', $this->input->post('ministry_old_title'));
+		$this->db->update('ministries', array('ministry_title' => $this->input->post('ministry_new_title')));
+		$this->db->where('ministry', $this->input->post('ministry_old_title'));
+		$this->db->update('members', array('ministry' => $this->input->post('ministry_new_title')));
+		return true;
+	}
+
+	public function from_id($id) {
+		$this->db->where('ministry_id', $id);
+		$res = $this->db->get('ministries')->result_array();
+
+		return $res[0];
+	}
+
+	public function delete_ministry($id, $title) {
+		$this->db->where('ministry_id', $id);
+		$this->db->delete('ministries');
+		$this->db->where('ministry', $title);
+		$this->db->update('members', array('ministry' => ''));
+		return true;
+	}
+
+
+
+
 }
