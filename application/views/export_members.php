@@ -42,8 +42,9 @@
 
 			          <select name="job_type" class="s2">
 			            <option value="" <?php if($_SESSION['filtermember']['job_type'] == '') echo 'selected'; ?>> የሥራ አይነት </option>
+			            <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['job_type'] == 'አልተመረጠም') echo 'selected'; ?>> አልተመረጠም </option>
 			                    <?php foreach($job_types as $job_type) { ?>
-			                        <option value="<?= $job_type['job_type_id'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
+			                        <option value="<?= $job_type['job_type_title'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_title']) echo 'selected'; ?>> 
 			                          <?= $job_type['job_type_title']; ?> 
 			                        </option>
 			                    <?php } ?>
@@ -59,20 +60,23 @@
 			          </select>
 			          <select name="membership_level" class="s2">
 			            <option value="" <?php if($_SESSION['filtermember']['membership_level'] == NULL) echo 'selected'; ?>>የአባልነት ደረጃ</option>
+			            		<option value="">አልተመረጠም</option>
 			                    <?php foreach($membership_levels as $membership_level) { ?>
-			                      <option value="<?= $membership_level['membership_level_id']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $membership_level['membership_level_id']) echo 'selected'; ?>> 
+			                      <option value="<?= $membership_level['membership_level_title']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $membership_level['membership_level_title']) echo 'selected'; ?>> 
 			                        <?= $membership_level['membership_level_title']; ?> 
 			                      </option>
 			                    <?php } ?>
 			          </select>
 			          <select name="ministry" class="s2">
 			            <option value="" <?php if($_SESSION['filtermember']['ministry'] == NULL) echo 'selected'; ?>>የአገልግሎት ዘርፍ</option>
+
+                                <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['ministry'] == 'አልተመረጠም') echo 'selected'; ?>>አልተመረጠም</option>
 			                    <?php foreach($ministries as $ministry) { ?>
-			                      <option value="<?= $ministry['ministry_id']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
+			                      <option value="<?= $ministry['ministry_title']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_title']) echo 'selected'; ?>> 
 			                        <?= $ministry['ministry_title']; ?> 
 			                      </option>
 			                    <?php } ?>
-			          </select>
+			          </select><br><br>
 			            <input type="submit" name="submit" class="btn btn-primary btn-flat" value="አጣራ">
 			            <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning btn-flat"> ፍለጋውን አጥፋ </a><BR><BR>
 			          </td></tr>

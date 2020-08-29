@@ -169,7 +169,6 @@ class Member extends CI_Model {
 		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
 		$this->db->where('id', $id);
 		$this->db->from('members');
-		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
 		$res = $this->db->get();
 		$res = $res->result_array();
 		return  $res[0];
@@ -199,7 +198,6 @@ class Member extends CI_Model {
 	    	$this->db->where('TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) <', $eage);
 	    }
 		$this->db->from('members');
-		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
 		$data = $this->db->get();
 		return $data->result_array();			
 	}
@@ -223,9 +221,6 @@ class Member extends CI_Model {
 	    }
 		$this->db->order_by('firstname', 'ASC');
 		$this->db->from('members');
-		$this->db->join('membership_levels', 'members.membership_level = membership_levels.membership_level_id');
-		$this->db->join('membership_causes', 'members.membership_cause = membership_causes.membership_cause_id');
-		$this->db->join('ministries', 'members.ministry = ministries.ministry_id');
 		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
 		$data = $this->db->get();
 		return $data->result_array();					

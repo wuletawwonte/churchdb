@@ -21,7 +21,7 @@ class Mender extends CI_Model {
 	}
 
 	public function get_all() {
-		$data = $this->db->get('kifle_ketemas');
+		$data = $this->db->get('menders');
 		return $data->result_array();
 	}
 

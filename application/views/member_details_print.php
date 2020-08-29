@@ -112,7 +112,7 @@
 			<tr>
 				<td class="LabelColumn">የሥራ አይነት:</td>
 				<td width="10"></td>
-				<td class="TextColumnWithBottomBorder"><?= $member['job_type_title']?>&nbsp;</td>
+				<td class="TextColumnWithBottomBorder"><?= $member['job_type']?>&nbsp;</td>
 			</tr>
 			<tr>
 				<td class="LabelColumn">የመሥሪያ ቤቱ ስም:</td>
@@ -131,17 +131,17 @@
 			<tr>
 				<td class="LabelColumn">የአባልነት ደረጃ:</td>
 				<td width="10"></td>
-				<td class="TextColumn"><?= $member['membership_level_title']?>&nbsp;</td>
+				<td class="TextColumn"><?= $member['membership_level']?>&nbsp;</td>
 			</tr>
 			<tr>
 				<td class="LabelColumn">አባል የሆኑበት ሁኔታ:</td>
 				<td width="10"></td>
-				<td class="TextColumn"><?= $member['membership_cause_title']?>&nbsp;</td>
+				<td class="TextColumn"><?= $member['membership_cause']?>&nbsp;</td>
 			</tr>
 			<tr>
 				<td class="LabelColumn">የአገልግሎት ዘርፍ:</td>
 				<td width="10"></td>
-				<td class="TextColumn"><?= $member['ministry_title']?>&nbsp;</td>
+				<td class="TextColumn"><?= $member['ministry']?>&nbsp;</td>
 			</tr>
     	</table>
     </td>

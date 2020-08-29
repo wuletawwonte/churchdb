@@ -151,27 +151,30 @@
 
 	                    <div class="col-md-4">
 	                        <label> ክፍለ ከተማ: </label>
-	                        <select name="kifle_ketema" class="form-control s2">
+		                    <select name="kifle_ketema" id="kifle_ketema" class="form-control s2">
+	                        	<option value="" <?php if($member['kifle_ketema'] == '') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($kifle_ketemas as $kifle_ketema) { ?>
-		                        	<option value="<?= $kifle_ketema['kifle_ketema_id']?>" <?php if($member['kifle_ketema'] == $kifle_ketema['kifle_ketema_id']) echo 'selected'; ?> > <?= $kifle_ketema['kifle_ketema_title']; ?> </option>
+		                        	<option value="<?= $kifle_ketema['kifle_ketema_title']?>" <?php if($member['kifle_ketema'] == $kifle_ketema['kifle_ketema_title']) echo 'selected'; ?> > <?= $kifle_ketema['kifle_ketema_title']; ?> </option>
 		                        <?php } ?>
 	                        </select>
 	                    </div>
 
 	                    <div class="col-md-4">
 	                        <label> ቀበሌ: </label>
-	                        <select name="kebele" class="form-control s2">
+	                        <select name="kebele" id="kebele" class="form-control s2">
+	                        	<option value="" <?php if($member['kebele'] == '') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($kebeles as $kebele) { ?>
-		                        	<option value="<?= $kebele['kebele_id'] ?>" <?php if($member['kebele'] == $kebele['kebele_id']) echo 'selected'; ?> > <?= $kebele['kebele_title']; ?> </option>
+		                        	<option value="<?= $kebele['kebele_title'] ?>" <?php if($member['kebele'] == $kebele['kebele_title']) echo 'selected'; ?> > <?= $kebele['kebele_title']; ?> </option>
 		                        <?php } ?>
 	                        </select>
 	                    </div>
 
 	                    <div class="col-md-4">
 	                        <label> መንደር: </label>
-	                        <select name="mender" class="form-control s2">
+	                        <select name="mender" id="mender" class="form-control s2">
+	                        	<option value="" <?php if($member['mender'] == '') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($menders as $mender) { ?>
-		                        	<option value="<?= $mender['mender_id']; ?>" <?php if($member['mender'] == $mender['mender_id']) echo 'selected'; ?> > <?= $mender['mender_title']; ?> </option>
+		                        	<option value="<?= $mender['mender_title']; ?>" <?php if($member['mender'] == $mender['mender_title']) echo 'selected'; ?> > <?= $mender['mender_title']; ?> </option>
 		                        <?php } ?>
 	                        </select>
 	                    </div>
@@ -251,8 +254,9 @@
 	                    <div class="col-md-4">
 	                        <label> የሥራ መስክ: </label>
 	                        <select name="job_type" class="form-control s2">
+	                        	<option value="አልተመረጠም" <?php if($member['job_type'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
 				                <?php foreach($job_types as $job_type) { ?>
-			                        <option value="<?= $job_type['job_type_id'] ?>" <?php if($member['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
+			                        <option value="<?= $job_type['job_type_title'] ?>" <?php if($member['job_type'] == $job_type['job_type_title']) echo 'selected'; ?>> 
 			                          <?= $job_type['job_type_title']; ?> 
 			                        </option>
 			                    <?php } ?>
@@ -316,8 +320,9 @@
 	                    <div class="col-md-4">
 	                        <label> <?= lang('cause_of_membership'); ?>  :</label>
 	                        <select name="membership_cause" class="form-control s2">
+	                        	<option value="አልተመረጠም" <?php if($member['membership_cause'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($membership_causes as $membership_cause) { ?>
-		                        	<option <?php if($membership_cause['membership_cause_id'] == $member['membership_cause']){echo 'selected'; }?> value="<?= $membership_cause['membership_cause_id']; ?>"> 
+		                        	<option <?php if($membership_cause['membership_cause_title'] == $member['membership_cause']){echo 'selected'; }?> value="<?= $membership_cause['membership_cause_title']; ?>"> 
 		                        		<?= $membership_cause['membership_cause_title']; ?> 
 		                        	</option>
 		                        <?php } ?>
@@ -327,8 +332,9 @@
 	                    <div class="col-md-4">
 	                        <label> <?= lang('level_of_membership'); ?>  :</label>
 	                        <select name="membership_level" class="form-control s2">
+	                        	<option value="አልተመረጠም" <?php if($member['membership_level'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($membership_levels as $membership_level) { ?>
-		                        	<option <?php if($membership_level['membership_level_id'] == $member['membership_level']){echo 'selected'; }?> value="<?= $membership_level['membership_level_id']; ?>"> 
+		                        	<option <?php if($membership_level['membership_level_title'] == $member['membership_level']){echo 'selected'; }?> value="<?= $membership_level['membership_level_title']; ?>"> 
 		                        		<?= $membership_level['membership_level_title']; ?> 
 		                        	</option>
 		                        <?php } ?>
@@ -342,7 +348,7 @@
 	                        <label> የአገልግሎት ዘርፍ :</label>
 	                        <select name="ministry" class="form-control s2">
 	                        	<?php foreach($ministries as $ministry) { ?>
-		                        	<option <?php if($ministry['ministry_id'] == $member['ministry']){echo 'selected'; }?> value="<?= $ministry['ministry_id']; ?>"> 
+		                        	<option <?php if($ministry['ministry_title'] == $member['ministry']){echo 'selected'; }?> value="<?= $ministry['ministry_title']; ?>"> 
 		                        		<?= $ministry['ministry_title']; ?> 
 		                        	</option>
 		                        <?php } ?>
@@ -440,6 +446,44 @@
 	    });
 
 		$(".inputmasked").inputmask(); 
+
+
+
+	    $("#kifle_ketema").change(function(){
+	    	var kifle_ketema_title = $("#kifle_ketema").val();
+	    	if(kifle_ketema_title != '') {
+	    		$.ajax({
+	    			url: "<?php echo base_url(); ?>admin/fetch_kebeles",
+	    			method: "POST",
+	    			data: {kifle_ketema_title: kifle_ketema_title},
+	    			success: function(data) {
+	    				$("#kebele").html(data);
+			    		$("#mender").html('<option value="">አልተመረጠም</option>');
+	    			}
+	    		});
+	    	} else {
+	    		$("#kebele").html('<option value="">አልተመረጠም</option>');
+	    		$("#mender").html('<option value="">አልተመረጠም</option>');
+	    	}
+	    });
+
+	    $("#kebele").change(function(){
+	    	var kebele_title = $("#kebele").val();
+	    	if(kebele_title != ''){
+	    		$.ajax({
+	    			url: "<?php echo base_url(); ?>admin/fetch_menders",
+	    			method: "POST",
+	    			data:{kebele_title: kebele_title},
+	    			success: function(data) {
+	    				$("#mender").html(data);
+	    			}
+	    		});
+	    	} else {
+	    		$("#mender").html('<option value="">አልተመረጠም</option>');
+	    	}
+	    });
+
+
 	});
 </script>
 

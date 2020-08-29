@@ -247,6 +247,7 @@
 	                    <div class="col-md-4">
 	                        <label> የሥራ መስክ: </label>
 	                        <select name="job_type" class="form-control s2">
+	                        	<option value="አልተመረጠም">አልተመረጠም</option>
 	                        	<?php foreach($job_types as $job_type) { ?>
 		                            <option value="<?= $job_type['job_type_id'] ?>"> <?= $job_type['job_type_title']; ?> </option>
 		                        <?php } ?>
@@ -307,7 +308,7 @@
 	                    <div class="col-md-4">
 	                        <label> አባል የሆኑበት ሁኔታ :</label>
 	                        <select name="membership_cause" class="form-control s2">
-								<option value="">አልተመረጠም</option>
+								<option value="አልተመረጠም">አልተመረጠም</option>
 	                        	<?php foreach($membership_causes as $membership_cause) { ?>
 		                        	<option value="<?= $membership_cause['membership_cause_title']; ?>"> <?= $membership_cause['membership_cause_title']; ?> </option>
 		                        <?php } ?>
@@ -317,7 +318,7 @@
 	                    <div class="col-md-4">
 	                        <label> የአባልነት ደረጃ :</label>
 	                        <select name="membership_level" class="form-control s2">
-								<option value="">አልተመረጠም</option>
+								<option value="አልተመረጠም">አልተመረጠም</option>
 	                        	<?php foreach($membership_levels as $membership_level) { ?>
 		                        	<option value="<?= $membership_level['membership_level_title']; ?>"> <?= $membership_level['membership_level_title']; ?> </option>
 		                        <?php } ?>
@@ -330,7 +331,7 @@
 	                    <div class="col-md-4 ministries">
 	                        <label> የአገልግሎት ዘርፍ :</label>
 	                        <select name="ministry" class="form-control s2">
-	                        	<option value="">አልተመረጠም</option>
+	                        	<option value="አልተመረጠም">አልተመረጠም</option>
 	                        	<?php foreach($ministries as $ministry) { ?>
 		                        	<option value="<?= $ministry['ministry_title']; ?>"> <?= $ministry['ministry_title']; ?> </option>
 		                        <?php } ?>

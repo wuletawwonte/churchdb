@@ -330,8 +330,8 @@ class Admin extends CI_Controller {
 		$data['membership_levels'] = $this->membership_level->get_all();
 		$data['ministries'] = $this->ministry->get_all();
 		$data['kifle_ketemas'] = $this->kifle_ketema->get_all();
-		$data['kebeles'] = $this->kebele->get_all();
-		$data['menders'] = $this->mender->get_all();
+		$data['kebeles'] = $this->kebele->get_from_kifle_ketema($data['member']['kifle_ketema']);
+		$data['menders'] = $this->mender->get_from_kebele($data['member']['kebele']);
 		$this->load->view('templates/header', $data);
 		$this->load->view('edit_member_form');
 		$this->load->view('templates/footer');		
@@ -436,9 +436,9 @@ class Admin extends CI_Controller {
 			$objPHPExcel->getActiveSheet()->SetCellValue('K'. $rowCount, $member['workplace_name']);
 			$objPHPExcel->getActiveSheet()->SetCellValue('L'. $rowCount, $member['workplace_phone']);
 			$objPHPExcel->getActiveSheet()->SetCellValue('M'. $rowCount, $member['membership_year']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('N'. $rowCount, $member['membership_cause_title']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('O'. $rowCount, $member['membership_level_title']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('P'. $rowCount, $member['ministry_title']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('N'. $rowCount, $member['membership_cause']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('O'. $rowCount, $member['membership_level']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('P'. $rowCount, $member['ministry']);
 			$objPHPExcel->getActiveSheet()->SetCellValue('Q'. $rowCount, $member['marital_status']);
 			$rowCount++;
 		}
@@ -766,8 +766,11 @@ class Admin extends CI_Controller {
 	}
 
 	public function membersexport() {
-		$data['age_groups'] = $this->age_group->get_all();
 		$data['active_menu'] = "membersexport";
+		$data['age_groups'] = $this->age_group->get_all();
+		$data['membership_levels'] = $this->membership_level->get_all();
+		$data['ministries'] = $this->ministry->get_all();
+		$data['job_types'] = $this->job_type->get_all();
 		$this->load->view('templates/header', $data);
 		$this->load->view('export_members');
 		$this->load->view('templates/footer');											

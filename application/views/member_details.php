@@ -196,7 +196,7 @@
                                     <dt> ኢሜል </dt>
                                     <dd> <?= $member['email']?> </dd>
                                     <dt> የሥራ አይነት </dt>
-                                    <dd> <?= $member['job_type_title']?> </dd>
+                                    <dd> <?= $member['job_type']?> </dd>
                                     <dt> የመሥሪያ ቤቱ ስም </dt>
                                     <dd> <?= $member['workplace_name']?> </dd>
                                     <dt> የመሥሪያ ቤት ስልክ ቁጥር </dt>

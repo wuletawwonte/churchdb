@@ -89,16 +89,17 @@
                         </select>
 
                         <select name="job_type" class="s2">
-                            <option value="" <?php if($_SESSION['filtermember']['job_type'] == '') echo 'selected'; ?>> የሥራ አይነት </option>
+                            <option value="" <?php if($_SESSION['filtermember']['job_type'] == NULL) echo 'selected'; ?>> የሥራ አይነት </option>                                    
+                                    <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['job_type'] == 'አልተመረጠም') echo 'selected'; ?>>አልተመረጠም</option>
                                     <?php foreach($job_types as $job_type) { ?>
-                                        <option value="<?= $job_type['job_type_id'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
+                                        <option value="<?= $job_type['job_type_title'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_title']) echo 'selected'; ?>> 
                                           <?= $job_type['job_type_title']; ?> 
                                         </option>
                                     <?php } ?>
                         </select>
                         
                         <select name="marital_status" class="s2">
-                            <option value="" <?php if($_SESSION['filtermember']['marital_status'] == '') echo 'selected'; ?>> የጋብቻ ሁኔታ </option>
+                            <option value="" <?php if($_SESSION['filtermember']['marital_status'] == NULL) echo 'selected'; ?>> የጋብቻ ሁኔታ </option>
                                     <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['marital_status'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
                                     <option value="0" disabled>-----------------------</option>
                                     <option value="ያላገባ/ች" <?php if($_SESSION['filtermember']['marital_status'] == 'ያላገባ/ች') echo 'selected'; ?> > ያላገባ/ች </option>
@@ -109,6 +110,7 @@
                           
                         <select name="membership_level" class="s2">
                             <option value="" <?php if($_SESSION['filtermember']['membership_level'] == NULL) echo 'selected'; ?>>የአባልነት ደረጃ</option>
+                                    <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['membership_level'] == 'አልተመረጠም') echo 'selected'; ?>>አልተመረጠም</option>
                                     <?php foreach($membership_levels as $level) { ?>
                                       <option value="<?= $level['membership_level_title']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $level['membership_level_title']) echo 'selected'; ?>> 
                                         <?= $level['membership_level_title']; ?> 
@@ -118,8 +120,9 @@
                           
                         <select name="ministry" class="s2">
                             <option value="" <?php if($_SESSION['filtermember']['ministry'] == NULL) echo 'selected'; ?>>የአገልግሎት ዘርፍ</option>
+                                    <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['ministry'] == 'አልተመረጠም') echo 'selected'; ?>>አልተመረጠም</option>
                                     <?php foreach($ministries as $ministry) { ?>
-                                      <option value="<?= $ministry['ministry_title']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
+                                      <option value="<?= $ministry['ministry_title']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_title']) echo 'selected'; ?>> 
                                         <?= $ministry['ministry_title']; ?> 
                                       </option>
                                     <?php } ?>
@@ -216,7 +219,7 @@
                         <td><span><?= $member['home_phone']?></span></td>
                         <td><span><?= $member['level_of_education']?></span></td>
                         <td><span><?= $member['field_of_study']?></span></td>
-                        <td><span><?= $member['job_type_title']?></span></td>
+                        <td><span><?= $member['job_type']?></span></td>
                         <td><span><?= $member['workplace_name']?></span></td>
                         <td><span><?= $member['workplace_phone']?></span></td>
                         <td><span><?= $member['monthly_income']?></span></td>
