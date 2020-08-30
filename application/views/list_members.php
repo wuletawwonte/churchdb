@@ -210,7 +210,6 @@
                         <td>
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'hidden'; } ?> href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a onclick=""><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                         <td><span><?= $member['kifle_ketema']?></span></td>
                         <td><span><?= $member['kebele']?></span></td>

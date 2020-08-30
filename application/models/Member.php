@@ -284,9 +284,9 @@ class Member extends CI_Model {
 	public function membership_level_count() {
 		$result = $this->db->get('membership_levels')->result_array();
 		$this->db->where('status', 'ያለ');
-		$this->db->where('membership_level', NULL)->or_where('membership_level', '');
+		$this->db->where('membership_level', 'አልተመረጠም')->or_where('membership_level', '');
 		$resCount = $this->db->get('members')->num_rows();
-		$data = [array('title' => "አልተረጠም",'count' => $resCount,'color' => '#D3D3D3')];
+		$data = [array('title' => "አልተመረጠም",'count' => $resCount,'color' => '#D3D3D3')];
 		$colors = array('#001f3f', '#00a65a', '#0073b7', '#39cccc', '#f39c12', '#ff851b' , '#01ff70', '#dd4b39', '#605ca8', '#f012be', '#777777');	
 
 		$index = 0;
