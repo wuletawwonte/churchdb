@@ -80,7 +80,7 @@
                 <ul class="fa-ul">
                     <li><i class="fa-li fa fa-user"></i>የጋብቻ ሁኔታ: <?= $member['marital_status']?></li>
                     <?php if($member['spouse'] != NULL) { ?>
-                        <li><i class="fa-li fa fa-user"></i>የትዳር አጋር: <?= $member['spouse_name']?></li>
+                        <li><i class="fa-li fa fa-user"></i>የትዳር አጋር: <a href="<?= base_url(); ?>admin/memberdetails/<?= $member['spouse_id']; ?>"><?= $member['spouse_name']?></a></li>
                     <?php } ?>
                     <li><i class="fa-li fa fa-calendar"></i>የትውልድ ቀን: <?= $member['birthdate']; ?></li>
                     <?php if(!$member['hide_age']) { ?> 

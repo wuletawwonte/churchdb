@@ -155,6 +155,8 @@
                     <th>የትውልድ ስፍራ</th>
                     <th>የሞባይል ስልክ ቁጥር</th>
                     <th>ኢሜል</th>
+                    <th>የጋብቻ ሁኔታ</th>
+                    <th>የትዳር አጋር</th>
                     <th>የተመዘገበበት</th>
                     <th data-priority="4" >ስራዎች</th>
                     <th>ክፍለ ከተማ</th>
@@ -206,6 +208,8 @@
                         <td><span><?= $member['birth_place']?></span></td>
                         <td><span><?= $member['mobile_phone']?></span></td>
                         <td><span><?= $member['email']?></span></td>
+                        <td><span><?= $member['marital_status']?></span></td>
+                        <td><span><?php if($member['spouse'] != NULL) { echo $member['spouse_name']; } ?></span></td>
                         <td><span><?= nice_date($member['created'], 'M d, Y')?></span></td>
                         <td>
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;

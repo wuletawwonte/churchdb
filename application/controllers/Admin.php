@@ -417,19 +417,23 @@ class Admin extends CI_Controller {
 		$objPHPExcel->getActiveSheet()->SetCellValue('B1', 'የአባት ስም');
 		$objPHPExcel->getActiveSheet()->SetCellValue('C1', 'የአያት ስም');
 		$objPHPExcel->getActiveSheet()->SetCellValue('D1', 'ፆታ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('E1', 'የተወለዱበት ቀን');
-		$objPHPExcel->getActiveSheet()->SetCellValue('F1', 'እድሜ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('G1', 'የትውልድ ሥፍራ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('H1', 'የሞባይል ስልክ ቁጥር');
-		$objPHPExcel->getActiveSheet()->SetCellValue('I1', 'ኢሜል');
-		$objPHPExcel->getActiveSheet()->SetCellValue('J1', 'የሥራ አይነት');
-		$objPHPExcel->getActiveSheet()->SetCellValue('K1', 'የመሥሪያ ቤቱ ስም');
-		$objPHPExcel->getActiveSheet()->SetCellValue('L1', 'የመሥሪያ ቤት ስልክ ቁጥር');
-		$objPHPExcel->getActiveSheet()->SetCellValue('M1', 'የቤተክርስትያኒቱ አባል የሆኑበት ዘመን');
-		$objPHPExcel->getActiveSheet()->SetCellValue('N1', 'የቤተክርስትያኒቱ አባል የሆኑበት ሁኔታ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('O1', 'በቤተክርስትያኒቱ የአባልነት ደረጃ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('P1', 'የአገልግሎት ዘርፍ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'የጋብቻ ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('E1', 'ክፍለ ከተማ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('F1', 'ቀበሌ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('G1', 'መንደር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('H1', 'የተወለዱበት ቀን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('I1', 'እድሜ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('J1', 'የትውልድ ሥፍራ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('K1', 'የሞባይል ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('L1', 'ኢሜል');
+		$objPHPExcel->getActiveSheet()->SetCellValue('M1', 'የሥራ አይነት');
+		$objPHPExcel->getActiveSheet()->SetCellValue('N1', 'የመሥሪያ ቤቱ ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('O1', 'የመሥሪያ ቤት ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('P1', 'የቤተክርስትያኒቱ አባል የሆኑበት ዘመን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'የቤተክርስትያኒቱ አባል የሆኑበት ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('R1', 'በቤተክርስትያኒቱ የአባልነት ደረጃ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('S1', 'የአገልግሎት ዘርፍ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('T1', 'የጋብቻ ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('U1', 'የትዳር አጋር');
 
 		$rowCount = 2; 
 		foreach ($members as $member) {
@@ -437,19 +441,23 @@ class Admin extends CI_Controller {
 			$objPHPExcel->getActiveSheet()->SetCellValue('B'. $rowCount, $member['middlename']);
 			$objPHPExcel->getActiveSheet()->SetCellValue('C'. $rowCount, $member['lastname']);
 			$objPHPExcel->getActiveSheet()->SetCellValue('D'. $rowCount, $member['gender']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('E'. $rowCount, $member['birthdate']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('F'. $rowCount, $member['age']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('G'. $rowCount, $member['birth_place']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('H'. $rowCount, $member['mobile_phone']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('I'. $rowCount, $member['email']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('J'. $rowCount, $member['job_type_title']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('K'. $rowCount, $member['workplace_name']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('L'. $rowCount, $member['workplace_phone']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('M'. $rowCount, $member['membership_year']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('N'. $rowCount, $member['membership_cause']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('O'. $rowCount, $member['membership_level']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('P'. $rowCount, $member['ministry']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('Q'. $rowCount, $member['marital_status']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('E'. $rowCount, $member['kifle_ketema']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('F'. $rowCount, $member['kebele']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('G'. $rowCount, $member['mender']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('H'. $rowCount, $member['birthdate']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('I'. $rowCount, $member['age']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('J'. $rowCount, $member['birth_place']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('K'. $rowCount, $member['mobile_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('L'. $rowCount, $member['email']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('M'. $rowCount, $member['job_type']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('N'. $rowCount, $member['workplace_name']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('O'. $rowCount, $member['workplace_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('P'. $rowCount, $member['membership_year']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('Q'. $rowCount, $member['membership_cause']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('R'. $rowCount, $member['membership_level']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('S'. $rowCount, $member['ministry']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('T'. $rowCount, $member['marital_status']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('U'. $rowCount, $member['spouse_name']);
 			$rowCount++;
 		}
 
@@ -478,19 +486,23 @@ class Admin extends CI_Controller {
 		$objPHPExcel->getActiveSheet()->SetCellValue('B1', 'የአባት ስም');
 		$objPHPExcel->getActiveSheet()->SetCellValue('C1', 'የአያት ስም');
 		$objPHPExcel->getActiveSheet()->SetCellValue('D1', 'ፆታ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('E1', 'የተወለዱበት ቀን');
-		$objPHPExcel->getActiveSheet()->SetCellValue('F1', 'እድሜ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('G1', 'የትውልድ ሥፍራ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('H1', 'የሞባይል ስልክ ቁጥር');
-		$objPHPExcel->getActiveSheet()->SetCellValue('I1', 'ኢሜል');
-		$objPHPExcel->getActiveSheet()->SetCellValue('J1', 'የሥራ አይነት');
-		$objPHPExcel->getActiveSheet()->SetCellValue('K1', 'የመሥሪያ ቤቱ ስም');
-		$objPHPExcel->getActiveSheet()->SetCellValue('L1', 'የመሥሪያ ቤት ስልክ ቁጥር');
-		$objPHPExcel->getActiveSheet()->SetCellValue('M1', 'የቤተክርስትያኒቱ አባል የሆኑበት ዘመን');
-		$objPHPExcel->getActiveSheet()->SetCellValue('N1', 'የቤተክርስትያኒቱ አባል የሆኑበት ሁኔታ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('O1', 'በቤተክርስትያኒቱ የአባልነት ደረጃ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('P1', 'የአገልግሎት ዘርፍ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'የጋብቻ ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('E1', 'ክፍለ ከተማ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('F1', 'ቀበሌ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('G1', 'መንደር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('H1', 'የተወለዱበት ቀን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('I1', 'እድሜ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('J1', 'የትውልድ ሥፍራ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('K1', 'የሞባይል ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('L1', 'ኢሜል');
+		$objPHPExcel->getActiveSheet()->SetCellValue('M1', 'የሥራ አይነት');
+		$objPHPExcel->getActiveSheet()->SetCellValue('N1', 'የመሥሪያ ቤቱ ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('O1', 'የመሥሪያ ቤት ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('P1', 'የቤተክርስትያኒቱ አባል የሆኑበት ዘመን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'የቤተክርስትያኒቱ አባል የሆኑበት ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('R1', 'በቤተክርስትያኒቱ የአባልነት ደረጃ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('S1', 'የአገልግሎት ዘርፍ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('T1', 'የጋብቻ ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('U1', 'የትዳር አጋር');
 
 		$rowCount = 2; 
 		foreach ($members as $member) {
@@ -498,19 +510,23 @@ class Admin extends CI_Controller {
 			$objPHPExcel->getActiveSheet()->SetCellValue('B'. $rowCount, $member['middlename']);
 			$objPHPExcel->getActiveSheet()->SetCellValue('C'. $rowCount, $member['lastname']);
 			$objPHPExcel->getActiveSheet()->SetCellValue('D'. $rowCount, $member['gender']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('E'. $rowCount, $member['birthdate']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('F'. $rowCount, $member['age']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('G'. $rowCount, $member['birth_place']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('H'. $rowCount, $member['mobile_phone']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('I'. $rowCount, $member['email']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('J'. $rowCount, $member['job_type_title']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('K'. $rowCount, $member['workplace_name']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('L'. $rowCount, $member['workplace_phone']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('M'. $rowCount, $member['membership_year']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('N'. $rowCount, $member['membership_cause']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('O'. $rowCount, $member['membership_level']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('P'. $rowCount, $member['ministry']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('Q'. $rowCount, $member['marital_status']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('E'. $rowCount, $member['kifle_ketema']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('F'. $rowCount, $member['kebele']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('G'. $rowCount, $member['mender']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('H'. $rowCount, $member['birthdate']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('I'. $rowCount, $member['age']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('J'. $rowCount, $member['birth_place']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('K'. $rowCount, $member['mobile_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('L'. $rowCount, $member['email']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('M'. $rowCount, $member['job_type']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('N'. $rowCount, $member['workplace_name']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('O'. $rowCount, $member['workplace_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('P'. $rowCount, $member['membership_year']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('Q'. $rowCount, $member['membership_cause']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('R'. $rowCount, $member['membership_level']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('S'. $rowCount, $member['ministry']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('T'. $rowCount, $member['marital_status']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('U'. $rowCount, $member['spouse_name']);
 			$rowCount++;
 		}
 
@@ -1148,6 +1164,17 @@ class Admin extends CI_Controller {
 			redirect('admin/editministries');
 		}										
 	}
+
+	public function permanentdeletemember($id) {
+		if($this->member->permanent_delete($id)) {
+			$this->session->set_flashdata('success', 'የምዕመን መረጃ በትክክል ጠፍቷል።');
+			redirect('admin/recyclebin');
+		} else {
+			$this->session->set_flashdata('error', 'የምዕመን መረጃ ማጥፋት አልተቻለም።');
+			redirect('admin/recyclebin');
+		}												
+	}
+
 
 
 

@@ -21,6 +21,19 @@
 
     <!-- Main content -->
     <section class="content container-fluid">
+
+         <?php if($this->session->flashdata('success')) { ?>
+            <div class="callout callout-info">
+                <?php echo $this->session->flashdata('success'); ?>
+            </div>
+        <?php } else if($this->session->flashdata('error')) { ?>
+            <div class="callout callout-danger">
+                <?php echo $this->session->flashdata('error'); ?>
+            </div>
+        <?php } ?>
+
+
+
     	<div class="box box-primary">
     		<div class="box-header with-border">
     			<h3 class="box-title">የምዕመናኑ ዝርዝር</h3>
@@ -43,7 +56,31 @@
                                 <td><a href="<?= base_url()?>admin/memberdetails/<?= $member['id']; ?>"><?= $member['firstname'].' '.$member['middlename']?></td></a>
                                 <td><span class="label <?php if($member['status'] == 'የጠፋ') { echo 'label-danger'; } else if($member['status'] == 'የሌለ') { echo 'label-warning'; } ?>"><?= $member['status']?></span></td>
                                 <td><?= nice_date($member['created'], 'M d, Y'); ?></td>
-                                <td><a class="btn btn-danger btn-xs" href="#"><i class="fa fa-trash"></i></a></td>
+                                <td>
+
+
+                                    <a data-toggle="modal" class="btn btn-danger btn-xs" href="#deleteMember<?= $member['id']; ?>" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+
+
+                                    <div id="deleteMember<?= $member['id']?>" class="modal modal-danger fade" role="dialog">
+                                      <div class="modal-dialog modal-sm">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                          <div class="modal-header" align="left">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>መልሶ ማስተካከል አይቻልም</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">አይ</button>
+                                            <a href="<?= base_url(); ?>admin/permanentdeletemember/<?= $member['id']; ?>" class="btn btn-danger">አዎ</a>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>          
+
+                                </td>
                             </tr>
                         <?php } } ?>
                     </tbody>

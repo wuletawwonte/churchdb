@@ -166,9 +166,8 @@ class Member extends CI_Model {
 	}
 
 	public function get_one($id = NULL) {
-		$this->db->select('m.*, TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) AS age, m2.id spouse_id, CONCAT(m2.firstname, " ", m2.lastname) AS spouse_name ');
+		$this->db->select('m.*, TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) AS age, m2.id spouse_id, CONCAT(m2.firstname, " ", m2.middlename) AS spouse_name ');
 		$this->db->where('m.id', $id);
-		// $this->db->from('members m, members m2');
 		$this->db->join('members m2', 'm.spouse = m2.id', 'LEFT');
 		$res = $this->db->get('members m');
 
@@ -178,8 +177,8 @@ class Member extends CI_Model {
 
 	public function get_filtered_sorted($sage=NULL, $eage=NULL) {
 		$this->load->model('age_group');
-		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
-		$this->db->where('status', 'ያለ');
+		$this->db->select('m.*, TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) AS age, m2.id spouse_id, CONCAT(m2.firstname, " ", m2.middlename) AS spouse_name ');
+		$this->db->where('m.status', 'ያለ');
 	    if($_SESSION['filtermember']['gender'] != NULL) {
 	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
 	    }
@@ -199,14 +198,15 @@ class Member extends CI_Model {
 	    	$this->db->where('TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) >', $sage);
 	    	$this->db->where('TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) <', $eage);
 	    }
-		$this->db->from('members');
-		$data = $this->db->get();
+
+		$this->db->join('members m2', 'm.spouse = m2.id', 'LEFT');
+		$data = $this->db->get('members m');
 		return $data->result_array();			
 	}
 
 	public function get_members_for_export() {
-		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
-	    if($_SESSION['filtermember']['gender'] != NULL) {
+		$this->db->select('m.*, TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) AS age, m2.id spouse_id, CONCAT(m2.firstname, " ", m2.middlename) AS spouse_name ');	    
+		if($_SESSION['filtermember']['gender'] != NULL) {
 	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
 	    }
 	    if($_SESSION['filtermember']['job_type'] != NULL) {
@@ -222,9 +222,9 @@ class Member extends CI_Model {
 	    	$this->db->where('marital_status', $_SESSION['filtermember']['marital_status']);
 	    }
 		$this->db->order_by('firstname', 'ASC');
-		$this->db->from('members');
-		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
-		$data = $this->db->get();
+
+		$this->db->join('members m2', 'm.spouse = m2.id', 'LEFT');
+		$data = $this->db->get('members m');
 		return $data->result_array();					
 	}
 
@@ -345,6 +345,15 @@ class Member extends CI_Model {
 		$data = $this->db->get('members');
 
 		return $data->result_array();
+	}
+
+	public function permanent_delete($id) {
+		$this->db->where('id', $id);
+		$this->db->delete('members');
+		$this->db->where('spouse', $id);
+		$this->db->update('members', array('spouse' => NULL));
+
+		return true;
 	}
 
 
