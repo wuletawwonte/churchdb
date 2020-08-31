@@ -6,6 +6,7 @@ class Member extends CI_Model {
 	public function __construct() {
 		parent::__construct();
 		
+		$this->load->model('kifle_ketema','kebele','mender');
 	}
 
 	public function add($avatar) {
@@ -150,6 +151,7 @@ class Member extends CI_Model {
 	}
 
 	public function latest_members(){
+		$this->db->where('status', 'ያለ');
 		$this->db->limit(12);
 		$this->db->order_by('created', 'DESC');
 		$res = $this->db->get('members')->result_array();
@@ -157,29 +159,26 @@ class Member extends CI_Model {
 	}
 
 	public function record_count() {
-		return $this->db->count_all('members');
+		$this->db->where('status', 'ያለ');
+		$res = $this->db->get('members');
+		return $res->num_rows();
+		// return $this->db->count_all('members');
 	}
 
 	public function get_one($id = NULL) {
-		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
-		$this->db->from('members');
-		$this->db->where('id', $id);
-		$this->db->join('membership_levels', 'members.membership_level = membership_levels.membership_level_id');
-		$this->db->join('membership_causes', 'members.membership_cause = membership_causes.membership_cause_id');
-		$this->db->join('ministries', 'members.ministry = ministries.ministry_id');
-		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
-		$this->db->join('kifle_ketemas', 'members.kifle_ketema = kifle_ketemas.kifle_ketema_id');
-		$this->db->join('kebeles', 'members.kebele = kebeles.kebele_id');
-		$this->db->join('menders', 'members.mender = menders.mender_id');
-		$res = $this->db->get();
+		$this->db->select('m.*, TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) AS age, m2.id spouse_id, CONCAT(m2.firstname, " ", m2.middlename) AS spouse_name ');
+		$this->db->where('m.id', $id);
+		$this->db->join('members m2', 'm.spouse = m2.id', 'LEFT');
+		$res = $this->db->get('members m');
+
 		$res = $res->result_array();
 		return  $res[0];
 	}
 
 	public function get_filtered_sorted($sage=NULL, $eage=NULL) {
 		$this->load->model('age_group');
-		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
-		$this->db->where('status', 'ያለ');
+		$this->db->select('m.*, TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) AS age, m2.id spouse_id, CONCAT(m2.firstname, " ", m2.middlename) AS spouse_name ');
+		$this->db->where('m.status', 'ያለ');
 	    if($_SESSION['filtermember']['gender'] != NULL) {
 	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
 	    }
@@ -199,21 +198,15 @@ class Member extends CI_Model {
 	    	$this->db->where('TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) >', $sage);
 	    	$this->db->where('TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) <', $eage);
 	    }
-		$this->db->from('members');
-		$this->db->join('membership_levels', 'members.membership_level = membership_levels.membership_level_id');
-		$this->db->join('membership_causes', 'members.membership_cause = membership_causes.membership_cause_id');
-		$this->db->join('ministries', 'members.ministry = ministries.ministry_id');
-		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
-		$this->db->join('kifle_ketemas', 'members.kifle_ketema = kifle_ketemas.kifle_ketema_id');
-		$this->db->join('kebeles', 'members.kebele = kebeles.kebele_id');
-		$this->db->join('menders', 'members.mender = menders.mender_id');
-		$data = $this->db->get();
+
+		$this->db->join('members m2', 'm.spouse = m2.id', 'LEFT');
+		$data = $this->db->get('members m');
 		return $data->result_array();			
 	}
 
 	public function get_members_for_export() {
-		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
-	    if($_SESSION['filtermember']['gender'] != NULL) {
+		$this->db->select('m.*, TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) AS age, m2.id spouse_id, CONCAT(m2.firstname, " ", m2.middlename) AS spouse_name ');	    
+		if($_SESSION['filtermember']['gender'] != NULL) {
 	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
 	    }
 	    if($_SESSION['filtermember']['job_type'] != NULL) {
@@ -229,12 +222,9 @@ class Member extends CI_Model {
 	    	$this->db->where('marital_status', $_SESSION['filtermember']['marital_status']);
 	    }
 		$this->db->order_by('firstname', 'ASC');
-		$this->db->from('members');
-		$this->db->join('membership_levels', 'members.membership_level = membership_levels.membership_level_id');
-		$this->db->join('membership_causes', 'members.membership_cause = membership_causes.membership_cause_id');
-		$this->db->join('ministries', 'members.ministry = ministries.ministry_id');
-		$this->db->join('job_types', 'members.job_type = job_types.job_type_id');
-		$data = $this->db->get();
+
+		$this->db->join('members m2', 'm.spouse = m2.id', 'LEFT');
+		$data = $this->db->get('members m');
 		return $data->result_array();					
 	}
 
@@ -282,9 +272,11 @@ class Member extends CI_Model {
 	}
 
 	public function gender_count() {		
+		$this->db->where('status', 'ያለ');
 		$this->db->where('gender', 'ወንድ');
 		$data['male'] = $this->db->get('members')->num_rows();
 
+		$this->db->where('status', 'ያለ');
 		$this->db->where('gender', 'ሴት');
 		$data['female'] = $this->db->get('members')->num_rows();
 
@@ -293,12 +285,16 @@ class Member extends CI_Model {
 
 	public function membership_level_count() {
 		$result = $this->db->get('membership_levels')->result_array();
-		$data = [];
+		$this->db->where('status', 'ያለ');
+		$this->db->where('membership_level', 'አልተመረጠም')->or_where('membership_level', '');
+		$resCount = $this->db->get('members')->num_rows();
+		$data = [array('title' => "አልተመረጠም",'count' => $resCount,'color' => '#D3D3D3')];
 		$colors = array('#001f3f', '#00a65a', '#0073b7', '#39cccc', '#f39c12', '#ff851b' , '#01ff70', '#dd4b39', '#605ca8', '#f012be', '#777777');	
 
 		$index = 0;
 		foreach($result as $res) {
-			$this->db->where('membership_level', $res['membership_level_id']);
+			$this->db->where('status', 'ያለ');
+			$this->db->where('membership_level', $res['membership_level_title']);
 			$count = $this->db->get('members')->num_rows();
 			$arrayRecord = array(
 				'title' => $res['membership_level_title'], 
@@ -341,7 +337,30 @@ class Member extends CI_Model {
 		return $res->result_array();
 	}
 
+	public function get_gender_specific($gender) {
+		$this->db->where('status', 'ያለ');
+		$this->db->where('marital_status', 'ያላገባ/ች');
+		$this->db->or_where('marital_status', 'አልተመረጠም');
+		$this->db->where('gender !=', $gender);
+		$data = $this->db->get('members');
+
+		return $data->result_array();
+	}
+
+	public function permanent_delete($id) {
+		$this->db->where('id', $id);
+		$this->db->delete('members');
+		$this->db->where('spouse', $id);
+		$this->db->update('members', array('spouse' => NULL));
+
+		return true;
+	}
+
+
 
 
 
 }
+
+
+

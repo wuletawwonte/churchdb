@@ -12,10 +12,6 @@
 
     <section class="content">
         <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">ሪፖርት ማዘዣ</h3>
-            </div>
-
            	<div class="box-body">
 
 
@@ -42,8 +38,9 @@
 
 			          <select name="job_type" class="s2">
 			            <option value="" <?php if($_SESSION['filtermember']['job_type'] == '') echo 'selected'; ?>> የሥራ አይነት </option>
+			            <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['job_type'] == 'አልተመረጠም') echo 'selected'; ?>> አልተመረጠም </option>
 			                    <?php foreach($job_types as $job_type) { ?>
-			                        <option value="<?= $job_type['job_type_id'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
+			                        <option value="<?= $job_type['job_type_title'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_title']) echo 'selected'; ?>> 
 			                          <?= $job_type['job_type_title']; ?> 
 			                        </option>
 			                    <?php } ?>
@@ -59,20 +56,23 @@
 			          </select>
 			          <select name="membership_level" class="s2">
 			            <option value="" <?php if($_SESSION['filtermember']['membership_level'] == NULL) echo 'selected'; ?>>የአባልነት ደረጃ</option>
+			            		<option value="">አልተመረጠም</option>
 			                    <?php foreach($membership_levels as $membership_level) { ?>
-			                      <option value="<?= $membership_level['membership_level_id']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $membership_level['membership_level_id']) echo 'selected'; ?>> 
+			                      <option value="<?= $membership_level['membership_level_title']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $membership_level['membership_level_title']) echo 'selected'; ?>> 
 			                        <?= $membership_level['membership_level_title']; ?> 
 			                      </option>
 			                    <?php } ?>
 			          </select>
 			          <select name="ministry" class="s2">
 			            <option value="" <?php if($_SESSION['filtermember']['ministry'] == NULL) echo 'selected'; ?>>የአገልግሎት ዘርፍ</option>
+
+                                <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['ministry'] == 'አልተመረጠም') echo 'selected'; ?>>አልተመረጠም</option>
 			                    <?php foreach($ministries as $ministry) { ?>
-			                      <option value="<?= $ministry['ministry_id']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
+			                      <option value="<?= $ministry['ministry_title']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_title']) echo 'selected'; ?>> 
 			                        <?= $ministry['ministry_title']; ?> 
 			                      </option>
 			                    <?php } ?>
-			          </select>
+			          </select><br><br>
 			            <input type="submit" name="submit" class="btn btn-primary btn-flat" value="አጣራ">
 			            <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning btn-flat"> ፍለጋውን አጥፋ </a><BR><BR>
 			          </td></tr>
@@ -96,6 +96,74 @@
             </div>
 
         </div>
+
+
+         <?php if($this->session->flashdata('success')) { ?>
+            <div class="callout callout-info">
+                <?php echo $this->session->flashdata('success'); ?>
+            </div>
+        <?php } else if($this->session->flashdata('error')) { ?>
+            <div class="callout callout-danger">
+                <?php echo $this->session->flashdata('error'); ?>
+            </div>
+        <?php } ?>
+
+
+
+        <div class="box box-primary">
+
+
+            <div class="box-header with-border">
+                <h3 class="box-title">ሪፖርት ማዘዣ</h3>
+            </div>
+
+           	<div class="box-body">
+           		<div style="text-align: center;">
+	           		<a href="<?= base_url(); ?>admin/export_members_excel_backup" class="btn btn-flat btn-lg btn-primary">ሪፖርት አዘጋጅ</a>
+        		</div>
+        		<div>
+        			<br>
+	                <table class="table table-bordered table-hover">
+	                	<thead>
+	                		<tr>
+		                		<th>ቀን</th>
+		                		<th style="text-align: center;">ተግባራት</th>
+	                		</tr>
+	                	</thead>
+	                    <?php foreach($export_backups as $backup) { ?>
+	                        <tr>
+	                        	<td><?= $backup['title']?></td>
+	                        	<td style="text-align: center;">
+	                        		<a href="<?= base_url(); ?>download/<?= $backup['filename']; ?>" ><i class="fa fa-download"  style="color: #00c0ef;" aria-hidden="true"></i></a>
+	                        		<a data-toggle="modal" href="#deleteBackup<?= $backup['id']; ?>" ><i class="fa fa-trash"  style="color: #dd4b39;" aria-hidden="true"></i></a>
+
+
+                                    <div id="deleteBackup<?= $backup['id']?>" class="modal modal-danger fade" role="dialog">
+                                      <div class="modal-dialog modal-sm">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                          <div class="modal-header" align="left">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>መልሶ ማስተካከል አይቻልም</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">አይ</button>
+                                            <a href="<?= base_url(); ?>admin/deletemembersbackup/<?= $backup['id']; ?>" class="btn btn-danger">አዎ</a>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>                            
+
+
+	                        	</td>
+	                        </tr>
+	                    <?php } ?>
+	                </table>
+        		</div>
+	        </div>
+	    </div>
     
 
 

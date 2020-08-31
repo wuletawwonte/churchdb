@@ -14,7 +14,7 @@
         border: 2px solid #d2d6de;
         font-size: 20px;
         color: #fff;
-        line-height: 52px;
+        line-height: 60px;
         text-align: center;
         margin: 0 0; 
     }
@@ -89,16 +89,17 @@
                         </select>
 
                         <select name="job_type" class="s2">
-                            <option value="" <?php if($_SESSION['filtermember']['job_type'] == '') echo 'selected'; ?>> የሥራ አይነት </option>
+                            <option value="" <?php if($_SESSION['filtermember']['job_type'] == NULL) echo 'selected'; ?>> የሥራ አይነት </option>                                    
+                                    <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['job_type'] == 'አልተመረጠም') echo 'selected'; ?>>አልተመረጠም</option>
                                     <?php foreach($job_types as $job_type) { ?>
-                                        <option value="<?= $job_type['job_type_id'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_id']) echo 'selected'; ?>> 
+                                        <option value="<?= $job_type['job_type_title'] ?>" <?php if($_SESSION['filtermember']['job_type'] == $job_type['job_type_title']) echo 'selected'; ?>> 
                                           <?= $job_type['job_type_title']; ?> 
                                         </option>
                                     <?php } ?>
                         </select>
                         
                         <select name="marital_status" class="s2">
-                            <option value="" <?php if($_SESSION['filtermember']['marital_status'] == '') echo 'selected'; ?>> የጋብቻ ሁኔታ </option>
+                            <option value="" <?php if($_SESSION['filtermember']['marital_status'] == NULL) echo 'selected'; ?>> የጋብቻ ሁኔታ </option>
                                     <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['marital_status'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
                                     <option value="0" disabled>-----------------------</option>
                                     <option value="ያላገባ/ች" <?php if($_SESSION['filtermember']['marital_status'] == 'ያላገባ/ች') echo 'selected'; ?> > ያላገባ/ች </option>
@@ -109,24 +110,31 @@
                           
                         <select name="membership_level" class="s2">
                             <option value="" <?php if($_SESSION['filtermember']['membership_level'] == NULL) echo 'selected'; ?>>የአባልነት ደረጃ</option>
-                                    <?php foreach($membership_levels as $membership_level) { ?>
-                                      <option value="<?= $membership_level['membership_level_id']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $membership_level['membership_level_id']) echo 'selected'; ?>> 
-                                        <?= $membership_level['membership_level_title']; ?> 
+                                    <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['membership_level'] == 'አልተመረጠም') echo 'selected'; ?>>አልተመረጠም</option>
+                                    <?php foreach($membership_levels as $level) { ?>
+                                      <option value="<?= $level['membership_level_title']; ?>"<?php if($_SESSION['filtermember']['membership_level'] == $level['membership_level_title']) echo 'selected'; ?>> 
+                                        <?= $level['membership_level_title']; ?> 
                                       </option>
                                     <?php } ?>
                         </select>
                           
                         <select name="ministry" class="s2">
                             <option value="" <?php if($_SESSION['filtermember']['ministry'] == NULL) echo 'selected'; ?>>የአገልግሎት ዘርፍ</option>
+                                    <option value="አልተመረጠም" <?php if($_SESSION['filtermember']['ministry'] == 'አልተመረጠም') echo 'selected'; ?>>አልተመረጠም</option>
                                     <?php foreach($ministries as $ministry) { ?>
-                                      <option value="<?= $ministry['ministry_id']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_id']) echo 'selected'; ?>> 
+                                      <option value="<?= $ministry['ministry_title']; ?>" <?php if($_SESSION['filtermember']['ministry'] == $ministry['ministry_title']) echo 'selected'; ?>> 
                                         <?= $ministry['ministry_title']; ?> 
                                       </option>
                                     <?php } ?>
                         </select>
                         
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 10px;">
                         <input type="submit" name="submit" class="btn btn-primary btn-flat" value="አጣራ">
                         <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning btn-flat"> ፍለጋውን አጥፋ </a><BR>
+
                     </td>
                 </tr>
             </table>
@@ -147,9 +155,10 @@
                     <th>የትውልድ ስፍራ</th>
                     <th>የሞባይል ስልክ ቁጥር</th>
                     <th>ኢሜል</th>
+                    <th>የጋብቻ ሁኔታ</th>
+                    <th>የትዳር አጋር</th>
                     <th>የተመዘገበበት</th>
                     <th data-priority="4" >ስራዎች</th>
-                    <th>የአባልነት ደረጃ</th>
                     <th>ክፍለ ከተማ</th>
                     <th>ቀበሌ</th>
                     <th>መንደር</th>
@@ -199,27 +208,27 @@
                         <td><span><?= $member['birth_place']?></span></td>
                         <td><span><?= $member['mobile_phone']?></span></td>
                         <td><span><?= $member['email']?></span></td>
+                        <td><span><?= $member['marital_status']?></span></td>
+                        <td><span><?php if($member['spouse'] != NULL) { echo $member['spouse_name']; } ?></span></td>
                         <td><span><?= nice_date($member['created'], 'M d, Y')?></span></td>
                         <td>
                             <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'hidden'; } ?> href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                            <a onclick=""><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
-                        <td><span><?= $member['membership_level_title']?></span></td>
-                        <td><span><?= $member['kifle_ketema_title']?></span></td>
-                        <td><span><?= $member['kebele_title']?></span></td>
-                        <td><span><?= $member['mender_title']?></span></td>
+                        <td><span><?= $member['kifle_ketema']?></span></td>
+                        <td><span><?= $member['kebele']?></span></td>
+                        <td><span><?= $member['mender']?></span></td>
                         <td><span><?= $member['house_number']?></span></td>
                         <td><span><?= $member['home_phone']?></span></td>
                         <td><span><?= $member['level_of_education']?></span></td>
                         <td><span><?= $member['field_of_study']?></span></td>
-                        <td><span><?= $member['job_type_title']?></span></td>
+                        <td><span><?= $member['job_type']?></span></td>
                         <td><span><?= $member['workplace_name']?></span></td>
                         <td><span><?= $member['workplace_phone']?></span></td>
                         <td><span><?= $member['monthly_income']?></span></td>
                         <td><span><?= $member['membership_year']?></span></td>
-                        <td><span><?= $member['membership_cause_title']?></span></td>
-                        <td><span><?= $member['membership_level_title']?></span></td>
+                        <td><span><?= $member['membership_cause']?></span></td>
+                        <td><span><?= $member['membership_level']?></span></td>
 
                     </tr>
 

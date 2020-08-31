@@ -79,6 +79,9 @@
             <div class="box-body" style="overflow-x: hidden;">
                 <ul class="fa-ul">
                     <li><i class="fa-li fa fa-user"></i>የጋብቻ ሁኔታ: <?= $member['marital_status']?></li>
+                    <?php if($member['spouse'] != NULL) { ?>
+                        <li><i class="fa-li fa fa-user"></i>የትዳር አጋር: <a href="<?= base_url(); ?>admin/memberdetails/<?= $member['spouse_id']; ?>"><?= $member['spouse_name']?></a></li>
+                    <?php } ?>
                     <li><i class="fa-li fa fa-calendar"></i>የትውልድ ቀን: <?= $member['birthdate']; ?></li>
                     <?php if(!$member['hide_age']) { ?> 
                         <li><i class="fa-li fa fa-heartbeat"></i> እድሜ: <span><?= $member['age'].' yrs old';?></span></li>
@@ -86,7 +89,7 @@
                     <li><i class="fa-li fa fa-phone"></i>የሞባይል ስልክ ቁጥር: <span><?= $member['mobile_phone']; ?></span></li>
                     <li><i class="fa-li fa fa-tty"></i>የቤት ስልክ ቁጥር: <span><?= $member['home_phone']; ?></span></li>
                     <li><i class="fa-li fa fa-envelope"></i>ኢሜል: <span><?= $member['email']; ?></span></li>
-                    <li><i class="fa-li fa fa-info"></i>የአባልነት ደረጃ: <span><?= $member['membership_level_title']; ?></span></li>
+                    <li><i class="fa-li fa fa-info"></i>የአባልነት ደረጃ: <span><?= $member['membership_level']; ?></span></li>
                 </ul><hr>
                 <strong>
                     <i class="fa fa-book margin-r-5"></i>
@@ -122,9 +125,8 @@
                 <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/payment"><i class="fa fa-money"></i> የክፍያ መረጃ </a>
                 <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/status"><i class="fa fa-user"></i> የምዕመን ሁኔታ </a>
                 <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
-                <a class="btn btn-app" id="addGroup"><i class="fa fa-users"></i> <?= lang('assign_new_group') ?> </a>
-                <a data-toggle="modal" href="#deleteMember" class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> ምዕመን አጥፋ </a>
                 <a class="btn btn-app <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-user-secret"></i> መረጃ ቀይር </a>
+                <a data-toggle="modal" href="#deleteMember" class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> ምዕመን አጥፋ </a>
             </div>
 
             <!-- ምዕመን አጥፋ Dialogue -->
@@ -185,11 +187,11 @@
                             <div class="box-body">
                                 <dl class="dl-horizontal">
                                     <dt> ክፍለ ከተማ </dt>
-                                    <dd> <?= $member['kifle_ketema_title']; ?></dd>
+                                    <dd> <?= $member['kifle_ketema']; ?></dd>
                                     <dt> ቀበሌ </dt>
-                                    <dd> <?= $member['kebele_title']; ?></dd>
+                                    <dd> <?= $member['kebele']; ?></dd>
                                     <dt> መንደር </dt>
-                                    <dd> <?= $member['mender_title']; ?> </dd>
+                                    <dd> <?= $member['mender']; ?> </dd>
                                     <dt> የቤት ቁጥር </dt>
                                     <dd> <?= $member['house_number']; ?> </dd>
                                     <dt> የሞባይል ስልክ ቁጥር </dt>
@@ -197,7 +199,7 @@
                                     <dt> ኢሜል </dt>
                                     <dd> <?= $member['email']?> </dd>
                                     <dt> የሥራ አይነት </dt>
-                                    <dd> <?= $member['job_type_title']?> </dd>
+                                    <dd> <?= $member['job_type']?> </dd>
                                     <dt> የመሥሪያ ቤቱ ስም </dt>
                                     <dd> <?= $member['workplace_name']?> </dd>
                                     <dt> የመሥሪያ ቤት ስልክ ቁጥር </dt>
@@ -222,11 +224,11 @@
                                     <dt>አባል የሆኑበት ዘመን</dt>
                                     <dd><?php if($member['membership_year']) { echo $member['membership_year']; } else { echo ""; }?></dd>
                                     <dt>የአባልነት ደረጃ</dt>
-                                    <dd><?= $member['membership_level_title']?></dd>
+                                    <dd><?= $member['membership_level']?></dd>
                                     <dt>አባል የሆኑበት ሁኔታ</dt>
-                                    <dd><?= $member['membership_cause_title']?></dd>
+                                    <dd><?= $member['membership_cause']?></dd>
                                     <dt>የአገልግሎት ዘርፍ</dt>
-                                    <dd><?= $member['ministry_title']?></dd>
+                                    <dd><?= $member['ministry']?></dd>
                                 </dl>                        
                             </div>
                             <!-- /.box-body -->
@@ -574,6 +576,7 @@
                                 <div class="timeline-body"><?= $note['note_content']?></div>
                                 <div class="timeline-footer">
                                   <a class="btn btn-warning btn-flat btn-xs">View comment</a>
+                                  <a class="btn btn-danger btn-flat btn-xs">አጥፋ</a>
                                 </div>
                               </div>
                             </li>

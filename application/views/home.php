@@ -10,10 +10,10 @@
   border-radius: 50%;
   padding: 2px;
   border: 2px solid #d2d6de;
-  font-size: 30px;
+  font-size: 25px;
   color: #fff;
   text-align: center;
-  line-height: 62px;
+  line-height: 70px;
   margin: 0 auto; 
 }
 
@@ -122,7 +122,7 @@
                             <span class="users-list-date"><?= timespan(human_to_unix($member['created']), null, 1).' በፊት'; ?>&nbsp;</span>
                         </li>
                         <?php } ?>
-                </ul>
+                    </ul>
                     <!-- /.users-list -->
                 </div>
                 <div class="box-footer text-center">

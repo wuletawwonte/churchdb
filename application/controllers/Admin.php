@@ -19,7 +19,7 @@ class Admin extends CI_Controller {
 
 		$this->session->set_userdata('last_visited', time());
 
-		$this->load->model(array('age_group', 'payment', 'kifle_ketema', 'mender', 'kebele', 'note', 'user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
+		$this->load->model(array('age_group', 'members_backup', 'payment', 'kifle_ketema', 'mender', 'kebele', 'note', 'user', 'cnfg', 'member', 'timeline', 'group', 'group_member', 'job_type', 'membership_cause', 'membership_level', 'ministry'));
 		$this->load->helper('text', 'file');
 
 		$this->lang->load('label_lang', 'amharic');
@@ -161,8 +161,6 @@ class Admin extends CI_Controller {
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
 		$data['kifle_ketemas'] = $this->kifle_ketema->get_all();
-		$data['kebeles'] = $this->kebele->get_all();
-		$data['menders'] = $this->mender->get_all();
 		$data['ministries'] = $this->ministry->get_all();
 		$this->load->view('templates/header', $data);
 		$this->load->view('new_member_form', $data);
@@ -263,7 +261,7 @@ class Admin extends CI_Controller {
 				$this->session->set_flashdata('success', 'የምዕመን መረጃ በትክክል ተመዝግቧል።');
 				redirect('admin/personregistration');
 			} else {
-				$this->session->set_flashdata('error', 'የምዕመን መረጃ ሊመዘግብ አልተቻለም።');
+				$this->session->set_flashdata('error', 'የምዕመን መረጃ ሊመዘገብ አልተቻለም።');
 				redirect('admin/personregistration');			
 			}
 		} else {
@@ -325,15 +323,15 @@ class Admin extends CI_Controller {
 
 	public function editmember($id = NULL) {
 		$data['active_menu'] = '';
-		$data['members'] = $this->member->get_all();		
 		$data['member'] = $this->member->get_one($id);
+		$data['members'] = $this->member->get_gender_specific($data['member']['gender']);	
 		$data['job_types'] = $this->job_type->get_all();		
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
 		$data['ministries'] = $this->ministry->get_all();
 		$data['kifle_ketemas'] = $this->kifle_ketema->get_all();
-		$data['kebeles'] = $this->kebele->get_all();
-		$data['menders'] = $this->mender->get_all();
+		$data['kebeles'] = $this->kebele->get_from_kifle_ketema($data['member']['kifle_ketema']);
+		$data['menders'] = $this->mender->get_from_kebele($data['member']['kebele']);
 		$this->load->view('templates/header', $data);
 		$this->load->view('edit_member_form');
 		$this->load->view('templates/footer');		
@@ -396,8 +394,18 @@ class Admin extends CI_Controller {
 		exit;
 	}
 
-	public function export_members_excel() {
-		$filename = "ChurchDb_members_".date('Ymd').".xlsx";
+	public function deletemembersbackup($id) {
+		if($this->members_backup->delete($id)) {
+			$this->session->set_flashdata('success', 'የተዘጋጀው ባካፕ በትክክል ጠፍቷል።');
+			redirect('admin/membersexport');
+		} else {
+			$this->session->set_flashdata('error', 'የተዘጋጀውን ባካፕ ማጥፋት አልተቻለም።');
+			redirect('admin/membersexport');
+		}		
+	}
+
+	public function export_members_excel_backup() {
+		$filename = "ChurchDb_members ".date('F j_Y h-i-s').".xlsx";
 		$this->load->library('excel');
 
 		$members = $this->member->get_members_for_export();
@@ -409,19 +417,23 @@ class Admin extends CI_Controller {
 		$objPHPExcel->getActiveSheet()->SetCellValue('B1', 'የአባት ስም');
 		$objPHPExcel->getActiveSheet()->SetCellValue('C1', 'የአያት ስም');
 		$objPHPExcel->getActiveSheet()->SetCellValue('D1', 'ፆታ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('E1', 'የተወለዱበት ቀን');
-		$objPHPExcel->getActiveSheet()->SetCellValue('F1', 'እድሜ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('G1', 'የትውልድ ሥፍራ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('H1', 'የሞባይል ስልክ ቁጥር');
-		$objPHPExcel->getActiveSheet()->SetCellValue('I1', 'ኢሜል');
-		$objPHPExcel->getActiveSheet()->SetCellValue('J1', 'የሥራ አይነት');
-		$objPHPExcel->getActiveSheet()->SetCellValue('K1', 'የመሥሪያ ቤቱ ስም');
-		$objPHPExcel->getActiveSheet()->SetCellValue('L1', 'የመሥሪያ ቤት ስልክ ቁጥር');
-		$objPHPExcel->getActiveSheet()->SetCellValue('M1', 'የቤተክርስትያኒቱ አባል የሆኑበት ዘመን');
-		$objPHPExcel->getActiveSheet()->SetCellValue('N1', 'የቤተክርስትያኒቱ አባል የሆኑበት ሁኔታ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('O1', 'በቤተክርስትያኒቱ የአባልነት ደረጃ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('P1', 'የአገልግሎት ዘርፍ');
-		$objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'የጋብቻ ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('E1', 'ክፍለ ከተማ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('F1', 'ቀበሌ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('G1', 'መንደር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('H1', 'የተወለዱበት ቀን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('I1', 'እድሜ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('J1', 'የትውልድ ሥፍራ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('K1', 'የሞባይል ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('L1', 'ኢሜል');
+		$objPHPExcel->getActiveSheet()->SetCellValue('M1', 'የሥራ አይነት');
+		$objPHPExcel->getActiveSheet()->SetCellValue('N1', 'የመሥሪያ ቤቱ ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('O1', 'የመሥሪያ ቤት ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('P1', 'የቤተክርስትያኒቱ አባል የሆኑበት ዘመን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'የቤተክርስትያኒቱ አባል የሆኑበት ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('R1', 'በቤተክርስትያኒቱ የአባልነት ደረጃ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('S1', 'የአገልግሎት ዘርፍ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('T1', 'የጋብቻ ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('U1', 'የትዳር አጋር');
 
 		$rowCount = 2; 
 		foreach ($members as $member) {
@@ -429,19 +441,92 @@ class Admin extends CI_Controller {
 			$objPHPExcel->getActiveSheet()->SetCellValue('B'. $rowCount, $member['middlename']);
 			$objPHPExcel->getActiveSheet()->SetCellValue('C'. $rowCount, $member['lastname']);
 			$objPHPExcel->getActiveSheet()->SetCellValue('D'. $rowCount, $member['gender']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('E'. $rowCount, $member['birthdate']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('F'. $rowCount, $member['age']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('G'. $rowCount, $member['birth_place']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('H'. $rowCount, $member['mobile_phone']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('I'. $rowCount, $member['email']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('J'. $rowCount, $member['job_type_title']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('K'. $rowCount, $member['workplace_name']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('L'. $rowCount, $member['workplace_phone']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('M'. $rowCount, $member['membership_year']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('N'. $rowCount, $member['membership_cause_title']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('O'. $rowCount, $member['membership_level_title']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('P'. $rowCount, $member['ministry_title']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('Q'. $rowCount, $member['marital_status']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('E'. $rowCount, $member['kifle_ketema']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('F'. $rowCount, $member['kebele']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('G'. $rowCount, $member['mender']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('H'. $rowCount, $member['birthdate']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('I'. $rowCount, $member['age']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('J'. $rowCount, $member['birth_place']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('K'. $rowCount, $member['mobile_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('L'. $rowCount, $member['email']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('M'. $rowCount, $member['job_type']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('N'. $rowCount, $member['workplace_name']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('O'. $rowCount, $member['workplace_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('P'. $rowCount, $member['membership_year']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('Q'. $rowCount, $member['membership_cause']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('R'. $rowCount, $member['membership_level']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('S'. $rowCount, $member['ministry']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('T'. $rowCount, $member['marital_status']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('U'. $rowCount, $member['spouse_name']);
+			$rowCount++;
+		}
+
+		header('Content-Type:application/vnd.ms-excel');
+		header('Content-Disposition:attachment;filename="'.$filename.'"');
+		header('Cache-Control: max-age=0');
+		$objWriter =PHPExcel_IOFactory::createWriter($objPHPExcel,'CSV');
+		$objWriter->save('/var/www/church-database/download/'.$filename);
+		
+		$this->members_backup->add($filename);
+
+		redirect('admin/membersexport');
+
+	}
+
+	public function export_members_excel() {
+		$filename = "ChurchDb_members ".date('F j_Y h-i-s').".xlsx";
+		$this->load->library('excel');
+
+		$members = $this->member->get_members_for_export();
+
+		$objPHPExcel = new PHPExcel();
+		$objPHPExcel->setActiveSheetIndex(0);
+
+		$objPHPExcel->getActiveSheet()->SetCellValue('A1', 'ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('B1', 'የአባት ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('C1', 'የአያት ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('D1', 'ፆታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('E1', 'ክፍለ ከተማ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('F1', 'ቀበሌ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('G1', 'መንደር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('H1', 'የተወለዱበት ቀን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('I1', 'እድሜ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('J1', 'የትውልድ ሥፍራ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('K1', 'የሞባይል ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('L1', 'ኢሜል');
+		$objPHPExcel->getActiveSheet()->SetCellValue('M1', 'የሥራ አይነት');
+		$objPHPExcel->getActiveSheet()->SetCellValue('N1', 'የመሥሪያ ቤቱ ስም');
+		$objPHPExcel->getActiveSheet()->SetCellValue('O1', 'የመሥሪያ ቤት ስልክ ቁጥር');
+		$objPHPExcel->getActiveSheet()->SetCellValue('P1', 'የቤተክርስትያኒቱ አባል የሆኑበት ዘመን');
+		$objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'የቤተክርስትያኒቱ አባል የሆኑበት ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('R1', 'በቤተክርስትያኒቱ የአባልነት ደረጃ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('S1', 'የአገልግሎት ዘርፍ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('T1', 'የጋብቻ ሁኔታ');
+		$objPHPExcel->getActiveSheet()->SetCellValue('U1', 'የትዳር አጋር');
+
+		$rowCount = 2; 
+		foreach ($members as $member) {
+			$objPHPExcel->getActiveSheet()->SetCellValue('A'. $rowCount, $member['firstname']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('B'. $rowCount, $member['middlename']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('C'. $rowCount, $member['lastname']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('D'. $rowCount, $member['gender']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('E'. $rowCount, $member['kifle_ketema']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('F'. $rowCount, $member['kebele']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('G'. $rowCount, $member['mender']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('H'. $rowCount, $member['birthdate']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('I'. $rowCount, $member['age']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('J'. $rowCount, $member['birth_place']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('K'. $rowCount, $member['mobile_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('L'. $rowCount, $member['email']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('M'. $rowCount, $member['job_type']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('N'. $rowCount, $member['workplace_name']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('O'. $rowCount, $member['workplace_phone']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('P'. $rowCount, $member['membership_year']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('Q'. $rowCount, $member['membership_cause']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('R'. $rowCount, $member['membership_level']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('S'. $rowCount, $member['ministry']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('T'. $rowCount, $member['marital_status']);
+			$objPHPExcel->getActiveSheet()->SetCellValue('U'. $rowCount, $member['spouse_name']);
 			$rowCount++;
 		}
 
@@ -582,43 +667,12 @@ class Admin extends CI_Controller {
 		$this->load->view('member_details_print', $data);		
 	}
 
-
-	public function addmembershiplevelchoice() {
-		if($this->membership_level->add_choice()) {
-			$this->session->set_flashdata('success', 'የአባልነት ደረጃ በትክክል ተመዝግቧል።');
-			redirect('admin/listformelements');
-		} else {
-			$this->session->set_flashdata('error', 'የአባልነት ደረጃ መመዝገብ አልተቻለም።');
-			redirect('admin/listformelements');
-		}		
-	}
-
 	public function addjobtypechoice() {
 		if($this->job_type->add_choice()) {
 			$this->session->set_flashdata('success', 'የስራ አይነት በትክክል ተመዝግቧል።');
 			redirect('admin/listformelements');
 		} else {
 			$this->session->set_flashdata('error', 'የስራ አይነት መመዝገብ አልተቻለም።');
-			redirect('admin/listformelements');
-		}		
-	}
-
-	public function addmembershipcausechoice() {
-		if($this->membership_cause->add_choice()) {
-			$this->session->set_flashdata('success', 'አባል የሆኑበት ሁኔታ በትክክል ተመዝግቧል።');
-			redirect('admin/listformelements');
-		} else {
-			$this->session->set_flashdata('error', 'አባል የሆኑበት ሁኔታ መመዝገብ አልተቻለም።');
-			redirect('admin/listformelements');
-		}		
-	}
-
-	public function addministrychoice() {
-		if($this->ministry->add_choice()) {
-			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ በትክክል ተመዝግቧል።');
-			redirect('admin/listformelements');
-		} else {
-			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ መመዝገብ አልተቻለም።');
 			redirect('admin/listformelements');
 		}		
 	}
@@ -799,8 +853,12 @@ class Admin extends CI_Controller {
 	}
 
 	public function membersexport() {
-		$data['age_groups'] = $this->age_group->get_all();
 		$data['active_menu'] = "membersexport";
+		$data['age_groups'] = $this->age_group->get_all();
+		$data['membership_levels'] = $this->membership_level->get_all();
+		$data['ministries'] = $this->ministry->get_all();
+		$data['job_types'] = $this->job_type->get_all();
+		$data['export_backups'] = $this->members_backup->get_all();
 		$this->load->view('templates/header', $data);
 		$this->load->view('export_members');
 		$this->load->view('templates/footer');											
@@ -856,13 +914,266 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('edit_age_group_error', 'የምዕመን እድሜ በድን መረጃ መቀየር አልተቻለም።');			
 			redirect('admin/generalsetting'); 			
 		}
-
 	}
 
+	// AJAX function
+	public function fetch_kebeles() {
+		if($this->input->post('kifle_ketema_title')) {
+			echo $this->kebele->fetch_kebeles($this->input->post('kifle_ketema_title'));
+		}
+	}
+	// Ajax function
+	public function fetch_menders() {
+		if($this->input->post('kebele_title')) {
+			echo $this->mender->fetch_menders($this->input->post('kebele_title'));
+		}
+	}
 
+	public function editmembershiplevels() {
+		$data['active_menu'] = "formelements";
+		$data['membership_level_choices'] = $this->membership_level->get_all();
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_membership_level_choices');
+		$this->load->view('templates/footer');			
+	}
 
+	public function editmembershipcauses() {
+		$data['active_menu'] = "formelements";
+		$data['membership_cause_choices'] = $this->membership_cause->get_all();
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_membership_cause_choices');
+		$this->load->view('templates/footer');			
+	}
 
+	public function addmembershiplevelchoice() {
+		if($this->membership_level->add_choice()) {
+			$this->session->set_flashdata('success', 'የአባልነት ደረጃ በትክክል ተመዝግቧል።');
+			redirect('admin/editmembershiplevels');
+		} else {
+			$this->session->set_flashdata('error', 'የአባልነት ደረጃ መመዝገብ አልተቻለም።');
+			redirect('admin/editmembershiplevels');
+		}		
+	}
 
+	public function addmembershipcausechoice() {
+		if($this->membership_cause->add_choice()) {
+			$this->session->set_flashdata('success', 'አባል የሆኑበት ምክንያት በትክክል ተመዝግቧል።');
+			redirect('admin/editmembershipcauses');
+		} else {
+			$this->session->set_flashdata('error', 'አባል የሆኑበት ምክንያት መመዝገብ አልተቻለም።');
+			redirect('admin/editmembershipcauses');
+		}		
+	}
+
+	public function addministrychoice() {
+		if($this->ministry->add_choice()) {
+			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ በትክክል ተመዝግቧል።');
+			redirect('admin/editministries');
+		} else {
+			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ መመዝገብ አልተቻለም።');
+			redirect('admin/editministries');
+		}		
+	}
+
+	public function addkifleketemachoice() {
+		if($this->kifle_ketema->add_choice()) {
+			$this->session->set_flashdata('success', 'ክፍለ ከተማው በትክክል ተመዝግቧል።');
+			redirect('admin/editkifleketemas');
+		} else {
+			$this->session->set_flashdata('error', 'ክፍለ ከተማውን መመዝገብ አልተቻለም።');
+			redirect('admin/editkifleketemas');
+		}				
+	}
+
+	public function addkebelechoice() {
+		if($this->kebele->add_choice()) {
+			$this->session->set_flashdata('success', 'ቀበሌው በትክክል ተመዝግቧል።');
+			redirect('admin/editkebeles/'.$this->input->post('kifle_ketema_id'));
+		} else {
+			$this->session->set_flashdata('error', 'ቀበሌውን መመዝገብ አልተቻለም።');
+			redirect('admin/editkebeles/'.$this->input->post('kifle_ketema_id'));
+		}						
+	}
+
+	public function addmenderchoice() {
+		if($this->mender->add_choice()) {
+			$this->session->set_flashdata('success', 'መንደሩ በትክክል ተመዝግቧል።');
+			redirect('admin/editmenders/'.$this->input->post('kebele_id'));
+		} else {
+			$this->session->set_flashdata('error', 'መንደሩን መመዝገብ አልተቻለም።');
+			redirect('admin/editmenders/'.$this->input->post('kebele_id'));
+		}						
+	}
+
+	public function editministries() {
+		$data['active_menu'] = "formelements";
+		$data['ministries'] = $this->ministry->get_all();
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_ministry_choices');
+		$this->load->view('templates/footer');					
+	}
+
+	public function editkifleketemas() {
+		$data['active_menu'] = "formelements";
+		$data['kifle_ketemas'] = $this->kifle_ketema->get_all();
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_kifle_ketema_choices');
+		$this->load->view('templates/footer');							
+	}
+
+	public function editkebeles($kifle_ketema_id) {
+		$data['active_menu'] = "formelements";
+		$data['kifle_ketema'] = $this->kifle_ketema->from_id($kifle_ketema_id);
+		$data['kebeles'] = $this->kebele->get_from_kifle_ketema($data['kifle_ketema']['kifle_ketema_title']);
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_kebele_choices');
+		$this->load->view('templates/footer');									
+	}
+
+	public function editmenders($kebele_id) {
+		$data['active_menu'] = "formelements";
+		$data['kebele'] = $this->kebele->from_id($kebele_id);
+		$data['menders'] = $this->mender->get_from_kebele($data['kebele']['kebele_title']);
+		$this->load->view('templates/header', $data);
+		$this->load->view('list_mender_choices');
+		$this->load->view('templates/footer');									
+	}
+
+	public function editkifleketemachoice() {
+		if($this->kifle_ketema->update_kifle_ketema()) {
+			$this->session->set_flashdata('success', 'የክፍለ ከተማው መረጃ በትክክል ተቀይሯል።');
+			redirect('admin/editkifleketemas');
+		} else {
+			$this->session->set_flashdata('error', 'የክፈለ ከተማውን መረጃ መቀየር አልተቻለም።');
+			redirect('admin/editkifleketemas');
+		}						
+	}
+
+	public function editkebelechoice() {
+		if($this->kebele->update_kebele()) {
+			$this->session->set_flashdata('success', 'የቀበሌው መረጃ በትክክል ተቀይሯል።');
+			redirect('admin/editkebeles/'.$this->input->post('kifle_ketema_id'));
+		} else {
+			$this->session->set_flashdata('error', 'የቀበሌውን መረጃ መቀየር አልተቻለም።');
+			redirect('admin/editkebeles/'.$this->input->post('kifle_ketema_id'));
+		}						
+	}
+
+	public function editmenderchoice() {
+		if($this->mender->update_mender()) {
+			$this->session->set_flashdata('success', 'የመንደሩ መረጃ በትክክል ተቀይሯል።');
+			redirect('admin/editmenders/'.$this->input->post('kebele_id'));
+		} else {
+			$this->session->set_flashdata('error', 'የመንደሩን መረጃ መቀየር አልተቻለም።');
+			redirect('admin/editmenders/'.$this->input->post('kebele_id'));
+		}						
+	}
+
+	public function deletekifleketema($id) {
+		$data = $this->kifle_ketema->from_id($id);
+		if($this->kifle_ketema->delete_kifle_ketema($id, $data['kifle_ketema_title'])) {
+			$this->session->set_flashdata('success', 'የክፍለ ከተማው መረጃ በትክክል ጠፍቷል።');
+			redirect('admin/editkifleketemas');
+		} else {
+			$this->session->set_flashdata('error', 'የክፈለ ከተማውን መረጃ ማጥፋት አልተቻለም።');
+			redirect('admin/editkifleketemas');
+		}								
+	}
+
+	public function deletekebele($kebele_id, $kifle_ketema_id) {
+		$data = $this->kebele->from_id($kebele_id);
+		if($this->kebele->delete_kebele($kebele_id, $data['kebele_title'])) {
+			$this->session->set_flashdata('success', 'የቀበሌው መረጃ በትክክል ጠፍቷል።');
+			redirect('admin/editkebeles/'.$kifle_ketema_id);
+		} else {
+			$this->session->set_flashdata('error', 'የቀበሌውን መረጃ ማጥፋት አልተቻለም።');
+			redirect('admin/editkebeles/'.$kifle_ketema_id);
+		}								
+	}
+
+	public function deletemender($mender_id, $kebele_id) {
+		$data = $this->mender->from_id($mender_id);
+		if($this->mender->delete_mender($mender_id, $data['mender_title'])) {
+			$this->session->set_flashdata('success', 'የመንደር መረጃ በትክክል ጠፍቷል።');
+			redirect('admin/editmenders/'.$kebele_id);
+		} else {
+			$this->session->set_flashdata('error', 'የመንደሩን መረጃ ማጥፋት አልተቻለም።');
+			redirect('admin/editmenders/'.$kebele_id);
+		}								
+	}
+
+	public function editmembershiplevelchoice() {
+		if($this->membership_level->update_membership_level()) {
+			$this->session->set_flashdata('success', 'የአባልነት ደረጃ በትክክል ተቀይሯል።');
+			redirect('admin/editmembershiplevels');
+		} else {
+			$this->session->set_flashdata('error', 'የአባልነት ደረጃ መቀየር አልተቻለም።');
+			redirect('admin/editmembershiplevels');
+		}						
+	}
+
+	public function deletemembershiplevel($id) {
+		$data = $this->membership_level->from_id($id);
+		if($this->membership_level->delete_membership_level($id, $data['membership_level_title'])) {
+			$this->session->set_flashdata('success', 'የአባልነት ደረጃ በትክክል ጠፍቷል።');
+			redirect('admin/editmembershiplevels');
+		} else {
+			$this->session->set_flashdata('error', 'የአባልነት ደረጃ ማጥፋት አልተቻለም።');
+			redirect('admin/editmembershiplevels');
+		}										
+	}
+
+	public function editmembershipcausechoice() {
+		if($this->membership_cause->update_membership_cause()) {
+			$this->session->set_flashdata('success', 'አባል የሆኑበት ሁኔታ በትክክል ተቀይሯል።');
+			redirect('admin/editmembershipcauses');
+		} else {
+			$this->session->set_flashdata('error', 'አባል የሆኑበት ሁኔታ መቀየር አልተቻለም።');
+			redirect('admin/editmembershipcauses');
+		}						
+	}
+
+	public function deletemembershipcause($id) {
+		$data = $this->membership_cause->from_id($id);
+		if($this->membership_cause->delete_membership_cause($id, $data['membership_cause_title'])) {
+			$this->session->set_flashdata('success', 'አባል የሆኑበት ሁኔታ በትክክል ጠፍቷል።');
+			redirect('admin/editmembershipcauses');
+		} else {
+			$this->session->set_flashdata('error', 'አባል የሆኑበት ሁኔታ ማጥፋት አልተቻለም።');
+			redirect('admin/editmembershipcauses');
+		}										
+	}
+
+	public function editministrychoice() {
+		if($this->ministry->update_ministry()) {
+			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ በትክክል ተቀይሯል።');
+			redirect('admin/editministries');
+		} else {
+			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ መቀየር አልተቻለም።');
+			redirect('admin/editministries');
+		}						
+	}
+
+	public function deleteministry($id) {
+		$data = $this->ministry->from_id($id);
+		if($this->ministry->delete_ministry($id, $data['membership_cause_title'])) {
+			$this->session->set_flashdata('success', 'የአገልግሎት ዘርፍ በትክክል ጠፍቷል።');
+			redirect('admin/editministries');
+		} else {
+			$this->session->set_flashdata('error', 'የአገልግሎት ዘርፍ ማጥፋት አልተቻለም።');
+			redirect('admin/editministries');
+		}										
+	}
+
+	public function permanentdeletemember($id) {
+		if($this->member->permanent_delete($id)) {
+			$this->session->set_flashdata('success', 'የምዕመን መረጃ በትክክል ጠፍቷል።');
+			redirect('admin/recyclebin');
+		} else {
+			$this->session->set_flashdata('error', 'የምዕመን መረጃ ማጥፋት አልተቻለም።');
+			redirect('admin/recyclebin');
+		}												
+	}
 
 
 
