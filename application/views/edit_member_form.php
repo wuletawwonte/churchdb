@@ -384,7 +384,7 @@
 		            <div class="form-group col-md-6">
 		                <label> የትዳር አጋር:</label>
 		                <select name="spouse" class="form-control s2" id="spouse" disabled>
-		                    <option value="አልተመረጠም" selected>አልተመረጠም</option>
+		                    <option value="አልተመረጠም" <?php if($member['spouse'] == 'አልተመረጠም') { echo 'selected'; }?> >አልተመረጠም</option>
 		                    <option disabled>-----------------------</option>
 		                    <?php foreach($members as $m) { ?>
 		                    <option <?php if($member['spouse'] == $m['id']) { echo 'selected'; }?> value="<?= $m['id']; ?>"><?= $m['firstname'].' '.$m['middlename']; ?></option>

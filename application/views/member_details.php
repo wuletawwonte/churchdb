@@ -79,6 +79,9 @@
             <div class="box-body" style="overflow-x: hidden;">
                 <ul class="fa-ul">
                     <li><i class="fa-li fa fa-user"></i>የጋብቻ ሁኔታ: <?= $member['marital_status']?></li>
+                    <?php if($member['spouse'] != NULL) { ?>
+                        <li><i class="fa-li fa fa-user"></i>የትዳር አጋር: <?= $member['spouse_name']?></li>
+                    <?php } ?>
                     <li><i class="fa-li fa fa-calendar"></i>የትውልድ ቀን: <?= $member['birthdate']; ?></li>
                     <?php if(!$member['hide_age']) { ?> 
                         <li><i class="fa-li fa fa-heartbeat"></i> እድሜ: <span><?= $member['age'].' yrs old';?></span></li>

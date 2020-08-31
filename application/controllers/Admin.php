@@ -323,8 +323,8 @@ class Admin extends CI_Controller {
 
 	public function editmember($id = NULL) {
 		$data['active_menu'] = '';
-		$data['members'] = $this->member->get_all();		
 		$data['member'] = $this->member->get_one($id);
+		$data['members'] = $this->member->get_gender_specific($data['member']['gender']);	
 		$data['job_types'] = $this->job_type->get_all();		
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();

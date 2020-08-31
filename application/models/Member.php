@@ -166,10 +166,12 @@ class Member extends CI_Model {
 	}
 
 	public function get_one($id = NULL) {
-		$this->db->select('*, TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) AS age');
-		$this->db->where('id', $id);
-		$this->db->from('members');
-		$res = $this->db->get();
+		$this->db->select('m.*, TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) AS age, m2.id spouse_id, CONCAT(m2.firstname, " ", m2.lastname) AS spouse_name ');
+		$this->db->where('m.id', $id);
+		// $this->db->from('members m, members m2');
+		$this->db->join('members m2', 'm.spouse = m2.id', 'LEFT');
+		$res = $this->db->get('members m');
+
 		$res = $res->result_array();
 		return  $res[0];
 	}
@@ -333,6 +335,16 @@ class Member extends CI_Model {
 		$res = $this->db->get('members');
 
 		return $res->result_array();
+	}
+
+	public function get_gender_specific($gender) {
+		$this->db->where('status', 'ያለ');
+		$this->db->where('marital_status', 'ያላገባ/ች');
+		$this->db->or_where('marital_status', 'አልተመረጠም');
+		$this->db->where('gender !=', $gender);
+		$data = $this->db->get('members');
+
+		return $data->result_array();
 	}
 
 
