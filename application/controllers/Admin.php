@@ -156,7 +156,6 @@ class Admin extends CI_Controller {
 	public function personregistration() {
 
 		$data['active_menu'] = "personregistration";
-		$data['members'] = $this->member->get_all();
 		$data['job_types'] = $this->job_type->get_all();
 		$data['membership_causes'] = $this->membership_cause->get_all();
 		$data['membership_levels'] = $this->membership_level->get_all();
@@ -166,6 +165,15 @@ class Admin extends CI_Controller {
 		$this->load->view('new_member_form', $data);
 		$this->load->view('templates/footer');
 
+	}
+
+	// AJAX function 
+	public function get_gender_specific_ajax() {
+		$searchTerm = $this->input->post('searchTerm');
+		$gender = $this->input->post('gender');
+		$res = $this->member->get_gender_specific_ajax($searchTerm, $gender);
+		
+		echo json_encode($res);
 	}
 
 	public function listmembers() {

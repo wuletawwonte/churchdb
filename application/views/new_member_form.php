@@ -353,7 +353,11 @@
 		            <div class="form-group col-md-6">
 		                <label> የጋብቻ ሁኔታ :</label>
 		                <select name="marital_status" class="form-control s2" id="maritalStatus">
-		                    
+		                    <option value="አልተመረጠም">አልተመረጠም</option>
+		                    <option disabled>-----------------------</option>
+		                    <option value="ያላገባ/ች">ያላገባ/ች</option>
+		                    <option value="ያገባ/ች">ያገባ/ች</option>		                    
+		                    <option value="የፈታ/ች">የፈታ/ች</option>
 		                </select>
 		            </div>
 
@@ -362,9 +366,6 @@
 		                <select name="spouse" class="form-control" id="spouse" disabled>
 		                    <option value="አልተመረጠም" selected>አልተመረጠም</option>
 		                    <option disabled>-----------------------</option>
-		                    <?php foreach($members as $member) { ?>
-		                    <option value="<?= $member['id']; ?>"><?= $member['firstname'].' '.$member['middlename']; ?></option>
-		                    <?php } ?>
 		                </select>
 		            </div>
 		        </div>
@@ -401,7 +402,25 @@
 
 		$(".inputmasked").inputmask(); 
 
-		$("#spouse").select2();
+		$("#spouse").select2({
+				ajax: {
+					url: "<?php echo base_url(); ?>admin/get_gender_specific_ajax",
+					dataType: 'json',	
+					method: "POST",				
+					data: function(params){ 
+						return {
+							searchTerm: params.term,
+							gender: $("#gender").val()
+						};
+					},
+					processResults: function (data) {
+			            return {
+			            	results: data
+			            };
+			        },
+		            cache: true
+				}
+			});
 
 	    $(function () {
 	        $('input').iCheck({
@@ -413,7 +432,7 @@
 
 	    $("#maritalStatus").change(function(){
 	    	var selected = $(this).val();
-	    	if(selected == "ያገባ" || selected == "ያገባች") {
+	    	if(selected == "ያገባ/ች") {
 	    		$("#spouse").prop('disabled', false);
 	    	} 
 	    	else {
@@ -421,25 +440,27 @@
 	    	}
 	    });
 
-	    function maleMaritalStatus() {
-	    	$("#maritalStatus").html("<option value='አልተመረጠም'>አልተመረጠም</option><option disabled>-----------------------</option><option value='ያላገባ'>ያላገባ</option><option value='ያገባ'>ያገባ</option><option value='የፈታ'>የፈታ</option>");    	
-	    }
+	    // function maleMaritalStatus() {
+	    // 	$("#maritalStatus").html("<option value='አልተመረጠም'>አልተመረጠም</option><option disabled>-----------------------</option><option value='ያላገባ'>ያላገባ</option><option value='ያገባ'>ያገባ</option><option value='የፈታ'>የፈታ</option>");    	
+    	// 	$("#spouse").prop('disabled', true);
+	    // }
 
-	    function femaleMaritalStatus() {
-	    	$("#maritalStatus").html("<option value='አልተመረጠም'>አልተመረጠም</option><option disabled>-----------------------</option><option value='ያላገባች'>ያላገባች</option><option value='ያገባች'>ያገባች</option><option value='የፈታች'>የፈታች</option>");
-	    }
+	    // function femaleMaritalStatus() {
+	    // 	$("#maritalStatus").html("<option value='አልተመረጠም'>አልተመረጠም</option><option disabled>-----------------------</option><option value='ያላገባች'>ያላገባች</option><option value='ያገባች'>ያገባች</option><option value='የፈታች'>የፈታች</option>");
+    	// 	$("#spouse").prop('disabled', true);
+	    // }
 
-	    femaleMaritalStatus();
+	    // femaleMaritalStatus();
 
-	    $("#gender").change(function() {
-	    	var gender = $(this).val();
-	    	if(gender == "ወንድ") {
-	    		maleMaritalStatus();
-	    	} 
-	    	else if(gender == "ሴት") {
-	    		femaleMaritalStatus();
-	    	}
-	    });
+	    // $("#gender").change(function() {
+	    // 	var gender = $(this).val();
+	    // 	if(gender == "ወንድ") {
+	    // 		maleMaritalStatus();
+	    // 	} 
+	    // 	else if(gender == "ሴት") {
+	    // 		femaleMaritalStatus();
+	    // 	}
+	    // });
 
 
 	    $("#kifle_ketema").change(function(){
@@ -476,22 +497,6 @@
 	    	}
 	    });
 
-
-
-	    // $(function fileupload(input) {
-	    // 	if(input.files && input.files[0]) {
-	    // 		var reader = new FileReader();
-
-	    // 		reader.onload = function(e) {
-	    // 			$("#avatar")
-	    // 			.attr("src", e.target.result)
-	    // 			.width(130)
-	    // 			.height(130);
-	    // 		};
-
-	    // 		reader.readAsDataURL(input.files[0]);
-	    // 	}
-	    // });
 
 	});
 </script>
