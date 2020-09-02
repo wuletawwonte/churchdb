@@ -80,7 +80,7 @@
 				                <div class="row">
 				                    <div class="col-md-2">
 				                        <label> <?= lang('gender'); ?>  :</label>
-				                        <select name="gender" class="form-control s2">
+				                        <select name="gender" class="form-control s2" disabled>
 				                            <option <?php if($member['gender'] == 'ሴት') { echo 'selected'; }?> value="ሴት">ሴት</option>
 				                            <option <?php if($member['gender'] == 'ወንድ') { echo 'selected'; }?> value="ወንድ">ወንድ</option>
 				                        </select>
@@ -387,7 +387,7 @@
 		                    <option value="አልተመረጠም" <?php if($member['spouse'] == 'አልተመረጠም') { echo 'selected'; }?> >አልተመረጠም</option>
 		                    <option disabled>-----------------------</option>
 		                    <?php foreach($members as $m) { ?>
-		                    <option <?php if($member['spouse'] == $m['id']) { echo 'selected'; }?> value="<?= $m['id']; ?>"><?= $m['firstname'].' '.$m['middlename']; ?></option>
+		                    <option <?php if($member['spouse'] == $m['id']) { echo 'selected'; }?> value="<?= $m['id']; ?>"><?= $m['text']; ?></option>
 		                    <?php } ?>
 		                </select>
 		            </div>

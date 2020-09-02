@@ -126,7 +126,27 @@
                 <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/status"><i class="fa fa-user"></i> የምዕመን ሁኔታ </a>
                 <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
                 <a class="btn btn-app <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-user-secret"></i> መረጃ ቀይር </a>
-                <a data-toggle="modal" href="#deleteMember" class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> ምዕመን አጥፋ </a>
+                <a data-toggle="modal" href="#deleteMember" style="background-color: orange; color: white;" class="btn btn-app delete-person"><i class="fa fa-trash-o"></i> ወደ ቆሼ </a>                
+                <a data-toggle="modal" href="#permanentlyDeleteMember" class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> አስወግድ </a>
+            </div>
+
+            <!-- ምዕመን አጥፋ Dialogue -->
+            <div id="permanentlyDeleteMember" class="modal modal-danger fade" role="dialog">
+                <div class="modal-dialog modal-sm">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-body" align="left">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>የዚህን ምዕመን መረጃ ሙሉ በሙሉ ሊያጠፉ ነው።</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal">አይ</button>
+                            <a href="<?= base_url()?>admin/permanentdeletemember/<?= $member['id']?>" class="btn btn-outline btn-flat">አዎ</a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
             <!-- ምዕመን አጥፋ Dialogue -->
@@ -137,7 +157,7 @@
                     <div class="modal-content">
                         <div class="modal-body" align="left">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>የዚህን ምዕመን መረጃ ሊያጠፉ ነው።</p>
+                            <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>የዚህን ምዕመን መረጃ ወደ ቆሼ ሊከቱ ነው።</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal">አይ</button>

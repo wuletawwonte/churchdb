@@ -114,8 +114,8 @@
 
 
             <div class="box-header with-border">
-                <h3 class="box-title">ሪፖርት ማዘዣ</h3>
-            </div>
+                <h3 class="box-title">ሪፖርት ማዘዣ </h3>
+            </div> 
 
            	<div class="box-body">
            		<div style="text-align: center;">

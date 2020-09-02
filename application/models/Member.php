@@ -180,23 +180,23 @@ class Member extends CI_Model {
 		$this->db->select('m.*, TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) AS age, m2.id spouse_id, CONCAT(m2.firstname, " ", m2.middlename) AS spouse_name ');
 		$this->db->where('m.status', 'ያለ');
 	    if($_SESSION['filtermember']['gender'] != NULL) {
-	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
+	    	$this->db->where('m.gender', $_SESSION['filtermember']['gender']);
 	    }
 	    if($_SESSION['filtermember']['job_type'] != NULL) {
-	    	$this->db->where('job_type', $_SESSION['filtermember']['job_type']);
+	    	$this->db->where('m.job_type', $_SESSION['filtermember']['job_type']);
 	    }
 	    if($_SESSION['filtermember']['membership_level'] != NULL) {
-	    	$this->db->where('membership_level', $_SESSION['filtermember']['membership_level']);
+	    	$this->db->where('m.membership_level', $_SESSION['filtermember']['membership_level']);
 	    }
 	    if($_SESSION['filtermember']['ministry'] != NULL) {
-	    	$this->db->where('ministry', $_SESSION['filtermember']['ministry']);
+	    	$this->db->where('m.ministry', $_SESSION['filtermember']['ministry']);
 	    }
 	    if($_SESSION['filtermember']['marital_status'] != NULL) {
-	    	$this->db->where('marital_status', $_SESSION['filtermember']['marital_status']);
+	    	$this->db->where('m.marital_status', $_SESSION['filtermember']['marital_status']);
 	    }
 	    if($sage != NULL) {
-	    	$this->db->where('TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) >', $sage);
-	    	$this->db->where('TIMESTAMPDIFF(YEAR,birthdate,CURDATE()) <', $eage);
+	    	$this->db->where('TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) >', $sage);
+	    	$this->db->where('TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) <', $eage);
 	    }
 
 		$this->db->join('members m2', 'm.spouse = m2.id', 'LEFT');
@@ -207,21 +207,21 @@ class Member extends CI_Model {
 	public function get_members_for_export() {
 		$this->db->select('m.*, TIMESTAMPDIFF(YEAR,m.birthdate,CURDATE()) AS age, m2.id spouse_id, CONCAT(m2.firstname, " ", m2.middlename) AS spouse_name ');	    
 		if($_SESSION['filtermember']['gender'] != NULL) {
-	    	$this->db->where('gender', $_SESSION['filtermember']['gender']);
+	    	$this->db->where('m.gender', $_SESSION['filtermember']['gender']);
 	    }
 	    if($_SESSION['filtermember']['job_type'] != NULL) {
-	    	$this->db->where('job_type', $_SESSION['filtermember']['job_type']);
+	    	$this->db->where('m.job_type', $_SESSION['filtermember']['job_type']);
 	    }
 	    if($_SESSION['filtermember']['membership_level'] != NULL) {
-	    	$this->db->where('membership_level', $_SESSION['filtermember']['membership_level']);
+	    	$this->db->where('m.membership_level', $_SESSION['filtermember']['membership_level']);
 	    }
 	    if($_SESSION['filtermember']['ministry'] != NULL) {
-	    	$this->db->where('ministry', $_SESSION['filtermember']['ministry']);
+	    	$this->db->where('m.ministry', $_SESSION['filtermember']['ministry']);
 	    }
 	    if($_SESSION['filtermember']['marital_status'] != NULL) {
-	    	$this->db->where('marital_status', $_SESSION['filtermember']['marital_status']);
+	    	$this->db->where('m.marital_status', $_SESSION['filtermember']['marital_status']);
 	    }
-		$this->db->order_by('firstname', 'ASC');
+		$this->db->order_by('m.firstname', 'ASC');
 
 		$this->db->join('members m2', 'm.spouse = m2.id', 'LEFT');
 		$data = $this->db->get('members m');
@@ -338,9 +338,21 @@ class Member extends CI_Model {
 	}
 
 	public function get_gender_specific($gender) {
+		$this->db->select('id, CONCAT(firstname," ", middlename) as text');
 		$this->db->where('status', 'ያለ');
 		$this->db->where('marital_status', 'ያላገባ/ች');
 		$this->db->or_where('marital_status', 'አልተመረጠም');
+		$this->db->where('gender !=', $gender);
+		$data = $this->db->get('members');
+
+		return $data->result_array();
+	}
+
+	public function get_gender_specific_ajax($search, $gender) {
+		$this->db->select('id, CONCAT(firstname," ", middlename) as text');
+		$this->db->where('status', 'ያለ');
+		$this->db->where('marital_status', 'ያላገባ/ች')->or_where('marital_status', 'አልተመረጠም');
+		$this->db->where("firstname like '%".$search."%'");
 		$this->db->where('gender !=', $gender);
 		$data = $this->db->get('members');
 
@@ -355,7 +367,6 @@ class Member extends CI_Model {
 
 		return true;
 	}
-
 
 
 
