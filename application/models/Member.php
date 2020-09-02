@@ -43,7 +43,7 @@ class Member extends CI_Model {
 			'profile_color' => $colors[array_rand($colors, 1)] 
 			);
 
-		$this->db->insert('members', $data);
+		$this->db->insert('members', $data);		
 		$last_id = $this->db->insert_id();
 		$tracked_change = array(
 			'by_user' => $this->session->userdata('current_user')['firstname'].' '.$this->session->userdata('current_user')['lastname'],
@@ -51,6 +51,11 @@ class Member extends CI_Model {
 			'member_id' => $last_id
 			);
 		$this->db->insert('timelines', $tracked_change);
+
+		if($this->input->post('spouse') != NULL) {
+			$this->db->where('id', $this->input->post('spouse'));
+			$this->db->update('members', array('marital_status' => 'ያገባ/ች', 'spouse' => $last_id));
+		}
 
 		return true;
 	}
