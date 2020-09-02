@@ -473,7 +473,7 @@ class Admin extends CI_Controller {
 		header('Content-Disposition:attachment;filename="'.$filename.'"');
 		header('Cache-Control: max-age=0');
 		$objWriter =PHPExcel_IOFactory::createWriter($objPHPExcel,'CSV');
-		$objWriter->save('/var/www/church-database/download/'.$filename);
+		$objWriter->save('/data/www/amyc.org.et/churchdb.amyc.org.et/download/'.$filename);
 		
 		$this->members_backup->add($filename);
 
