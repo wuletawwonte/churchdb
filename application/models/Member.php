@@ -345,8 +345,7 @@ class Member extends CI_Model {
 	public function get_gender_specific($gender) {
 		$this->db->select('id, CONCAT(firstname," ", middlename) as text');
 		$this->db->where('status', 'ያለ');
-		$this->db->where('marital_status', 'ያላገባ/ች');
-		$this->db->or_where('marital_status', 'አልተመረጠም');
+		$this->db->where('spouse', NULL);
 		$this->db->where('gender !=', $gender);
 		$data = $this->db->get('members');
 
