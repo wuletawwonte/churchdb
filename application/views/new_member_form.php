@@ -418,7 +418,6 @@
 			            	results: data
 			            };
 			        }
-		            // cache: true
 				}
 			});
 
