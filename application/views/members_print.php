@@ -67,13 +67,13 @@
 						<td><?= $member['birth_place']; ?></td>
 						<td><?= $member['mobile_phone']; ?></td>
 						<td><?= $member['email']; ?></td>
-						<td><?= $member['job_type_title']; ?></td>
+						<td><?= $member['job_type']; ?></td>
 						<td><?= $member['workplace_name']; ?></td>
 						<td><?= $member['workplace_phone']; ?></td>
 						<td><?php if($member['membership_year']) { echo $member['membership_year']; } ?></td>
-						<td><?= $member['membership_cause_title']; ?></td>
-						<td><?= $member['membership_level_title']; ?></td>
-						<td><?= $member['ministry_title']; ?></td>
+						<td><?= $member['membership_cause']; ?></td>
+						<td><?= $member['membership_level']; ?></td>
+						<td><?= $member['ministry']; ?></td>
 						<td><?= $member['marital_status']; ?></td>
 		            </tr>
 		        <?php } ?>

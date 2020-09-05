@@ -73,24 +73,6 @@
 
                                     <a href="<?php echo base_url(); ?>admin/edituserform/<?= $user['id'] ?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
                                     <a data-toggle="modal" href="#myModal<?= $user['id']?>"><i class="fa fa-trash" style="color: #dd4b39;"></i></a>
-                                <?php } ?>
-                            </td>
-
-                            <td>
-                                <a href="#"> <?php echo $user['firstname'].' '.$user['lastname']; ?></a>
-                            </td>
-
-                            <td><?= $user['user_type']; ?></td>
-                            <td align="center"><?= $user['login_count']; ?></td>
-                            <td><?php echo $user['created']; ?></td>
-
-                            <td>
-                                <a href="#"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                           </td>
-
-                        </tr>
-
-
 
 
                                         <div id="myModal<?= $user['id']?>" class="modal fade" role="dialog" style="margin-top: 100px;">
@@ -112,7 +94,22 @@
                                         </div>
 
 
+                                <?php } ?>
+                            </td>
 
+                            <td>
+                                <a href="<?php echo base_url(); ?>admin/edituserform/<?= $user['id'] ?>"> <?php echo $user['firstname'].' '.$user['lastname']; ?></a>
+                            </td>
+
+                            <td><?= $user['user_type']; ?></td>
+                            <td align="center"><?= $user['login_count']; ?></td>
+                            <td><?php echo $user['created']; ?></td>
+
+                            <td>
+                                <a href="#"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                           </td>
+
+                        </tr>
 
 
 

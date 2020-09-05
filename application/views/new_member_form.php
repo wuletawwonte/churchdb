@@ -364,7 +364,7 @@
 		            <div class="form-group col-md-6">
 		                <label> የትዳር አጋር:</label>
 		                <select name="spouse" class="form-control" id="spouse" disabled>
-		                    <option value="አልተመረጠም" selected>አልተመረጠም</option>
+		                    <option value="" selected>አልተመረጠም</option>
 		                    <option disabled>-----------------------</option>
 		                </select>
 		            </div>
@@ -417,8 +417,8 @@
 			            return {
 			            	results: data
 			            };
-			        },
-		            cache: true
+			        }
+		            // cache: true
 				}
 			});
 
