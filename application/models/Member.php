@@ -11,6 +11,11 @@ class Member extends CI_Model {
 
 	public function add($avatar) {
 		$colors = array('#00c0ef', '#0073b7', '#3c8dbc', '#39cccc', '#f39c12', '#ff851b', '#00a65a', '#01ff70', '#dd4b39', '#605ca8', '#f012be', '#777777', '#001f3f');	
+		$spouse = $this->input->post('spouse');
+		if($this->input->post('spouse') == 0){
+			$spouse = null;
+		}
+
 		$data = array(
 			'title' => $this->input->post('title'), 
 			'firstname' => $this->input->post('firstname'), 
@@ -38,7 +43,7 @@ class Member extends CI_Model {
 			'membership_level' => $this->input->post('membership_level'), 
 			'ministry' => $this->input->post('ministry'), 
 			'marital_status' => $this->input->post('marital_status'), 
-			'spouse' => $this->input->post('spouse'),
+			'spouse' => $spouse,
 			'avatar' => $avatar,
 			'profile_color' => $colors[array_rand($colors, 1)] 
 			);
@@ -73,6 +78,11 @@ class Member extends CI_Model {
 	}
 
 	public function edit($id, $avatar) {
+		$spouse = $this->input->post('spouse');
+		if($this->input->post('spouse') == 0){
+			$spouse = null;
+		}
+
 		if($avatar == NULL) {
 			$data = array(
 				'title' => $this->input->post('title'), 
@@ -101,7 +111,7 @@ class Member extends CI_Model {
 				'membership_level' => $this->input->post('membership_level'), 
 				'ministry' => $this->input->post('ministry'), 
 				'marital_status' => $this->input->post('marital_status'), 
-				'spouse' => $this->input->post('spouse')
+				'spouse' => $spouse
 				);
 		} else {
 			$data = array(
@@ -131,7 +141,7 @@ class Member extends CI_Model {
 				'membership_level' => $this->input->post('membership_level'), 
 				'ministry' => $this->input->post('ministry'), 
 				'marital_status' => $this->input->post('marital_status'), 
-				'spouse' => $this->input->post('spouse'),
+				'spouse' => $spouse,
 				'avatar' => $avatar
 				);
 		}
@@ -346,7 +356,7 @@ class Member extends CI_Model {
 		$this->db->select('id, CONCAT(firstname," ", middlename) as text');
 		$this->db->where('gender !=', $gender);
 		$this->db->where('status', 'ያለ');
-		$this->db->where('spouse IS NULL')->or_where('spouse', 0);
+		$this->db->where('spouse IS NULL');
 		$data = $this->db->get('members');
 
 		return $data->result_array();
@@ -354,10 +364,10 @@ class Member extends CI_Model {
 
 	public function get_gender_specific_ajax($search, $gender) {
 		$this->db->select('id, CONCAT(firstname," ", middlename) as text');
-		$this->db->where('gender !=', $gender);
+		$this->db->where('spouse IS NULL');
 		$this->db->where('status', 'ያለ');
-		$this->db->where('spouse IS NULL')->or_where('spouse', 0);
-		$this->db->where("firstname like '%".$search."%'");
+		$this->db->like("firstname", $search, 'both');
+		$this->db->where('gender !=', $gender);
 		$data = $this->db->get('members');
 
 		return $data->result_array();
