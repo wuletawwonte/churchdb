@@ -344,10 +344,9 @@ class Member extends CI_Model {
 
 	public function get_gender_specific($gender) {
 		$this->db->select('id, CONCAT(firstname," ", middlename) as text');
-		$this->db->where('status', 'ያለ');
-		$this->db->where('marital_status', 'ያላገባ/ች');
-		$this->db->or_where('marital_status', 'አልተመረጠም');
 		$this->db->where('gender !=', $gender);
+		$this->db->where('status', 'ያለ');
+		$this->db->where('spouse IS NULL')->or_where('spouse', 0);
 		$data = $this->db->get('members');
 
 		return $data->result_array();
@@ -355,10 +354,10 @@ class Member extends CI_Model {
 
 	public function get_gender_specific_ajax($search, $gender) {
 		$this->db->select('id, CONCAT(firstname," ", middlename) as text');
-		$this->db->where('status', 'ያለ');
-		$this->db->where('marital_status', 'ያላገባ/ች')->or_where('marital_status', 'አልተመረጠም');
-		$this->db->where("firstname like '%".$search."%'");
 		$this->db->where('gender !=', $gender);
+		$this->db->where('status', 'ያለ');
+		$this->db->where('spouse IS NULL')->or_where('spouse', 0);
+		$this->db->where("firstname like '%".$search."%'");
 		$data = $this->db->get('members');
 
 		return $data->result_array();
