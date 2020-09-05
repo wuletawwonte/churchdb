@@ -249,7 +249,7 @@
 	                        <select name="job_type" class="form-control s2">
 	                        	<option value="አልተመረጠም">አልተመረጠም</option>
 	                        	<?php foreach($job_types as $job_type) { ?>
-		                            <option value="<?= $job_type['job_type_id'] ?>"> <?= $job_type['job_type_title']; ?> </option>
+		                            <option value="<?= $job_type['job_type_title'] ?>"> <?= $job_type['job_type_title']; ?> </option>
 		                        <?php } ?>
 	                        </select>
 	                    </div>
