@@ -347,6 +347,7 @@
 	                    <div class="col-md-4 serving_as">
 	                        <label> የአገልግሎት ዘርፍ :</label>
 	                        <select name="ministry" class="form-control s2">
+	                        	<option value="አልተመረጠም" <?php if($member['ministry'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($ministries as $ministry) { ?>
 		                        	<option <?php if($ministry['ministry_title'] == $member['ministry']){echo 'selected'; }?> value="<?= $ministry['ministry_title']; ?>"> 
 		                        		<?= $ministry['ministry_title']; ?> 
