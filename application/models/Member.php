@@ -164,6 +164,15 @@ class Member extends CI_Model {
 		return $data->result_array(); 
 	}
 
+	public function get_all_for_mobile() {
+		$this->db->select('firstname, middlename, lastname, avatar, profile_color, gender, membership_level');
+		$this->db->where('status', 'ያለ');
+		$this->db->order_by('firstname', 'ASC');
+		$data = $this->db->get('members');
+
+		return $data->result_array(); 		
+	}
+
 	public function latest_members(){
 		$this->db->where('status', 'ያለ');
 		$this->db->limit(12);
