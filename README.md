@@ -1,72 +1,40 @@
-# Church DAtabase System being developed by Wuletaw Wonte using Codeigniter version 3.19
+# Church Database
 
-###################
-What is CodeIgniter
-###################
+> This project is developed to track church members information. It is initially built for Arba Minch Mekane Yesus Congregation, but anyone can use it. It is built. It has all of the basic features a church management system needs, such as member registration, editing member information, deleting members data, including tracking a payment information for each member.
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+How do I use this?
+---
+1. [Download the latest version](https://github.com/wuletawwonte/churchdb)
+2. Create a new database, user and password and import the sql/project_database.sql file into the new database
+3. Edit application/config/database.php and update the database name, user and password
+4. (Optional) Rename htaccess.txt to .htaccess
+5. Edit application/config/config.php and make sure to update the following settings: base\_url, index\_page (you can remove index.php if you're using a .htaccess file), encryption\_key, sess\_cookie\_name, csrf\_token\_name and csrf\_cookie\_name
+6. The app should be up and running by now, you can login using email admin@admin.com with password "password" (without quotes)
+7. (Optional) You will find the original Ion Auth files in controllers/auth.php and views/auth so you can extend and/or customize them as you see fit
+8. New controllers on your app should inherit from App_Controller
 
-*******************
-Release Information
-*******************
+Ok, but there are things I don't like in here, how can I change them?
+---
+- You can use config/app.php to define configuration that is used everywhere
+- Validation Rules are set in config/form\_validation.php, you can either delete or add more here
+- The App\_Form\_Validation.php file has custom validations already in place, you can either delete or add new ones there
+- The App_Controller.php file is a good place to start if you want to change how this template works
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
 
-**************************
-Changelog and New Features
-**************************
+What will I find in here?
+---
+* [CodeIgniter 2.1.3](https://github.com/EllisLab/CodeIgniter)
+* [Ion Auth](https://github.com/benedmunds/CodeIgniter-Ion-Auth)
+* [CodeIgniter Template](https://github.com/philsturgeon/codeigniter-template)
+* [wiredesignz Modular Extensions - HMVC](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc)
+* [Bootstrap 2.3.1](http://twitter.github.com/bootstrap)
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+Copyright and license
+---
+Copyright (C) 2013 [Wuletaw Wonte](https://github.com/wuletawwonte).
 
-*******************
-Server Requirements
-*******************
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-PHP version 5.6 or newer is recommended.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
-
-************
-Installation
-************
-
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
-
-*******
-License
-*******
-
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
-
-*********
-Resources
-*********
-
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
-
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
-
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
