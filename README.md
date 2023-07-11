@@ -3,7 +3,6 @@
 > This project is developed to track church members information. It is initially built for Arba Minch Mekane Yesus Congregation, but anyone can use it. It has all of the basic features a church management system needs, such as member registration, editing member information, deleting members data, including tracking a payment information for each member.
 
 ## Getting Started
----
 1. Clone the repo to your computer
 ```bash
 git clone https://github.com/wuletawwonte/churchdb
@@ -24,7 +23,6 @@ git clone https://github.com/wuletawwonte/churchdb
 
 
 ### What will I find in here?
----
 * [CodeIgniter 2.1.3](https://github.com/EllisLab/CodeIgniter)
 * [Ion Auth](https://github.com/benedmunds/CodeIgniter-Ion-Auth)
 * [CodeIgniter Template](https://github.com/philsturgeon/codeigniter-template)
