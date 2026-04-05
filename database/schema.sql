@@ -141,6 +141,20 @@ CREATE TABLE `members` (
 ) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 #
+# TABLE STRUCTURE FOR: members_backups
+# Tracks generated member export files (see Admin::membersexport / Members_backup model).
+#
+
+DROP TABLE IF EXISTS `members_backups`;
+
+CREATE TABLE `members_backups` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `filename` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
 # TABLE STRUCTURE FOR: membership_causes
 #
 
