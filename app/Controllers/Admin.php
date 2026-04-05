@@ -345,7 +345,7 @@ class Admin extends BaseController
 
 	public function listgroups() {
 
-		$config['base_url'] = base_url('admin/listgroups');
+		$config['base_url'] = base_url('admin/groups');
 		$config['total_rows'] = $this->groupModel->record_count();
 		$config['per_page'] = 5;
 		$config["uri_segment"] = 3;
@@ -366,8 +366,9 @@ class Admin extends BaseController
 		$config['last_tagl_close'] = "</li>";
 
 		$page = (int) ($this->request->getUri()->getSegment(3) ?? 0);
-		$data['links'] = $this->paginationByOffset('admin/listgroups', $config['per_page'], $config['total_rows'], $page);
+		$data['links'] = $this->paginationByOffset('admin/groups', $config['per_page'], $config['total_rows'], $page);
 		$data['active_menu'] = "groups";
+		$data['groups_total'] = (int) $config['total_rows'];
 		$data['groups'] = $this->groupModel->get_all('created', 'DESC', $config["per_page"], $page);
 		echo view('templates/header', $data);
 		echo view('list_groups');
@@ -376,7 +377,7 @@ class Admin extends BaseController
 
 	public function savegroup() {
 		$this->groupModel->add();
-		return redirect()->to(site_url('admin/listgroups'));
+		return redirect()->to(site_url('admin/groups'));
 	}
 
 		public function export_families_csv() {
@@ -594,7 +595,7 @@ class Admin extends BaseController
 
 	public function add_group_member() {
 		$this->groupMemberModel->add_group_member();
-		return redirect()->to(site_url('admin/groupdetails/'.$this->request->getPost('group_id')));		
+		return redirect()->to(site_url('admin/group/'.$this->request->getPost('group_id')));
 	}
 
 	public function ajax_get_member() {
@@ -623,7 +624,7 @@ class Admin extends BaseController
 
 	public function remove_group_member($mid, $gid) {
 		$this->groupMemberModel->remove_group_member($mid, $gid);
-		return redirect()->to(site_url('admin/groupdetails/'.$gid));
+		return redirect()->to(site_url('admin/group/'.$gid));
 	}
 
 	public function listformelements() {
@@ -783,10 +784,10 @@ class Admin extends BaseController
 	public function deletegroup($gid) {
 		if($this->groupModel->deletegroup($gid)) {
 			session()->setFlashdata('success', 'ቡድኑ በትክክል ጠፍቷል።');			
-			return redirect()->to(site_url('admin/listgroups'));
+			return redirect()->to(site_url('admin/groups'));
 		} else {
 			session()->setFlashdata('error', 'የቡድኑን መረጃ ማጥፋት አልተቻለም።');			
-			return redirect()->to(site_url('admin/listgroups'));			
+			return redirect()->to(site_url('admin/groups'));			
 		}
 	}
 

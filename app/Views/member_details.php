@@ -257,7 +257,7 @@
                             <?php foreach($assigned_groups as $group) {?>
                                 <tr>
                                     <td>                      
-                                        <a href="<?= base_url('admin/groupdetails/'.$group['gid']); ?>"><?= $group['name'];?> </a>
+                                        <a href="<?= base_url('admin/group/'.$group['gid']); ?>"><?= $group['name'];?> </a>
                                     </td>
                                     <td class="text-center">
                                         <span class='label label-default'><?= $group['type']?> </span>

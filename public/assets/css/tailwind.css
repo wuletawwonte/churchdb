@@ -4066,6 +4066,12 @@
   .w-32 {
     width: calc(var(--spacing) * 32);
   }
+  .w-36 {
+    width: calc(var(--spacing) * 36);
+  }
+  .w-40 {
+    width: calc(var(--spacing) * 40);
+  }
   .w-44 {
     width: calc(var(--spacing) * 44);
   }
@@ -4126,6 +4132,9 @@
   .min-w-0 {
     min-width: calc(var(--spacing) * 0);
   }
+  .min-w-\[10rem\] {
+    min-width: 10rem;
+  }
   .min-w-\[12rem\] {
     min-width: 12rem;
   }
@@ -4134,6 +4143,9 @@
   }
   .min-w-\[480px\] {
     min-width: 480px;
+  }
+  .min-w-\[520px\] {
+    min-width: 520px;
   }
   .min-w-\[600px\] {
     min-width: 600px;
@@ -4377,6 +4389,14 @@
       background-color: var(--color-base-200);
       color: var(--color-base-content);
       background-image: none;
+    }
+  }
+  .badge-outline {
+    @layer daisyui.l1.l2 {
+      color: var(--badge-color);
+      --badge-bg: #0000;
+      background-image: none;
+      border-color: currentColor;
     }
   }
   .border-base-content {
@@ -5095,6 +5115,16 @@
       }
     }
   }
+  .hover\:bg-error\/10 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-error);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-error) 10%, transparent);
+        }
+      }
+    }
+  }
   .hover\:text-base-content {
     &:hover {
       @media (hover: hover) {
@@ -5144,14 +5174,29 @@
       grid-column: span 2 / span 2;
     }
   }
+  .sm\:col-span-5 {
+    @media (width >= 40rem) {
+      grid-column: span 5 / span 5;
+    }
+  }
   .sm\:inline {
     @media (width >= 40rem) {
       display: inline;
     }
   }
+  .sm\:w-auto {
+    @media (width >= 40rem) {
+      width: auto;
+    }
+  }
   .sm\:grid-cols-2 {
     @media (width >= 40rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .sm\:grid-cols-12 {
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
     }
   }
   .sm\:flex-row {
@@ -5162,6 +5207,11 @@
   .sm\:items-center {
     @media (width >= 40rem) {
       align-items: center;
+    }
+  }
+  .sm\:items-end {
+    @media (width >= 40rem) {
+      align-items: flex-end;
     }
   }
   .sm\:justify-between {

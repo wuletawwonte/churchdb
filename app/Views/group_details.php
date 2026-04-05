@@ -5,7 +5,7 @@
     <!-- Content Header (Page header) -->
     <?= view('templates/partials/page_heading', [
         'title' => 'የቡድን አባላት',
-        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url('admin/members'), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li><li><a href="' . esc(base_url('admin/listgroups'), 'url') . '" class="link link-hover"><i class="fa fa-object-group"></i> ቡድኖች </a></li><li class="text-base-content/80"> የቡድን አባላት </li></ul>',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url('admin/members'), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li><li><a href="' . esc(base_url('admin/groups'), 'url') . '" class="link link-hover"><i class="fa fa-object-group"></i> ቡድኖች </a></li><li class="text-base-content/80"> የቡድን አባላት </li></ul>',
     ]); ?>
 
     <section class="content container-fluid">

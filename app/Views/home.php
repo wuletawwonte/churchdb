@@ -40,7 +40,7 @@ $membership_pie_sum = array_sum(array_column($membership_pie_segments, 'value'))
         <div class="stat-figure text-error"><i class="fa fa-tag text-3xl"></i></div>
         <div class="stat-title"><?= lang('label.groups') ?></div>
         <div class="stat-value text-error"><?= esc($total_groups); ?></div>
-        <div class="stat-desc"><a href="<?= base_url('admin/listgroups'); ?>" class="link"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a></div>
+        <div class="stat-desc"><a href="<?= base_url('admin/groups'); ?>" class="link"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a></div>
       </div>
     </div>
   </div>
