@@ -1,69 +1,58 @@
-# CodeIgniter 4 Application Starter
+# ChurchDB
 
-## What is CodeIgniter?
+ChurchDB is a **public, open source** web application for managing people, groups, and related records for faith communities and similar organizations. It is **not limited to a single congregation or denomination**: you can adapt labels, configuration, and data to your own context.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+The project is **built with Ethiopian churches in mind**—including **Amharic** in the interface, workflows that match common local church administration needs, and defaults that fit how many congregations in Ethiopia operate. Contributors and deployers anywhere are welcome; the stack is standard PHP and MySQL.
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Features (high level)
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+- Member registration and profiles, groups, payments, notes, and reporting-oriented views  
+- Bilingual-friendly UI (Amharic-focused strings with English fallbacks where configured)  
+- CodeIgniter 4 application structure (`public/` document root, `.env` configuration)
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## Requirements
 
-## Installation & updates
+- **PHP** 8.2+ with extensions such as **intl**, **mbstring**, and **mysqli** / **mysqlnd** (see the [CodeIgniter 4 user guide](https://codeigniter.com/user_guide/) for full details)  
+- **MySQL** or **MariaDB** for the application database  
+- **Composer** for PHP dependencies  
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+## Quick start (local)
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+1. Clone the repository and install dependencies:
 
-## Setup
+   ```bash
+   composer install
+   ```
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+2. Copy the environment template and edit database and `app.baseURL` (and other values as needed):
 
-## Important Change with index.php
+   ```bash
+   cp env .env
+   ```
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+3. Create the database and import schema (and optional seed data):
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+   ```bash
+   mysql -u USER -p DATABASE < database/schema.sql
+   mysql -u USER -p DATABASE < database/seed.sql   # optional demo data
+   ```
 
-**Please** read the user guide for a better explanation of how CI4 works!
+4. Point your web server at the **`public/`** directory (not the project root), or use Docker (see below).
 
-## Repository Management
+## Docker
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+A **`Dockerfile`** and **`docker-compose.yml`** are included for local stacks (app + MariaDB). See the comments in `docker-compose.yml` for ports, environment variables, and how to load `database/schema.sql` after the containers are up.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+Images are also built in CI and can be published to **GitHub Container Registry**; see `.github/workflows/docker-ghcr.yml`.
 
-## Server Requirements
+## Framework
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+ChurchDB is built on [CodeIgniter 4](https://codeigniter.com). For framework-specific concepts (routing, security, localization), refer to the [official documentation](https://codeigniter.com/user_guide/).
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+## License
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+This project is open source under the **MIT License**; see the `LICENSE` file in the repository.
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+## Contributing
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Issues and pull requests are welcome. Please keep changes focused and consistent with existing patterns in the codebase.
