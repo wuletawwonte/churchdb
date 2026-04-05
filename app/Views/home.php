@@ -1,4 +1,15 @@
-<script type="text/javascript" src="<?= base_url('assets/vendors/chartjs/Chart.min.js'); ?>"></script>
+<?php
+$membership_pie_segments = [];
+foreach ($membership_levels as $ml) {
+    $membership_pie_segments[] = [
+        'value' => (int) ($ml['count'] ?? 0),
+        'color' => (string) ($ml['color'] ?? '#777777'),
+        'highlight' => (string) ($ml['color'] ?? '#777777'),
+        'label' => (string) ($ml['title'] ?? ''),
+    ];
+}
+$membership_pie_sum = array_sum(array_column($membership_pie_segments, 'value'));
+?>
 
 <?= view('templates/partials/page_heading', [
     'title' => lang('label.welcome'),
@@ -58,16 +69,20 @@
     </div>
 
     <div class="space-y-4">
-      <div class="card border border-base-content/15 bg-base-100 shadow-md">
-        <div class="card-body">
+      <div class="card border border-base-content/15 bg-base-100 shadow-md overflow-hidden">
+        <div class="card-body gap-4">
           <h2 class="card-title border-b border-base-content/15 pb-2"> የአባልነት ደራጃ ተዋፅኦ </h2>
-          <div class="flex flex-col gap-4 md:flex-row">
-            <div class="min-w-0 flex-1">
-              <div class="chart-responsive flex justify-center">
-                <canvas id="pieChart" height="160" width="207" style="width: 207px; height: 160px;"></canvas>
+          <div class="flex flex-col items-stretch gap-6 md:flex-row md:items-center">
+            <div class="flex min-w-0 shrink-0 justify-center md:w-[min(44%,220px)]">
+              <div class="chart-responsive box-border flex aspect-square w-full max-w-[200px] items-center justify-center overflow-hidden rounded-xl bg-base-200/40 p-2 md:max-w-none md:w-full">
+                <?php if ($membership_pie_sum > 0) : ?>
+                <canvas id="pieChart" width="184" height="184" class="block max-h-full max-w-full" style="width: 184px; height: 184px; max-width: 100%; max-height: 100%;"></canvas>
+                <?php else : ?>
+                <p class="px-2 text-center text-sm text-base-content/60">ለዚህ ስብስብ የአባልነት ደረጃ ቁጥር የለም።</p>
+                <?php endif; ?>
               </div>
             </div>
-            <ul class="flex flex-col gap-2 text-sm md:w-2/5">
+            <ul class="flex min-w-0 flex-1 flex-col gap-2 text-sm">
               <?php foreach ($membership_levels as $membership_level) { ?>
                 <li><i class="fa fa-circle-o" style="color: <?= esc($membership_level['color']); ?>;"></i> <?= esc($membership_level['title']); ?> </li>
               <?php } ?>
@@ -108,33 +123,33 @@
 
 </section>
 
-<script type="text/javascript">
-  $(document).ready(function () {
-    var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
-    var pieChart = new Chart(pieChartCanvas);
-    var PieData = [
-    <?php foreach ($membership_levels as $membership_level) { ?>
-      {
-        value: <?= $membership_level['count'] ?>,
-        color: '<?= $membership_level['color'] ?>',
-        highlight: '<?= $membership_level['color'] ?>',
-        label: "<?= $membership_level['title'] ?>"
-      },
-    <?php } ?>
-    ];
-    var pieOptions = {
-      segmentShowStroke: true,
-      segmentStrokeColor: '#fff',
-      segmentStrokeWidth: 2,
-      percentageInnerCutout: 50,
-      animationSteps: 100,
-      animationEasing: 'easeOutBounce',
-      animateRotate: true,
-      animateScale: true,
-      responsive: true,
-      maintainAspectRatio: true,
-      legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
-    };
-    pieChart.Doughnut(PieData, pieOptions);
-  });
+<?php if ($membership_pie_sum > 0) : ?>
+<script src="<?= base_url('assets/vendors/chartjs/Chart.min.js'); ?>"></script>
+<script>
+(function () {
+  if (typeof Chart === 'undefined') {
+    return;
+  }
+  var canvas = document.getElementById('pieChart');
+  if (!canvas || !canvas.getContext) {
+    return;
+  }
+  var ctx = canvas.getContext('2d');
+  var pieData = <?= json_encode($membership_pie_segments, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP) ?: '[]' ?>;
+  var pieOptions = {
+    segmentShowStroke: true,
+    segmentStrokeColor: '#ffffff',
+    segmentStrokeWidth: 2,
+    percentageInnerCutout: 50,
+    animationSteps: 100,
+    animationEasing: 'easeOutBounce',
+    animateRotate: true,
+    animateScale: false,
+    responsive: false,
+    maintainAspectRatio: true,
+    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+  };
+  new Chart(ctx).Doughnut(pieData, pieOptions);
+})();
 </script>
+<?php endif; ?>
