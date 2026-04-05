@@ -1,58 +1,69 @@
-# Church Database
+# CodeIgniter 4 Application Starter
 
-> This project is developed to track church members information. It is initially built for Arba Minch Mekane Yesus Congregation, but anyone can use it. It has all of the basic features a church management system needs, such as member registration, editing member information, deleting members data, including tracking a payment information for each member.
+## What is CodeIgniter?
 
-## Getting Started
-1. Clone the repo to your computer
-```bash
-git clone https://github.com/wuletawwonte/churchdb
-```
-2. Create a new database, user and password and import the sql/project_database.sql file into the new database
-3. Edit application/config/database.php and update the database name, user and password
-4. (Optional) Rename htaccess.txt to .htaccess
-5. Edit application/config/config.php and make sure to update the following settings: base\_url, index\_page (you can remove index.php if you're using a .htaccess file), encryption\_key, sess\_cookie\_name, csrf\_token\_name and csrf\_cookie\_name
-6. The app should be up and running by now, you can login using email admin@admin.com with password "password" (without quotes)
-7. (Optional) You will find the original Ion Auth files in controllers/auth.php and views/auth so you can extend and/or customize them as you see fit
-8. New controllers on your app should inherit from App_Controller
+CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
+More information can be found at the [official site](https://codeigniter.com).
 
-### Important files to edit 
-- You can use config/app.php to define configuration that is used everywhere
-- Validation Rules are set in config/form\_validation.php, you can either delete or add more here
-- The App\_Form\_Validation.php file has custom validations already in place, you can either delete or add new ones there
-- The App_Controller.php file is a good place to start if you want to change how this template works
+This repository holds a composer-installable app starter.
+It has been built from the
+[development repository](https://github.com/codeigniter4/CodeIgniter4).
 
+More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
 
-### What will I find in here?
-* [CodeIgniter 2.1.3](https://github.com/EllisLab/CodeIgniter)
-* [Ion Auth](https://github.com/benedmunds/CodeIgniter-Ion-Auth)
-* [CodeIgniter Template](https://github.com/philsturgeon/codeigniter-template)
-* [wiredesignz Modular Extensions - HMVC](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc)
-* [Bootstrap 2.3.1](http://twitter.github.com/bootstrap)
+You can read the [user guide](https://codeigniter.com/user_guide/)
+corresponding to the latest version of the framework.
 
-## Authors
+## Installation & updates
 
-👤 **Wuletaw Wonte**
+`composer create-project codeigniter4/appstarter` then `composer update` whenever
+there is a new release of the framework.
 
-- GitHub: [@wuletawwonte](https://github.com/wuletawwonte)
-- Twitter: [@wuletaww](https://twitter.com/wuletaww)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/wuletaw-wonte)
+When updating, check the release notes to see if there are any changes you might need to apply
+to your `app` folder. The affected files can be copied or merged from
+`vendor/codeigniter4/framework/app`.
 
-## 🤝 Contributing
+## Setup
 
-Contributions, issues, and feature requests are welcome!
+Copy `env` to `.env` and tailor for your app, specifically the baseURL
+and any database settings.
 
-Feel free to check the [issues page](../../issues/).
+## Important Change with index.php
 
-## Show your support
+`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
+for better security and separation of components.
 
-Give a ⭐️ if you like this project!
+This means that you should configure your web server to "point" to your project's *public* folder, and
+not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
+framework are exposed.
 
-## Acknowledgments
+**Please** read the user guide for a better explanation of how CI4 works!
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+## Repository Management
 
-## 📝 License
+We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
+We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
+FEATURE REQUESTS.
 
-This project is **[MIT](./LICENSE.md)** licensed.
+This repository is a "distribution" one, built by our release preparation script.
+Problems with it can be raised on our forum, or as issues in the main repository.
+
+## Server Requirements
+
+PHP version 8.2 or higher is required, with the following extensions installed:
+
+- [intl](http://php.net/manual/en/intl.requirements.php)
+- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+
+> [!WARNING]
+> - The end of life date for PHP 7.4 was November 28, 2022.
+> - The end of life date for PHP 8.0 was November 26, 2023.
+> - The end of life date for PHP 8.1 was December 31, 2025.
+> - If you are still using below PHP 8.2, you should upgrade immediately.
+> - The end of life date for PHP 8.2 will be December 31, 2026.
+
+Additionally, make sure that the following extensions are enabled in your PHP:
+
+- json (enabled by default - don't turn it off)
+- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
+- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
