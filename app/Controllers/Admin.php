@@ -51,6 +51,7 @@ class Admin extends BaseController
         $this->ministryModel        = model('Ministry');
 
         $request->setLocale('amharic');
+        service('language')->setLocale($request->getLocale());
     }
 
 	public function index() {

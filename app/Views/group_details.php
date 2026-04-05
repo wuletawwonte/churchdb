@@ -32,7 +32,7 @@
 
 
         <div class="box box-primary">
-            <div class="box-header with-border"><?= lang('add_member') ?></div>
+            <div class="box-header with-border"><?= lang('label.add_member') ?></div>
             <div class="box-body">
                 <form action="<?= base_url('admin/add_group_member') ?>" method="POST">
                     <input type="text" name="group_id" value="<?= $group['gid'] ?>" hidden>
@@ -78,7 +78,7 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                          <th><span><?= lang('name') ?></span></th>
+                          <th><span><?= lang('label.name') ?></span></th>
                           <th class="text-center"><span>አባልነት</span></th>
                           <th><span>የትውልድ ቀን</span></th>
                           <th></th>

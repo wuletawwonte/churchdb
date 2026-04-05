@@ -28,7 +28,7 @@
 
 <div class="content-wrapper">
     <section class="content-header">
-        <h1><?= lang('person_profile') ?></h1>
+        <h1><?= lang('label.person_profile') ?></h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>admin/listmembers"><i class="fa fa-users"></i> ምዕመናን </a></li>
             <li class="active"> ምዕመን </li>
@@ -64,7 +64,7 @@
                         <?= $member['firstname']." ".$member['middlename']; ?></h3></a>
 
 
-                      <a  href="<?= base_url('admin/editmember/'.$member['id']); ?>" class="btn btn-primary btn-block <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" id="EditPerson"><b><?= lang('edit') ?></b></a>
+                      <a  href="<?= base_url('admin/editmember/'.$member['id']); ?>" class="btn btn-primary btn-block <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" id="EditPerson"><b><?= lang('label.edit') ?></b></a>
                   </div>
           <!-- /.box-body -->
         </div>
@@ -305,7 +305,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th><span><?= lang('name') ?></span></th>
+                                    <th><span><?= lang('label.name') ?></span></th>
                                     <th  class="text-center"><span>type</span></th>
                                     <th><span>role</span></th>
                                     <th><span>Created</span></th>

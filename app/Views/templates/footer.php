@@ -6,7 +6,7 @@
       <b>Version</b> 1.01
     </div>
     <!-- Default to the left -->
-    <strong><?= lang('copyright') ?> &copy; <?= date('Y'); ?> <a href="#"><b>Grace</b>Soft webdesign</a>.</strong> <?= lang('all_rights_reserved') ?>.
+    <strong><?= lang('label.copyright') ?> &copy; <?= date('Y'); ?> <a href="#"><b>Grace</b>Soft webdesign</a>.</strong> <?= lang('label.all_rights_reserved') ?>.
   </footer>
 
 </div>
@@ -20,7 +20,7 @@
      $(window).on('load', function() {
 
         $('#searchbox').select2({
-          placeholder: '<?= lang('search') ?>',
+          placeholder: '<?= lang('label.search') ?>',
           ajax: {
             url: '<?= base_url('admin/ajax_get_member') ?>',
             datatype: 'json',

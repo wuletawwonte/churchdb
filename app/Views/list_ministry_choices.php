@@ -44,7 +44,7 @@
                             <input type="text" placeholder="የአገልግሎት ዘርፍ" name="ministry_title" maxlength="48"  class="form-control" required>
                         </div>
                         <div class="col-md-2">
-                            <input type="submit" class="btn btn-primary btn-flat" name="" value="<?= lang('save') ?>">
+                            <input type="submit" class="btn btn-primary btn-flat" name="" value="<?= lang('label.save') ?>">
                         </div>
                     </form>
                 </div>

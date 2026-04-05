@@ -87,7 +87,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <a href="<?= base_url('users/logout'); ?>">ወይም በሌላ አካውንት ይግቡ</a>
   </div>
   <div class="lockscreen-footer text-center">
-<strong><?= lang('copyright') ?> &copy; <?= date('Y'); ?> <a href="https://www.facebook.com/gracesoftwebdesign" target="blank"><b>Grace</b>Soft webdesign</a>.</strong> <?= lang('all_rights_reserved') ?>.  
+<strong><?= lang('label.copyright') ?> &copy; <?= date('Y'); ?> <a href="https://www.facebook.com/gracesoftwebdesign" target="blank"><b>Grace</b>Soft webdesign</a>.</strong> <?= lang('label.all_rights_reserved') ?>.  
 </div>
 </div>
 <!-- /.center -->

@@ -16,6 +16,10 @@ class Users extends BaseController
     ) {
         parent::initController($request, $response, $logger);
         helper(['form', 'url']);
+        if ($request instanceof \CodeIgniter\HTTP\IncomingRequest) {
+            $request->setLocale('amharic');
+            service('language')->setLocale($request->getLocale());
+        }
         $this->userModel = model('User');
         $this->cnfgModel = model('Cnfg');
     }

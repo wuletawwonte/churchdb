@@ -18,11 +18,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <?= lang('person_registration'); ?>
+        <?= lang('label.person_registration'); ?>
       </h1>
       <ol class="breadcrumb">
         	<li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-	        <li class="active"><?= lang('add_new_person'); ?></li>
+	        <li class="active"><?= lang('label.add_new_person'); ?></li>
       </ol>
     </section>
 
@@ -372,7 +372,7 @@
 		    </div>
 
 
-            <input type="submit" class="btn btn-primary" value="<?= lang('save') ?>" Name="addchurchsubmit">
+            <input type="submit" class="btn btn-primary" value="<?= lang('label.save') ?>" Name="addchurchsubmit">
 			<input type="submit" class="btn btn-info" value="Save and Add" name="addchurchsubmit">
 			<a href="<?= base_url(); ?>admin/listmembers" class="btn">Cancel</a>
 

@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="pull-right">
-                        <label class="sr-only">Search:</label><input type="search" placeholder="<?= lang('search') ?>" class="form-control" aria-controls="families">
+                        <label class="sr-only">Search:</label><input type="search" placeholder="<?= lang('label.search') ?>" class="form-control" aria-controls="families">
                     </div>
                 </div>
             </div>
@@ -60,9 +60,9 @@
                 <thead>
                 <tr>
                     <th  style="text-align: center">Actions</th>
-                    <th><?= lang('name') ?></th>
-                    <th align="center"><?= lang('class_type') ?></th>
-                    <th align="center"><?= lang('created') ?></th>
+                    <th><?= lang('label.name') ?></th>
+                    <th align="center"><?= lang('label.class_type') ?></th>
+                    <th align="center"><?= lang('label.created') ?></th>
 
                 </tr>
                 </thead>

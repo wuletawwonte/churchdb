@@ -5,7 +5,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <?= lang('groups') ?>
+        <?= lang('label.groups') ?>
       </h1>
       <ol class="breadcrumb">
           <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
@@ -28,7 +28,7 @@
     <?php } ?>
 
     <div class="box box-primary">
-    	<div class="box-header with-border"><?= lang('create_group') ?></div>
+    	<div class="box-header with-border"><?= lang('label.create_group') ?></div>
     	<div class="box-body">
             <div class="form-group">
             <form method="POST" action="<?= base_url('admin/savegroup'); ?>">
@@ -44,7 +44,7 @@
 					<input type="text" name="name" maxlength="48"  class="form-control" required>
 				</div>
 				<div class="col-md-2">
-					<input type="submit" class="btn btn-primary btn-flat" name="" value="<?= lang('save') ?>">
+					<input type="submit" class="btn btn-primary btn-flat" name="" value="<?= lang('label.save') ?>">
 				</div>
 			</form>
 			</div>	            
@@ -68,9 +68,9 @@
                 <thead>
                 <tr>
                     <th  style="text-align: center">Actions</th>
-                    <th><?= lang('name') ?></th>
-                    <th align="center"><?= lang('group_type') ?></th>
-                    <th align="center"><?= lang('created') ?></th>
+                    <th><?= lang('label.name') ?></th>
+                    <th align="center"><?= lang('label.group_type') ?></th>
+                    <th align="center"><?= lang('label.created') ?></th>
 
                 </tr>
                 </thead>

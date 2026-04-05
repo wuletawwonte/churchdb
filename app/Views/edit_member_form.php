@@ -73,46 +73,46 @@
 	    		<div class="col-md-9 col-sm-9 col-lg-9">
 				    <div class="box box-info clearfix">
 				        <div class="box-header with-border">
-				            <h3 class="box-title"> <?= lang('personal_info'); ?>  </h3>
+				            <h3 class="box-title"> <?= lang('label.personal_info'); ?>  </h3>
 				        </div><!-- /.box-header -->
 				        <div class="box-body">
 				            <div class="form-group">
 				                <div class="row">
 				                    <div class="col-md-2">
-				                        <label> <?= lang('gender'); ?>  :</label>
+				                        <label> <?= lang('label.gender'); ?>  :</label>
 				                        <select name="gender" class="form-control s2">
 				                            <option <?php if($member['gender'] == 'ሴት') { echo 'selected'; }?> value="ሴት">ሴት</option>
 				                            <option <?php if($member['gender'] == 'ወንድ') { echo 'selected'; }?> value="ወንድ">ወንድ</option>
 				                        </select>
 				                    </div>
 				                    <div class="col-md-3">
-				                        <label for="Title"> <?= lang('title'); ?>  :</label>
+				                        <label for="Title"> <?= lang('label.title'); ?>  :</label>
 				                        <input type="text" name="Title" value="<?= $member['title']; ?>" class="form-control">
 				                    </div>
 				                </div>
 				                <p/>
 				                <div class="row">
 				                    <div class="col-md-4">
-				                        <label for="firstname"> <?= lang('first_name'); ?>  :</label>
+				                        <label for="firstname"> <?= lang('label.first_name'); ?>  :</label>
 				                        <input type="text" name="firstname" value="<?= $member['firstname'] ?>" class="form-control">
 				        				<br><font color="red"></font>
 				                    </div>
 
 				                    <div class="col-md-2">
-				                        <label for="middlename"> <?= lang('middle_name'); ?>  :</label>
+				                        <label for="middlename"> <?= lang('label.middle_name'); ?>  :</label>
 				                        <input type="text" name="middlename" value="<?= $member['middlename'] ?>" class="form-control">
 
 				                    </div>
 
 				                    <div class="col-md-6">
-				                        <label for="lastname"> <?= lang('last_name'); ?>  :</label>
+				                        <label for="lastname"> <?= lang('label.last_name'); ?>  :</label>
 				                        <input type="text" name="lastname" value="<?= $member['lastname'] ?>" class="form-control">                    
 				                    </div>
 				                </div>
 				                <p/>
 				                <div class="row">
 					                <div class="col-md-4 form-group">
-						                <label><?= lang('birth_date') ?>:</label>
+						                <label><?= lang('label.birth_date') ?>:</label>
 
 						                <div class="input-group">
 						                  <div class="input-group-addon">
@@ -130,7 +130,7 @@
 				                    </div>
 
 				                    <div class="col-md-6">
-				                        <label for="birth_place"> <?= lang('birth_place'); ?>  :</label>
+				                        <label for="birth_place"> <?= lang('label.birth_place'); ?>  :</label>
 				                        <input type="text" name="birth_place" value="<?= $member['birth_place'] ?>" class="form-control">                    
 				                    </div>
 
@@ -144,7 +144,7 @@
 
 			<div class="box box-info clearfix">
 				<div class="box-header with-border">
-					<h3 class="box-title"><?= lang('contact_and_job_info') ?></h3>
+					<h3 class="box-title"><?= lang('label.contact_and_job_info') ?></h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
 					<div class="row">
@@ -200,7 +200,7 @@
 
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label><?= lang('mobile_phone') ?>:</label>
+							<label><?= lang('label.mobile_phone') ?>:</label>
 							<div class="input-group">
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-earphone"></i>
@@ -210,7 +210,7 @@
 						</div>
 
 						<div class="form-group col-md-6">
-							<label><?= lang('email') ?> :</label>
+							<label><?= lang('label.email') ?> :</label>
 							<div class="input-group">
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-envelope"></i>
@@ -302,14 +302,14 @@
 
 			<div class="box box-info clearfix">
 				<div class="box-header  with-border">
-					<h3 class="box-title"><?= lang('church_participation') ?></h3>
+					<h3 class="box-title"><?= lang('label.church_participation') ?></h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
 
 					<div class="row">
 
 	                    <div class="col-md-4">
-	                        <label for="Title"> <?= lang('membership_year'); ?>  :</label>
+	                        <label for="Title"> <?= lang('label.membership_year'); ?>  :</label>
 	                        <div class="input-group">
 	                        	<input type="text" name="membership_year" value="<?php if($member['membership_year']) { echo $member['membership_year']; } ?>" class="form-control inputmasked" data-inputmask='"mask": "9999"' data-mask>
 	                    		<div class="input-group-addon">ዓ.ም</div>
@@ -318,7 +318,7 @@
 	                    </div>
 
 	                    <div class="col-md-4">
-	                        <label> <?= lang('cause_of_membership'); ?>  :</label>
+	                        <label> <?= lang('label.cause_of_membership'); ?>  :</label>
 	                        <select name="membership_cause" class="form-control s2">
 	                        	<option value="አልተመረጠም" <?php if($member['membership_cause'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($membership_causes as $membership_cause) { ?>
@@ -330,7 +330,7 @@
 	                    </div>
 
 	                    <div class="col-md-4">
-	                        <label> <?= lang('level_of_membership'); ?>  :</label>
+	                        <label> <?= lang('label.level_of_membership'); ?>  :</label>
 	                        <select name="membership_level" class="form-control s2">
 	                        	<option value="አልተመረጠም" <?php if($member['membership_level'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($membership_levels as $membership_level) { ?>

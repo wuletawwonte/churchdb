@@ -27,7 +27,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <?= lang('welcome') ?>
+        <?= lang('label.welcome') ?>
       </h1>
     </section>
 
@@ -43,12 +43,12 @@
             <div class="inner">
               <h3>150</h3>
 
-              <p><?= lang('website_hits') ?></p>
+              <p><?= lang('label.website_hits') ?></p>
             </div>
             <div class="icon">
               <i class="fa fa-globe"></i>
             </div>
-            <a href="#" class="small-box-footer"><?= lang('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -58,12 +58,12 @@
             <div class="inner">
               <h3><?= $total_members; ?></h3>
 
-              <p><?= lang('members') ?></p>
+              <p><?= lang('label.members') ?></p>
             </div>
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <a href="<?= base_url('admin/listmembers'); ?>" class="small-box-footer"><?= lang('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('admin/listmembers'); ?>" class="small-box-footer"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -73,12 +73,12 @@
             <div class="inner">
               <h3><?= $total_groups; ?></h3>
 
-              <p><?= lang('groups') ?></p>
+              <p><?= lang('label.groups') ?></p>
             </div>
             <div class="icon">
               <i class="fa fa-tag"></i>
             </div>
-            <a href="<?= base_url('admin/listgroups'); ?>" class="small-box-footer"><?= lang('more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('admin/listgroups'); ?>" class="small-box-footer"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -91,7 +91,7 @@
         <div class="box box-solid">
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><?= lang('latest_members'); ?></h3>
+                    <h3 class="box-title"><?= lang('label.latest_members'); ?></h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                         </button>
