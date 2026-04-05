@@ -7,9 +7,8 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/tailwind.css'); ?>">
 
 <style type="text/css">
 	.profile-image {
@@ -55,7 +54,7 @@
                         </div>
                     <?php } else { ?>
                         <div style="margin: 0 auto;height: 200px; width: 200px;margin-top: 15px;">
-                            <img class="img-circle" style="border: 3px solid <?= $member['profile_color']; ?>;padding: 3px;height: 200px; width: 200px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
+                            <img class="rounded-full" style="border: 3px solid <?= $member['profile_color']; ?>;padding: 3px;height: 200px; width: 200px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
                         </div>
 
                     <?php } ?>

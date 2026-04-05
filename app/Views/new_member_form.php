@@ -14,17 +14,16 @@
 
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
+    <div class="mb-6"><h1 class="text-2xl font-bold">
         <?= lang('label.person_registration'); ?>
       </h1>
-      <ol class="breadcrumb">
+      <div class="breadcrumbs text-sm"><ul>
         	<li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-	        <li class="active"><?= lang('label.add_new_person'); ?></li>
-      </ol>
-    </section>
+	        <li><?= lang('label.add_new_person'); ?></li>
+      </ul></div>
+    </div>
 
 
 
@@ -43,7 +42,7 @@
 	            <?php echo session()->getFlashdata('success'); ?>
 	        </div>
 	    <?php } else if(session()->getFlashdata('error')) { ?>
-		    <div class="alert alert-danger alert-dismissible">
+		    <div class="alert alert-error">
                 <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
 	            <?php echo session()->getFlashdata('error'); ?>
 	        </div>
@@ -52,18 +51,18 @@
 
 	    	<div class="row">
 	    		<div class="col-md-3 col-sm-3 col-lg-3">
-	    			<div class="box box-info clearfix ">
-	    				<div class="box-header with-border">
-	    					<h3 class="box-title">የምዕመን ፎቶ</h3>
+	    			<div class="card border border-base-300 bg-base-100 shadow-md clearfix ">
+	    				<div class="card-body border-b border-base-300 pb-3 mb-3">
+	    					<h3 class="card-title text-lg">የምዕመን ፎቶ</h3>
 	    				</div>
-	    				<div class="box-body" align="center">
-			              	<img class="img-responsive img-circle" for="avatarInput" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/img/user.png" alt="User profile picture"><br>
+	    				<div class="card-body" align="center">
+			              	<img class="img-responsive rounded-full" for="avatarInput" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/img/user.png" alt="User profile picture"><br>
 
 
 						<div class="input-group">
 			                <input type="file" accept="image/*" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" id="avatarInput" name="avatar_input" style="display: none;">
-				                    <button type="button" class="btn btn-lg btn-primary btn-flat" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
-				                    <button type="button" class="btn btn-lg btn-info btn-flat" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/img/user.png'"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
+				                    <button type="button" class="btn btn-lg btn-primary" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
+				                    <button type="button" class="btn btn-lg btn-info" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/img/user.png'"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
 			            </div>
 		                <p></p>
 
@@ -73,40 +72,40 @@
 	    			</div>
 	    		</div>
 	    		<div class="col-md-9 col-lg-9 col-sm-9">
-				    <div class="box box-info clearfix">
-				        <div class="box-header with-border">
-				            <h3 class="box-title"> የግል መረጃ </h3>
+				    <div class="card border border-base-300 bg-base-100 shadow-md clearfix">
+				        <div class="card-body border-b border-base-300 pb-3 mb-3">
+				            <h3 class="card-title text-lg"> የግል መረጃ </h3>
 				        </div><!-- /.box-header -->
-				        <div class="box-body">
+				        <div class="card-body">
 			                <div class="row">
 			                    <div class="col-md-2">
 			                        <label> ፆታ  :</label>
-			                        <select name="gender" id="gender" class="form-control s2">
+			                        <select name="gender" id="gender" class="input input-bordered w-full max-w-full s2">
 			                            <option value="ሴት"> ሴት </option>
 			                            <option value="ወንድ"> ወንድ </option>
 			                        </select>
 			                    </div>
 			                    <div class="col-md-3">
 			                        <label for="title"> ማዕረግ  :</label>
-			                        <input type="text" name="title" class="form-control">
+			                        <input type="text" name="title" class="input input-bordered w-full max-w-full">
 			                    </div>
 			                </div><br>
 			                <div class="row">
 			                    <div class="col-md-4">
 			                        <label for="firstname"> ስም  :</label>
-			                        <input type="text" name="firstname" class="form-control" required>
+			                        <input type="text" name="firstname" class="input input-bordered w-full max-w-full" required>
 			        				<br><font color="red"></font>
 			                    </div>
 
 			                    <div class="col-md-2">
 			                        <label for="middlename"> የአባት ስም  :</label>
-			                        <input type="text" name="middlename" class="form-control" required>
+			                        <input type="text" name="middlename" class="input input-bordered w-full max-w-full" required>
 
 			                    </div>
 
 			                    <div class="col-md-6">
 			                        <label for="lastname"> የአያት ስም :</label>
-			                        <input type="text" name="lastname" class="form-control" required>                    
+			                        <input type="text" name="lastname" class="input input-bordered w-full max-w-full" required>                    
 			                    </div>
 			                </div><br>
 			                <div class="row">
@@ -117,7 +116,7 @@
 					                  <div class="input-group-addon">
 					                    <i class="glyphicon glyphicon-calendar"></i>
 					                  </div>
-					                  <input type="text" class="form-control family-head inputmasked" name="birthdate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask required>
+					                  <input type="text" class="input input-bordered w-full max-w-full family-head inputmasked" name="birthdate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask required>
 					                </div>
 					                <!-- /.input group -->
 					            </div>
@@ -129,7 +128,7 @@
 			                    </div>
 			                    <div class="col-md-6">
 			                        <label for="birth_place"> የትውልድ ሥፍራ :</label>
-			                        <input type="text" name="birth_place" class="form-control">                    
+			                        <input type="text" name="birth_place" class="input input-bordered w-full max-w-full">                    
 			                    </div>
 			                </div>
 				        </div>
@@ -139,16 +138,16 @@
 
 
 
-			<div class="box box-info clearfix">
-				<div class="box-header with-border">
-					<h3 class="box-title"> የምዕመኑ አድራሻ </h3>
+			<div class="card border border-base-300 bg-base-100 shadow-md clearfix">
+				<div class="card-body border-b border-base-300 pb-3 mb-3">
+					<h3 class="card-title text-lg"> የምዕመኑ አድራሻ </h3>
 				</div><!-- /.box-header -->
-				<div class="box-body">
+				<div class="card-body">
 					<div class="row">
 
 	                    <div class="col-md-4">
 	                        <label> ክፍለ ከተማ: </label>
-	                        <select name="kifle_ketema" id="kifle_ketema" class="form-control s2">
+	                        <select name="kifle_ketema" id="kifle_ketema" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="">አልተመረጠም</option>
 	                        	<?php foreach($kifle_ketemas as $kifle_ketema) { ?>
 		                        	<option value="<?= $kifle_ketema['kifle_ketema_title']; ?>"> <?= $kifle_ketema['kifle_ketema_title']; ?> </option>
@@ -158,14 +157,14 @@
 
 	                    <div class="col-md-4">
 	                        <label> ቀበሌ: </label>
-	                        <select name="kebele" id="kebele" class="form-control s2">
+	                        <select name="kebele" id="kebele" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="">አልተመረጠም</option>
 	                        </select>
 	                    </div>
 
 	                    <div class="col-md-4">
 	                        <label> መንደር: </label>
-	                        <select name="mender" id="mender" class="form-control s2">
+	                        <select name="mender" id="mender" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="">አልተመረጠም</option>
 	                        </select>
 	                    </div>
@@ -174,7 +173,7 @@
 
 	                    <div class="col-md-2">
 	                        <label for="house_number"> የቤት ቁጥር: </label>
-	                        <input type="text" name="house_number" class="form-control">                    
+	                        <input type="text" name="house_number" class="input input-bordered w-full max-w-full">                    
 	                    </div>
 
 						<div class="form-group col-md-4">
@@ -183,7 +182,7 @@
 								<div class="input-group-addon">
 									<i class="fa fa-tty"></i>
 								</div>
-								<input type="text" name="home_phone" class="form-control" placeholder="046..">
+								<input type="text" name="home_phone" class="input input-bordered w-full max-w-full" placeholder="046..">
 							</div>
 						</div>
 
@@ -196,7 +195,7 @@
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-earphone"></i>
 								</div>
-								<input type="text" name="mobile_phone" class="form-control" placeholder="09..">
+								<input type="text" name="mobile_phone" class="input input-bordered w-full max-w-full" placeholder="09..">
 							</div>
 						</div>
 
@@ -206,7 +205,7 @@
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-envelope"></i>
 								</div>
-								<input type="email" Name="email" class="form-control" size="50" maxlength="50">
+								<input type="email" Name="email" class="input input-bordered w-full max-w-full" size="50" maxlength="50">
 							</div>
 						</div>
 
@@ -215,16 +214,16 @@
 			</div>
 
 
-			<div class="box box-info clearfix">
-				<div class="box-header with-border">
-					<h3 class="box-title"> የምዕመን የስራ ሁኔታ </h3>
+			<div class="card border border-base-300 bg-base-100 shadow-md clearfix">
+				<div class="card-body border-b border-base-300 pb-3 mb-3">
+					<h3 class="card-title text-lg"> የምዕመን የስራ ሁኔታ </h3>
 				</div><!-- /.box-header -->
-				<div class="box-body">
+				<div class="card-body">
 					<div class="row">
 
 						<div class="col-md-6">
 							<label>የትምህርት ደረጃ:</label>
-	                        <select name="level_of_education" class="form-control s2">
+	                        <select name="level_of_education" class="input input-bordered w-full max-w-full s2">
 		                        <option value="አልተመረጠም"> አልተመረጠም </option>
 		                        <option value="8ኛ ያጠናቀቀ"> 8ኛ ያጠናቀቀ </option>
 		                        <option value="10ኛ ያጠናቀቀ"> 10ኛ ያጠናቀቀ </option>
@@ -239,14 +238,14 @@
 
 						<div class="col-md-6">
 							<label>የሰለጠኑበት ሙያ መስክ:</label>
-							<input type="text" Name="field_of_study" class="form-control" maxlength="50">
+							<input type="text" Name="field_of_study" class="input input-bordered w-full max-w-full" maxlength="50">
 						</div>
 
 					</div><br>
 					<div class="row">
 	                    <div class="col-md-4">
 	                        <label> የሥራ መስክ: </label>
-	                        <select name="job_type" class="form-control s2">
+	                        <select name="job_type" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="አልተመረጠም">አልተመረጠም</option>
 	                        	<?php foreach($job_types as $job_type) { ?>
 		                            <option value="<?= $job_type['job_type_title'] ?>"> <?= $job_type['job_type_title']; ?> </option>
@@ -256,7 +255,7 @@
 
 	                    <div class="col-md-4">
 	                        <label for="workplace_name"> የመሥሪያ ቤቱ ስም :</label>
-	                        <input type="text" name="workplace_name" class="form-control">                    
+	                        <input type="text" name="workplace_name" class="input input-bordered w-full max-w-full">                    
 	                    </div>
 
 
@@ -266,7 +265,7 @@
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-phone-alt"></i>
 								</div>
-								<input type="text" name="workplace_phone" class="form-control inputmasked" data-inputmask='"mask": "(999) 999-9999"' data-mask/>
+								<input type="text" name="workplace_phone" class="input input-bordered w-full max-w-full inputmasked" data-inputmask='"mask": "(999) 999-9999"' data-mask/>
 							</div>
 						</div>
 
@@ -276,7 +275,7 @@
 	                    <div class="col-md-4">
 	                        <label for="monthly_income"> ወርሐዊ ገቢ:</label>
 	                        <div class="input-group">
-	                        	<input type="tel" name="monthly_income" class="form-control">
+	                        	<input type="tel" name="monthly_income" class="input input-bordered w-full max-w-full">
 	                    		<div class="input-group-addon">ብር</div>
 
 	                    	</div>
@@ -288,18 +287,18 @@
 			</div>
 
 
-			<div class="box box-info clearfix">
-				<div class="box-header with-border">
-					<h3 class="box-title"> የቤተክርስትያን ተሳትፎ </h3>
+			<div class="card border border-base-300 bg-base-100 shadow-md clearfix">
+				<div class="card-body border-b border-base-300 pb-3 mb-3">
+					<h3 class="card-title text-lg"> የቤተክርስትያን ተሳትፎ </h3>
 				</div><!-- /.box-header -->
-				<div class="box-body">
+				<div class="card-body">
 
 					<div class="row">
 
 	                    <div class="col-md-4">
 	                        <label for="Title"> አባል የሆኑበት ዘመን :</label>
 	                        <div class="input-group">
-	                        	<input type="text" name="membership_year" class="form-control inputmasked" data-inputmask='"mask": "9999"' data-mask>
+	                        	<input type="text" name="membership_year" class="input input-bordered w-full max-w-full inputmasked" data-inputmask='"mask": "9999"' data-mask>
 	                    		<div class="input-group-addon">ዓ.ም</div>
 
 	                    	</div>
@@ -307,7 +306,7 @@
 
 	                    <div class="col-md-4">
 	                        <label> አባል የሆኑበት ሁኔታ :</label>
-	                        <select name="membership_cause" class="form-control s2">
+	                        <select name="membership_cause" class="input input-bordered w-full max-w-full s2">
 								<option value="አልተመረጠም">አልተመረጠም</option>
 	                        	<?php foreach($membership_causes as $membership_cause) { ?>
 		                        	<option value="<?= $membership_cause['membership_cause_title']; ?>"> <?= $membership_cause['membership_cause_title']; ?> </option>
@@ -317,7 +316,7 @@
 
 	                    <div class="col-md-4">
 	                        <label> የአባልነት ደረጃ :</label>
-	                        <select name="membership_level" class="form-control s2">
+	                        <select name="membership_level" class="input input-bordered w-full max-w-full s2">
 								<option value="አልተመረጠም">አልተመረጠም</option>
 	                        	<?php foreach($membership_levels as $membership_level) { ?>
 		                        	<option value="<?= $membership_level['membership_level_title']; ?>"> <?= $membership_level['membership_level_title']; ?> </option>
@@ -330,7 +329,7 @@
 					<p/>
 	                    <div class="col-md-4 ministries">
 	                        <label> የአገልግሎት ዘርፍ :</label>
-	                        <select name="ministry" class="form-control s2">
+	                        <select name="ministry" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="አልተመረጠም">አልተመረጠም</option>
 	                        	<?php foreach($ministries as $ministry) { ?>
 		                        	<option value="<?= $ministry['ministry_title']; ?>"> <?= $ministry['ministry_title']; ?> </option>
@@ -345,14 +344,14 @@
 
 
 
-		    <div class="box box-info clearfix">
-		        <div class="box-header with-border">
-		            <h3 class="box-title"> የቤተሰብ መረጃ </h3>
+		    <div class="card border border-base-300 bg-base-100 shadow-md clearfix">
+		        <div class="card-body border-b border-base-300 pb-3 mb-3">
+		            <h3 class="card-title text-lg"> የቤተሰብ መረጃ </h3>
 		        </div><!-- /.box-header -->
-		        <div class="box-body">
+		        <div class="card-body">
 		            <div class="form-group col-md-6">
 		                <label> የጋብቻ ሁኔታ :</label>
-		                <select name="marital_status" class="form-control s2" id="maritalStatus">
+		                <select name="marital_status" class="input input-bordered w-full max-w-full s2" id="maritalStatus">
 		                    <option value="አልተመረጠም">አልተመረጠም</option>
 		                    <option disabled>-----------------------</option>
 		                    <option value="ያላገባ/ች">ያላገባ/ች</option>
@@ -363,7 +362,7 @@
 
 		            <div class="form-group col-md-6">
 		                <label> የትዳር አጋር:</label>
-		                <select name="spouse" class="form-control" id="spouse" disabled>
+		                <select name="spouse" class="input input-bordered w-full max-w-full" id="spouse" disabled>
 		                    <option value="" selected>አልተመረጠም</option>
 		                    <option disabled>-----------------------</option>
 		                </select>
@@ -386,7 +385,7 @@
 
 
   </div>
-  <!-- /.content-wrapper -->
+  
 
 
 

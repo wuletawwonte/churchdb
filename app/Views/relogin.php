@@ -1,96 +1,62 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<html>
+<html lang="am" data-theme="corporate">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> <?php echo session()->get('system_name'); ?> </title>
-
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/skins/'.(session()->get('skin') ?: 'skin-yellow-light').'.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
-
+  <title><?php echo esc(session()->get('system_name')); ?></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/tailwind.css'); ?>">
   <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>">
-
-
-<!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3 -->
-<script src="<?php echo base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?php echo base_url('assets/vendors/bootstrap/js/bootstrap.min.js'); ?>"></script>
-  
-<style type="text/css">
-
-.profile-image {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  font-size: 30px;
-  color: #fff;
-  text-align: center;
-  line-height: 80px;
-  margin: 0 0; 
-}
-
-</style>
-
+  <style type="text/css">
+    .profile-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      font-size: 30px;
+      color: #fff;
+      text-align: center;
+      line-height: 80px;
+      margin: 0;
+    }
+  </style>
+  <script src="<?php echo base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
 </head>
-
-<body class="hold-transition lockscreen">
-<!-- Automatic element centering -->
-<div class="lockscreen-wrapper">
-  <div class="lockscreen-logo">
-    <a href="<?= base_url('users/relogin'); ?>"><?= session()->get('system_name'); ?></a>
-  </div>
-  <!-- User name -->
-  <div class="lockscreen-name"><?= $_SESSION['current_user']['firstname'].' '.$_SESSION['current_user']['lastname']?></div>
-
-  <!-- START LOCK SCREEN ITEM -->
-  <div class="lockscreen-item">
-    <!-- lockscreen image -->
-    <div class="lockscreen-image">
-      <img src="<?= base_url(); ?>assets/<?php $pp = $_SESSION['current_user']['profile_picture'] ?? null; if($pp === null || $pp === '') { echo 'img/user-icon.jpg'; } else { echo 'profile_pictures/'.$pp; } ?>" alt="User Image">
-    </div>
-    <!-- /.lockscreen-image -->
-
-    <!-- lockscreen credentials (contains the form) -->
-    <form class="lockscreen-credentials" method="POST" action="<?= base_url('users/login'); ?>">
-      <input type="text" name="username" value="<?= session()->get('current_user')['username']; ?>" hidden>
-      <div class="input-group">
-        <input type="password" name="password" class="form-control" placeholder="የይለፍ ቃል">
-
-        <div class="input-group-btn">
-          <button type="submit" class="btn"><i class="glyphicon glyphicon-arrow-right text-muted"></i></button>
-        </div>
+<body class="flex min-h-screen items-center justify-center bg-base-200 p-4">
+<?php
+$pp = $_SESSION['current_user']['profile_picture'] ?? null;
+$lockAvatar = base_url('assets/' . (($pp === null || $pp === '') ? 'img/user-icon.jpg' : 'profile_pictures/' . $pp));
+?>
+<div class="card w-full max-w-lg border border-base-300 bg-base-100 shadow-xl">
+  <div class="card-body items-center text-center">
+    <h1 class="card-title text-xl"><a href="<?= base_url('users/relogin'); ?>" class="link link-hover"><?= esc(session()->get('system_name')); ?></a></h1>
+    <p class="text-lg font-medium"><?= esc($_SESSION['current_user']['firstname'] . ' ' . $_SESSION['current_user']['lastname']) ?></p>
+    <div class="avatar my-4">
+      <div class="w-24 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+        <img src="<?= esc($lockAvatar); ?>" alt="">
       </div>
+    </div>
+    <form method="POST" action="<?= base_url('users/login'); ?>" class="flex w-full max-w-sm flex-col gap-3">
+      <input type="text" name="username" value="<?= esc(session()->get('current_user')['username']); ?>" hidden>
+      <label class="form-control w-full">
+        <span class="label-text">የይለፍ ቃል</span>
+        <input type="password" name="password" class="input input-bordered w-full" placeholder="የይለፍ ቃል" required>
+      </label>
+      <button type="submit" class="btn btn-primary gap-2">
+        <i class="fa fa-arrow-right"></i> ይግቡ
+      </button>
     </form>
-    <!-- /.lockscreen credentials -->
-
-  </div>
-  <!-- /.lockscreen-item -->
-    <?php if(session()->getFlashdata('login_failed')) { ?>
-        <div class="callout callout-danger">
-            <?php echo session()->getFlashdata('login_failed'); ?>
-        </div>
+    <?php if (session()->getFlashdata('login_failed')) { ?>
+      <div role="alert" class="alert alert-error mt-4 w-full text-sm">
+        <span><?php echo esc(session()->getFlashdata('login_failed')); ?></span>
+      </div>
     <?php } ?>
-
-  <div class="help-block text-center">
-    ወዳ አካውንቶ ለመመለስ የይለፍ ቃሎን ያስገቡ
+    <p class="mt-4 text-sm opacity-80">ወዳ አካውንቶ ለመመለስ የይለፍ ቃሎን ያስገቡ</p>
+    <a href="<?= base_url('users/logout'); ?>" class="link link-hover text-sm">ወይም በሌላ አካውንት ይግቡ</a>
+    <p class="mt-6 text-xs opacity-70">
+      <strong><?= lang('label.copyright') ?> &copy; <?= date('Y'); ?> <a href="https://www.facebook.com/gracesoftwebdesign" target="_blank" rel="noopener" class="link">GraceSoft webdesign</a>.</strong> <?= lang('label.all_rights_reserved') ?>.
+    </p>
   </div>
-  <div class="text-center">
-    <a href="<?= base_url('users/logout'); ?>">ወይም በሌላ አካውንት ይግቡ</a>
-  </div>
-  <div class="lockscreen-footer text-center">
-<strong><?= lang('label.copyright') ?> &copy; <?= date('Y'); ?> <a href="https://www.facebook.com/gracesoftwebdesign" target="blank"><b>Grace</b>Soft webdesign</a>.</strong> <?= lang('label.all_rights_reserved') ?>.  
 </div>
-</div>
-<!-- /.center -->
-
 </body>
 </html>

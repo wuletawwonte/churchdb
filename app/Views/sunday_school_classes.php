@@ -1,28 +1,25 @@
 
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
+    <div class="mb-6"><h1 class="text-2xl font-bold">
         የስንበት ትምህርት 
       </h1>
-      <ol class="breadcrumb">
+      <div class="breadcrumbs text-sm"><ul>
           <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-          <li class="active"> የሰንበት ትምህርት </li>
-      </ol>
+          <li> የሰንበት ትምህርት </li>
+      </ul></div>
 
- 	</section>
-
-    <!-- Main content -->
+ 	</div>
     <section class="content container-fluid">
 
     <?php if(session()->getFlashdata('success')) { ?>
-        <div class="callout callout-info">
+        <div class="alert alert-info">
             <?php echo session()->getFlashdata('success'); ?>
         </div>
     <?php } else if(session()->getFlashdata('error')) { ?>
-        <div class="callout callout-danger">
+        <div class="alert alert-error">
             <?php echo session()->getFlashdata('error'); ?>
         </div>
     <?php } ?>
@@ -30,7 +27,7 @@
 
     <!-- Default box -->
     <div class="box">
-        <div class="box-body">
+        <div class="card-body">
 
 
             <div class="row">
@@ -47,7 +44,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="pull-right">
-                        <label class="sr-only">Search:</label><input type="search" placeholder="<?= lang('label.search') ?>" class="form-control" aria-controls="families">
+                        <label class="sr-only">Search:</label><input type="search" placeholder="<?= lang('label.search') ?>" class="input input-bordered w-full max-w-full" aria-controls="families">
                     </div>
                 </div>
             </div>
@@ -56,7 +53,7 @@
 
 
 
-            <table class="table table-hover table-bordered table-striped dt-responsive" id="user-listing-table" style="width:100%;">
+            <table class="table table-zebra w-full dt-responsive" id="user-listing-table" style="width:100%;">
                 <thead>
                 <tr>
                     <th  style="text-align: center">Actions</th>
@@ -92,7 +89,7 @@
             <!-- <p><?= $links; ?></p> -->
 
         </div>
-        <!-- /.box-body -->
+        <!-- /.card-body -->
     </div>
     <!-- /.box -->
 
@@ -101,4 +98,4 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+  

@@ -1,66 +1,54 @@
 
 
-
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
+<div class="space-y-4">
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold">
         የሲስተም ተጠቃሚዎች
-        <small>የሲስተም ተጠቃሚዎች ዝርዝር</small>
+        <span class="mt-1 block text-base font-normal opacity-70">የሲስተም ተጠቃሚዎች ዝርዝር</span>
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-        <li class="active"><a href="<?php echo base_url(); ?>admin/users"> የሲስተም ተጠቃሚዎች</a></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
+      <div class="breadcrumbs text-sm">
+        <ul>
+          <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
+          <li><a href="<?php echo base_url(); ?>admin/users"> የሲስተም ተጠቃሚዎች</a></li>
+        </ul>
+      </div>
+    </div>
     <section class="content container-fluid">
 
 
     <?php if(session()->getFlashdata('success')) { ?>
-        <div class="callout callout-info">
+        <div class="alert alert-info">
             <?php echo session()->getFlashdata('success'); ?>
         </div>
     <?php } else if(session()->getFlashdata('error')) { ?>
-        <div class="callout callout-danger">
+        <div class="alert alert-error">
             <?php echo session()->getFlashdata('error'); ?>
         </div>
     <?php } ?>
 
 
 
-    <!-- Default box -->
-    <div class="box box-primary">
-        <div class="box-header">
-            <a href="<?php echo base_url(); ?>admin/newuserform" class="btn btn-app"><i class="fa fa-user-plus"></i> አዲስ ተጠቃሚ </a>
-            <a href="SettingsUser.php" class="btn btn-app"><i class="fa fa-wrench"></i>የተጠቃሚዎች መቼት</a>
+    <div class="card border border-base-300 bg-base-100 shadow-md">
+        <div class="card-body flex flex-wrap gap-2 border-b border-base-300">
+            <a href="<?php echo base_url(); ?>admin/newuserform" class="btn btn-outline btn-sm"><i class="fa fa-user-plus"></i> አዲስ ተጠቃሚ </a>
+            <a href="SettingsUser.php" class="btn btn-outline btn-sm"><i class="fa fa-wrench"></i> የተጠቃሚዎች መቼት</a>
         </div>
     </div>
 
-    <div class="box">
-<!--         <div class="box-header" align="right">
-            <button class="btn"><i class="fa fa-file-excel-o"></i> Excel</button>
-            <button class="btn"><i class="fa fa-file-o"></i> CSV</button>
-            <button class="btn"><i class="fa fa-file-pdf-o"></i> PDF</button>
-            <button class="btn"><i class="fa fa-print"></i> Print</button>
-        </div>        
- -->        
-            <div class="box-header with-border">
-                <h3 class="box-title">የተጠቃሚዎች ዝርዝር</h3>
+    <div class="card border border-base-300 bg-base-100 shadow-md">
+            <div class="card-body border-b border-base-300 pb-3 mb-3">
+                <h3 class="card-title text-lg">የተጠቃሚዎች ዝርዝር</h3>
             </div>
-            <div class="box-body">
-                <table class="table table-bordered table-striped" id="user-listing-table">
+            <div class="card-body overflow-x-auto">
+                <table class="table table-zebra w-full" id="user-listing-table">
                     <thead>
                     <tr>
                         <th>ተግባራት</th>
                         <th>ስም</th>
-                        <th align="center">የተጠቃሚው አይነት</th>
-                        <th align="center">ስንት ጊዜ ተገባ</th>
-                        <th align="center">የተፈጠረበት ቀንና ሰዓት</th>
-                        <th align="center">የይለፍ ቃል</th>
+                        <th class="text-center">የተጠቃሚው አይነት</th>
+                        <th class="text-center">ስንት ጊዜ ተገባ</th>
+                        <th class="text-center">የተፈጠረበት ቀንና ሰዓት</th>
+                        <th class="text-center">የይለፍ ቃል</th>
 
                     </tr>
                     </thead>
@@ -71,64 +59,50 @@
                             <td>
                                 <?php if($user['user_type'] != 'ዋና የሲስተም አስተዳደር') { ?>
 
-                                    <a href="<?php echo base_url(); ?>admin/edituserform/<?= $user['id'] ?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                                    <a data-toggle="modal" href="#myModal<?= $user['id']?>"><i class="fa fa-trash" style="color: #dd4b39;"></i></a>
-
-
-                                        <div id="myModal<?= $user['id']?>" class="modal fade" role="dialog" style="margin-top: 100px;">
-                                          <div class="modal-dialog modal-sm">
-
-                                            <!-- Modal content-->
-                                            <div class="modal-content">
-                                              <div class="modal-header" align="left">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>መልሶ ማግኘት አይቻልም</p>
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">አይ</button>
-                                                <a href="<?= base_url(); ?>admin/deleteuser/<?= $user['id']?>" class="btn btn-primary">አዎ</a>
-                                              </div>
-                                            </div>
-
-                                          </div>
-                                        </div>
-
+                                    <a href="<?php echo base_url(); ?>admin/edituserform/<?= $user['id'] ?>" class="link link-hover"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                                    <a href="#" data-open-modal="myModal<?= $user['id']?>" class="link link-error"><i class="fa fa-trash"></i></a>
 
                                 <?php } ?>
                             </td>
 
                             <td>
-                                <a href="<?php echo base_url(); ?>admin/edituserform/<?= $user['id'] ?>"> <?php echo $user['firstname'].' '.$user['lastname']; ?></a>
+                                <a href="<?php echo base_url(); ?>admin/edituserform/<?= $user['id'] ?>" class="link link-hover"> <?php echo esc($user['firstname'].' '.$user['lastname']); ?></a>
                             </td>
 
-                            <td><?= $user['user_type']; ?></td>
-                            <td align="center"><?= $user['login_count']; ?></td>
-                            <td><?php echo $user['created']; ?></td>
+                            <td class="text-center"><?= esc($user['user_type']); ?></td>
+                            <td class="text-center"><?= esc($user['login_count']); ?></td>
+                            <td><?php echo esc($user['created']); ?></td>
 
-                            <td>
-                                <a href="#"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <td class="text-center">
+                                <a href="#" class="link"><i class="fa fa-wrench" aria-hidden="true"></i></a>
                            </td>
 
                         </tr>
-
-
-
-
 
                         <?php } ?>
 
                     </tbody>
                 </table>
-            <div style="text-align: end;"><p><?= $links; ?></p></div>
+            <div class="text-end pt-4"><p><?= $links; ?></p></div>
         </div>
-
-        <!-- /.box-body -->
     </div>
-    <!-- /.box -->
 
-
+    <?php foreach ($users as $user) {
+        if ($user['user_type'] == 'ዋና የሲስተም አስተዳደር') {
+            continue;
+        } ?>
+            <dialog id="myModal<?= $user['id']?>" class="modal">
+              <div class="modal-box">
+                <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
+                <p class="py-4">መልሶ ማግኘት አይቻልም</p>
+                <div class="modal-action">
+                  <form method="dialog"><button class="btn">አይ</button></form>
+                  <a href="<?= base_url(); ?>admin/deleteuser/<?= $user['id']?>" class="btn btn-primary">አዎ</a>
+                </div>
+              </div>
+              <form method="dialog" class="modal-backdrop"><button>close</button></form>
+            </dialog>
+    <?php } ?>
 
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->

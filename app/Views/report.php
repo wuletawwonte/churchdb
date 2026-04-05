@@ -1,19 +1,18 @@
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
+    <div class="mb-6"><h1 class="text-2xl font-bold">
         ጠቅላላ ሪፖርት
-        <!-- <small>#007612</small> -->
+        <!-- <span>#007612</span> -->
       </h1>
-      <ol class="breadcrumb">
+      <div class="breadcrumbs text-sm"><ul>
           <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-          <li class="active">ሪፖርት</li>
-      </ol>
+          <li>ሪፖርት</li>
+      </ul></div>
     </section>
 
     <div class="pad margin no-print">
-      <div class="callout callout-info" style="margin-bottom: 0!important;">
+      <div class="alert alert-info" style="margin-bottom: 0!important;">
         <h4> ልብ ይበሉ:</h4>
         ይህ ገፅ ለህተመት የተስተካከለ ነው። ከስር ህትመት የሚለውን ይጫኑ።
       </div>
@@ -161,7 +160,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="<?= base_url(); ?>admin/adminreportprint" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> ህትመት </a>
+          <a href="<?= base_url(); ?>admin/adminreportprint" target="_blank" class="btn btn-ghost"><i class="fa fa-print"></i> ህትመት </a>
         </div>
       </div>
     </section>

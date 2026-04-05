@@ -1,39 +1,36 @@
 
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
+    <div class="mb-6"><h1 class="text-2xl font-bold">
         <?= lang('label.groups') ?>
       </h1>
-      <ol class="breadcrumb">
+      <div class="breadcrumbs text-sm"><ul>
           <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-          <li class="active"> ቡድኖች </li>
-      </ol>
+          <li> ቡድኖች </li>
+      </ul></div>
 
- 	</section>
-
-    <!-- Main content -->
+ 	</div>
     <section class="content container-fluid">
 
     <?php if(session()->getFlashdata('success')) { ?>
-        <div class="callout callout-info">
+        <div class="alert alert-info">
             <?php echo session()->getFlashdata('success'); ?>
         </div>
     <?php } else if(session()->getFlashdata('error')) { ?>
-        <div class="callout callout-danger">
+        <div class="alert alert-error">
             <?php echo session()->getFlashdata('error'); ?>
         </div>
     <?php } ?>
 
-    <div class="box box-primary">
-    	<div class="box-header with-border"><?= lang('label.create_group') ?></div>
-    	<div class="box-body">
+    <div class="card border border-base-300 bg-base-100 shadow-md">
+    	<div class="card-body border-b border-base-300 pb-3 mb-3"><?= lang('label.create_group') ?></div>
+    	<div class="card-body">
             <div class="form-group">
             <form method="POST" action="<?= base_url('admin/savegroup'); ?>">
                 <div class="col-md-5">
-                    <select name="type" class="form-control s2">
+                    <select name="type" class="input input-bordered w-full max-w-full s2">
                     	<option value="የአገልግሎት ቡድን">የአገልግሎት ቡድን</option>
                         <option value="የአስተዳደር ቡድን">የአስተዳደር ቡድን</option>
                         <option value="መዘምራን">መዘምራን</option>
@@ -41,10 +38,10 @@
                     </select>
                 </div>
 				<div class="col-md-4">
-					<input type="text" name="name" maxlength="48"  class="form-control" required>
+					<input type="text" name="name" maxlength="48"  class="input input-bordered w-full max-w-full" required>
 				</div>
 				<div class="col-md-2">
-					<input type="submit" class="btn btn-primary btn-flat" name="" value="<?= lang('label.save') ?>">
+					<input type="submit" class="btn btn-primary" name="" value="<?= lang('label.save') ?>">
 				</div>
 			</form>
 			</div>	            
@@ -54,17 +51,17 @@
 
     <!-- Default box -->
     <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">የቡድኖች ዝርዝር</h3>
+        <div class="card-body border-b border-base-300 pb-3 mb-3">
+            <h3 class="card-title text-lg">የቡድኖች ዝርዝር</h3>
         </div>
-        <div class="box-body">
+        <div class="card-body">
 
 
             <p></p>
 
 
 
-            <table class="table table-hover table-bordered table-striped dt-responsive" id="user-listing-table" style="width:100%;">
+            <table class="table table-zebra w-full dt-responsive" id="user-listing-table" style="width:100%;">
                 <thead>
                 <tr>
                     <th  style="text-align: center">Actions</th>
@@ -101,7 +98,7 @@
             <p><?= $links; ?></p>
 
         </div>
-        <!-- /.box-body -->
+        <!-- /.card-body -->
     </div>
     <!-- /.box -->
 
@@ -110,4 +107,4 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+  

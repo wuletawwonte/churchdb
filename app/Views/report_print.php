@@ -7,15 +7,13 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/tailwind.css'); ?>">
 
 </head>
-<body onload="window.print();">
+<body class="bg-base-100 p-6 print:p-2" onload="window.print();">
 
-	  <!-- Content Wrapper. Contains page content -->
-	  <div class="content-wrapper" style="margin-left: 0px;background-color: #fff; padding-top: 20px;">
+	  <div class="mx-auto max-w-6xl bg-base-100">
 
 	    <!-- Main content -->
 	    <section class="invoice">

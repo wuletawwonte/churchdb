@@ -30,41 +30,32 @@
 </style>
 
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= lang('label.welcome') ?>
-      </h1>
-      <ol class="breadcrumb">
-          <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-          <li class="active"> ምዕመናን </li>
-      </ol>
-    </section>
+<div class="mb-6">
+  <h1 class="text-2xl font-bold"><?= lang('label.welcome') ?></h1>
+  <div class="breadcrumbs text-sm">
+    <ul>
+      <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
+      <li> ምዕመናን </li>
+    </ul>
+  </div>
+</div>
 
-    <!-- Main content -->
-    <section class="content container-fluid">
+<section class="space-y-4">
 
     <?php if(session()->getFlashdata('success')) { ?>
-        <div class="alert alert-info alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i> ጥሩ!</h4>
-            <?php echo session()->getFlashdata('success'); ?>
+        <div role="alert" class="alert alert-success">
+            <button type="button" class="btn btn-sm btn-ghost btn-circle" data-dismiss="alert" aria-label="close">×</button>
+            <span><i class="fa fa-check"></i> ጥሩ! <?php echo session()->getFlashdata('success'); ?></span>
         </div>
     <?php } else if(session()->getFlashdata('error')) { ?>
-        <div class="alert alert-danger">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="fa fa-ban"></i> ይቅርታ</h4>
-            <?php echo session()->getFlashdata('error'); ?>
+        <div role="alert" class="alert alert-error">
+            <button type="button" class="btn btn-sm btn-ghost btn-circle" data-dismiss="alert" aria-label="close">×</button>
+            <span><i class="fa fa-ban"></i> ይቅርታ <?php echo session()->getFlashdata('error'); ?></span>
         </div>
     <?php } ?>
 
-
-
-    <!-- Default box -->
-    <div class="box box-primary">
-        <div class="box-body">
+    <div class="card border border-base-300 bg-base-100 shadow-md">
+        <div class="card-body">
 
 
 
@@ -132,8 +123,8 @@
                 </tr>
                 <tr>
                     <td style="padding-top: 10px;">
-                        <input type="submit" name="submit" class="btn btn-primary btn-flat" value="አጣራ">
-                        <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning btn-flat"> ፍለጋውን አጥፋ </a><BR>
+                        <input type="submit" name="submit" class="btn btn-primary" value="አጣራ">
+                        <a href="<?= base_url(); ?>admin/clearfilter" class="btn btn-warning"> ፍለጋውን አጥፋ </a><BR>
 
                     </td>
                 </tr>
@@ -142,9 +133,9 @@
             
 
 
-        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+        <div class="mt-6 overflow-x-auto">
 
-            <table class="table table-hover table-bordered" id="user-listing-table">
+            <table class="table table-zebra table-pin-rows w-full min-w-[800px]" id="user-listing-table">
                 <thead>
                 <tr>
                     <th width="80">ፎቶ</th>
@@ -192,7 +183,7 @@
                                     </div>
                                 <?php } else { ?>
                                     <div>
-                                        <img class="img-circle" style="border: 2px solid <?= $member['profile_color']; ?>;padding: 2px;height: 60px; width: 60px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
+                                        <img class="rounded-full" style="border: 2px solid <?= $member['profile_color']; ?>;padding: 2px;height: 60px; width: 60px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
                                     </div>
                                 <?php } ?>
                             </a>
@@ -239,14 +230,9 @@
 
         </div>
     </div>
-    <!-- /.box -->
+    </div>
 
-
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+</section>
 
 
 
@@ -254,21 +240,8 @@
 
     $(function () {
         $('#user-listing-table').DataTable({
-            responsive: {
-                details: {
-                    display: $.fn.dataTable.Responsive.display.modal( {
-                        header: function ( row ) {
-                            var data = row.data();
-                            return data[1];
-                        }
-                    } ),
-                    renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
-                        tableClass: 'table'
-                    } )
-                }
-            },
-            // dom: 'Bfrtip',
-            dom: '<"row"<"col-sm-6 pull-left"B><"col-sm-6 pull-right"f>>rt<"row"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',            
+            scrollX: true,
+            dom: 'Blfrtip',
             language: {
                 url: '<?= base_url()?>assets/vendors/DataTables/locale/Amharic.json'
             },

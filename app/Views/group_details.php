@@ -1,50 +1,47 @@
 
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
+    <div class="mb-6"><h1 class="text-2xl font-bold">
         የቡድን አባላት
       </h1>
 
-      <ol class="breadcrumb">
+      <div class="breadcrumbs text-sm"><ul>
         <li><a href="<?= base_url(); ?>admin/listmembers"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
         <li><a href="<?= base_url(); ?>admin/listgroups"><i class="fa fa-object-group"></i> ቡድኖች </a></li>
-        <li class="active"> የቡድን አባላት </li>
-      </ol>
+        <li> የቡድን አባላት </li>
+      </ul></div>
 
-  </section>
-
-    <!-- Main content -->
+  </div>
     <section class="content container-fluid">
 
     <?php if(session()->getFlashdata('success')) { ?>
-        <div class="callout callout-info">
+        <div class="alert alert-info">
             <?php echo session()->getFlashdata('success'); ?>
         </div>
     <?php } else if(session()->getFlashdata('error')) { ?>
-        <div class="callout callout-danger">
+        <div class="alert alert-error">
             <?php echo session()->getFlashdata('error'); ?>
         </div>
     <?php } ?>
 
 
 
-        <div class="box box-primary">
-            <div class="box-header with-border"><?= lang('label.add_member') ?></div>
-            <div class="box-body">
+        <div class="card border border-base-300 bg-base-100 shadow-md">
+            <div class="card-body border-b border-base-300 pb-3 mb-3"><?= lang('label.add_member') ?></div>
+            <div class="card-body">
                 <form action="<?= base_url('admin/add_group_member') ?>" method="POST">
                     <input type="text" name="group_id" value="<?= $group['gid'] ?>" hidden>
                     <div class="col-md-4">
-                      <select name="role" class="form-control input-sm s2">
+                      <select name="role" class="input input-bordered w-full max-w-full input-sm s2">
                         <option value="አባል" > አባል </option>
                         <option value="መሪ" > መሪ </option>
                       </select>             
                     </div>
 
                     <div class="col-md-6">
-                      <select id="members" name="member_id" class="form-control s3">
+                      <select id="members" name="member_id" class="input input-bordered w-full max-w-full s3">
 
                           <?php foreach($non_group_members as $member) { ?>
                           <option value="<?= $member['id']?>"><?= $member['firstname'].' '.$member['middlename']; ?></option>
@@ -60,8 +57,8 @@
 
 
 
-        <div class="box box-primary">
-            <div class="box-header with-border" align="right">
+        <div class="card border border-base-300 bg-base-100 shadow-md">
+            <div class="card-body border-b border-base-300 pb-3 mb-3" align="right">
                 <p/><p/><p/>
                 <button class="btn btn-info" type="button">
                     የቡድን ስም <span class="badge"> <?= $group['name']; ?> </span>
@@ -74,8 +71,8 @@
                 </button>
             </div>
 
-            <div class="box-body table-responsive clearfix">
-                <table class="table table-hover table-bordered">
+            <div class="card-body table-responsive clearfix">
+                <table class="table table-zebra w-full">
                     <thead>
                         <tr>
                           <th><span><?= lang('label.name') ?></span></th>
