@@ -638,17 +638,58 @@ class Admin extends BaseController
 		echo view('templates/footer');								
 	}
 
-	public function adminreport() {
-		$data['active_menu'] = "adminreport";
-		$data['church_name'] = $this->cnfgModel->get('church_name');
-		echo view('templates/header', $data);
-		echo view('report');
-		echo view('templates/footer');								
+	private function buildGeneralReportData(): array
+	{
+		$gender = $this->memberModel->gender_count();
+		$systemName = $this->cnfgModel->get('system_name');
+		if ($systemName === null || $systemName === '') {
+			$systemName = 'ChurchDB';
+		}
+		$churchName = (string) ($this->cnfgModel->get('church_name') ?? '');
+
+		$cu       = session()->get('current_user');
+		$issuedTo = '—';
+		if (is_array($cu)) {
+			$first = trim((string) ($cu['firstname'] ?? ''));
+			$last  = trim((string) ($cu['lastname'] ?? ''));
+			$name  = trim($first . ' ' . $last);
+			if ($name !== '') {
+				$issuedTo = $name;
+			}
+		}
+
+		$generatedAt = date('d-m-Y H:i');
+
+		$reportStats = [
+			['label' => lang('label.members'), 'value' => $this->memberModel->record_count()],
+			['label' => lang('label.male'), 'value' => (int) ($gender['male'] ?? 0)],
+			['label' => lang('label.female'), 'value' => (int) ($gender['female'] ?? 0)],
+			['label' => lang('label.groups'), 'value' => $this->groupModel->record_count()],
+			['label' => 'የሲስተም ተጠቃሚዎች', 'value' => $this->userModel->users_count()],
+			['label' => 'የአገልግሎት ዘርፎች', 'value' => count($this->ministryModel->get_all())],
+		];
+
+		return [
+			'system_name'    => $systemName,
+			'church_name'    => $churchName,
+			'issued_to_name' => $issuedTo,
+			'generated_at'   => $generatedAt,
+			'report_stats'   => $reportStats,
+		];
 	}
 
-	public function adminreportprint() {
-		$data['church_name'] = $this->cnfgModel->get('church_name');
-		echo view('report_print', $data);		
+	public function report() {
+		$data                = $this->buildGeneralReportData();
+		$data['active_menu'] = 'report';
+		echo view('templates/header', $data);
+		echo view('report');
+		echo view('templates/footer');
+	}
+
+	public function reportprint() {
+		$data                    = $this->buildGeneralReportData();
+		$data['print_autoprint'] = $this->request->getGet('autoprint') === '1';
+		echo view('report_print', $data);
 	}
 
 	public function memberdetailsprint($mid) {

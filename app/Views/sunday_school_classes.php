@@ -82,7 +82,6 @@
 
                 </tbody>
             </table>
-            <!-- <p><?= $links; ?></p> -->
 
         </div>
         <!-- /.card-body -->
