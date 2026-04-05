@@ -1,0 +1,49 @@
+# Local stack: web + MariaDB. Copy env to .env or set variables in your shell.
+#   docker compose up --build
+# App: http://localhost:8080  (override with APP_PORT)
+#
+# After first start, import schema (and optional seed):
+#   docker compose exec db mariadb -uchurchdb -pchurchdb churchdb < database/schema.sql
+#   docker compose exec db mariadb -uchurchdb -pchurchdb churchdb < database/seed.sql
+
+services:
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootsecret}
+      MARIADB_DATABASE: ${DB_DATABASE:-churchdb}
+      MARIADB_USER: ${DB_USER:-churchdb}
+      MARIADB_PASSWORD: ${DB_PASSWORD:-churchdb}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - churchdb_mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+
+  app:
+    build: .
+    image: ${APP_IMAGE:-churchdb:local}
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
+    environment:
+      CI_ENVIRONMENT: ${CI_ENVIRONMENT:-development}
+      database.default.hostname: db
+      database.default.database: ${DB_DATABASE:-churchdb}
+      database.default.username: ${DB_USER:-churchdb}
+      database.default.password: ${DB_PASSWORD:-churchdb}
+      database.default.DBDriver: MySQLi
+      database.default.port: "3306"
+      app.baseURL: ${APP_BASE_URL:-http://localhost:8080/}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  churchdb_mysql:
