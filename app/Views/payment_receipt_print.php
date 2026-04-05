@@ -10,23 +10,6 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/tailwind.css'); ?>">
 
-<style type="text/css">
-	.profile-image {
-  margin: 0 auto;
-  margin-top: 15px;
-  width: 200px;
-  height: 200px;
-  padding: 3px;
-  border-radius: 50%;
-  border: 3px solid #d2d6de; 
-  font-size: 50px;
-  color: #fff;
-  text-align: center;
-  line-height: 188px;
-}
-
-</style>
-
 </head>
 
 <body style="background-color: #eee;padding: 10px;" onload="window.print();">

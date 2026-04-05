@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="am" data-theme="corporate">
 <head>
+  <script>
+  (function(){try{var k='churchdb-theme',t=localStorage.getItem(k);if(t==='dark'||t==='corporate')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+  </script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?php echo session()->get('system_name'); ?></title>
@@ -10,7 +13,8 @@
   <link rel="stylesheet" href="<?= base_url('assets/vendors/pace/pace.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/tailwind.css'); ?>">
-  <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.ico'); ?>">
+  <link rel="icon" href="<?= base_url('favicon.ico'); ?>" type="image/x-icon">
+  <link rel="shortcut icon" href="<?= base_url('favicon.ico'); ?>">
 
   <style type="text/css">
     textarea { resize: vertical; min-height: 5rem; }
@@ -29,11 +33,19 @@ $fullName = session()->get('current_user')['firstname'] . ' ' . session()->get('
 ?>
 
 <body class="min-h-screen bg-base-200">
-<div class="drawer lg:drawer-open">
+<div id="layout-drawer-root" class="drawer lg:drawer-open">
+  <script>
+  (function(){try{if(localStorage.getItem('churchdb-sidebar')==='closed'){var r=document.getElementById('layout-drawer-root');if(r)r.classList.remove('lg:drawer-open');}}catch(e){}})();
+  </script>
   <input id="layout-drawer" type="checkbox" class="drawer-toggle" />
 
   <div class="drawer-content flex min-h-screen flex-col">
     <header class="navbar border-b border-base-300 bg-base-100 shadow-sm">
+      <div class="flex-none hidden lg:block">
+        <button type="button" class="btn btn-square btn-ghost" data-sidebar-toggle aria-expanded="true" aria-controls="layout-drawer-side" title="Show or hide sidebar">
+          <i class="fa fa-angle-double-left text-lg" aria-hidden="true"></i>
+        </button>
+      </div>
       <div class="flex-none lg:hidden">
         <label for="layout-drawer" class="btn btn-square btn-ghost drawer-button" aria-label="Open menu">
           <i class="fa fa-bars text-lg"></i>
@@ -43,6 +55,13 @@ $fullName = session()->get('current_user')['firstname'] . ' ' . session()->get('
         <a href="<?= base_url(); ?>" class="btn btn-ghost text-lg font-semibold normal-case">
           <?= esc(session()->get('system_name')); ?>
         </a>
+      </div>
+      <div class="flex-none">
+        <label class="swap swap-rotate btn btn-circle btn-ghost" title="Light / dark theme">
+          <input type="checkbox" data-theme-toggle />
+          <span class="swap-on text-lg" aria-hidden="true"><i class="fa fa-moon-o"></i></span>
+          <span class="swap-off text-lg" aria-hidden="true"><i class="fa fa-sun-o"></i></span>
+        </label>
       </div>
       <div class="flex-none">
         <div class="dropdown dropdown-end">
@@ -63,5 +82,8 @@ $fullName = session()->get('current_user')['firstname'] . ' ' . session()->get('
         </div>
       </div>
     </header>
+    <script>
+    (function(){var r=document.getElementById('layout-drawer-root');var b=document.querySelector('[data-sidebar-toggle]');if(!r||!b)return;var o=r.classList.contains('lg:drawer-open');b.setAttribute('aria-expanded',o?'true':'false');var i=b.querySelector('i');if(i)i.className='fa text-lg '+(o?'fa-angle-double-left':'fa-bars');})();
+    </script>
 
     <main class="mx-auto w-full max-w-[1920px] flex-1 px-4 py-6 md:px-8">

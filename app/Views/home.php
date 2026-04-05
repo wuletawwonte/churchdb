@@ -1,20 +1,5 @@
 <script type="text/javascript" src="<?= base_url('assets/vendors/chartjs/Chart.min.js'); ?>"></script>
 
-<style type="text/css">
-  .profile-image {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    padding: 2px;
-    border: 2px solid #d2d6de;
-    font-size: 25px;
-    color: #fff;
-    text-align: center;
-    line-height: 70px;
-    margin: 0 auto;
-  }
-</style>
-
 <div class="mb-6">
   <h1 class="text-2xl font-bold"><?= lang('label.welcome') ?></h1>
 </div>
@@ -52,23 +37,11 @@
     <div class="card border border-base-300 bg-base-100 shadow-md">
       <div class="card-body">
         <h2 class="card-title border-b border-base-300 pb-2"><?= lang('label.latest_members'); ?></h2>
-        <ul class="menu rounded-box bg-base-200/50 p-2">
+        <ul class="menu w-full rounded-box bg-base-200/50 p-2">
           <?php foreach ($latest_members as $member) { ?>
-            <li>
-              <a href="<?= base_url('admin/memberdetails/' . $member['id']); ?>" class="gap-3">
-                <?php if ($member['avatar'] == null) { ?>
-                  <div class="profile-image shrink-0">
-                    <div class="flex h-full w-full items-center justify-center rounded-full" style="background: <?= esc($member['profile_color']); ?>">
-                      <b><?= mb_substr($member['firstname'], 0, 1) . mb_substr($member['middlename'], 0, 1); ?></b>
-                    </div>
-                  </div>
-                <?php } else { ?>
-                  <div class="avatar shrink-0">
-                    <div class="w-14 rounded-full ring ring-base-300" style="--tw-ring-color: <?= esc($member['profile_color']); ?>">
-                      <img src="<?= base_url(); ?>assets/avatars/<?= esc($member['avatar']) ?>" alt="">
-                    </div>
-                  </div>
-                <?php } ?>
+            <li class="w-full">
+              <a href="<?= base_url('admin/memberdetails/' . $member['id']); ?>" class="w-full gap-3">
+                <?= view('templates/partials/member_avatar', ['member' => $member, 'size' => 'dashboard']); ?>
                 <div class="min-w-0 flex-1">
                   <span class="block truncate font-medium"><?= esc($member['firstname'] . ' ' . $member['middlename']); ?></span>
                   <span class="text-xs opacity-70"><?= timespan(human_to_unix($member['created']), null, 1) . ' በፊት'; ?></span>

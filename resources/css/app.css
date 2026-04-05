@@ -94,3 +94,32 @@
     max-width: 75%;
   }
 }
+
+/*
+ * Sidebar scrollbars: DaisyUI sets overflow-y: auto on .drawer-side (lg:drawer-open + mobile open),
+ * so the visible bar is usually on .drawer-side, not only on the inner .menu.
+ */
+.drawer .drawer-toggle:checked ~ .drawer-side,
+.drawer.lg\:drawer-open > .drawer-side {
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+  -ms-overflow-style: none;
+}
+.drawer .drawer-toggle:checked ~ .drawer-side::-webkit-scrollbar,
+.drawer.lg\:drawer-open > .drawer-side::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Inner menu list (when it scrolls instead / in addition) */
+.app-sidebar-menu {
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+  -ms-overflow-style: none;
+}
+.app-sidebar-menu::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}

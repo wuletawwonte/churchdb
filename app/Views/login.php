@@ -3,6 +3,9 @@ defined('SYSTEMPATH') || exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="am" data-theme="corporate">
 <head>
+  <script>
+  (function(){try{var k='churchdb-theme',t=localStorage.getItem(k);if(t==='dark'||t==='corporate')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+  </script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,7 +13,8 @@ defined('SYSTEMPATH') || exit('No direct script access allowed');
   <title> ቸርችDB </title>
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendors/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/tailwind.css'); ?>">
-  <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>">
+  <link rel="icon" href="<?= base_url('favicon.ico'); ?>" type="image/x-icon">
+  <link rel="shortcut icon" href="<?= base_url('favicon.ico'); ?>">
   <style type="text/css">
     .se-pre-con {
       position: fixed;
@@ -27,11 +31,30 @@ defined('SYSTEMPATH') || exit('No direct script access allowed');
 <body class="min-h-screen bg-base-200">
 <div class="se-pre-con"></div>
 
+<label class="swap swap-rotate fixed right-4 top-4 z-50 btn btn-circle btn-ghost border border-base-300 bg-base-100 shadow-sm" title="Light / dark theme">
+  <input type="checkbox" data-theme-toggle />
+  <span class="swap-on text-lg" aria-hidden="true"><i class="fa fa-moon-o"></i></span>
+  <span class="swap-off text-lg" aria-hidden="true"><i class="fa fa-sun-o"></i></span>
+</label>
+
 <div class="flex min-h-screen flex-col items-center justify-center gap-8 p-4">
   <div class="card w-full max-w-md border border-base-300 bg-base-100 shadow-xl">
     <div class="card-body">
-      <h1 class="card-title justify-center text-2xl font-bold"><?php echo esc($system_name); ?></h1>
-      <p class="text-center text-sm opacity-70">ወደ አካውንቶ ይግቡ</p>
+      <div class="flex flex-col items-center gap-3">
+        <a
+          href="<?= esc(base_url()); ?>"
+          class="inline-flex items-center justify-center no-underline text-base-content hover:text-base-content hover:no-underline focus:outline-none"
+          aria-label="<?= esc($system_name); ?>"
+        >
+          <img
+            src="<?= esc(base_url('logo.svg')); ?>"
+            alt=""
+            class="h-24 w-auto max-h-24 max-w-[7rem] object-contain"
+            decoding="async"
+          />
+        </a>
+        <p class="text-center text-sm opacity-70">ወደ አካውንቶ ይግቡ</p>
+      </div>
 
       <form action="<?php echo base_url(); ?>users/login" method="post" class="mt-4 flex flex-col gap-4">
         <label class="form-control w-full">
@@ -64,6 +87,7 @@ defined('SYSTEMPATH') || exit('No direct script access allowed');
   </p>
 </div>
 
+<script src="<?= base_url('assets/js/theme.js'); ?>"></script>
 <script>
   $(window).on('load', function () {
     $('.se-pre-con').fadeOut('slow');

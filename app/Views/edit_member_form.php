@@ -47,8 +47,13 @@
 	    				<div class="card-body border-b border-base-300 pb-3 mb-3">
 	    					<h3 class="card-title text-lg">የምዕመን ፎቶ</h3>
 	    				</div>
-	    				<div class="card-body" align="center">
-			              	<img class="img-responsive rounded-full" for="avatarInput" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?php if($member['avatar'] == NULL) { echo base_url().'assets/img/user.png'; } else { echo base_url('assets/avatars/'. $member['avatar']); } ?>" alt="User profile picture"><br>
+	    				<div class="card-body flex flex-col items-center text-center">
+			              	<?= view('templates/partials/member_avatar', [
+			              	    'member' => $member,
+			              	    'size' => 'lg',
+			              	    'placeholderSrc' => base_url('assets/img/user.png'),
+			              	    'imgId' => 'avatar',
+			              	]); ?><br>
 
 
 						<div class="input-group input-group-lg">
@@ -109,15 +114,8 @@
 				                <p/>
 				                <div class="row">
 					                <div class="col-md-4 form-group">
-						                <label><?= lang('label.birth_date') ?>:</label>
-
-						                <div class="input-group">
-						                  <div class="input-group-addon">
-						                    <i class="glyphicon glyphicon-calendar"></i>
-						                  </div>
-						                  <input type="text" class="input input-bordered w-full max-w-full family-head inputmasked" name="birthdate" value="<?= $member['birthdate'] ?>" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask>
-						                </div>
-						                <!-- /.input group -->
+						                <label for="birthdate"><?= lang('label.birth_date') ?>:</label>
+						                <input type="date" id="birthdate" name="birthdate" class="input input-bordered w-full max-w-full family-head" value="<?= esc(substr((string) ($member['birthdate'] ?? ''), 0, 10)); ?>" max="<?= esc(date('Y-m-d')); ?>">
 						            </div>
 				                    <div class="col-md-2">
 				                        <label> ዕድሜ ይደበቅ  </label><br/>
@@ -185,11 +183,11 @@
 
 						<div class="form-group col-md-4">
 							<label for="home_phone"> የመኖርያ ቤት ስልክ ቁጥር: </label>
-							<div class="input-group">
-								<div class="input-group-addon">
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
 									<i class="fa fa-tty"></i>
-								</div>
-								<input type="text" name="home_phone" value="<?= $member['home_phone']?>" class="input input-bordered w-full max-w-full" placeholder="046..">
+								</span>
+								<input id="home_phone" type="tel" name="home_phone" value="<?= esc($member['home_phone'] ?? '') ?>" autocomplete="tel-national" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30" placeholder="046..">
 							</div>
 						</div>
 
@@ -197,12 +195,12 @@
 
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label><?= lang('label.mobile_phone') ?>:</label>
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="glyphicon glyphicon-earphone"></i>
-								</div>
-								<input type="text" name="mobile_phone" value="<?= $member['mobile_phone'] ?>" class="input input-bordered w-full max-w-full">
+							<label for="mobile_phone"><?= lang('label.mobile_phone') ?>:</label>
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
+									<i class="fa fa-mobile text-lg"></i>
+								</span>
+								<input id="mobile_phone" type="tel" name="mobile_phone" value="<?= esc($member['mobile_phone'] ?? '') ?>" autocomplete="tel-national" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30">
 							</div>
 						</div>
 
@@ -268,12 +266,12 @@
 
 
 						<div class="form-group col-md-4">
-							<label> የመሥሪያ ቤት ስልክ ቁጥር: </label>
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="glyphicon glyphicon-phone-alt"></i>
-								</div>
-								<input type="text" name="workplace_phone" value="<?= $member['workplace_phone'] ?>" class="input input-bordered w-full max-w-full inputmasked" data-inputmask='"mask": "(999) 999-9999"' data-mask/>
+							<label for="workplace_phone"> የመሥሪያ ቤት ስልክ ቁጥር: </label>
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
+									<i class="fa fa-building-o"></i>
+								</span>
+								<input id="workplace_phone" type="tel" name="workplace_phone" value="<?= esc($member['workplace_phone'] ?? '') ?>" autocomplete="tel" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30 inputmasked" data-inputmask='"mask": "(999) 999-9999"' data-mask>
 							</div>
 						</div>
 
@@ -306,11 +304,13 @@
 					<div class="row">
 
 	                    <div class="col-md-4">
-	                        <label for="Title"> <?= lang('label.membership_year'); ?>  :</label>
-	                        <div class="input-group">
-	                        	<input type="text" name="membership_year" value="<?php if($member['membership_year']) { echo $member['membership_year']; } ?>" class="input input-bordered w-full max-w-full inputmasked" data-inputmask='"mask": "9999"' data-mask>
-	                    		<div class="input-group-addon">ዓ.ም</div>
-
+	                        <label for="membership_year"> <?= lang('label.membership_year'); ?>  :</label>
+	                        <div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
+	                        	<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
+	                        		<i class="fa fa-calendar"></i>
+	                        	</span>
+	                        	<input id="membership_year" type="text" name="membership_year" value="<?php if($member['membership_year']) { echo $member['membership_year']; } ?>" inputmode="numeric" autocomplete="off" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30 inputmasked" data-inputmask='"mask": "9999"' data-mask>
+	                    		<span class="join-item inline-flex min-h-10 shrink-0 items-center justify-center border-0 border-s border-base-300 bg-base-200 px-3 text-sm text-base-content" aria-hidden="true">ዓ.ም</span>
 	                    	</div>
 	                    </div>
 
@@ -418,7 +418,7 @@
 		}
 
 	    $(function () {
-	        $('input').iCheck({
+	        $('input:not(#layout-drawer):not([data-theme-toggle]):not([type="file"]):not([type="hidden"])').iCheck({
 		      checkboxClass: 'icheckbox_square-blue',
 		      radioClass: 'iradio_square-blue',
 		      increaseArea: '20%' /* optional */

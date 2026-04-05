@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="am" data-theme="corporate">
 <head>
+  <script>
+  (function(){try{var k='churchdb-theme',t=localStorage.getItem(k);if(t==='dark'||t==='corporate')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+  </script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?php echo esc(session()->get('system_name')); ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/tailwind.css'); ?>">
-  <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>">
+  <link rel="icon" href="<?= base_url('favicon.ico'); ?>" type="image/x-icon">
+  <link rel="shortcut icon" href="<?= base_url('favicon.ico'); ?>">
   <style type="text/css">
     .profile-image {
       width: 80px;
@@ -22,7 +26,12 @@
   </style>
   <script src="<?php echo base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
 </head>
-<body class="flex min-h-screen items-center justify-center bg-base-200 p-4">
+<body class="relative flex min-h-screen items-center justify-center bg-base-200 p-4">
+<label class="swap swap-rotate absolute right-4 top-4 z-50 btn btn-circle btn-ghost border border-base-300 bg-base-100 shadow-sm" title="Light / dark theme">
+  <input type="checkbox" data-theme-toggle />
+  <span class="swap-on text-lg" aria-hidden="true"><i class="fa fa-moon-o"></i></span>
+  <span class="swap-off text-lg" aria-hidden="true"><i class="fa fa-sun-o"></i></span>
+</label>
 <?php
 $pp = $_SESSION['current_user']['profile_picture'] ?? null;
 $lockAvatar = base_url('assets/' . (($pp === null || $pp === '') ? 'img/user-icon.jpg' : 'profile_pictures/' . $pp));
@@ -58,5 +67,6 @@ $lockAvatar = base_url('assets/' . (($pp === null || $pp === '') ? 'img/user-ico
     </p>
   </div>
 </div>
+<script src="<?= base_url('assets/js/theme.js'); ?>"></script>
 </body>
 </html>

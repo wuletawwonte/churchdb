@@ -6,19 +6,6 @@
 
 <style type="text/css">
 
-    .profile-image {
-        width: 60px;
-        height: 60px;
-        padding: 2px;
-        border-radius: 50%;
-        border: 2px solid #d2d6de;
-        font-size: 20px;
-        color: #fff;
-        line-height: 60px;
-        text-align: center;
-        margin: 0 0; 
-    }
-
     table tbody td a, table tbody td span {
         line-height: 52px;
     }
@@ -173,19 +160,9 @@
 
                     <tr>
 
-                        <td>
-                            <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
-                                <?php if($member['avatar'] == NULL) { ?>
-                                    <div class="profile-image" >
-                                        <div style="width: 100%; height: 100%; border-radius: 50%; background: <?= $member['profile_color']; ?>">
-                                            <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
-                                        </div>
-                                    </div>
-                                <?php } else { ?>
-                                    <div>
-                                        <img class="rounded-full" style="border: 2px solid <?= $member['profile_color']; ?>;padding: 2px;height: 60px; width: 60px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
-                                    </div>
-                                <?php } ?>
+                        <td class="align-middle leading-none">
+                            <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>" class="inline-flex leading-none">
+                                <?= view('templates/partials/member_avatar', ['member' => $member, 'size' => 'sm']); ?>
                             </a>
                         </td>
 

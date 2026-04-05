@@ -4,21 +4,6 @@
 
 
 <style type="text/css">
-
-    .profile-image {
-      margin: 0 auto;
-      margin-top: 15px;
-      width: 130px;
-      height: 130px;
-      padding: 3px;
-      border-radius: 50%;
-      border: 3px solid #d2d6de; 
-      font-size: 50px;
-      color: #fff;
-      text-align: center;
-      line-height: 128px;
-    }
-
     .user-list tbody td a, .user-list tbody td span {
         line-height: 50px;
     }
@@ -38,19 +23,8 @@
         <div class="w-full shrink-0 lg:w-80">
             <div class="card border border-base-300 bg-base-100 shadow-md">
                 <div class="card-body items-center text-center">
-                    <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
-                    	<?php if($member['avatar'] == NULL) { ?>
-                            <div class="profile-image">
-                                <div style="width: 100%; height: 100%; border-radius: 50%; background: <?= $member['profile_color']; ?>">
-                                    <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
-                                </div>
-                            </div>
-                        <?php } else { ?>
-                            <div style="margin: 0 auto;height: 130px; width: 130px;margin-top: 15px;">
-                                <img class="rounded-full" style="border: 3px solid <?= $member['profile_color']; ?>;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
-                            </div>
-
-                        <?php } ?>
+                    <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>" class="mx-auto mt-2 flex justify-center">
+                        <?= view('templates/partials/member_avatar', ['member' => $member, 'size' => 'lg']); ?>
                     </a><br>
                   
                   <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><h3 class="text-center text-lg font-semibold">

@@ -171,6 +171,12 @@ class Admin extends BaseController
 		$this->cnfgModel->edit_one('church_name', $this->request->getPost('church_name'));
 		$this->cnfgModel->edit_one('default_password', $this->request->getPost('default_password'));
 
+		session()->set([
+			'system_name'       => (string) $this->request->getPost('system_name'),
+			'system_name_short' => (string) $this->request->getPost('system_name_short'),
+			'church_name'       => (string) $this->request->getPost('church_name'),
+		]);
+
 		session()->setFlashdata('success', 'የሲስተም ለውጦች በትክክል ተመዝግበዋል።');
 
 		return redirect()->to(site_url('admin/generalsetting'));

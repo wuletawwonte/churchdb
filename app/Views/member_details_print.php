@@ -10,23 +10,6 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/css/tailwind.css'); ?>">
 
-<style type="text/css">
-	.profile-image {
-  margin: 0 auto;
-  margin-top: 15px;
-  width: 200px;
-  height: 200px;
-  padding: 3px;
-  border-radius: 50%;
-  border: 3px solid #d2d6de; 
-  font-size: 50px;
-  color: #fff;
-  text-align: center;
-  line-height: 188px;
-}
-
-</style>
-
 </head>
 
 <body style="background-color: #eee;padding: 10px;" onload="window.print();">
@@ -46,18 +29,9 @@
 
 <table>	<tr>	<td  style="padding:5px;">
 
-                	<?php if($member['avatar'] == NULL) { ?>
-                        <div class="profile-image">
-                            <div style="width: 100%; height: 100%; border-radius: 50%; background: <?= $member['profile_color']; ?>">
-                                <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
-                            </div>
-                        </div>
-                    <?php } else { ?>
-                        <div style="margin: 0 auto;height: 200px; width: 200px;margin-top: 15px;">
-                            <img class="rounded-full" style="border: 3px solid <?= $member['profile_color']; ?>;padding: 3px;height: 200px; width: 200px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
-                        </div>
-
-                    <?php } ?>
+                	<div class="mx-auto mt-2 flex justify-center">
+                        <?= view('templates/partials/member_avatar', ['member' => $member, 'size' => 'print']); ?>
+                    </div>
 
 
 	</td>

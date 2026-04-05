@@ -99,7 +99,7 @@
     });
 
     $(function () {
-        $('input').iCheck({
+        $('input:not(#layout-drawer):not([data-theme-toggle]):not([type="file"]):not([type="hidden"])').iCheck({
 	      checkboxClass: 'icheckbox_square-blue',
 	      radioClass: 'iradio_square-blue',
 	      increaseArea: '20%' /* optional */

@@ -4,6 +4,62 @@
 (function () {
   'use strict';
 
+  var SIDEBAR_KEY = 'churchdb-sidebar';
+
+  function drawerRoot() {
+    return document.getElementById('layout-drawer-root');
+  }
+
+  function drawerCheckbox() {
+    return document.getElementById('layout-drawer');
+  }
+
+  function isLgSidebarPinnedOpen() {
+    var r = drawerRoot();
+    return !!(r && r.classList.contains('lg:drawer-open'));
+  }
+
+  function setLgSidebarPinnedOpen(open) {
+    var r = drawerRoot();
+    var cb = drawerCheckbox();
+    if (!r || !cb) return;
+    if (open) {
+      r.classList.add('lg:drawer-open');
+      cb.checked = false;
+      try {
+        localStorage.setItem(SIDEBAR_KEY, 'open');
+      } catch (err) {}
+    } else {
+      r.classList.remove('lg:drawer-open');
+      cb.checked = false;
+      try {
+        localStorage.setItem(SIDEBAR_KEY, 'closed');
+      } catch (err) {}
+    }
+    updateSidebarToggleButton();
+  }
+
+  function updateSidebarToggleButton() {
+    var btn = document.querySelector('[data-sidebar-toggle]');
+    if (!btn) return;
+    var open = isLgSidebarPinnedOpen();
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var i = btn.querySelector('i');
+    if (i) {
+      i.className = 'fa text-lg ' + (open ? 'fa-angle-double-left' : 'fa-bars');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    updateSidebarToggleButton();
+    var btn = document.querySelector('[data-sidebar-toggle]');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        setLgSidebarPinnedOpen(!isLgSidebarPinnedOpen());
+      });
+    }
+  });
+
   document.addEventListener('click', function (e) {
     var dismissAlert = e.target.closest('[data-dismiss="alert"]');
     if (dismissAlert) {

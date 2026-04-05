@@ -1,11 +1,3 @@
-
-<style type="text/css">
-	#avatar {
-		width: 130px;
-		height: 130px;
-	}
-</style>
-
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/plugins/jquery.inputmask.date.extensions.js'); ?>"></script>
 <script src="<?= base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
@@ -14,7 +6,7 @@
 
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="space-y-4">
+  <div class="space-y-6">
     <!-- Content Header (Page header) -->
     <div class="mb-6"><h1 class="text-2xl font-bold">
         <?= lang('label.person_registration'); ?>
@@ -34,7 +26,7 @@
 
 
     <!-- Main content -->
-    <section class="content container-fluid">
+    <section class="content container-fluid space-y-6">
 
 	    <?php if(session()->getFlashdata('success')) { ?>
 	        <div class="alert alert-info alert-dismissible">
@@ -55,18 +47,19 @@
 	    				<div class="card-body border-b border-base-300 pb-3 mb-3">
 	    					<h3 class="card-title text-lg">የምዕመን ፎቶ</h3>
 	    				</div>
-	    				<div class="card-body" align="center">
-			              	<img class="img-responsive rounded-full" for="avatarInput" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/img/user.png" alt="User profile picture"><br>
-
+	    				<div class="card-body flex flex-col items-center gap-4 text-center">
+			              	<?= view('templates/partials/member_avatar', [
+			              	    'member' => [],
+			              	    'size' => 'lg',
+			              	    'placeholderSrc' => base_url('assets/img/user.png'),
+			              	    'imgId' => 'avatar',
+			              	]); ?>
 
 						<div class="input-group">
 			                <input type="file" accept="image/*" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" id="avatarInput" name="avatar_input" style="display: none;">
 				                    <button type="button" class="btn btn-lg btn-primary" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
 				                    <button type="button" class="btn btn-lg btn-info" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/img/user.png'"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
 			            </div>
-		                <p></p>
-
-
 			              	<p class="text-muted text-center">የፎቶው ከ1500KB ቢያንስ ይመረጣል </p>
 	    				</div>
 	    			</div>
@@ -76,7 +69,7 @@
 				        <div class="card-body border-b border-base-300 pb-3 mb-3">
 				            <h3 class="card-title text-lg"> የግል መረጃ </h3>
 				        </div><!-- /.box-header -->
-				        <div class="card-body">
+				        <div class="card-body flex flex-col gap-5">
 			                <div class="row">
 			                    <div class="col-md-2">
 			                        <label> ፆታ  :</label>
@@ -89,7 +82,7 @@
 			                        <label for="title"> ማዕረግ  :</label>
 			                        <input type="text" name="title" class="input input-bordered w-full max-w-full">
 			                    </div>
-			                </div><br>
+			                </div>
 			                <div class="row">
 			                    <div class="col-md-4">
 			                        <label for="firstname"> ስም  :</label>
@@ -107,18 +100,11 @@
 			                        <label for="lastname"> የአያት ስም :</label>
 			                        <input type="text" name="lastname" class="input input-bordered w-full max-w-full" required>                    
 			                    </div>
-			                </div><br>
+			                </div>
 			                <div class="row">
 				                <div class="col-md-4 form-group">
-					                <label>የተወለዱበት ቀን :</label>
-
-					                <div class="input-group">
-					                  <div class="input-group-addon">
-					                    <i class="glyphicon glyphicon-calendar"></i>
-					                  </div>
-					                  <input type="text" class="input input-bordered w-full max-w-full family-head inputmasked" name="birthdate" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask required>
-					                </div>
-					                <!-- /.input group -->
+					                <label for="birthdate">የተወለዱበት ቀን :</label>
+					                <input type="date" id="birthdate" name="birthdate" class="input input-bordered w-full max-w-full family-head" required max="<?= esc(date('Y-m-d')); ?>">
 					            </div>
 			                    <div class="col-md-2">
 			                        <label> ዕድሜ ይደበቅ  </label><br/>
@@ -142,7 +128,7 @@
 				<div class="card-body border-b border-base-300 pb-3 mb-3">
 					<h3 class="card-title text-lg"> የምዕመኑ አድራሻ </h3>
 				</div><!-- /.box-header -->
-				<div class="card-body">
+				<div class="card-body flex flex-col gap-5">
 					<div class="row">
 
 	                    <div class="col-md-4">
@@ -168,7 +154,7 @@
 	                        	<option value="">አልተመረጠም</option>
 	                        </select>
 	                    </div>
-					</div><br>
+					</div>
 					<div class="row">
 
 	                    <div class="col-md-2">
@@ -178,24 +164,24 @@
 
 						<div class="form-group col-md-4">
 							<label for="home_phone"> የመኖርያ ቤት ስልክ ቁጥር: </label>
-							<div class="input-group">
-								<div class="input-group-addon">
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
 									<i class="fa fa-tty"></i>
-								</div>
-								<input type="text" name="home_phone" class="input input-bordered w-full max-w-full" placeholder="046..">
+								</span>
+								<input id="home_phone" type="tel" name="home_phone" autocomplete="tel-national" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30" placeholder="046..">
 							</div>
 						</div>
 
-					</div><br>
+					</div>
 					<div class="row">
 
 						<div class="form-group col-md-6">
-							<label>የሞባይል ስልክ ቁጥር:</label>
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="glyphicon glyphicon-earphone"></i>
-								</div>
-								<input type="text" name="mobile_phone" class="input input-bordered w-full max-w-full" placeholder="09..">
+							<label for="mobile_phone">የሞባይል ስልክ ቁጥር:</label>
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
+									<i class="fa fa-mobile text-lg"></i>
+								</span>
+								<input id="mobile_phone" type="tel" name="mobile_phone" autocomplete="tel-national" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30" placeholder="09..">
 							</div>
 						</div>
 
@@ -218,7 +204,7 @@
 				<div class="card-body border-b border-base-300 pb-3 mb-3">
 					<h3 class="card-title text-lg"> የምዕመን የስራ ሁኔታ </h3>
 				</div><!-- /.box-header -->
-				<div class="card-body">
+				<div class="card-body flex flex-col gap-5">
 					<div class="row">
 
 						<div class="col-md-6">
@@ -241,7 +227,7 @@
 							<input type="text" Name="field_of_study" class="input input-bordered w-full max-w-full" maxlength="50">
 						</div>
 
-					</div><br>
+					</div>
 					<div class="row">
 	                    <div class="col-md-4">
 	                        <label> የሥራ መስክ: </label>
@@ -260,16 +246,16 @@
 
 
 						<div class="form-group col-md-4">
-							<label>የመሥሪያ ቤት ስልክ ቁጥር :</label>
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="glyphicon glyphicon-phone-alt"></i>
-								</div>
-								<input type="text" name="workplace_phone" class="input input-bordered w-full max-w-full inputmasked" data-inputmask='"mask": "(999) 999-9999"' data-mask/>
+							<label for="workplace_phone">የመሥሪያ ቤት ስልክ ቁጥር :</label>
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
+									<i class="fa fa-building-o"></i>
+								</span>
+								<input id="workplace_phone" type="tel" name="workplace_phone" autocomplete="tel" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30 inputmasked" data-inputmask='"mask": "(999) 999-9999"' data-mask>
 							</div>
 						</div>
 
-					</div><br>
+					</div>
 					<div class="row">
 
 	                    <div class="col-md-4">
@@ -291,16 +277,18 @@
 				<div class="card-body border-b border-base-300 pb-3 mb-3">
 					<h3 class="card-title text-lg"> የቤተክርስትያን ተሳትፎ </h3>
 				</div><!-- /.box-header -->
-				<div class="card-body">
+				<div class="card-body flex flex-col gap-5">
 
 					<div class="row">
 
 	                    <div class="col-md-4">
-	                        <label for="Title"> አባል የሆኑበት ዘመን :</label>
-	                        <div class="input-group">
-	                        	<input type="text" name="membership_year" class="input input-bordered w-full max-w-full inputmasked" data-inputmask='"mask": "9999"' data-mask>
-	                    		<div class="input-group-addon">ዓ.ም</div>
-
+	                        <label for="membership_year"> አባል የሆኑበት ዘመን :</label>
+	                        <div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
+	                        	<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
+	                        		<i class="fa fa-calendar"></i>
+	                        	</span>
+	                        	<input id="membership_year" type="text" name="membership_year" inputmode="numeric" autocomplete="off" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30 inputmasked" data-inputmask='"mask": "9999"' data-mask>
+	                    		<span class="join-item inline-flex min-h-10 shrink-0 items-center justify-center border-0 border-s border-base-300 bg-base-200 px-3 text-sm text-base-content" aria-hidden="true">ዓ.ም</span>
 	                    	</div>
 	                    </div>
 
@@ -324,9 +312,7 @@
 	                        </select>
 	                    </div>
 					</div>
-					<p/>
 					<div class="row">
-					<p/>
 	                    <div class="col-md-4 ministries">
 	                        <label> የአገልግሎት ዘርፍ :</label>
 	                        <select name="ministry" class="input input-bordered w-full max-w-full s2">
@@ -338,7 +324,6 @@
 	                    </div>
 
 					</div>
-					<p/>
 				</div>
 			</div>
 
@@ -349,6 +334,7 @@
 		            <h3 class="card-title text-lg"> የቤተሰብ መረጃ </h3>
 		        </div><!-- /.box-header -->
 		        <div class="card-body">
+		            <div class="row">
 		            <div class="form-group col-md-6">
 		                <label> የጋብቻ ሁኔታ :</label>
 		                <select name="marital_status" class="input input-bordered w-full max-w-full s2" id="maritalStatus">
@@ -367,13 +353,16 @@
 		                    <option disabled>-----------------------</option>
 		                </select>
 		            </div>
+		            </div>
 		        </div>
 		    </div>
 
 
+            <div class="flex flex-wrap gap-3 pt-1">
             <input type="submit" class="btn btn-primary" value="<?= lang('label.save') ?>" Name="addchurchsubmit">
 			<input type="submit" class="btn btn-info" value="Save and Add" name="addchurchsubmit">
 			<a href="<?= base_url(); ?>admin/listmembers" class="btn">Cancel</a>
+			</div>
 
 
 	    </section>
@@ -421,7 +410,7 @@
 			});
 
 	    $(function () {
-	        $('input').iCheck({
+	        $('input:not(#layout-drawer):not([data-theme-toggle]):not([type="file"]):not([type="hidden"])').iCheck({
 		      checkboxClass: 'icheckbox_square-blue',
 		      radioClass: 'iradio_square-blue',
 		      increaseArea: '20%' /* optional */
