@@ -28,15 +28,15 @@
 
 
 
-    <div class="card border border-base-300 bg-base-100 shadow-md">
-        <div class="card-body flex flex-wrap gap-2 border-b border-base-300">
-            <a href="<?php echo base_url(); ?>admin/newuserform" class="btn btn-outline btn-sm"><i class="fa fa-user-plus"></i> አዲስ ተጠቃሚ </a>
-            <a href="SettingsUser.php" class="btn btn-outline btn-sm"><i class="fa fa-wrench"></i> የተጠቃሚዎች መቼት</a>
+    <div class="card border border-base-content/15 bg-base-100 shadow-md">
+        <div class="card-body flex flex-wrap gap-2 border-b border-base-content/15">
+            <a href="<?php echo base_url(); ?>admin/newuserform" class="btn btn-outline btn-primary btn-sm"><i class="fa fa-user-plus"></i> አዲስ ተጠቃሚ </a>
+            <a href="SettingsUser.php" class="btn btn-outline btn-primary btn-sm"><i class="fa fa-wrench"></i> የተጠቃሚዎች መቼት</a>
         </div>
     </div>
 
-    <div class="card border border-base-300 bg-base-100 shadow-md">
-            <div class="card-body border-b border-base-300 pb-3 mb-3">
+    <div class="card border border-base-content/15 bg-base-100 shadow-md">
+            <div class="card-body border-b border-base-content/15 pb-3 mb-3">
                 <h3 class="card-title text-lg">የተጠቃሚዎች ዝርዝር</h3>
             </div>
             <div class="card-body overflow-x-auto">
@@ -96,7 +96,7 @@
                 <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
                 <p class="py-4">መልሶ ማግኘት አይቻልም</p>
                 <div class="modal-action">
-                  <form method="dialog"><button class="btn">አይ</button></form>
+                  <form method="dialog"><button class="btn btn-ghost">አይ</button></form>
                   <a href="<?= base_url(); ?>admin/deleteuser/<?= $user['id']?>" class="btn btn-primary">አዎ</a>
                 </div>
               </div>

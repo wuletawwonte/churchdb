@@ -24,8 +24,8 @@
         </div>
     <?php } ?>
 
-    <div class="card border border-base-300 bg-base-100 shadow-md">
-    	<div class="card-body border-b border-base-300 pb-3 mb-3"><?= lang('label.create_group') ?></div>
+    <div class="card border border-base-content/15 bg-base-100 shadow-md">
+    	<div class="card-body border-b border-base-content/15 pb-3 mb-3"><?= lang('label.create_group') ?></div>
     	<div class="card-body">
             <div class="form-group">
             <form method="POST" action="<?= base_url('admin/savegroup'); ?>">
@@ -51,7 +51,7 @@
 
     <!-- Default box -->
     <div class="box">
-        <div class="card-body border-b border-base-300 pb-3 mb-3">
+        <div class="card-body border-b border-base-content/15 pb-3 mb-3">
             <h3 class="card-title text-lg">የቡድኖች ዝርዝር</h3>
         </div>
         <div class="card-body">

@@ -4,7 +4,7 @@ defined('SYSTEMPATH') || exit('No direct script access allowed');
 <html lang="am" data-theme="corporate">
 <head>
   <script>
-  (function(){try{var k='churchdb-theme',t=localStorage.getItem(k);if(t==='dark'||t==='corporate')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+  (function(){try{var k='churchdb-theme',t=localStorage.getItem(k),d=document.documentElement;if(t==='system')d.removeAttribute('data-theme');else if(t==='dark'||t==='corporate')d.setAttribute('data-theme',t);}catch(e){}})();
   </script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,14 +31,31 @@ defined('SYSTEMPATH') || exit('No direct script access allowed');
 <body class="min-h-screen bg-base-200">
 <div class="se-pre-con"></div>
 
-<label class="swap swap-rotate fixed right-4 top-4 z-50 btn btn-circle btn-ghost border border-base-300 bg-base-100 shadow-sm" title="Light / dark theme">
-  <input type="checkbox" data-theme-toggle />
-  <span class="swap-on text-lg" aria-hidden="true"><i class="fa fa-moon-o"></i></span>
-  <span class="swap-off text-lg" aria-hidden="true"><i class="fa fa-sun-o"></i></span>
-</label>
+<div class="dropdown dropdown-end fixed right-4 top-4 z-50">
+  <div tabindex="0" role="button" class="btn btn-circle btn-ghost border border-base-content/15 bg-base-100 shadow-sm" data-theme-menu-trigger title="Theme" aria-label="Theme" aria-haspopup="true">
+    <span data-theme-trigger-icon class="text-lg"><i class="fa fa-sun-o" aria-hidden="true"></i></span>
+  </div>
+  <ul tabindex="0" class="menu dropdown-content z-[200] mt-2 w-44 rounded-box border border-base-content/15 bg-base-100 p-2 shadow-lg">
+    <li>
+      <button type="button" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-base-200" data-theme-choice="corporate" role="menuitemradio" aria-checked="false">
+        <i class="fa fa-sun-o w-5 shrink-0 opacity-80" aria-hidden="true"></i><span>Light</span>
+      </button>
+    </li>
+    <li>
+      <button type="button" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-base-200" data-theme-choice="dark" role="menuitemradio" aria-checked="false">
+        <i class="fa fa-moon-o w-5 shrink-0 opacity-80" aria-hidden="true"></i><span>Dark</span>
+      </button>
+    </li>
+    <li>
+      <button type="button" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-base-200" data-theme-choice="system" role="menuitemradio" aria-checked="false">
+        <i class="fa fa-desktop w-5 shrink-0 opacity-80" aria-hidden="true"></i><span>System</span>
+      </button>
+    </li>
+  </ul>
+</div>
 
 <div class="flex min-h-screen flex-col items-center justify-center gap-8 p-4">
-  <div class="card w-full max-w-md border border-base-300 bg-base-100 shadow-xl">
+  <div class="card w-full max-w-md border border-base-content/15 bg-base-100 shadow-xl">
     <div class="card-body">
       <div class="flex flex-col items-center gap-3">
         <a

@@ -8,7 +8,7 @@
 
 /* Select2 (no Bootstrap theme): match form controls */
 .select2-container--default .select2-selection--single {
-  @apply min-h-10 rounded-lg border border-base-300 bg-base-100 px-3 py-2;
+  @apply min-h-10 rounded-lg border border-base-content/15 bg-base-100 px-3 py-2;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   @apply leading-normal text-base-content;
@@ -18,7 +18,7 @@
   height: 2.25rem;
 }
 .select2-dropdown {
-  @apply rounded-box border border-base-300 bg-base-100;
+  @apply rounded-box border border-base-content/15 bg-base-100;
 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
   @apply bg-primary text-primary-content;
@@ -33,7 +33,7 @@
 }
 
 .nav-tabs-custom .tabs.tabs-boxed li.active > a {
-  @apply border-base-300 bg-base-100 font-semibold text-base-content shadow-sm;
+  @apply border-base-content/15 bg-base-100 font-semibold text-base-content shadow-sm;
 }
 
 /* Minimal legacy grid for views still using Bootstrap 3 column class names */

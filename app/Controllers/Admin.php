@@ -186,7 +186,7 @@ class Admin extends BaseController
 
 	public function personregistration() {
 
-		$data['active_menu'] = "personregistration";
+		$data['active_menu'] = "listmembers";
 		$data['job_types'] = $this->jobTypeModel->get_all();
 		$data['membership_causes'] = $this->membershipCauseModel->get_all();
 		$data['membership_levels'] = $this->membershipLevelModel->get_all();
@@ -267,7 +267,7 @@ class Admin extends BaseController
 				'age_group' => NULL
 			);
 			session()->set('filtermember', $filtermember);		
-			return redirect()->to(site_url('admin/listmembers')); 
+			return redirect()->to(site_url('admin/members')); 
 	}
 
 	public function savemember() {
@@ -381,7 +381,7 @@ class Admin extends BaseController
 
 		public function export_families_csv() {
 		session()->setFlashdata('error', 'Family export is not available.');
-		return redirect()->to(site_url('admin/listmembers'));
+		return redirect()->to(site_url('admin/members'));
 	}
 
 	public function deletemembersbackup($id) {
@@ -849,10 +849,10 @@ class Admin extends BaseController
 	public function deletemember($id) {
 		if($this->memberModel->delete_member($id)) {
 			session()->setFlashdata('success', 'የምዕመኑ መረጃ በትክክል ጠፍቷል።');			
-			return redirect()->to(site_url('admin/listmembers')); 
+			return redirect()->to(site_url('admin/members')); 
 		} else {
 			session()->setFlashdata('error', 'የምዕመኑ መረጃ ማጥፋት አልተቻለም።');			
-			return redirect()->to(site_url('admin/listmembers')); 			
+			return redirect()->to(site_url('admin/members')); 			
 		}
 	}
 

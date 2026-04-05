@@ -8,7 +8,7 @@
       </h1>
 
       <div class="breadcrumbs text-sm"><ul>
-        <li><a href="<?= base_url(); ?>admin/listmembers"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
+        <li><a href="<?= base_url(); ?>admin/members"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
         <li><a href="<?= base_url(); ?>admin/listgroups"><i class="fa fa-object-group"></i> ቡድኖች </a></li>
         <li> የቡድን አባላት </li>
       </ul></div>
@@ -28,8 +28,8 @@
 
 
 
-        <div class="card border border-base-300 bg-base-100 shadow-md">
-            <div class="card-body border-b border-base-300 pb-3 mb-3"><?= lang('label.add_member') ?></div>
+        <div class="card border border-base-content/15 bg-base-100 shadow-md">
+            <div class="card-body border-b border-base-content/15 pb-3 mb-3"><?= lang('label.add_member') ?></div>
             <div class="card-body">
                 <form action="<?= base_url('admin/add_group_member') ?>" method="POST">
                     <input type="text" name="group_id" value="<?= $group['gid'] ?>" hidden>
@@ -57,8 +57,8 @@
 
 
 
-        <div class="card border border-base-300 bg-base-100 shadow-md">
-            <div class="card-body border-b border-base-300 pb-3 mb-3" align="right">
+        <div class="card border border-base-content/15 bg-base-100 shadow-md">
+            <div class="card-body border-b border-base-content/15 pb-3 mb-3" align="right">
                 <p/><p/><p/>
                 <button class="btn btn-info" type="button">
                     የቡድን ስም <span class="badge"> <?= $group['name']; ?> </span>

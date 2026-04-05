@@ -14,8 +14,8 @@
 
 <section class="space-y-6">
 
-    <div class="card border border-base-300 bg-base-100 shadow-md">
-        <div class="card-body border-b border-base-300 pb-4">
+    <div class="card border border-base-content/15 bg-base-100 shadow-md">
+        <div class="card-body border-b border-base-content/15 pb-4">
             <h2 class="card-title">ክፍያ መመዝገብያ</h2>
         </div>
 
@@ -66,7 +66,7 @@
                 </div>
             </div>
 
-            <div class="card-actions justify-end border-t border-base-300 bg-base-200/30 px-6 py-4">
+            <div class="card-actions justify-end border-t border-base-content/15 bg-base-200/30 px-6 py-4">
                 <button type="button" class="btn btn-primary" data-open-modal="savepayment">መዝግብ</button>
             </div>
 
@@ -75,7 +75,7 @@
                     <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
                     <p class="py-4">መልሶ ማስተካከል አይቻልም</p>
                     <div class="modal-action">
-                        <button type="button" class="btn" onclick="document.getElementById('savepayment').close()">አይ</button>
+                        <button type="button" class="btn btn-ghost" onclick="document.getElementById('savepayment').close()">አይ</button>
                         <button type="submit" class="btn btn-primary">አዎ</button>
                     </div>
                 </div>
@@ -84,8 +84,8 @@
         </form>
     </div>
 
-    <div class="card border border-base-300 bg-base-100 shadow-md">
-        <div class="card-body border-b border-base-300">
+    <div class="card border border-base-content/15 bg-base-100 shadow-md">
+        <div class="card-body border-b border-base-content/15">
             <h2 class="card-title">የምዕመናን የክፍያ መረጃ</h2>
         </div>
         <div class="card-body overflow-x-auto">

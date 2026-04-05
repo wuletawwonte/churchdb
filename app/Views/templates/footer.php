@@ -5,7 +5,7 @@ $appNameShortDb = $appCfgRow['system_name_short'] !== '' ? $appCfgRow['system_na
 ?>
     </main>
 
-  <footer class="border-t border-base-300 bg-base-100">
+  <footer class="border-t border-base-content/15 bg-base-100">
     <div class="mx-auto flex w-full max-w-[1920px] flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-2 text-sm text-base-content md:px-8">
       <p class="inline min-w-0 text-base-content/80">
         <span class="font-medium text-base-content"><?= esc($appNameShortDb); ?></span>

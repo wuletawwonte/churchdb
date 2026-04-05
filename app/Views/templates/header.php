@@ -2,7 +2,7 @@
 <html lang="am" data-theme="corporate">
 <head>
   <script>
-  (function(){try{var k='churchdb-theme',t=localStorage.getItem(k);if(t==='dark'||t==='corporate')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+  (function(){try{var k='churchdb-theme',t=localStorage.getItem(k),d=document.documentElement;if(t==='system')d.removeAttribute('data-theme');else if(t==='dark'||t==='corporate')d.setAttribute('data-theme',t);}catch(e){}})();
   </script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,7 +40,7 @@ $fullName = session()->get('current_user')['firstname'] . ' ' . session()->get('
   <input id="layout-drawer" type="checkbox" class="drawer-toggle" />
 
   <div class="drawer-content flex min-h-screen flex-col">
-    <header class="navbar border-b border-base-300 bg-base-100 shadow-sm">
+    <header class="navbar border-b border-base-content/15 bg-base-100 shadow-sm">
       <div class="flex-none hidden lg:block">
         <button type="button" class="btn btn-square btn-ghost" data-sidebar-toggle aria-expanded="true" aria-controls="layout-drawer-side" title="Show or hide sidebar">
           <i class="fa fa-angle-double-left text-lg" aria-hidden="true"></i>
@@ -57,24 +57,41 @@ $fullName = session()->get('current_user')['firstname'] . ' ' . session()->get('
         </a>
       </div>
       <div class="flex-none">
-        <label class="swap swap-rotate btn btn-circle btn-ghost" title="Light / dark theme">
-          <input type="checkbox" data-theme-toggle />
-          <span class="swap-on text-lg" aria-hidden="true"><i class="fa fa-moon-o"></i></span>
-          <span class="swap-off text-lg" aria-hidden="true"><i class="fa fa-sun-o"></i></span>
-        </label>
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-circle btn-ghost" data-theme-menu-trigger title="Theme" aria-label="Theme" aria-haspopup="true">
+            <span data-theme-trigger-icon class="text-lg"><i class="fa fa-sun-o" aria-hidden="true"></i></span>
+          </div>
+          <ul tabindex="0" class="menu dropdown-content z-[200] mt-2 w-44 rounded-box border border-base-content/15 bg-base-100 p-2 shadow-lg">
+            <li>
+              <button type="button" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-base-200" data-theme-choice="corporate" role="menuitemradio" aria-checked="false">
+                <i class="fa fa-sun-o w-5 shrink-0 opacity-80" aria-hidden="true"></i><span>Light</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-base-200" data-theme-choice="dark" role="menuitemradio" aria-checked="false">
+                <i class="fa fa-moon-o w-5 shrink-0 opacity-80" aria-hidden="true"></i><span>Dark</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-base-200" data-theme-choice="system" role="menuitemradio" aria-checked="false">
+                <i class="fa fa-desktop w-5 shrink-0 opacity-80" aria-hidden="true"></i><span>System</span>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="flex-none">
         <div class="dropdown dropdown-end">
           <div tabindex="0" role="button" class="btn btn-ghost gap-2 px-2 normal-case">
             <div class="avatar">
-              <div class="w-9 rounded-full ring ring-base-300 ring-offset-2 ring-offset-base-100">
+              <div class="w-9 rounded-full ring ring-base-content/15 ring-offset-2 ring-offset-base-100">
                 <img src="<?= esc($avatarUrl); ?>" alt="" />
               </div>
             </div>
             <span class="hidden max-w-[10rem] truncate sm:inline"><?= esc($fullName); ?></span>
             <i class="fa fa-caret-down opacity-70"></i>
           </div>
-          <ul tabindex="0" class="menu dropdown-content z-[1] mt-2 w-56 rounded-box border border-base-300 bg-base-100 p-2 shadow-lg">
+          <ul tabindex="0" class="menu dropdown-content z-[1] mt-2 w-56 rounded-box border border-base-content/15 bg-base-100 p-2 shadow-lg">
             <li class="menu-title text-xs"><?= esc(session()->get('current_user')['user_type']); ?></li>
             <li><a href="<?= base_url(); ?>admin/profile"><i class="fa fa-user"></i> አካውንት</a></li>
             <li><a href="<?= base_url(); ?>users/logout"><i class="fa fa-sign-out"></i> ዘግተው ይውጡ</a></li>

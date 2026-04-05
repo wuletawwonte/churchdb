@@ -159,7 +159,7 @@ $code = preg_replace(
     <<<'PHP'
 	public function export_families_csv() {
 		session()->setFlashdata('error', 'Family export is not available.');
-		return redirect()->to(site_url('admin/listmembers'));
+		return redirect()->to(site_url('admin/members'));
 	}
 PHP
     ,

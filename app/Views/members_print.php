@@ -13,7 +13,7 @@
 	  <div class="mx-auto max-w-[100%] bg-base-100 p-6 print:p-2">
 
 	    <section class="invoice">
-	      <div class="mb-6 flex flex-wrap items-start justify-between gap-4 border-b border-base-300 pb-4">
+	      <div class="mb-6 flex flex-wrap items-start justify-between gap-4 border-b border-base-content/15 pb-4">
 	        <h2 class="text-xl font-bold">
 	            <i class="fa fa-globe"></i> <?php echo esc(session()->get('system_name')); ?>, Inc.
 	        </h2>
@@ -21,7 +21,7 @@
 	      </div>
 
 	      <div class="overflow-x-auto">
-	          <table class="table table-zebra table-sm w-full border border-base-300 text-sm">
+	          <table class="table table-zebra table-sm w-full border border-base-content/15 text-sm">
 	            <thead>
 	            <tr>
 	              <th>ስም</th>

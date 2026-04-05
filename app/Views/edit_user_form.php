@@ -18,7 +18,7 @@
 
 
 		<!-- Default box -->
-		<div class="card border border-base-300 bg-base-100 shadow-md">
+		<div class="card border border-base-content/15 bg-base-100 shadow-md">
 		    <div class="card-body">
 
 		        <div class="alert alert-info">

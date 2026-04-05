@@ -44,11 +44,11 @@ $imgIdAttr = $imgId !== null && $imgId !== '' ? ' id="' . esc($imgId, 'attr') . 
     <img src="<?= esc($photoSrc) ?>" alt="<?= esc($alt) ?>" class="h-full w-full rounded-full object-cover" loading="lazy" decoding="async"<?= $imgIdAttr ?>>
   </div>
 <?php elseif ($placeholderSrc !== null && $placeholderSrc !== '') : ?>
-  <div class="member-avatar shrink-0 <?= esc($s['box'], 'attr') ?> rounded-full bg-base-200 p-0.5 shadow-sm ring-2 ring-base-300 ring-offset-2 ring-offset-base-100">
+  <div class="member-avatar shrink-0 <?= esc($s['box'], 'attr') ?> rounded-full bg-base-200 p-0.5 shadow-sm ring-2 ring-base-content/15 ring-offset-2 ring-offset-base-100">
     <img src="<?= esc($placeholderSrc) ?>" alt="" class="h-full w-full rounded-full object-cover" decoding="async"<?= $imgIdAttr ?>>
   </div>
 <?php else : ?>
-  <div class="member-avatar member-avatar--initials flex shrink-0 items-center justify-center rounded-full font-bold text-base-100 shadow-sm ring-2 ring-base-content/10 <?= esc($s['box'], 'attr') ?> <?= esc($s['text'], 'attr') ?>" style="background-color: <?= esc($bgColor, 'attr') ?>">
+  <div class="member-avatar member-avatar--initials flex shrink-0 items-center justify-center rounded-full font-bold text-base-100 shadow-sm ring-2 ring-base-content/15 <?= esc($s['box'], 'attr') ?> <?= esc($s['text'], 'attr') ?>" style="background-color: <?= esc($bgColor, 'attr') ?>">
     <?= esc($initials) ?>
   </div>
 <?php endif; ?>

@@ -13,7 +13,7 @@
     <h1 class="text-2xl font-bold"><?= lang('label.person_profile') ?></h1>
     <div class="breadcrumbs text-sm">
         <ul>
-            <li><a href="<?php echo base_url(); ?>admin/listmembers"><i class="fa fa-users"></i> ምዕመናን </a></li>
+            <li><a href="<?php echo base_url(); ?>admin/members"><i class="fa fa-users"></i> ምዕመናን </a></li>
             <li> ምዕመን </li>
         </ul>
     </div>
@@ -21,7 +21,7 @@
 <section class="content">
     <div class="flex flex-col gap-6 lg:flex-row">
         <div class="w-full shrink-0 lg:w-80">
-            <div class="card border border-base-300 bg-base-100 shadow-md">
+            <div class="card border border-base-content/15 bg-base-100 shadow-md">
                 <div class="card-body items-center text-center">
                     <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>" class="mx-auto mt-2 flex justify-center">
                         <?= view('templates/partials/member_avatar', ['member' => $member, 'size' => 'lg']); ?>
@@ -40,8 +40,8 @@
                   </div>
         </div>
 
-        <div class="card mt-4 border border-base-300 bg-base-100 shadow-md">
-            <div class="card-body border-b border-base-300">
+        <div class="card mt-4 border border-base-content/15 bg-base-100 shadow-md">
+            <div class="card-body border-b border-base-content/15">
                 <h3 class="card-title justify-center text-center"> ስለ እኔ </h3>
             </div>
           
@@ -84,13 +84,13 @@
                 <div class="alert alert-error"><span><?php echo session()->getFlashdata('error'); ?></span></div>
             <?php } ?>
 
-            <div class="card border border-base-300 bg-base-100 p-4 shadow-md">
+            <div class="card border border-base-content/15 bg-base-100 p-4 shadow-md">
                 <div class="flex flex-wrap gap-2">
-                <a class="btn btn-outline btn-sm" href="<?= base_url(); ?>admin/memberdetailsprint/<?= $member['id']; ?>" target="_blank" rel="noopener"><i class="fa fa-print"></i> የሚታተም ገፅ </a>
-                <a class="btn btn-outline btn-sm" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/payment"><i class="fa fa-money"></i> የክፍያ መረጃ </a>
-                <a class="btn btn-outline btn-sm" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/status"><i class="fa fa-user"></i> የምዕመን ሁኔታ </a>
-                <a class="btn btn-outline btn-sm" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
-                <a class="btn btn-outline btn-sm <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'btn-disabled pointer-events-none'; } ?>" href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-user-secret"></i> መረጃ ቀይር </a>
+                <a class="btn btn-outline btn-primary btn-sm" href="<?= base_url(); ?>admin/memberdetailsprint/<?= $member['id']; ?>" target="_blank" rel="noopener"><i class="fa fa-print"></i> የሚታተም ገፅ </a>
+                <a class="btn btn-outline btn-primary btn-sm" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/payment"><i class="fa fa-money"></i> የክፍያ መረጃ </a>
+                <a class="btn btn-outline btn-primary btn-sm" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/status"><i class="fa fa-user"></i> የምዕመን ሁኔታ </a>
+                <a class="btn btn-outline btn-primary btn-sm" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
+                <a class="btn btn-outline btn-primary btn-sm <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'btn-disabled pointer-events-none'; } ?>" href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-user-secret"></i> መረጃ ቀይር </a>
                 <button type="button" data-open-modal="deleteMember" class="btn btn-warning btn-sm delete-person"><i class="fa fa-trash-o"></i> ወደ ቆሼ </button>                
                 <button type="button" data-open-modal="permanentlyDeleteMember" class="btn btn-error btn-sm delete-person"><i class="fa fa-trash-o"></i> አስወግድ </button>
                 </div>
@@ -101,7 +101,7 @@
                     <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
                     <p class="py-4">የዚህን ምዕመን መረጃ ሙሉ በሙሉ ሊያጠፉ ነው።</p>
                     <div class="modal-action">
-                        <form method="dialog"><button class="btn">አይ</button></form>
+                        <form method="dialog"><button class="btn btn-ghost">አይ</button></form>
                         <a href="<?= base_url()?>admin/permanentdeletemember/<?= $member['id']?>" class="btn btn-error">አዎ</a>
                     </div>
                 </div>
@@ -113,14 +113,14 @@
                     <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
                     <p class="py-4">የዚህን ምዕመን መረጃ ወደ ቆሼ ሊከቱ ነው።</p>
                     <div class="modal-action">
-                        <form method="dialog"><button class="btn">አይ</button></form>
+                        <form method="dialog"><button class="btn btn-ghost">አይ</button></form>
                         <a href="<?= base_url()?>admin/deletemember/<?= $member['id']?>" class="btn btn-error">አዎ</a>
                     </div>
                 </div>
                 <form method="dialog" class="modal-backdrop"><button>close</button></form>
             </dialog>
 
-            <div class="nav-tabs-custom card border border-base-300 bg-base-100 shadow-md">
+            <div class="nav-tabs-custom card border border-base-content/15 bg-base-100 shadow-md">
 
             <ul class="tabs tabs-boxed flex flex-wrap gap-1 bg-base-200 p-2" role="tablist">
                 <li role="presentation" <?php if($active_tab == NULL) { echo "class='active'"; } ?> ><a href="#details" aria-controls="details" role="tab" data-toggle="tab">ዝርዝር መረጃ</a></li>
@@ -144,8 +144,8 @@
                         </blockquote>
 
                         <div class="col-md-6">
-                          <div class="card border border-base-300 bg-base-100 shadow-md">
-                            <div class="card-body border-b border-base-300 pb-3 mb-3">
+                          <div class="card border border-base-content/15 bg-base-100 shadow-md">
+                            <div class="card-body border-b border-base-content/15 pb-3 mb-3">
                               <i class="fa fa-info"></i>
 
                               <h3 class="card-title text-lg">አድራሻና የሥራ ሁኔታ</h3>
@@ -179,8 +179,8 @@
                         </div>
 
                         <div class="col-md-6">
-                          <div class="card border border-base-300 bg-base-100 shadow-md">
-                            <div class="card-body border-b border-base-300 pb-3 mb-3">
+                          <div class="card border border-base-content/15 bg-base-100 shadow-md">
+                            <div class="card-body border-b border-base-content/15 pb-3 mb-3">
                               <i class="fa fa-info"></i>
 
                               <h3 class="card-title text-lg">የቤተክርስቲያን ተሳትፎ</h3>
@@ -309,7 +309,7 @@
 
                         <div class="box">
 
-                            <div class="card-body border-b border-base-300 pb-3 mb-3">
+                            <div class="card-body border-b border-base-content/15 pb-3 mb-3">
                                 <span>ክፍያ መዝግብ</span>
                             </div>
                             <div class="card-body">
@@ -345,7 +345,7 @@
                                         <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
                                         <p class="py-4">መልሶ ማስተካከል አይቻልም</p>
                                         <div class="modal-action">
-                                            <button type="button" class="btn" onclick="document.getElementById('savepayment').close()">አይ</button>
+                                            <button type="button" class="btn btn-ghost" onclick="document.getElementById('savepayment').close()">አይ</button>
                                             <button type="submit" form="memberSavePaymentForm" class="btn btn-primary" value="አዎ">አዎ</button>
                                         </div>
                                     </div>
@@ -454,7 +454,7 @@
                                             <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
                                             <p class="py-4">ይህ ማስተካከያ በምዕመኑ መረጃ ላይ ትልቅ ተፅዕኖ አለው።</p>
                                             <div class="modal-action">
-                                                <button type="button" class="btn" onclick="document.getElementById('changeMemberStatus').close()">አይ</button>
+                                                <button type="button" class="btn btn-ghost" onclick="document.getElementById('changeMemberStatus').close()">አይ</button>
                                                 <button type="submit" form="changestatusForm" class="btn btn-warning">አዎ</button>
                                             </div>
                                         </div>

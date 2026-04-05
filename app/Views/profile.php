@@ -25,7 +25,7 @@
 
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3">
-                    <div class="card border border-base-300 bg-base-100 shadow-md">
+                    <div class="card border border-base-content/15 bg-base-100 shadow-md">
                         <div class="card-body box-profile" align="center">
                             <a href="<?= base_url('admin/profile'); ?>">
                             	<?php $pp = $current_user['profile_picture'] ?? null; if($pp === null || $pp === '') { ?>
@@ -56,9 +56,9 @@
                 </div>
 
                 <div class="col-lg-9 col-md-9 col-sm-9">
-                    <div class="card border border-base-300 bg-base-100 shadow-md">
+                    <div class="card border border-base-content/15 bg-base-100 shadow-md">
                         <form class="form-horizontal" method="post" action="<?= base_url('admin/saveprofilechange') ?>" enctype="multipart/form-data" id="UserEditor">
-                            <div class="card-body border-b border-base-300 pb-3 mb-3">
+                            <div class="card-body border-b border-base-content/15 pb-3 mb-3">
                               <i class="fa fa-info"></i>
                               <h3 class="card-title text-lg"> መሰረታዊ የተጠቃሚ መረጃ </h3>
                             </div>
@@ -100,10 +100,10 @@
                     <?php } ?>
 
 
-                    <div class="card border border-base-300 bg-base-100 shadow-md"> 
+                    <div class="card border border-base-content/15 bg-base-100 shadow-md"> 
                         <form class="form-horizontal" method="post" action="<?= base_url('admin/savepasswordchange') ?>">
 
-                            <div class="card-body border-b border-base-300 pb-3 mb-3">
+                            <div class="card-body border-b border-base-content/15 pb-3 mb-3">
                                 <i class="fa fa-shield"></i>
                                 <h3 class="card-title text-lg"> የይለፍቃል መለወጫ </h3>
                             </div>

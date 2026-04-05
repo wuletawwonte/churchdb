@@ -22,7 +22,7 @@
     <div class="alert alert-error"><span><?php echo session()->getFlashdata('error'); ?></span></div>
   <?php } ?>
 
-  <div class="card border border-base-300 bg-base-100 shadow-md">
+  <div class="card border border-base-content/15 bg-base-100 shadow-md">
     <div class="card-body">
       <form method="POST" action="<?= base_url('admin/addmenderchoice'); ?>" class="flex flex-wrap items-end gap-4">
         <input type="text" name="kebele_title" value="<?= esc($kebele['kebele_title']) ?>" hidden>
@@ -60,7 +60,7 @@
           <input type="text" name="kebele_id" value="<?= esc($kebele['kebele_id']); ?>" hidden>
           <input type="text" name="mender_new_title" maxlength="48" value="<?= esc($choice['mender_title']); ?>" class="input input-bordered w-full" required>
           <div class="modal-action">
-            <button type="button" class="btn" onclick="document.getElementById('editMender<?= $choice['mender_id'] ?>').close()">ይቅር</button>
+            <button type="button" class="btn btn-ghost" onclick="document.getElementById('editMender<?= $choice['mender_id'] ?>').close()">ይቅር</button>
             <button type="submit" class="btn btn-info">አስተካክል</button>
           </div>
         </form>
@@ -73,7 +73,7 @@
         <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
         <p class="py-4">መልሶ ማስተካከል አይቻልም</p>
         <div class="modal-action">
-          <form method="dialog"><button class="btn">አይ</button></form>
+          <form method="dialog"><button class="btn btn-ghost">አይ</button></form>
           <a href="<?= base_url(); ?>admin/deletemender/<?= $choice['mender_id']; ?>/<?= $kebele['kebele_id']; ?>" class="btn btn-error">አዎ</a>
         </div>
       </div>

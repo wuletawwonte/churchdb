@@ -1,5 +1,6 @@
 /**
- * Light/dark theme: DaisyUI data-theme on <html>, persisted in localStorage.
+ * Theme: DaisyUI via <html data-theme> or OS preference when "system".
+ * Stored in localStorage as corporate (light), dark, or system.
  */
 (function () {
   'use strict';
@@ -7,49 +8,88 @@
   var STORAGE_KEY = 'churchdb-theme';
   var THEME_LIGHT = 'corporate';
   var THEME_DARK = 'dark';
+  var THEME_SYSTEM = 'system';
 
-  function getAppliedTheme() {
-    var t = document.documentElement.getAttribute('data-theme');
-    return t === THEME_DARK ? THEME_DARK : THEME_LIGHT;
-  }
-
-  function applyTheme(theme) {
-    if (theme !== THEME_LIGHT && theme !== THEME_DARK) {
-      theme = THEME_LIGHT;
-    }
-    document.documentElement.setAttribute('data-theme', theme);
+  function getStored() {
     try {
-      localStorage.setItem(STORAGE_KEY, theme);
+      var s = localStorage.getItem(STORAGE_KEY);
+      if (s === THEME_DARK || s === THEME_LIGHT || s === THEME_SYSTEM) {
+        return s;
+      }
     } catch (e) {}
-    syncToggleInputs(theme === THEME_DARK);
+    return THEME_LIGHT;
   }
 
-  function syncToggleInputs(isDark) {
-    document.querySelectorAll('input[data-theme-toggle][type="checkbox"]').forEach(function (el) {
-      el.checked = isDark;
+  function normalize(pref) {
+    if (pref === THEME_DARK || pref === THEME_LIGHT || pref === THEME_SYSTEM) {
+      return pref;
+    }
+    return THEME_LIGHT;
+  }
+
+  function triggerIconInner(pref) {
+    if (pref === THEME_SYSTEM) {
+      return '<i class="fa fa-desktop" aria-hidden="true"></i>';
+    }
+    if (pref === THEME_DARK) {
+      return '<i class="fa fa-moon-o" aria-hidden="true"></i>';
+    }
+    return '<i class="fa fa-sun-o" aria-hidden="true"></i>';
+  }
+
+  function updateThemeUi(pref) {
+    pref = normalize(pref);
+
+    document.querySelectorAll('[data-theme-choice]').forEach(function (btn) {
+      var v = btn.getAttribute('data-theme-choice');
+      var active = v === pref;
+      btn.classList.toggle('bg-base-200', active);
+      btn.classList.toggle('font-semibold', active);
+      if (btn.setAttribute) {
+        btn.setAttribute('aria-checked', active ? 'true' : 'false');
+      }
+    });
+
+    var label =
+      pref === THEME_SYSTEM ? 'System theme' : pref === THEME_DARK ? 'Dark theme' : 'Light theme';
+    document.querySelectorAll('[data-theme-menu-trigger]').forEach(function (el) {
+      el.setAttribute('aria-label', label);
+      el.setAttribute('title', label);
+    });
+
+    document.querySelectorAll('[data-theme-trigger-icon]').forEach(function (el) {
+      el.innerHTML = triggerIconInner(pref);
     });
   }
 
-  function toggle() {
-    applyTheme(getAppliedTheme() === THEME_DARK ? THEME_LIGHT : THEME_DARK);
+  function applyTheme(pref) {
+    pref = normalize(pref);
+    var root = document.documentElement;
+
+    if (pref === THEME_SYSTEM) {
+      root.removeAttribute('data-theme');
+    } else {
+      root.setAttribute('data-theme', pref);
+    }
+
+    try {
+      localStorage.setItem(STORAGE_KEY, pref);
+    } catch (e) {}
+
+    updateThemeUi(pref);
   }
 
   function init() {
-    var stored = null;
-    try {
-      stored = localStorage.getItem(STORAGE_KEY);
-    } catch (e) {}
+    applyTheme(getStored());
 
-    if (stored === THEME_LIGHT || stored === THEME_DARK) {
-      applyTheme(stored);
-    } else {
-      syncToggleInputs(getAppliedTheme() === THEME_DARK);
-    }
-
-    document.addEventListener('change', function (e) {
-      var el = e.target;
-      if (el && el.matches && el.matches('input[data-theme-toggle][type="checkbox"]')) {
-        applyTheme(el.checked ? THEME_DARK : THEME_LIGHT);
+    document.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest && e.target.closest('[data-theme-choice]');
+      if (!btn) {
+        return;
+      }
+      var v = btn.getAttribute('data-theme-choice');
+      if (v === THEME_LIGHT || v === THEME_DARK || v === THEME_SYSTEM) {
+        applyTheme(v);
       }
     });
   }
@@ -62,8 +102,9 @@
 
   window.ChurchDBTheme = {
     apply: applyTheme,
-    toggle: toggle,
+    get: getStored,
     LIGHT: THEME_LIGHT,
-    DARK: THEME_DARK
+    DARK: THEME_DARK,
+    SYSTEM: THEME_SYSTEM
   };
 })();

@@ -43,8 +43,8 @@
 
 	    	<div class="row">
 	    		<div class="col-md-3 col-sm-3 col-lg-3">
-	    			<div class="card border border-base-300 bg-base-100 shadow-md clearfix ">
-	    				<div class="card-body border-b border-base-300 pb-3 mb-3">
+	    			<div class="card border border-base-content/15 bg-base-100 shadow-md clearfix ">
+	    				<div class="card-body border-b border-base-content/15 pb-3 mb-3">
 	    					<h3 class="card-title text-lg">የምዕመን ፎቶ</h3>
 	    				</div>
 	    				<div class="card-body flex flex-col items-center gap-4 text-center">
@@ -58,15 +58,15 @@
 						<div class="input-group">
 			                <input type="file" accept="image/*" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" id="avatarInput" name="avatar_input" style="display: none;">
 				                    <button type="button" class="btn btn-lg btn-primary" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
-				                    <button type="button" class="btn btn-lg btn-info" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/img/user.png'"  style="border-radius: 0px;"><i class="fa fa-times"></i></button>
+				                    <button type="button" class="btn btn-lg btn-secondary" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/img/user.png'"><i class="fa fa-times"></i></button>
 			            </div>
 			              	<p class="text-muted text-center">የፎቶው ከ1500KB ቢያንስ ይመረጣል </p>
 	    				</div>
 	    			</div>
 	    		</div>
 	    		<div class="col-md-9 col-lg-9 col-sm-9">
-				    <div class="card border border-base-300 bg-base-100 shadow-md clearfix">
-				        <div class="card-body border-b border-base-300 pb-3 mb-3">
+				    <div class="card border border-base-content/15 bg-base-100 shadow-md clearfix">
+				        <div class="card-body border-b border-base-content/15 pb-3 mb-3">
 				            <h3 class="card-title text-lg"> የግል መረጃ </h3>
 				        </div><!-- /.box-header -->
 				        <div class="card-body flex flex-col gap-5">
@@ -124,8 +124,8 @@
 
 
 
-			<div class="card border border-base-300 bg-base-100 shadow-md clearfix">
-				<div class="card-body border-b border-base-300 pb-3 mb-3">
+			<div class="card border border-base-content/15 bg-base-100 shadow-md clearfix">
+				<div class="card-body border-b border-base-content/15 pb-3 mb-3">
 					<h3 class="card-title text-lg"> የምዕመኑ አድራሻ </h3>
 				</div><!-- /.box-header -->
 				<div class="card-body flex flex-col gap-5">
@@ -164,8 +164,8 @@
 
 						<div class="form-group col-md-4">
 							<label for="home_phone"> የመኖርያ ቤት ስልክ ቁጥር: </label>
-							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
-								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-content/15 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-content/15 bg-base-200 text-base-content" aria-hidden="true">
 									<i class="fa fa-tty"></i>
 								</span>
 								<input id="home_phone" type="tel" name="home_phone" autocomplete="tel-national" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30" placeholder="046..">
@@ -177,8 +177,8 @@
 
 						<div class="form-group col-md-6">
 							<label for="mobile_phone">የሞባይል ስልክ ቁጥር:</label>
-							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
-								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-content/15 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-content/15 bg-base-200 text-base-content" aria-hidden="true">
 									<i class="fa fa-mobile text-lg"></i>
 								</span>
 								<input id="mobile_phone" type="tel" name="mobile_phone" autocomplete="tel-national" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30" placeholder="09..">
@@ -200,8 +200,8 @@
 			</div>
 
 
-			<div class="card border border-base-300 bg-base-100 shadow-md clearfix">
-				<div class="card-body border-b border-base-300 pb-3 mb-3">
+			<div class="card border border-base-content/15 bg-base-100 shadow-md clearfix">
+				<div class="card-body border-b border-base-content/15 pb-3 mb-3">
 					<h3 class="card-title text-lg"> የምዕመን የስራ ሁኔታ </h3>
 				</div><!-- /.box-header -->
 				<div class="card-body flex flex-col gap-5">
@@ -247,8 +247,8 @@
 
 						<div class="form-group col-md-4">
 							<label for="workplace_phone">የመሥሪያ ቤት ስልክ ቁጥር :</label>
-							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
-								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-content/15 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-content/15 bg-base-200 text-base-content" aria-hidden="true">
 									<i class="fa fa-building-o"></i>
 								</span>
 								<input id="workplace_phone" type="tel" name="workplace_phone" autocomplete="tel" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30 inputmasked" data-inputmask='"mask": "(999) 999-9999"' data-mask>
@@ -273,8 +273,8 @@
 			</div>
 
 
-			<div class="card border border-base-300 bg-base-100 shadow-md clearfix">
-				<div class="card-body border-b border-base-300 pb-3 mb-3">
+			<div class="card border border-base-content/15 bg-base-100 shadow-md clearfix">
+				<div class="card-body border-b border-base-content/15 pb-3 mb-3">
 					<h3 class="card-title text-lg"> የቤተክርስትያን ተሳትፎ </h3>
 				</div><!-- /.box-header -->
 				<div class="card-body flex flex-col gap-5">
@@ -283,12 +283,12 @@
 
 	                    <div class="col-md-4">
 	                        <label for="membership_year"> አባል የሆኑበት ዘመን :</label>
-	                        <div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-300 bg-base-100">
-	                        	<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-300 bg-base-200 text-base-content" aria-hidden="true">
+	                        <div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-content/15 bg-base-100">
+	                        	<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-content/15 bg-base-200 text-base-content" aria-hidden="true">
 	                        		<i class="fa fa-calendar"></i>
 	                        	</span>
 	                        	<input id="membership_year" type="text" name="membership_year" inputmode="numeric" autocomplete="off" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30 inputmasked" data-inputmask='"mask": "9999"' data-mask>
-	                    		<span class="join-item inline-flex min-h-10 shrink-0 items-center justify-center border-0 border-s border-base-300 bg-base-200 px-3 text-sm text-base-content" aria-hidden="true">ዓ.ም</span>
+	                    		<span class="join-item inline-flex min-h-10 shrink-0 items-center justify-center border-0 border-s border-base-content/15 bg-base-200 px-3 text-sm text-base-content" aria-hidden="true">ዓ.ም</span>
 	                    	</div>
 	                    </div>
 
@@ -329,8 +329,8 @@
 
 
 
-		    <div class="card border border-base-300 bg-base-100 shadow-md clearfix">
-		        <div class="card-body border-b border-base-300 pb-3 mb-3">
+		    <div class="card border border-base-content/15 bg-base-100 shadow-md clearfix">
+		        <div class="card-body border-b border-base-content/15 pb-3 mb-3">
 		            <h3 class="card-title text-lg"> የቤተሰብ መረጃ </h3>
 		        </div><!-- /.box-header -->
 		        <div class="card-body">
@@ -360,8 +360,8 @@
 
             <div class="flex flex-wrap gap-3 pt-1">
             <input type="submit" class="btn btn-primary" value="<?= lang('label.save') ?>" Name="addchurchsubmit">
-			<input type="submit" class="btn btn-info" value="Save and Add" name="addchurchsubmit">
-			<a href="<?= base_url(); ?>admin/listmembers" class="btn">Cancel</a>
+			<input type="submit" class="btn btn-secondary" value="Save and Add" name="addchurchsubmit">
+			<a href="<?= base_url(); ?>admin/members" class="btn btn-neutral">Cancel</a>
 			</div>
 
 

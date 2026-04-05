@@ -9,8 +9,8 @@
     </div>
     <section class="content">
 
-        <div class="card border border-base-300 bg-base-100 shadow-md">
-            <div class="card-body border-b border-base-300 pb-3 mb-3">
+        <div class="card border border-base-content/15 bg-base-100 shadow-md">
+            <div class="card-body border-b border-base-content/15 pb-3 mb-3">
                 <h3 class="card-title text-lg">የመረጃቋቱ ባካፕ ሲደረግ የሚከተሉትን መተግበር የተሻለ መንገድ ነው።</h3>
             </div>
             <div class="card-body">

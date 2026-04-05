@@ -18,7 +18,7 @@
 
 
 		<!-- Default box -->
-		<div class="card border border-base-300 bg-base-100 shadow-md">
+		<div class="card border border-base-content/15 bg-base-100 shadow-md">
 		    <div class="card-body">
 
 		        <div class="alert alert-info">
@@ -76,7 +76,7 @@
 		                    <tr>
 		                        <td colspan="2" align="center">
 		                            <input type="submit" class="btn btn-primary" value="መዝግብ">&nbsp;
-		                            <input type="reset" class="btn" value="አጥፋ">
+		                            <input type="reset" class="btn btn-neutral" value="አጥፋ">
 		                        </td>
 		                    </tr>
 		                </table>

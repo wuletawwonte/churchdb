@@ -13,8 +13,8 @@ $appIconUrl = $appIconUrl ?? base_url('logo.svg');
 ?>
 <div id="layout-drawer-side" class="drawer-side z-40">
   <label for="layout-drawer" aria-label="Close menu" class="drawer-overlay lg:hidden"></label>
-  <aside class="flex min-h-full w-72 flex-col border-r border-base-300 bg-base-100">
-    <div class="border-b border-base-300 p-4">
+  <aside class="flex min-h-full w-72 flex-col border-r border-base-content/15 bg-base-100">
+    <div class="border-b border-base-content/15 p-4">
       <div class="flex items-center gap-3">
         <a
           href="<?= base_url(); ?>"
@@ -37,8 +37,7 @@ $appIconUrl = $appIconUrl ?? base_url('logo.svg');
     <ul class="app-sidebar-menu menu menu-md menu-vertical w-full min-h-0 flex-1 gap-0 overflow-y-auto overflow-x-hidden p-2">
       <li class="menu-title mt-2">ዋና ምርጫዎች</li>
       <li><a href="<?= base_url(); ?>" class="<?= $active_menu === 'dashboard' ? 'menu-active' : '' ?>"<?= $active_menu === 'dashboard' ? ' aria-current="page"' : '' ?>><i class="fa fa-dashboard"></i><?= lang('label.dashboard'); ?></a></li>
-      <li class="<?= ($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_register_member'] != 'allow') ? 'hidden' : '' ?>"><a href="<?= base_url(); ?>admin/personregistration" class="<?= $active_menu === 'personregistration' ? 'menu-active' : '' ?>"<?= $active_menu === 'personregistration' ? ' aria-current="page"' : '' ?>><i class="fa fa-user-plus"></i><?= lang('label.add_new_person'); ?></a></li>
-      <li><a href="<?= base_url(); ?>admin/listmembers" class="<?= $active_menu === 'listmembers' ? 'menu-active' : '' ?>"<?= $active_menu === 'listmembers' ? ' aria-current="page"' : '' ?>><i class="fa fa-users"></i><?= lang('label.members'); ?></a></li>
+      <li><a href="<?= base_url(); ?>admin/members" class="<?= $active_menu === 'listmembers' ? 'menu-active' : '' ?>"<?= $active_menu === 'listmembers' ? ' aria-current="page"' : '' ?>><i class="fa fa-users"></i><?= lang('label.members'); ?></a></li>
       <li class="<?= ($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_manage_group'] != 'allow') ? 'hidden' : '' ?>"><a href="<?= base_url(); ?>admin/listgroups" class="<?= $active_menu === 'groups' ? 'menu-active' : '' ?>"<?= $active_menu === 'groups' ? ' aria-current="page"' : '' ?>><i class="fa fa-object-group"></i><?= lang('label.groups'); ?></a></li>
       <li><a href="<?= base_url(); ?>admin/sunday_school_classes" class="<?= $active_menu === 'sunday_school' ? 'menu-active' : '' ?>"<?= $active_menu === 'sunday_school' ? ' aria-current="page"' : '' ?>><i class="fa fa-child"></i> የሰንበት ትምህርት</a></li>
       <li><a href="<?= base_url(); ?>admin/listpayments" class="<?= $active_menu === 'listpayments' ? 'menu-active' : '' ?>"<?= $active_menu === 'listpayments' ? ' aria-current="page"' : '' ?>><i class="fa fa-money"></i> ክፍያ</a></li>

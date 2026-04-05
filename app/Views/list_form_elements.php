@@ -32,7 +32,7 @@
         <div class="col-md-12">
 
 
-          <div class="card border border-base-300 bg-base-100 shadow-md">
+          <div class="card border border-base-content/15 bg-base-100 shadow-md">
             <!-- /.box-header -->
             <div class="card-body">
               <table class="table table-bordered table-large table-hover">

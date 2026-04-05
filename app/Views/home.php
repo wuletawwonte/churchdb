@@ -7,7 +7,7 @@
 <section class="space-y-6">
 
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    <div class="stats border border-base-300 bg-base-100 shadow">
+    <div class="stats border border-base-content/15 bg-base-100 shadow">
       <div class="stat">
         <div class="stat-figure text-info"><i class="fa fa-globe text-3xl"></i></div>
         <div class="stat-title"><?= lang('label.website_hits') ?></div>
@@ -15,15 +15,15 @@
         <div class="stat-desc"><a href="#" class="link"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a></div>
       </div>
     </div>
-    <div class="stats border border-base-300 bg-base-100 shadow">
+    <div class="stats border border-base-content/15 bg-base-100 shadow">
       <div class="stat">
         <div class="stat-figure text-warning"><i class="fa fa-user text-3xl"></i></div>
         <div class="stat-title"><?= lang('label.members') ?></div>
         <div class="stat-value text-warning"><?= esc($total_members); ?></div>
-        <div class="stat-desc"><a href="<?= base_url('admin/listmembers'); ?>" class="link"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a></div>
+        <div class="stat-desc"><a href="<?= base_url('admin/members'); ?>" class="link link-primary"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a></div>
       </div>
     </div>
-    <div class="stats border border-base-300 bg-base-100 shadow sm:col-span-2 lg:col-span-1">
+    <div class="stats border border-base-content/15 bg-base-100 shadow sm:col-span-2 lg:col-span-1">
       <div class="stat">
         <div class="stat-figure text-error"><i class="fa fa-tag text-3xl"></i></div>
         <div class="stat-title"><?= lang('label.groups') ?></div>
@@ -34,9 +34,9 @@
   </div>
 
   <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-    <div class="card border border-base-300 bg-base-100 shadow-md">
+    <div class="card border border-base-content/15 bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title border-b border-base-300 pb-2"><?= lang('label.latest_members'); ?></h2>
+        <h2 class="card-title border-b border-base-content/15 pb-2"><?= lang('label.latest_members'); ?></h2>
         <ul class="menu w-full rounded-box bg-base-200/50 p-2">
           <?php foreach ($latest_members as $member) { ?>
             <li class="w-full">
@@ -50,16 +50,16 @@
             </li>
           <?php } ?>
         </ul>
-        <div class="card-actions justify-center border-t border-base-300 pt-4">
-          <a href="<?= base_url(); ?>admin/listmembers" class="link link-primary uppercase">ወደ ምዕመናን ሁሉ</a>
+        <div class="card-actions justify-center border-t border-base-content/15 pt-4">
+          <a href="<?= base_url(); ?>admin/members" class="link link-primary font-semibold uppercase">ወደ ምዕመናን ሁሉ</a>
         </div>
       </div>
     </div>
 
     <div class="space-y-4">
-      <div class="card border border-base-300 bg-base-100 shadow-md">
+      <div class="card border border-base-content/15 bg-base-100 shadow-md">
         <div class="card-body">
-          <h2 class="card-title border-b border-base-300 pb-2"> የአባልነት ደራጃ ተዋፅኦ </h2>
+          <h2 class="card-title border-b border-base-content/15 pb-2"> የአባልነት ደራጃ ተዋፅኦ </h2>
           <div class="flex flex-col gap-4 md:flex-row">
             <div class="min-w-0 flex-1">
               <div class="chart-responsive flex justify-center">
@@ -80,7 +80,7 @@
       $femalePct = $totalMembers > 0 ? ($gender_count['female'] / $totalMembers) * 100 : 0.0;
       $malePct = $totalMembers > 0 ? ($gender_count['male'] / $totalMembers) * 100 : 0.0;
       ?>
-      <div class="card border border-base-300 bg-base-100 shadow-md">
+      <div class="card border border-base-content/15 bg-base-100 shadow-md">
         <div class="card-body flex-row items-center gap-4">
           <div class="text-4xl text-warning"><i class="fa fa-female"></i></div>
           <div class="min-w-0 flex-1">
@@ -91,7 +91,7 @@
           </div>
         </div>
       </div>
-      <div class="card border border-base-300 bg-base-100 shadow-md">
+      <div class="card border border-base-content/15 bg-base-100 shadow-md">
         <div class="card-body flex-row items-center gap-4">
           <div class="text-4xl text-secondary"><i class="fa fa-male"></i></div>
           <div class="min-w-0 flex-1">

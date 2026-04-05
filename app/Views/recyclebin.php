@@ -23,8 +23,8 @@
         <div class="alert alert-error"><span><?php echo session()->getFlashdata('error'); ?></span></div>
     <?php } ?>
 
-    <div class="card border border-base-300 bg-base-100 shadow-md">
-        <div class="card-body border-b border-base-300">
+    <div class="card border border-base-content/15 bg-base-100 shadow-md">
+        <div class="card-body border-b border-base-content/15">
             <h2 class="card-title">የምዕመናኑ ዝርዝር</h2>
         </div>
         <div class="card-body overflow-x-auto">
@@ -83,7 +83,7 @@
                     <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
                     <p class="py-4">መልሶ ማስተካከል አይቻልም</p>
                     <div class="modal-action">
-                        <form method="dialog"><button class="btn">አይ</button></form>
+                        <form method="dialog"><button class="btn btn-ghost">አይ</button></form>
                         <a href="<?= base_url(); ?>admin/permanentdeletemember/<?= $member['id']; ?>" class="btn btn-error">አዎ</a>
                     </div>
                 </div>

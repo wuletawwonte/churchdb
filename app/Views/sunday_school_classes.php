@@ -32,12 +32,12 @@
 
             <div class="row">
                 <div class="col-sm-4">
-                    <div class="btns">          
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">Copy</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">Excel</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">CSV</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">PDF</button> 
-                        <button class="btn" tabindex="0" aria-controls="families" type="button">Print</button> 
+                    <div class="btns flex flex-wrap gap-2">          
+                        <button class="btn btn-sm btn-outline btn-primary" tabindex="0" aria-controls="families" type="button">Copy</button> 
+                        <button class="btn btn-sm btn-outline btn-primary" tabindex="0" aria-controls="families" type="button">Excel</button> 
+                        <button class="btn btn-sm btn-outline btn-primary" tabindex="0" aria-controls="families" type="button">CSV</button> 
+                        <button class="btn btn-sm btn-outline btn-primary" tabindex="0" aria-controls="families" type="button">PDF</button> 
+                        <button class="btn btn-sm btn-outline btn-primary" tabindex="0" aria-controls="families" type="button">Print</button> 
                     </div>
                 </div>
                 <div class="col-sm-4">

@@ -2,7 +2,7 @@
 <html lang="am" data-theme="corporate">
 <head>
   <script>
-  (function(){try{var k='churchdb-theme',t=localStorage.getItem(k);if(t==='dark'||t==='corporate')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+  (function(){try{var k='churchdb-theme',t=localStorage.getItem(k),d=document.documentElement;if(t==='system')d.removeAttribute('data-theme');else if(t==='dark'||t==='corporate')d.setAttribute('data-theme',t);}catch(e){}})();
   </script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,21 +27,38 @@
   <script src="<?php echo base_url('assets/vendors/jquery/jquery.min.js'); ?>"></script>
 </head>
 <body class="relative flex min-h-screen items-center justify-center bg-base-200 p-4">
-<label class="swap swap-rotate absolute right-4 top-4 z-50 btn btn-circle btn-ghost border border-base-300 bg-base-100 shadow-sm" title="Light / dark theme">
-  <input type="checkbox" data-theme-toggle />
-  <span class="swap-on text-lg" aria-hidden="true"><i class="fa fa-moon-o"></i></span>
-  <span class="swap-off text-lg" aria-hidden="true"><i class="fa fa-sun-o"></i></span>
-</label>
+<div class="dropdown dropdown-end absolute right-4 top-4 z-50">
+  <div tabindex="0" role="button" class="btn btn-circle btn-ghost border border-base-content/15 bg-base-100 shadow-sm" data-theme-menu-trigger title="Theme" aria-label="Theme" aria-haspopup="true">
+    <span data-theme-trigger-icon class="text-lg"><i class="fa fa-sun-o" aria-hidden="true"></i></span>
+  </div>
+  <ul tabindex="0" class="menu dropdown-content z-[200] mt-2 w-44 rounded-box border border-base-content/15 bg-base-100 p-2 shadow-lg">
+    <li>
+      <button type="button" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-base-200" data-theme-choice="corporate" role="menuitemradio" aria-checked="false">
+        <i class="fa fa-sun-o w-5 shrink-0 opacity-80" aria-hidden="true"></i><span>Light</span>
+      </button>
+    </li>
+    <li>
+      <button type="button" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-base-200" data-theme-choice="dark" role="menuitemradio" aria-checked="false">
+        <i class="fa fa-moon-o w-5 shrink-0 opacity-80" aria-hidden="true"></i><span>Dark</span>
+      </button>
+    </li>
+    <li>
+      <button type="button" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-base-200" data-theme-choice="system" role="menuitemradio" aria-checked="false">
+        <i class="fa fa-desktop w-5 shrink-0 opacity-80" aria-hidden="true"></i><span>System</span>
+      </button>
+    </li>
+  </ul>
+</div>
 <?php
 $pp = $_SESSION['current_user']['profile_picture'] ?? null;
 $lockAvatar = base_url('assets/' . (($pp === null || $pp === '') ? 'img/user-icon.jpg' : 'profile_pictures/' . $pp));
 ?>
-<div class="card w-full max-w-lg border border-base-300 bg-base-100 shadow-xl">
+<div class="card w-full max-w-lg border border-base-content/15 bg-base-100 shadow-xl">
   <div class="card-body items-center text-center">
     <h1 class="card-title text-xl"><a href="<?= base_url('users/relogin'); ?>" class="link link-hover"><?= esc(session()->get('system_name')); ?></a></h1>
     <p class="text-lg font-medium"><?= esc($_SESSION['current_user']['firstname'] . ' ' . $_SESSION['current_user']['lastname']) ?></p>
     <div class="avatar my-4">
-      <div class="w-24 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+      <div class="w-24 rounded-full ring ring-base-content/15 ring-offset-2 ring-offset-base-100">
         <img src="<?= esc($lockAvatar); ?>" alt="">
       </div>
     </div>

@@ -24,7 +24,7 @@
 
 
 		<!-- Default box -->
-		<div class="card border border-base-300 bg-base-100 shadow-md">
+		<div class="card border border-base-content/15 bg-base-100 shadow-md">
 		    <div class="card-body">
 
 		        <div class="alert alert-info">
@@ -70,7 +70,7 @@
 		                    	<td></td>
 		                        <td colspan="2">
 		                            <input type="submit" class="btn btn-primary" value="መዝግብ" name="save">&nbsp;
-		                            <input type="reset" class="btn" value="አጥፋ">
+		                            <input type="reset" class="btn btn-neutral" value="አጥፋ">
 		                        </td>
 		                    </tr>
 		                </table>
@@ -80,8 +80,8 @@
 		    <!-- /.card-body -->
 		</div>
 		<!-- /.box -->
-		<div class="card border border-base-300 bg-base-100 shadow-md">
-			<div class="card-body border-b border-base-300 pb-3 mb-3">
+		<div class="card border border-base-content/15 bg-base-100 shadow-md">
+			<div class="card-body border-b border-base-content/15 pb-3 mb-3">
 				<span>የእድሜ ቡድን</span>
 			</div>
 			<div class="card-body">
