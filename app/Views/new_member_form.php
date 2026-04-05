@@ -8,14 +8,10 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="space-y-6">
     <!-- Content Header (Page header) -->
-    <div class="mb-6"><h1 class="text-2xl font-bold">
-        <?= lang('label.person_registration'); ?>
-      </h1>
-      <div class="breadcrumbs text-sm"><ul>
-        	<li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-	        <li><?= lang('label.add_new_person'); ?></li>
-      </ul></div>
-    </div>
+    <?= view('templates/partials/page_heading', [
+        'title' => lang('label.person_registration'),
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li><li class="text-base-content/80">' . esc(lang('label.add_new_person')) . '</li></ul>',
+    ]); ?>
 
 
 

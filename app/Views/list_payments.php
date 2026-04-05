@@ -2,15 +2,10 @@
 <script src="<?= base_url(); ?>assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/DataTables/datatables.min.css">
 
-<div class="mb-6">
-    <h1 class="text-2xl font-bold"> የክፍያ ዝርዝር </h1>
-    <div class="breadcrumbs text-sm">
-        <ul>
-            <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
-            <li> የክፍያ ዝርዝር </li>
-        </ul>
-    </div>
-</div>
+<?= view('templates/partials/page_heading', [
+    'title' => 'የክፍያ ዝርዝር',
+    'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li><li class="text-base-content/80"> የክፍያ ዝርዝር </li></ul>',
+]); ?>
 
 <section class="space-y-6">
 

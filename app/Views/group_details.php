@@ -3,17 +3,11 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <div class="mb-6"><h1 class="text-2xl font-bold">
-        የቡድን አባላት
-      </h1>
+    <?= view('templates/partials/page_heading', [
+        'title' => 'የቡድን አባላት',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url('admin/members'), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li><li><a href="' . esc(base_url('admin/listgroups'), 'url') . '" class="link link-hover"><i class="fa fa-object-group"></i> ቡድኖች </a></li><li class="text-base-content/80"> የቡድን አባላት </li></ul>',
+    ]); ?>
 
-      <div class="breadcrumbs text-sm"><ul>
-        <li><a href="<?= base_url(); ?>admin/members"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
-        <li><a href="<?= base_url(); ?>admin/listgroups"><i class="fa fa-object-group"></i> ቡድኖች </a></li>
-        <li> የቡድን አባላት </li>
-      </ul></div>
-
-  </div>
     <section class="content container-fluid">
 
     <?php if(session()->getFlashdata('success')) { ?>

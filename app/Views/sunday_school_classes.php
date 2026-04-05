@@ -3,15 +3,11 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <div class="mb-6"><h1 class="text-2xl font-bold">
-        የስንበት ትምህርት 
-      </h1>
-      <div class="breadcrumbs text-sm"><ul>
-          <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-          <li> የሰንበት ትምህርት </li>
-      </ul></div>
+    <?= view('templates/partials/page_heading', [
+        'title' => 'የስንበት ትምህርት',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li><li class="text-base-content/80"> የሰንበት ትምህርት </li></ul>',
+    ]); ?>
 
- 	</div>
     <section class="content container-fluid">
 
     <?php if(session()->getFlashdata('success')) { ?>

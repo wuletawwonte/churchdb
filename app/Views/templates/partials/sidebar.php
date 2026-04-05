@@ -34,8 +34,8 @@ $appIconUrl = $appIconUrl ?? base_url('logo.svg');
         </a>
       </div>
     </div>
-    <ul class="app-sidebar-menu menu menu-md menu-vertical w-full min-h-0 flex-1 gap-0 overflow-y-auto overflow-x-hidden p-2">
-      <li class="menu-title mt-2">ዋና ምርጫዎች</li>
+    <ul class="app-sidebar-menu menu menu-md menu-vertical w-full min-h-0 flex-1 gap-px overflow-y-auto overflow-x-hidden px-2 py-2">
+      <li class="menu-title">ዋና ምርጫዎች</li>
       <li><a href="<?= base_url(); ?>" class="<?= $active_menu === 'dashboard' ? 'menu-active' : '' ?>"<?= $active_menu === 'dashboard' ? ' aria-current="page"' : '' ?>><i class="fa fa-dashboard"></i><?= lang('label.dashboard'); ?></a></li>
       <li><a href="<?= base_url(); ?>admin/members" class="<?= $active_menu === 'listmembers' ? 'menu-active' : '' ?>"<?= $active_menu === 'listmembers' ? ' aria-current="page"' : '' ?>><i class="fa fa-users"></i><?= lang('label.members'); ?></a></li>
       <li class="<?= ($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_manage_group'] != 'allow') ? 'hidden' : '' ?>"><a href="<?= base_url(); ?>admin/listgroups" class="<?= $active_menu === 'groups' ? 'menu-active' : '' ?>"<?= $active_menu === 'groups' ? ' aria-current="page"' : '' ?>><i class="fa fa-object-group"></i><?= lang('label.groups'); ?></a></li>
@@ -44,7 +44,7 @@ $appIconUrl = $appIconUrl ?? base_url('logo.svg');
       <li><a href="<?= base_url(); ?>admin/adminreport" class="<?= $active_menu === 'adminreport' ? 'menu-active' : '' ?>"<?= $active_menu === 'adminreport' ? ' aria-current="page"' : '' ?>><i class="fa fa-book"></i> ጠቅላላ መረጃ</a></li>
       <li><a href="<?= base_url(); ?>admin/membersexport" class="<?= $active_menu === 'membersexport' ? 'menu-active' : '' ?>"<?= $active_menu === 'membersexport' ? ' aria-current="page"' : '' ?>><i class="fa fa-file-pdf-o"></i> ምእመናን ሪፖርት</a></li>
 
-      <li class="menu-title <?= ($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_manage_form'] != 'allow') ? 'hidden' : '' ?>">ማስተካከያ</li>
+      <li class="menu-title app-sidebar-menu-section<?= ($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_manage_form'] != 'allow') ? ' hidden' : '' ?>">ማስተካከያ</li>
       <li class="<?= ($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' || $_SESSION['current_user']['user_type'] == 'የሲስተም አስተዳደር') ? 'hidden' : '' ?>"><a href="<?= base_url(); ?>admin/generalsetting" class="<?= $active_menu === 'generalsetting' ? 'menu-active' : '' ?>"<?= $active_menu === 'generalsetting' ? ' aria-current="page"' : '' ?>><i class="fa fa-gear"></i> አጠቃላይ ማስተካከያዎች</a></li>
       <li class="<?= ($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' || $_SESSION['current_user']['user_type'] == 'የሲስተም አስተዳደር') ? 'hidden' : '' ?>"><a href="<?= base_url(); ?>admin/users" class="<?= $active_menu === 'users' ? 'menu-active' : '' ?>"<?= $active_menu === 'users' ? ' aria-current="page"' : '' ?>><i class="fa fa-user-secret"></i> የሲስተም ተጠቃሚዎች</a></li>
       <li class="<?= ($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_manage_form'] != 'allow') ? 'hidden' : '' ?>"><a href="<?= base_url(); ?>admin/listformelements" class="<?= $active_menu === 'formelements' ? 'menu-active' : '' ?>"<?= $active_menu === 'formelements' ? ' aria-current="page"' : '' ?>><i class="fa fa-tags"></i> የቅፅ ማስተካከያ</a></li>

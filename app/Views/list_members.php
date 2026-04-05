@@ -10,53 +10,137 @@ $can_edit = !($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃ�
 ?>
 
 <style type="text/css">
-    #members-list-page .members-list-table tbody td {
+    #members-list-view .members-list-table tbody td {
         vertical-align: middle;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
     }
-    #members-list-page .members-list-table tbody td a {
+    #members-list-view .members-list-table tbody td a {
         line-height: 1.25;
     }
-    #members-list-page .members-list-table {
+    #members-list-view .members-list-table {
         white-space: nowrap;
     }
-    #members-list-page .dataTables_wrapper .dataTables_length,
-    #members-list-page .dataTables_wrapper .dataTables_filter {
+    #members-list-view .dataTables_wrapper .dataTables_length,
+    #members-list-view .dataTables_wrapper .dataTables_filter {
+        float: none;
         margin-bottom: 1rem;
     }
-    #members-list-page .dataTables_wrapper .dataTables_filter input {
+    #members-list-view .dataTables_wrapper .dataTables_filter input {
         margin-left: 0.5rem;
-        border-radius: 0.25rem;
+        border-radius: var(--radius-field, 0.25rem);
         border: 1px solid color-mix(in oklch, var(--color-base-content) 15%, transparent);
         background: var(--color-base-100, Canvas);
         color: inherit;
         padding: 0.375rem 0.75rem;
         min-height: 2.5rem;
     }
-    #members-list-page .dt-buttons {
+    #members-list-view .dt-buttons {
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
         margin-bottom: 1rem;
     }
-    #members-list-page .dt-buttons .btn {
+    #members-list-view .dt-buttons .btn {
         margin: 0;
+    }
+    /* Footer: info + pagination */
+    #members-list-view .members-dt-footer {
+        width: 100%;
+    }
+    #members-list-view .dataTables_wrapper .dataTables_info {
+        float: none;
+        clear: none;
+        padding-top: 0;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: color-mix(in oklch, var(--color-base-content) 72%, transparent);
+    }
+    #members-list-view .dataTables_wrapper .dataTables_paginate {
+        float: none;
+        text-align: inherit;
+        padding-top: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.25rem;
+    }
+    #members-list-view .dataTables_wrapper .dataTables_paginate .paginate_button {
+        box-sizing: border-box;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 2.25rem;
+        min-height: 2.25rem;
+        padding: 0.25rem 0.5rem;
+        margin: 0;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        line-height: 1.2;
+        border-radius: var(--radius-field, 0.25rem);
+        border: 1px solid color-mix(in oklch, var(--color-base-content) 15%, transparent);
+        background: var(--color-base-100);
+        color: var(--color-base-content) !important;
+        background-image: none !important;
+        box-shadow: none !important;
+    }
+    #members-list-view .dataTables_wrapper .dataTables_paginate .paginate_button:hover:not(.disabled):not(.current) {
+        background: color-mix(in oklch, var(--color-base-content) 8%, transparent);
+        border-color: color-mix(in oklch, var(--color-base-content) 28%, transparent);
+        color: var(--color-base-content) !important;
+        background-image: none !important;
+    }
+    #members-list-view .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+    #members-list-view .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        background: var(--color-primary) !important;
+        border-color: var(--color-primary) !important;
+        color: var(--color-primary-content) !important;
+        background-image: none !important;
+        cursor: default;
+    }
+    #members-list-view .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+    #members-list-view .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+    #members-list-view .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+        opacity: 0.4;
+        cursor: not-allowed;
+        background: transparent !important;
+        border-color: color-mix(in oklch, var(--color-base-content) 10%, transparent);
+        color: color-mix(in oklch, var(--color-base-content) 45%, transparent) !important;
+        background-image: none !important;
+        box-shadow: none !important;
+    }
+    #members-list-view .dataTables_wrapper .dataTables_paginate .paginate_button:active:not(.disabled):not(.current) {
+        background: color-mix(in oklch, var(--color-base-content) 12%, transparent);
+        background-image: none !important;
+    }
+    #members-list-view .dataTables_wrapper .dataTables_paginate .ellipsis {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.25rem;
+        padding: 0 0.25rem;
+        margin: 0;
+        border: none;
+        background: transparent !important;
+        color: color-mix(in oklch, var(--color-base-content) 45%, transparent) !important;
+        cursor: default;
+    }
+    #members-filter-panel > summary {
+        list-style: none;
+    }
+    #members-filter-panel > summary::-webkit-details-marker {
+        display: none;
     }
 </style>
 
-<div id="members-list-page" class="mb-6">
-  <h1 class="text-2xl font-bold tracking-tight"><?= lang('label.members'); ?></h1>
-  <p class="mt-1 text-sm text-base-content/70"><?= esc((string) $members_total); ?> መዝገቦች</p>
-  <div class="breadcrumbs mt-2 text-sm">
-    <ul>
-      <li><a href="<?php echo base_url(); ?>" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ</a></li>
-      <li class="text-base-content/80"><?= lang('label.members'); ?></li>
-    </ul>
-  </div>
-</div>
+<?= view('templates/partials/page_heading', [
+    'title' => lang('label.members'),
+    'subtitle_html' => '<p class="mt-0.5 text-sm text-base-content/70">' . esc((string) $members_total) . ' መዝገቦች</p>',
+    'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ</a></li><li class="text-base-content/80">' . esc(lang('label.members')) . '</li></ul>',
+    'wrapper_id' => 'members-list-page',
+]); ?>
 
-<section class="space-y-6">
+<section id="members-list-view" class="space-y-6">
 
     <?php if(session()->getFlashdata('success')) { ?>
         <div role="alert" class="alert alert-success shadow-sm">
@@ -70,15 +154,18 @@ $can_edit = !($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃ�
         </div>
     <?php } ?>
 
-    <div class="card border border-base-content/15 bg-base-100 shadow-md">
-        <div class="card-body border-b border-base-content/15 pb-4">
-            <h2 class="card-title text-lg font-semibold">
-                <i class="fa fa-filter text-primary" aria-hidden="true"></i>
-                ፍለጋ
-            </h2>
-            <p class="text-sm text-base-content/60">በፆታ፣ እድሜ፣ ሥራ እና ሌሎች መስፈርት ምዕመናን ያጣሩ።</p>
-        </div>
-        <div class="card-body pt-4">
+    <details id="members-filter-panel" class="collapse collapse-arrow rounded-box border border-base-content/15 bg-base-100 shadow-md">
+        <summary class="collapse-title border-b border-base-content/15 px-6 py-4 text-start font-normal">
+            <span class="block">
+                <span class="card-title mb-1 block text-lg font-semibold">
+                    <i class="fa fa-filter text-primary" aria-hidden="true"></i>
+                    ፍለጋ
+                </span>
+                <span class="block text-sm font-normal text-base-content/60">በፆታ፣ እድሜ፣ ሥራ እና ሌሎች መስፈርት ምዕመናን ያጣሩ።</span>
+            </span>
+        </summary>
+        <div class="collapse-content px-0 pb-0 pt-0">
+        <div class="px-6 pb-6 pt-4">
         <form method="post" action="<?= base_url(); ?>admin/members" id="PersonList" class="space-y-6">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 <label class="form-control w-full">
@@ -160,7 +247,8 @@ $can_edit = !($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃ�
             </div>
         </form>
         </div>
-    </div>
+        </div>
+    </details>
 
     <div class="card border border-base-content/15 bg-base-100 shadow-md">
         <div class="card-body flex flex-col gap-4 border-b border-base-content/15 pb-4 sm:flex-row sm:items-center sm:justify-between">
@@ -275,7 +363,7 @@ $can_edit = !($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃ�
     $(function () {
         $('#user-listing-table').DataTable({
             scrollX: true,
-            dom: '<"flex flex-col gap-4 md:flex-row md:flex-wrap md:items-center md:justify-between"<"flex flex-wrap gap-2"B><"flex flex-wrap items-center gap-2"f>>rtip',
+            dom: '<"flex flex-col gap-4 md:flex-row md:flex-wrap md:items-center md:justify-between"<"flex flex-wrap gap-2"B><"flex flex-wrap items-center gap-2"f>>rt<"members-dt-footer flex flex-col gap-3 border-t border-base-content/15 pt-4 mt-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4"i p>',
             language: {
                 url: '<?= base_url()?>assets/vendors/DataTables/locale/Amharic.json'
             },

@@ -6,14 +6,10 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <div class="mb-6"><h1 class="text-2xl font-bold">
-        	ተጠቃሚ ምዝገባ
-      	</h1>
-      	<div class="breadcrumbs text-sm"><ul>
-        	<li><a href="<?php echo base_url(); ?>admin/listusers"><i class="fa fa-cog"></i> ጠቅላላ መቼት </a></li>
-        	<li>ተጠቃሚ ምዝገባ</li>
-      	</ul></div>
-    </div>
+    <?= view('templates/partials/page_heading', [
+        'title' => 'ተጠቃሚ ምዝገባ',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url('admin/listusers'), 'url') . '" class="link link-hover"><i class="fa fa-cog"></i> ጠቅላላ መቼት </a></li><li class="text-base-content/80">ተጠቃሚ ምዝገባ</li></ul>',
+    ]); ?>
     <section class="content container-fluid">
 
 

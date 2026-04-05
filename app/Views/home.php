@@ -1,8 +1,9 @@
 <script type="text/javascript" src="<?= base_url('assets/vendors/chartjs/Chart.min.js'); ?>"></script>
 
-<div class="mb-6">
-  <h1 class="text-2xl font-bold"><?= lang('label.welcome') ?></h1>
-</div>
+<?= view('templates/partials/page_heading', [
+    'title' => lang('label.welcome'),
+    'breadcrumbs_html' => '<ul><li class="text-base-content/80"><i class="fa fa-dashboard" aria-hidden="true"></i> ዳሽቦርድ</li></ul>',
+]); ?>
 
 <section class="space-y-6">
 

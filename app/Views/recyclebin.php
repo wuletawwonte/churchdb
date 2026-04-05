@@ -2,18 +2,10 @@
 <script src="<?= base_url(); ?>assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/DataTables/datatables.min.css">
 
-<div class="mb-6">
-    <h1 class="text-2xl font-bold">
-        ቆሼ
-        <span class="mt-1 block text-base font-normal opacity-70">የሌሉና የጠፉ ምዕመናን</span>
-    </h1>
-    <div class="breadcrumbs text-sm">
-        <ul>
-            <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
-            <li><a href="<?php echo base_url(); ?>admin/users"> ቆሼ </a></li>
-        </ul>
-    </div>
-</div>
+<?= view('templates/partials/page_heading', [
+    'title_html' => 'ቆሼ<span class="mt-1 block text-base font-normal opacity-70">የሌሉና የጠፉ ምዕመናን</span>',
+    'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li><li><a href="' . esc(base_url('admin/users'), 'url') . '" class="link link-hover"> ቆሼ </a></li></ul>',
+]); ?>
 
 <section class="space-y-4">
 

@@ -1,18 +1,10 @@
 
 
 <div class="space-y-4">
-    <div class="mb-6">
-      <h1 class="text-2xl font-bold">
-        የሲስተም ተጠቃሚዎች
-        <span class="mt-1 block text-base font-normal opacity-70">የሲስተም ተጠቃሚዎች ዝርዝር</span>
-      </h1>
-      <div class="breadcrumbs text-sm">
-        <ul>
-          <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
-          <li><a href="<?php echo base_url(); ?>admin/users"> የሲስተም ተጠቃሚዎች</a></li>
-        </ul>
-      </div>
-    </div>
+    <?= view('templates/partials/page_heading', [
+        'title_html' => 'የሲስተም ተጠቃሚዎች<span class="mt-1 block text-base font-normal opacity-70">የሲስተም ተጠቃሚዎች ዝርዝር</span>',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li><li><a href="' . esc(base_url('admin/users'), 'url') . '" class="link link-hover"> የሲስተም ተጠቃሚዎች</a></li></ul>',
+    ]); ?>
     <section class="content container-fluid">
 
 

@@ -1,11 +1,9 @@
 
 <div class="space-y-4">
-    <div class="mb-6"><h1 class="text-2xl font-bold"> የተጠቃሚ አካውንት ማስተካከያ </h1>
-        <div class="breadcrumbs text-sm"><ul>
-            <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
-            <li> አካውንት </li>
-        </ul></div>
-    </div>
+    <?= view('templates/partials/page_heading', [
+        'title' => 'የተጠቃሚ አካውንት ማስተካከያ',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li><li class="text-base-content/80"> አካውንት </li></ul>',
+    ]); ?>
     <section class="content">
 
 

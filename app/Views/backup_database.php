@@ -1,12 +1,10 @@
 
 
 <div class="space-y-4">
-    <div class="mb-6"><h1 class="text-2xl font-bold">የመረጃቋት ባካፕ</h1>
-        <div class="breadcrumbs text-sm"><ul>
-            <li><a href="<?php echo base_url(); ?>"><i class="fa fa-users"></i> ዳሽቦርድ </a></li>
-            <li> የመረጃቋት ባካፕ </li>
-        </ul></div>
-    </div>
+    <?= view('templates/partials/page_heading', [
+        'title' => 'የመረጃቋት ባካፕ',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-users"></i> ዳሽቦርድ </a></li><li class="text-base-content/80"> የመረጃቋት ባካፕ </li></ul>',
+    ]); ?>
     <section class="content">
 
         <div class="card border border-base-content/15 bg-base-100 shadow-md">

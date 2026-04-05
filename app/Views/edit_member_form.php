@@ -8,14 +8,10 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <div class="mb-6"><h1 class="text-2xl font-bold">
-        የምዕመን መራጃ ማስተካከያ
-      </h1>
-      <div class="breadcrumbs text-sm"><ul>
-        <li><a href="<?php echo base_url(); ?>admin/memberdetails/<?= $member['id']; ?>"><i class="fa fa-user"></i> የምዕመን መረጃ </a></li>
-        <li> መረጃ ቀይር </li>
-      </ul></div>
-    </div>
+    <?= view('templates/partials/page_heading', [
+        'title' => 'የምዕመን መራጃ ማስተካከያ',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url('admin/memberdetails/' . $member['id']), 'url') . '" class="link link-hover"><i class="fa fa-user"></i> የምዕመን መረጃ </a></li><li class="text-base-content/80"> መረጃ ቀይር </li></ul>',
+    ]); ?>
     <section class="content container-fluid">
 
 

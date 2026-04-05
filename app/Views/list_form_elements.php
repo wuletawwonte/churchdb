@@ -5,15 +5,10 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <div class="mb-6"><h1 class="text-2xl font-bold">
-        የቅፅ ማስተካከያ 
-        <span class="mt-1 block text-base font-normal opacity-70">የሚሞላው ፎርም ውስጥ ያሉ አማራጮች</span>
-      </h1>
-      <div class="breadcrumbs text-sm"><ul>
-          <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-          <li> የቅፅ ማስተካከያ </li>
-      </ul></div>
-    </div>
+    <?= view('templates/partials/page_heading', [
+        'title_html' => 'የቅፅ ማስተካከያ <span class="mt-1 block text-base font-normal opacity-70">የሚሞላው ፎርም ውስጥ ያሉ አማራጮች</span>',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li><li class="text-base-content/80"> የቅፅ ማስተካከያ </li></ul>',
+    ]); ?>
     <section class="content">
 
 

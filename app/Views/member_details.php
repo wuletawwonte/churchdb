@@ -9,15 +9,10 @@
     }
 </style>
 
-<div class="mb-6">
-    <h1 class="text-2xl font-bold"><?= lang('label.person_profile') ?></h1>
-    <div class="breadcrumbs text-sm">
-        <ul>
-            <li><a href="<?php echo base_url(); ?>admin/members"><i class="fa fa-users"></i> ምዕመናን </a></li>
-            <li> ምዕመን </li>
-        </ul>
-    </div>
-</div>
+<?= view('templates/partials/page_heading', [
+    'title' => lang('label.person_profile'),
+    'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url('admin/members'), 'url') . '" class="link link-hover"><i class="fa fa-users"></i> ምዕመናን </a></li><li class="text-base-content/80"> ምዕመን </li></ul>',
+]); ?>
 <section class="content">
     <div class="flex flex-col gap-6 lg:flex-row">
         <div class="w-full shrink-0 lg:w-80">
