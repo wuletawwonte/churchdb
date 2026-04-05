@@ -6,19 +6,12 @@
 
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        የምዕመን መራጃ ማስተካከያ
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo base_url(); ?>admin/memberdetails/<?= $member['id']; ?>"><i class="fa fa-user"></i> የምዕመን መረጃ </a></li>
-        <li class="active"> መረጃ ቀይር </li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
+    <?= view('templates/partials/page_heading', [
+        'title' => 'የምዕመን መራጃ ማስተካከያ',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url('admin/memberdetails/' . $member['id']), 'url') . '" class="link link-hover"><i class="fa fa-user"></i> የምዕመን መረጃ </a></li><li class="text-base-content/80"> መረጃ ቀይር </li></ul>',
+    ]); ?>
     <section class="content container-fluid">
 
 
@@ -34,7 +27,7 @@
 	            <?php echo session()->getFlashdata('success'); ?>
 	        </div>
 	    <?php } else if(session()->getFlashdata('error')) { ?>
-		    <div class="alert alert-danger alert-dismissible">
+		    <div class="alert alert-error">
                 <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
 	            <?php echo session()->getFlashdata('error'); ?>
 	        </div>
@@ -46,18 +39,23 @@
     		<div class="row">
 
 	    		<div class="col-md-3 col-sm-3 col-lg-3">
-	    			<div class="box box-info clearfix ">
-	    				<div class="box-header with-border">
-	    					<h3 class="box-title">የምዕመን ፎቶ</h3>
+	    			<div class="card border border-base-content/15 bg-base-100 shadow-md clearfix ">
+	    				<div class="card-body border-b border-base-content/15 pb-3 mb-3">
+	    					<h3 class="card-title text-lg">የምዕመን ፎቶ</h3>
 	    				</div>
-	    				<div class="box-body" align="center">
-			              	<img class="img-responsive img-circle" for="avatarInput" id="avatar" style="border: 3px solid #d2d6de;padding: 3px;height: 130px; width: 130px;" src="<?php if($member['avatar'] == NULL) { echo base_url().'assets/img/user.png'; } else { echo base_url('assets/avatars/'. $member['avatar']); } ?>" alt="User profile picture"><br>
+	    				<div class="card-body flex flex-col items-center text-center">
+			              	<?= view('templates/partials/member_avatar', [
+			              	    'member' => $member,
+			              	    'size' => 'lg',
+			              	    'placeholderSrc' => base_url('assets/img/user.png'),
+			              	    'imgId' => 'avatar',
+			              	]); ?><br>
 
 
 						<div class="input-group input-group-lg">
-			                <input type="file" accept="image/*"  class="form-control" id="avatarInput" name="avatar_input" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" style="display: none;">
-			                    <button type="button" class="btn btn-lg btn-primary btn-flat" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
-		                        <button type="button" class="btn btn-lg btn-info btn-flat" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/<?php if($member['avatar'] == NULL) { echo '/img/user.png'; } else { echo 'avatars/'.$member['avatar']; } ?>'"  style="border-radius: 0px;"><i class="fa fa-refresh"></i></button>
+			                <input type="file" accept="image/*"  class="input input-bordered w-full max-w-full" id="avatarInput" name="avatar_input" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0]);" style="display: none;">
+			                    <button type="button" class="btn btn-lg btn-primary" onclick="document.getElementById('avatarInput').click();"><i class="fa fa-folder-open"></i></button>
+		                        <button type="button" class="btn btn-lg btn-secondary" onclick="document.getElementById('avatarInput').value = ''; document.getElementById('avatar').src = '<?= base_url(); ?>assets/<?php if($member['avatar'] == NULL) { echo '/img/user.png'; } else { echo 'avatars/'.$member['avatar']; } ?>'"><i class="fa fa-refresh"></i></button>
 			            </div>
 		                <p></p>
 
@@ -71,56 +69,49 @@
 
 
 	    		<div class="col-md-9 col-sm-9 col-lg-9">
-				    <div class="box box-info clearfix">
-				        <div class="box-header with-border">
-				            <h3 class="box-title"> <?= lang('label.personal_info'); ?>  </h3>
+				    <div class="card border border-base-content/15 bg-base-100 shadow-md clearfix">
+				        <div class="card-body border-b border-base-content/15 pb-3 mb-3">
+				            <h3 class="card-title text-lg"> <?= lang('label.personal_info'); ?>  </h3>
 				        </div><!-- /.box-header -->
-				        <div class="box-body">
+				        <div class="card-body">
 				            <div class="form-group">
 				                <div class="row">
 				                    <div class="col-md-2">
 				                        <label> <?= lang('label.gender'); ?>  :</label>
-				                        <select name="gender" class="form-control s2">
+				                        <select name="gender" class="input input-bordered w-full max-w-full s2">
 				                            <option <?php if($member['gender'] == 'ሴት') { echo 'selected'; }?> value="ሴት">ሴት</option>
 				                            <option <?php if($member['gender'] == 'ወንድ') { echo 'selected'; }?> value="ወንድ">ወንድ</option>
 				                        </select>
 				                    </div>
 				                    <div class="col-md-3">
 				                        <label for="Title"> <?= lang('label.title'); ?>  :</label>
-				                        <input type="text" name="Title" value="<?= $member['title']; ?>" class="form-control">
+				                        <input type="text" name="Title" value="<?= $member['title']; ?>" class="input input-bordered w-full max-w-full">
 				                    </div>
 				                </div>
 				                <p/>
 				                <div class="row">
 				                    <div class="col-md-4">
 				                        <label for="firstname"> <?= lang('label.first_name'); ?>  :</label>
-				                        <input type="text" name="firstname" value="<?= $member['firstname'] ?>" class="form-control">
+				                        <input type="text" name="firstname" value="<?= $member['firstname'] ?>" class="input input-bordered w-full max-w-full">
 				        				<br><font color="red"></font>
 				                    </div>
 
 				                    <div class="col-md-2">
 				                        <label for="middlename"> <?= lang('label.middle_name'); ?>  :</label>
-				                        <input type="text" name="middlename" value="<?= $member['middlename'] ?>" class="form-control">
+				                        <input type="text" name="middlename" value="<?= $member['middlename'] ?>" class="input input-bordered w-full max-w-full">
 
 				                    </div>
 
 				                    <div class="col-md-6">
 				                        <label for="lastname"> <?= lang('label.last_name'); ?>  :</label>
-				                        <input type="text" name="lastname" value="<?= $member['lastname'] ?>" class="form-control">                    
+				                        <input type="text" name="lastname" value="<?= $member['lastname'] ?>" class="input input-bordered w-full max-w-full">                    
 				                    </div>
 				                </div>
 				                <p/>
 				                <div class="row">
 					                <div class="col-md-4 form-group">
-						                <label><?= lang('label.birth_date') ?>:</label>
-
-						                <div class="input-group">
-						                  <div class="input-group-addon">
-						                    <i class="glyphicon glyphicon-calendar"></i>
-						                  </div>
-						                  <input type="text" class="form-control family-head inputmasked" name="birthdate" value="<?= $member['birthdate'] ?>" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask>
-						                </div>
-						                <!-- /.input group -->
+						                <label for="birthdate"><?= lang('label.birth_date') ?>:</label>
+						                <input type="date" id="birthdate" name="birthdate" class="input input-bordered w-full max-w-full family-head" value="<?= esc(substr((string) ($member['birthdate'] ?? ''), 0, 10)); ?>" max="<?= esc(date('Y-m-d')); ?>">
 						            </div>
 				                    <div class="col-md-2">
 				                        <label> ዕድሜ ይደበቅ  </label><br/>
@@ -131,7 +122,7 @@
 
 				                    <div class="col-md-6">
 				                        <label for="birth_place"> <?= lang('label.birth_place'); ?>  :</label>
-				                        <input type="text" name="birth_place" value="<?= $member['birth_place'] ?>" class="form-control">                    
+				                        <input type="text" name="birth_place" value="<?= $member['birth_place'] ?>" class="input input-bordered w-full max-w-full">                    
 				                    </div>
 
 				                </div>
@@ -142,16 +133,16 @@
 			</div>
 
 
-			<div class="box box-info clearfix">
-				<div class="box-header with-border">
-					<h3 class="box-title"><?= lang('label.contact_and_job_info') ?></h3>
+			<div class="card border border-base-content/15 bg-base-100 shadow-md clearfix">
+				<div class="card-body border-b border-base-content/15 pb-3 mb-3">
+					<h3 class="card-title text-lg"><?= lang('label.contact_and_job_info') ?></h3>
 				</div><!-- /.box-header -->
-				<div class="box-body">
+				<div class="card-body">
 					<div class="row">
 
 	                    <div class="col-md-4">
 	                        <label> ክፍለ ከተማ: </label>
-		                    <select name="kifle_ketema" id="kifle_ketema" class="form-control s2">
+		                    <select name="kifle_ketema" id="kifle_ketema" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="" <?php if($member['kifle_ketema'] == '') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($kifle_ketemas as $kifle_ketema) { ?>
 		                        	<option value="<?= $kifle_ketema['kifle_ketema_title']?>" <?php if($member['kifle_ketema'] == $kifle_ketema['kifle_ketema_title']) echo 'selected'; ?> > <?= $kifle_ketema['kifle_ketema_title']; ?> </option>
@@ -161,7 +152,7 @@
 
 	                    <div class="col-md-4">
 	                        <label> ቀበሌ: </label>
-	                        <select name="kebele" id="kebele" class="form-control s2">
+	                        <select name="kebele" id="kebele" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="" <?php if($member['kebele'] == '') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($kebeles as $kebele) { ?>
 		                        	<option value="<?= $kebele['kebele_title'] ?>" <?php if($member['kebele'] == $kebele['kebele_title']) echo 'selected'; ?> > <?= $kebele['kebele_title']; ?> </option>
@@ -171,7 +162,7 @@
 
 	                    <div class="col-md-4">
 	                        <label> መንደር: </label>
-	                        <select name="mender" id="mender" class="form-control s2">
+	                        <select name="mender" id="mender" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="" <?php if($member['mender'] == '') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($menders as $mender) { ?>
 		                        	<option value="<?= $mender['mender_title']; ?>" <?php if($member['mender'] == $mender['mender_title']) echo 'selected'; ?> > <?= $mender['mender_title']; ?> </option>
@@ -183,16 +174,16 @@
 
 	                    <div class="col-md-2">
 	                        <label for="house_number"> የቤት ቁጥር: </label>
-	                        <input type="text" name="house_number" value="<?= $member['house_number']?>" class="form-control">                    
+	                        <input type="text" name="house_number" value="<?= $member['house_number']?>" class="input input-bordered w-full max-w-full">                    
 	                    </div>
 
 						<div class="form-group col-md-4">
 							<label for="home_phone"> የመኖርያ ቤት ስልክ ቁጥር: </label>
-							<div class="input-group">
-								<div class="input-group-addon">
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-content/15 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-content/15 bg-base-200 text-base-content" aria-hidden="true">
 									<i class="fa fa-tty"></i>
-								</div>
-								<input type="text" name="home_phone" value="<?= $member['home_phone']?>" class="form-control" placeholder="046..">
+								</span>
+								<input id="home_phone" type="tel" name="home_phone" value="<?= esc($member['home_phone'] ?? '') ?>" autocomplete="tel-national" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30" placeholder="046..">
 							</div>
 						</div>
 
@@ -200,12 +191,12 @@
 
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label><?= lang('label.mobile_phone') ?>:</label>
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="glyphicon glyphicon-earphone"></i>
-								</div>
-								<input type="text" name="mobile_phone" value="<?= $member['mobile_phone'] ?>" class="form-control">
+							<label for="mobile_phone"><?= lang('label.mobile_phone') ?>:</label>
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-content/15 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-content/15 bg-base-200 text-base-content" aria-hidden="true">
+									<i class="fa fa-mobile text-lg"></i>
+								</span>
+								<input id="mobile_phone" type="tel" name="mobile_phone" value="<?= esc($member['mobile_phone'] ?? '') ?>" autocomplete="tel-national" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30">
 							</div>
 						</div>
 
@@ -215,23 +206,23 @@
 								<div class="input-group-addon">
 									<i class="glyphicon glyphicon-envelope"></i>
 								</div>
-								<input type="email" Name="email" value="<?= $member['email'] ?>" class="form-control" value="" size="50" maxlength="50">
+								<input type="email" Name="email" value="<?= $member['email'] ?>" class="input input-bordered w-full max-w-full" value="" size="50" maxlength="50">
 							</div>
 						</div>
 
 					</div><p/>
 				</div>
 			</div>
-			<div class="box box-info clearfix">
-				<div class="box-header with-border">
-					<h3 class="box-title"> የምዕመን የስራ ሁኔታ </h3>
+			<div class="card border border-base-content/15 bg-base-100 shadow-md clearfix">
+				<div class="card-body border-b border-base-content/15 pb-3 mb-3">
+					<h3 class="card-title text-lg"> የምዕመን የስራ ሁኔታ </h3>
 				</div><!-- /.box-header -->
-				<div class="box-body">
+				<div class="card-body">
 					<div class="row">
 
 						<div class="col-md-6">
 							<label>የትምህርት ደረጃ:</label>
-	                        <select name="level_of_education" class="form-control s2">
+	                        <select name="level_of_education" class="input input-bordered w-full max-w-full s2">
 		                        <option <?php if($member['level_of_education'] == 'አልተመረጠም') echo 'selected'; ?> value="አልተመረጠም"> አልተመረጠም </option>
 		                        <option <?php if($member['level_of_education'] == '8ኛ ያጠናቀቀ') echo 'selected'; ?> value="8ኛ ያጠናቀቀ"> 8ኛ ያጠናቀቀ </option>
 		                        <option <?php if($member['level_of_education'] == '10ኛ ያጠናቀቀ') echo 'selected'; ?> value="10ኛ ያጠናቀቀ"> 10ኛ ያጠናቀቀ </option>
@@ -246,14 +237,14 @@
 
 						<div class="col-md-6">
 							<label>የሰለጠኑበት ሙያ መስክ:</label>
-							<input type="text" name="field_of_study" value="<?= $member['field_of_study']?>" class="form-control" maxlength="50">
+							<input type="text" name="field_of_study" value="<?= $member['field_of_study']?>" class="input input-bordered w-full max-w-full" maxlength="50">
 						</div>
 
 					</div><br>
 					<div class="row">
 	                    <div class="col-md-4">
 	                        <label> የሥራ መስክ: </label>
-	                        <select name="job_type" class="form-control s2">
+	                        <select name="job_type" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="አልተመረጠም" <?php if($member['job_type'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
 				                <?php foreach($job_types as $job_type) { ?>
 			                        <option value="<?= $job_type['job_type_title'] ?>" <?php if($member['job_type'] == $job_type['job_type_title']) echo 'selected'; ?>> 
@@ -266,17 +257,17 @@
 
 	                    <div class="col-md-4">
 	                        <label for="workplace_name"> የመሥሪያ ቤቱ ስም: </label>
-	                        <input type="text" name="workplace_name" value="<?= $member['workplace_name'] ?>" class="form-control">                    
+	                        <input type="text" name="workplace_name" value="<?= $member['workplace_name'] ?>" class="input input-bordered w-full max-w-full">                    
 	                    </div>
 
 
 						<div class="form-group col-md-4">
-							<label> የመሥሪያ ቤት ስልክ ቁጥር: </label>
-							<div class="input-group">
-								<div class="input-group-addon">
-									<i class="glyphicon glyphicon-phone-alt"></i>
-								</div>
-								<input type="text" name="workplace_phone" value="<?= $member['workplace_phone'] ?>" class="form-control inputmasked" data-inputmask='"mask": "(999) 999-9999"' data-mask/>
+							<label for="workplace_phone"> የመሥሪያ ቤት ስልክ ቁጥር: </label>
+							<div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-content/15 bg-base-100">
+								<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-content/15 bg-base-200 text-base-content" aria-hidden="true">
+									<i class="fa fa-building-o"></i>
+								</span>
+								<input id="workplace_phone" type="tel" name="workplace_phone" value="<?= esc($member['workplace_phone'] ?? '') ?>" autocomplete="tel" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30 inputmasked" data-inputmask='"mask": "(999) 999-9999"' data-mask>
 							</div>
 						</div>
 
@@ -286,7 +277,7 @@
 	                    <div class="col-md-4">
 	                        <label for="monthly_income"> ወርሐዊ ገቢ: </label>
 	                        <div class="input-group">
-	                        	<input type="tel" name="monthly_income" value="<?php if($member['monthly_income']) echo $member['monthly_income']; ?>" class="form-control">
+	                        	<input type="tel" name="monthly_income" value="<?php if($member['monthly_income']) echo $member['monthly_income']; ?>" class="input input-bordered w-full max-w-full">
 	                    		<div class="input-group-addon">ብር</div>
 
 	                    	</div>
@@ -300,26 +291,28 @@
 
 
 
-			<div class="box box-info clearfix">
+			<div class="card border border-base-content/15 bg-base-100 shadow-md clearfix">
 				<div class="box-header  with-border">
-					<h3 class="box-title"><?= lang('label.church_participation') ?></h3>
+					<h3 class="card-title text-lg"><?= lang('label.church_participation') ?></h3>
 				</div><!-- /.box-header -->
-				<div class="box-body">
+				<div class="card-body">
 
 					<div class="row">
 
 	                    <div class="col-md-4">
-	                        <label for="Title"> <?= lang('label.membership_year'); ?>  :</label>
-	                        <div class="input-group">
-	                        	<input type="text" name="membership_year" value="<?php if($member['membership_year']) { echo $member['membership_year']; } ?>" class="form-control inputmasked" data-inputmask='"mask": "9999"' data-mask>
-	                    		<div class="input-group-addon">ዓ.ም</div>
-
+	                        <label for="membership_year"> <?= lang('label.membership_year'); ?>  :</label>
+	                        <div class="join w-full max-w-full overflow-hidden rounded-lg border border-base-content/15 bg-base-100">
+	                        	<span class="join-item inline-flex min-h-10 w-12 shrink-0 items-center justify-center border-0 border-e border-base-content/15 bg-base-200 text-base-content" aria-hidden="true">
+	                        		<i class="fa fa-calendar"></i>
+	                        	</span>
+	                        	<input id="membership_year" type="text" name="membership_year" value="<?php if($member['membership_year']) { echo $member['membership_year']; } ?>" inputmode="numeric" autocomplete="off" class="input join-item min-h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent shadow-none focus:z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/30 inputmasked" data-inputmask='"mask": "9999"' data-mask>
+	                    		<span class="join-item inline-flex min-h-10 shrink-0 items-center justify-center border-0 border-s border-base-content/15 bg-base-200 px-3 text-sm text-base-content" aria-hidden="true">ዓ.ም</span>
 	                    	</div>
 	                    </div>
 
 	                    <div class="col-md-4">
 	                        <label> <?= lang('label.cause_of_membership'); ?>  :</label>
-	                        <select name="membership_cause" class="form-control s2">
+	                        <select name="membership_cause" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="አልተመረጠም" <?php if($member['membership_cause'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($membership_causes as $membership_cause) { ?>
 		                        	<option <?php if($membership_cause['membership_cause_title'] == $member['membership_cause']){echo 'selected'; }?> value="<?= $membership_cause['membership_cause_title']; ?>"> 
@@ -331,7 +324,7 @@
 
 	                    <div class="col-md-4">
 	                        <label> <?= lang('label.level_of_membership'); ?>  :</label>
-	                        <select name="membership_level" class="form-control s2">
+	                        <select name="membership_level" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="አልተመረጠም" <?php if($member['membership_level'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($membership_levels as $membership_level) { ?>
 		                        	<option <?php if($membership_level['membership_level_title'] == $member['membership_level']){echo 'selected'; }?> value="<?= $membership_level['membership_level_title']; ?>"> 
@@ -346,7 +339,7 @@
 					<p/>
 	                    <div class="col-md-4 serving_as">
 	                        <label> የአገልግሎት ዘርፍ :</label>
-	                        <select name="ministry" class="form-control s2">
+	                        <select name="ministry" class="input input-bordered w-full max-w-full s2">
 	                        	<option value="አልተመረጠም" <?php if($member['ministry'] == 'አልተመረጠም') echo 'selected'; ?> >አልተመረጠም</option>
 	                        	<?php foreach($ministries as $ministry) { ?>
 		                        	<option <?php if($ministry['ministry_title'] == $member['ministry']){echo 'selected'; }?> value="<?= $ministry['ministry_title']; ?>"> 
@@ -366,14 +359,14 @@
 
 
 
-		    <div class="box box-info clearfix">
+		    <div class="card border border-base-content/15 bg-base-100 shadow-md clearfix">
 		        <div class="box-header  with-border">
-		            <h3 class="box-title"> የቤተሰብ መረጃ </h3>
+		            <h3 class="card-title text-lg"> የቤተሰብ መረጃ </h3>
 		        </div><!-- /.box-header -->
-		        <div class="box-body">
+		        <div class="card-body">
 		            <div class="form-group col-md-6">
 		                <label> የጋብቻ ሁኔታ :</label>
-		                <select name="marital_status" class="form-control s2" id="maritalStatus">
+		                <select name="marital_status" class="input input-bordered w-full max-w-full s2" id="maritalStatus">
 		                    <option value="አልተመረጠም" <?php if($member['marital_status'] == 'አልተመረጠም') { echo 'selected'; } ?> >አልተመረጠም</option>
 		                    <option disabled>-----------------------</option>
 		                    <option value="ያላገባ/ች" <?php if($member['marital_status'] == 'ያላገባ/ች') { echo 'selected'; } ?> >ያላገባ/ች</option>
@@ -384,7 +377,7 @@
 
 		            <div class="form-group col-md-6">
 		                <label> የትዳር አጋር:</label>
-		                <select name="spouse" class="form-control" id="spouse" disabled>
+		                <select name="spouse" class="input input-bordered w-full max-w-full" id="spouse" disabled>
 		                    <option value="" <?php if($member['spouse'] == NULL) { echo 'selected'; }?> >አልተመረጠም</option>
 		                    <option disabled>-----------------------</option>
 		                    <?php foreach($members as $m) { ?>
@@ -397,7 +390,7 @@
 
 
             <input type="submit" class="btn btn-primary" value="ቀይር" Name="addchurchsubmit">
-			<a href="<?= base_url(); ?>admin/listmembers" class="btn">Cancel</a>
+			<a href="<?= base_url(); ?>admin/members" class="btn btn-neutral">Cancel</a>
 
 
 		</form>
@@ -407,7 +400,7 @@
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+  
 
 
 
@@ -421,7 +414,7 @@
 		}
 
 	    $(function () {
-	        $('input').iCheck({
+	        $('input:not(#layout-drawer):not([data-theme-toggle]):not([type="file"]):not([type="hidden"])').iCheck({
 		      checkboxClass: 'icheckbox_square-blue',
 		      radioClass: 'iradio_square-blue',
 		      increaseArea: '20%' /* optional */

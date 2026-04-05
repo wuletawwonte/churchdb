@@ -171,6 +171,12 @@ class Admin extends BaseController
 		$this->cnfgModel->edit_one('church_name', $this->request->getPost('church_name'));
 		$this->cnfgModel->edit_one('default_password', $this->request->getPost('default_password'));
 
+		session()->set([
+			'system_name'       => (string) $this->request->getPost('system_name'),
+			'system_name_short' => (string) $this->request->getPost('system_name_short'),
+			'church_name'       => (string) $this->request->getPost('church_name'),
+		]);
+
 		session()->setFlashdata('success', 'የሲስተም ለውጦች በትክክል ተመዝግበዋል።');
 
 		return redirect()->to(site_url('admin/generalsetting'));
@@ -180,7 +186,7 @@ class Admin extends BaseController
 
 	public function personregistration() {
 
-		$data['active_menu'] = "personregistration";
+		$data['active_menu'] = "listmembers";
 		$data['job_types'] = $this->jobTypeModel->get_all();
 		$data['membership_causes'] = $this->membershipCauseModel->get_all();
 		$data['membership_levels'] = $this->membershipLevelModel->get_all();
@@ -261,7 +267,7 @@ class Admin extends BaseController
 				'age_group' => NULL
 			);
 			session()->set('filtermember', $filtermember);		
-			return redirect()->to(site_url('admin/listmembers')); 
+			return redirect()->to(site_url('admin/members')); 
 	}
 
 	public function savemember() {
@@ -339,7 +345,7 @@ class Admin extends BaseController
 
 	public function listgroups() {
 
-		$config['base_url'] = base_url('admin/listgroups');
+		$config['base_url'] = base_url('admin/groups');
 		$config['total_rows'] = $this->groupModel->record_count();
 		$config['per_page'] = 5;
 		$config["uri_segment"] = 3;
@@ -360,8 +366,9 @@ class Admin extends BaseController
 		$config['last_tagl_close'] = "</li>";
 
 		$page = (int) ($this->request->getUri()->getSegment(3) ?? 0);
-		$data['links'] = $this->paginationByOffset('admin/listgroups', $config['per_page'], $config['total_rows'], $page);
+		$data['links'] = $this->paginationByOffset('admin/groups', $config['per_page'], $config['total_rows'], $page);
 		$data['active_menu'] = "groups";
+		$data['groups_total'] = (int) $config['total_rows'];
 		$data['groups'] = $this->groupModel->get_all('created', 'DESC', $config["per_page"], $page);
 		echo view('templates/header', $data);
 		echo view('list_groups');
@@ -370,12 +377,12 @@ class Admin extends BaseController
 
 	public function savegroup() {
 		$this->groupModel->add();
-		return redirect()->to(site_url('admin/listgroups'));
+		return redirect()->to(site_url('admin/groups'));
 	}
 
 		public function export_families_csv() {
 		session()->setFlashdata('error', 'Family export is not available.');
-		return redirect()->to(site_url('admin/listmembers'));
+		return redirect()->to(site_url('admin/members'));
 	}
 
 	public function deletemembersbackup($id) {
@@ -588,7 +595,7 @@ class Admin extends BaseController
 
 	public function add_group_member() {
 		$this->groupMemberModel->add_group_member();
-		return redirect()->to(site_url('admin/groupdetails/'.$this->request->getPost('group_id')));		
+		return redirect()->to(site_url('admin/group/'.$this->request->getPost('group_id')));
 	}
 
 	public function ajax_get_member() {
@@ -617,7 +624,7 @@ class Admin extends BaseController
 
 	public function remove_group_member($mid, $gid) {
 		$this->groupMemberModel->remove_group_member($mid, $gid);
-		return redirect()->to(site_url('admin/groupdetails/'.$gid));
+		return redirect()->to(site_url('admin/group/'.$gid));
 	}
 
 	public function listformelements() {
@@ -631,17 +638,58 @@ class Admin extends BaseController
 		echo view('templates/footer');								
 	}
 
-	public function adminreport() {
-		$data['active_menu'] = "adminreport";
-		$data['church_name'] = $this->cnfgModel->get('church_name');
-		echo view('templates/header', $data);
-		echo view('report');
-		echo view('templates/footer');								
+	private function buildGeneralReportData(): array
+	{
+		$gender = $this->memberModel->gender_count();
+		$systemName = $this->cnfgModel->get('system_name');
+		if ($systemName === null || $systemName === '') {
+			$systemName = 'ChurchDB';
+		}
+		$churchName = (string) ($this->cnfgModel->get('church_name') ?? '');
+
+		$cu       = session()->get('current_user');
+		$issuedTo = '—';
+		if (is_array($cu)) {
+			$first = trim((string) ($cu['firstname'] ?? ''));
+			$last  = trim((string) ($cu['lastname'] ?? ''));
+			$name  = trim($first . ' ' . $last);
+			if ($name !== '') {
+				$issuedTo = $name;
+			}
+		}
+
+		$generatedAt = date('d-m-Y H:i');
+
+		$reportStats = [
+			['label' => lang('label.members'), 'value' => $this->memberModel->record_count()],
+			['label' => lang('label.male'), 'value' => (int) ($gender['male'] ?? 0)],
+			['label' => lang('label.female'), 'value' => (int) ($gender['female'] ?? 0)],
+			['label' => lang('label.groups'), 'value' => $this->groupModel->record_count()],
+			['label' => 'የሲስተም ተጠቃሚዎች', 'value' => $this->userModel->users_count()],
+			['label' => 'የአገልግሎት ዘርፎች', 'value' => count($this->ministryModel->get_all())],
+		];
+
+		return [
+			'system_name'    => $systemName,
+			'church_name'    => $churchName,
+			'issued_to_name' => $issuedTo,
+			'generated_at'   => $generatedAt,
+			'report_stats'   => $reportStats,
+		];
 	}
 
-	public function adminreportprint() {
-		$data['church_name'] = $this->cnfgModel->get('church_name');
-		echo view('report_print', $data);		
+	public function report() {
+		$data                = $this->buildGeneralReportData();
+		$data['active_menu'] = 'report';
+		echo view('templates/header', $data);
+		echo view('report');
+		echo view('templates/footer');
+	}
+
+	public function reportprint() {
+		$data                    = $this->buildGeneralReportData();
+		$data['print_autoprint'] = $this->request->getGet('autoprint') === '1';
+		echo view('report_print', $data);
 	}
 
 	public function memberdetailsprint($mid) {
@@ -777,10 +825,10 @@ class Admin extends BaseController
 	public function deletegroup($gid) {
 		if($this->groupModel->deletegroup($gid)) {
 			session()->setFlashdata('success', 'ቡድኑ በትክክል ጠፍቷል።');			
-			return redirect()->to(site_url('admin/listgroups'));
+			return redirect()->to(site_url('admin/groups'));
 		} else {
 			session()->setFlashdata('error', 'የቡድኑን መረጃ ማጥፋት አልተቻለም።');			
-			return redirect()->to(site_url('admin/listgroups'));			
+			return redirect()->to(site_url('admin/groups'));			
 		}
 	}
 
@@ -843,10 +891,10 @@ class Admin extends BaseController
 	public function deletemember($id) {
 		if($this->memberModel->delete_member($id)) {
 			session()->setFlashdata('success', 'የምዕመኑ መረጃ በትክክል ጠፍቷል።');			
-			return redirect()->to(site_url('admin/listmembers')); 
+			return redirect()->to(site_url('admin/members')); 
 		} else {
 			session()->setFlashdata('error', 'የምዕመኑ መረጃ ማጥፋት አልተቻለም።');			
-			return redirect()->to(site_url('admin/listmembers')); 			
+			return redirect()->to(site_url('admin/members')); 			
 		}
 	}
 

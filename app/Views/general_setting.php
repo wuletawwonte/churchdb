@@ -9,85 +9,77 @@
   
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-    	<h1>
-        	አጠቃላይ ማስተካከያዎች
-        	<small>ዋና የሲስተም ለውጦች ማስተካከያ</small>
-      	</h1>
-      	<ol class="breadcrumb">
-        	<li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-        	<li class="active">አጠቃላይ ማስተካከያዎች </li>
-      	</ol>
-    </section>
-
-    <!-- Main content -->
+    <?= view('templates/partials/page_heading', [
+        'title_html' => 'አጠቃላይ ማስተካከያዎች<span class="mt-1 block text-base font-normal opacity-70">ዋና የሲስተም ለውጦች ማስተካከያ</span>',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li><li class="text-base-content/80">አጠቃላይ ማስተካከያዎች </li></ul>',
+    ]); ?>
     <section class="content container-fluid">
 
 
 		<!-- Default box -->
-		<div class="box box-info">
-		    <div class="box-body">
+		<div class="card border border-base-content/15 bg-base-100 shadow-md">
+		    <div class="card-body">
 
-		        <div class="callout callout-info">
+		        <div class="alert alert-info">
 		            ልብ ይበሉ: አጠቃላይ መቼት ዋና የሚባሉ የሲስተም ለውጦችን የሚያድርግ ሲሆን ለውጦቹን ለማየት እንደገና መግባት ያስፈልጋል።
 		        </div>
 
 
 			     <?php if(session()->getFlashdata('success')) { ?>
-			        <div class="callout callout-info">
+			        <div class="alert alert-info">
 			            <?php echo session()->getFlashdata('success'); ?>
 			        </div>
 			    <?php } else if(session()->getFlashdata('error')) { ?>
-			        <div class="callout callout-danger">
+			        <div class="alert alert-error">
 			            <?php echo session()->getFlashdata('error'); ?>
 			        </div>
 			    <?php } ?>
 
 		        <form method="post" action="<?php echo base_url(); ?>admin/savesetting">
 		            <div class="table-responsive" width="100%">
-		                <table class="table table-hover">
+		                <table class="table table-zebra w-full">
 
 		                    <tr>
 		                        <td width="50%" >የሲስተም ስም:</td>
-		                        <td><input type="text" name="system_name" value="<?php echo $system_name; ?>" class="form-control" width="32" ></td>
+		                        <td><input type="text" name="system_name" value="<?php echo $system_name; ?>" class="input input-bordered w-full max-w-full" width="32" ></td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>የሲስተም ስም በአጭሩ:</td>
-		                        <td><input type="text" name="system_name_short" value="<?php echo $system_name_short; ?>" class="form-control" width="5"></td>
+		                        <td><input type="text" name="system_name_short" value="<?php echo $system_name_short; ?>" class="input input-bordered w-full max-w-full" width="5"></td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>የቤተክርስቲያኒቱ ስም:</td>
-		                        <td><input type="text" name="church_name" value="<?php echo $church_name; ?>" class="form-control" width="5"></td>
+		                        <td><input type="text" name="church_name" value="<?php echo $church_name; ?>" class="input input-bordered w-full max-w-full" width="5"></td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>ዋና የይለፍ ቃል:</td>
-		                        <td><input type="text" name="default_password" value="<?php echo $default_password; ?>" class="form-control" width="32"></td>
+		                        <td><input type="text" name="default_password" value="<?php echo $default_password; ?>" class="input input-bordered w-full max-w-full" width="32"></td>
 		                    </tr>
 
 		                    <tr>
 		                    	<td></td>
 		                        <td colspan="2">
-		                            <input type="submit" class="btn btn-primary btn-flat" value="መዝግብ" name="save">&nbsp;
-		                            <input type="reset" class="btn btn-flat" value="አጥፋ">
+		                            <input type="submit" class="btn btn-primary" value="መዝግብ" name="save">&nbsp;
+		                            <input type="reset" class="btn btn-neutral" value="አጥፋ">
 		                        </td>
 		                    </tr>
 		                </table>
 		            </div>
 		        </form>
 		    </div>
-		    <!-- /.box-body -->
+		    <!-- /.card-body -->
 		</div>
 		<!-- /.box -->
-		<div class="box box-default">
-			<div class="box-header with-border">
+		<div class="card border border-base-content/15 bg-base-100 shadow-md">
+			<div class="card-body border-b border-base-content/15 pb-3 mb-3">
 				<span>የእድሜ ቡድን</span>
 			</div>
-			<div class="box-body">
+			<div class="card-body">
 
 			     <?php if(session()->getFlashdata('edit_age_group_success')) { ?>
 			        <div class="alert alert-info alert-dismissible">
@@ -95,7 +87,7 @@
 			            <?php echo session()->getFlashdata('edit_age_group_success'); ?>
 			        </div>
 			    <?php } else if(session()->getFlashdata('edit_age_group_error')) { ?>
-			        <div class="callout callout-danger">
+			        <div class="alert alert-error">
                         <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
 			            <?php echo session()->getFlashdata('edit_age_group_error'); ?>
 			        </div>
@@ -104,7 +96,7 @@
 				<div class="row">
 					<form method="post" action="<?= base_url()?>admin/editagegroup">
                     <div class="col-md-3">
-                        <select name="ag_id" id="ageGroupId" class="form-control s2" required>
+                        <select name="ag_id" id="ageGroupId" class="input input-bordered w-full max-w-full s2" required>
                             <option value=''> የእድሜ ቡድን </option>
                             <?php foreach($age_groups as $ag) { ?>
 	                            <option value="<?= $ag['ag_id']?>"> <?= $ag['age_group_name']?> </option>
@@ -113,15 +105,15 @@
                     </div>
 
                     <div class="col-md-2">
-                        <input type="text" name="start_age" id="startAge" class="form-control" placeholder="መነሻ እድሜ">
+                        <input type="text" name="start_age" id="startAge" class="input input-bordered w-full max-w-full" placeholder="መነሻ እድሜ">
                     </div>
 
                     <div class="col-md-2">
-                        <input type="text" name="end_age" id="endAge" class="form-control" placeholder="ማለቂያ እድሜ">
+                        <input type="text" name="end_age" id="endAge" class="input input-bordered w-full max-w-full" placeholder="ማለቂያ እድሜ">
                     </div>
 
                     <div class="col-md-2">
-                        <input type="submit" class="btn btn-primary btn-flat" value="ቀይር">
+                        <input type="submit" class="btn btn-primary" value="ቀይር">
                     </div>
 
 				</div><br>

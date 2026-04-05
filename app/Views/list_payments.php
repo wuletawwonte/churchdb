@@ -1,167 +1,142 @@
 
 <script src="<?= base_url(); ?>assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?= base_url(); ?>assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/DataTables/datatables.min.css">
 
-<link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<?= view('templates/partials/page_heading', [
+    'title' => 'የክፍያ ዝርዝር',
+    'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li><li class="text-base-content/80"> የክፍያ ዝርዝር </li></ul>',
+]); ?>
 
+<section class="space-y-6">
 
-<div class="content-wrapper">
-    <section class="content-header">
-        <h1> የክፍያ ዝርዝር </h1>
-        <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li>
-            <li class="active"> የክፍያ ዝርዝር </li>
-        </ol>
-    </section>
-    <!-- Main content -->
+    <div class="card border border-base-content/15 bg-base-100 shadow-md">
+        <div class="card-body border-b border-base-content/15 pb-4">
+            <h2 class="card-title">ክፍያ መመዝገብያ</h2>
+        </div>
 
-    <section class="content">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">ክፍያ መመዝገብያ</h3>
-            </div>
+        <form method="post" action="<?= base_url(); ?>admin/savepayment">
+            <input type="text" name="page" value="listpayments" hidden>
 
-            <form method="post" action="<?= base_url(); ?>admin/savepayment">
-                <input type="text" name="page" value="listpayments" hidden>    
+            <div class="card-body space-y-4">
 
-            <div class="box-body">
-
-
-                <?php if(session()->getFlashdata('payment_save_success')) { ?>
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" style="opacity: 1; color: #ffffff;" aria-hidden="true">×</button>
-                        <h4><i class="icon fa fa-check"></i> ማስታወሻ!</h4>
-                        <?php echo session()->getFlashdata('payment_save_success'); ?><br>
-                        <a href="<?= base_url()?>admin/printreceipt/<?= session()->getFlashdata('transaction_id'); ?>" target="_blank" class="btn btn-outline" style="text-decoration: none;"><i class="fa fa-print"></i> ደረሰኝ አትም</a>                            
+                <?php if (session()->getFlashdata('payment_save_success')) { ?>
+                    <div role="alert" class="alert alert-success">
+                        <button type="button" class="btn btn-sm btn-ghost btn-circle" data-dismiss="alert" aria-label="close">×</button>
+                        <div>
+                            <h3 class="font-bold"><i class="fa fa-check"></i> ማስታወሻ!</h3>
+                            <p><?php echo session()->getFlashdata('payment_save_success'); ?></p>
+                            <a href="<?= base_url() ?>admin/printreceipt/<?= session()->getFlashdata('transaction_id'); ?>" target="_blank" rel="noopener" class="btn btn-sm btn-outline mt-2"><i class="fa fa-print"></i> ደረሰኝ አትም</a>
+                        </div>
                     </div>
-                <?php } else if(session()->getFlashdata('payment_save_error')) { ?>
-                    <div class="alert alert-danger">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="fa fa-ban"></i> ይቅርታ</h4>
-                        <?php echo session()->getFlashdata('payment_save_error'); ?>
+                <?php } elseif (session()->getFlashdata('payment_save_error')) { ?>
+                    <div role="alert" class="alert alert-error">
+                        <button type="button" class="btn btn-sm btn-ghost btn-circle" data-dismiss="alert" aria-label="close">×</button>
+                        <span><i class="fa fa-ban"></i> ይቅርታ <?php echo session()->getFlashdata('payment_save_error'); ?></span>
                     </div>
                 <?php } ?>
 
-
-                <div class="col-md-4" style="padding-left: 0px;">
-                    <select name="member_id" class="form-control s2searchable" style="width: 100%;" tabindex="-1" area-hidden="true" required>
-                        <option disabled selected>ምዕመን</option>
-                        <?php foreach($members as $member) { ?>
-                            <option value="<?= $member['id']?>"> <?= $member['firstname'].' '.$member['middlename']?> </option>
-                        <?php } ?>
-                    </select>
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                    <label class="form-control w-full">
+                        <span class="label-text">ምዕመን</span>
+                        <select name="member_id" class="s2searchable w-full" style="width: 100% !important;" tabindex="-1" required>
+                            <option disabled selected>ምዕመን</option>
+                            <?php foreach ($members as $member) { ?>
+                                <option value="<?= $member['id'] ?>"> <?= esc($member['firstname'] . ' ' . $member['middlename']) ?> </option>
+                            <?php } ?>
+                        </select>
+                    </label>
+                    <label class="form-control w-full">
+                        <span class="label-text">ምክንያት</span>
+                        <select name="payment_type" class="s2 w-full" style="width: 100% !important;" required>
+                            <option disabled selected>ምክንያት</option>
+                            <option value="አስራት"> አስራት </option>
+                            <option value="የፍቅር ስጦታ"> የፍቅር ስጦታ </option>
+                            <option value="በኩራት"> በኩራት </option>
+                        </select>
+                    </label>
+                    <label class="form-control w-full">
+                        <span class="label-text">የገንዘብ መጠን (ብር)</span>
+                        <input type="tel" name="payment_amount" placeholder="የገንዘብ መጠን" class="input input-bordered w-full" required>
+                    </label>
                 </div>
-
-                <div class="col-md-4">
-                    <select name="payment_type" class="form-control s2" style="width: 100%;" tabindex="-1" area-hidden="true" required>
-                        <option disabled selected>ምክንያት</option>
-                        <option value="አስራት"> አስራት </option>
-                        <option value="የፍቅር ስጦታ"> የፍቅር ስጦታ </option>
-                        <option value="በኩራት"> በኩራት </option>
-                    </select>
-                </div>
-
-                <div class="col-md-4" style="padding-right: 0px;">
-                    <div class="input-group">
-                        <input type="tel" name="payment_amount" placeholder="የገንዘብ መጠን" class="form-control" required>
-                        <div class="input-group-addon">ብር</div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="box-footer">
-                <a data-toggle="modal" href="#savepayment" class="btn btn-primary btn-flat pull-right">መዝግብ</a>
-
-
-                <!-- pre payment saving modal massage -->
-                <div id="savepayment" class="modal modal-info fade" role="dialog">
-                    <div class="modal-dialog modal-sm">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-body" align="left">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>መልሶ ማስተካከል አይቻልም</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline btn-flat pull-left" data-dismiss="modal">አይ</button>
-                                <input type="submit" class="btn btn-outline btn-flat" value="አዎ">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
             </div>
 
-            </form>
+            <div class="card-actions justify-end border-t border-base-content/15 bg-base-200/30 px-6 py-4">
+                <button type="button" class="btn btn-primary" data-open-modal="savepayment">መዝግብ</button>
+            </div>
 
-            
+            <dialog id="savepayment" class="modal">
+                <div class="modal-box">
+                    <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
+                    <p class="py-4">መልሶ ማስተካከል አይቻልም</p>
+                    <div class="modal-action">
+                        <button type="button" class="btn btn-ghost" onclick="document.getElementById('savepayment').close()">አይ</button>
+                        <button type="submit" class="btn btn-primary">አዎ</button>
+                    </div>
+                </div>
+                <form method="dialog" class="modal-backdrop"><button>close</button></form>
+            </dialog>
+        </form>
+    </div>
+
+    <div class="card border border-base-content/15 bg-base-100 shadow-md">
+        <div class="card-body border-b border-base-content/15">
+            <h2 class="card-title">የምዕመናን የክፍያ መረጃ</h2>
         </div>
-
-        <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">የምዕመናን የክፍያ መረጃ</h3>
-            </div>
-            <!-- /.box-header -->
-
-
-            <div class="box-body">
-                <table id="example1" class="table table-bordered table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th width="30px">መለያ</th>
-                            <th>የከፋይ ስም</th>
-                            <th>የክፍያው ምክንያት</th>
-                            <th>የገንዘብ መጠን</th>
-                            <th>ቀን</th>
+        <div class="card-body overflow-x-auto">
+            <table id="example1" class="table table-zebra w-full min-w-[600px]">
+                <thead>
+                    <tr>
+                        <th width="30px">መለያ</th>
+                        <th>የከፋይ ስም</th>
+                        <th>የክፍያው ምክንያት</th>
+                        <th>የገንዘብ መጠን</th>
+                        <th>ቀን</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (empty($payments)) { ?>
+                        <tr class="odd">
+                            <td colspan="5" class="dataTables_empty" valign="top">ምንም የክፍያ መረጃ አልተመዘገበም</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php if(empty($payments)) { ?>
-                            <tr class="odd"><td colspan="5" class="dataTables_empty" valign="top">ምንም የክፍያ መረጃ አልተመዘገበም</td></tr>
-                        <?php } else { foreach($payments as $payment) { ?>
+                    <?php } else {
+                        foreach ($payments as $payment) { ?>
                             <tr>
-                                <td><?= $payment['pid']?></td>
-                                <td><a href="<?= base_url()?>admin/memberdetails/<?= $payment['id']; ?>"><?= $payment['firstname'].' '.$payment['middlename']?></td></a>
-                                <td><?= $payment['payment_type']?></td>
-                                <td><?= $payment['payment_amount']?></td>
-                                <td><?= nice_date($payment['date_issued'], 'M d, Y')?></td>
+                                <td><?= esc($payment['pid']) ?></td>
+                                <td><a href="<?= base_url() ?>admin/memberdetails/<?= $payment['id']; ?>" class="link link-hover"><?= esc($payment['firstname'] . ' ' . $payment['middlename']) ?></a></td>
+                                <td><?= esc($payment['payment_type']) ?></td>
+                                <td><?= esc($payment['payment_amount']) ?></td>
+                                <td><?= nice_date($payment['date_issued'], 'M d, Y') ?></td>
                             </tr>
-                        <?php } } ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                          <th>መለያ</th>
-                          <th>የከፋይ ስም</th>
-                          <th>የክፍያው ምክንያት</th>
-                          <th>የገንዘብ መጠን</th>
-                          <th>ቀን</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+                    <?php }
+                        } ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>መለያ</th>
+                        <th>የከፋይ ስም</th>
+                        <th>የክፍያው ምክንያት</th>
+                        <th>የገንዘብ መጠን</th>
+                        <th>ቀን</th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
-        <!-- /.box -->
-    </section>
-</div>
-
-
+    </div>
+</section>
 
 <script>
-
     $(function () {
         $('#example1').DataTable({
-        'paging'    : true,
-        'lengthChange'  : true,
-        'searching' : true,
-        'ordering'  : true,
-        'info'      : true,
-        'autoWidth' : true,
-        'language'  : {
-                url: '<?= base_url()?>assets/vendors/DataTables/locale/Amharic.json'
+            paging: true,
+            lengthChange: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            autoWidth: true,
+            language: {
+                url: '<?= base_url() ?>assets/vendors/DataTables/locale/Amharic.json'
             }
-        })
-  })
+        });
+    });
 </script>

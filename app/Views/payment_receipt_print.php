@@ -7,26 +7,8 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
-
-<style type="text/css">
-	.profile-image {
-  margin: 0 auto;
-  margin-top: 15px;
-  width: 200px;
-  height: 200px;
-  padding: 3px;
-  border-radius: 50%;
-  border: 3px solid #d2d6de; 
-  font-size: 50px;
-  color: #fff;
-  text-align: center;
-  line-height: 188px;
-}
-
-</style>
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/tailwind.css'); ?>">
 
 </head>
 

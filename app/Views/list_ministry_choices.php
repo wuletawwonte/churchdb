@@ -1,131 +1,71 @@
 
 
+<?= view('templates/partials/page_heading', [
+    'title_html' => 'የአገልግሎት ዘርፍ<span class="mt-1 block text-base font-normal opacity-70">የአገልግሎት ዘርፍ የሚሞላው ፎርም ውስጥ ያሉ አማራጮች</span>',
+    'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ </a></li><li><a href="' . esc(base_url('admin/listformelements'), 'url') . '" class="link link-hover"> የቅፅ ማስተካከያ </a></li><li class="text-base-content/80"> የአገልግሎት ዘርፍ </li></ul>',
+]); ?>
 
+<section class="space-y-4">
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        የአገልግሎት ዘርፍ
-        <small>የአገልግሎት ዘርፍ የሚሞላው ፎርም ውስጥ ያሉ አማራጮች</small>
-      </h1>
-      <ol class="breadcrumb">
-          <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-          <li class="active"><a href="<?= base_url(); ?>admin/listformelements"> የቅፅ ማስተካከያ </a></li>
-          <li class="active"> የአገልግሎት ዘርፍ </li>
-      </ol>
-    </section>
+  <?php if (session()->getFlashdata('success')) { ?>
+    <div class="alert alert-success"><span><?php echo session()->getFlashdata('success'); ?></span></div>
+  <?php } elseif (session()->getFlashdata('error')) { ?>
+    <div class="alert alert-error"><span><?php echo session()->getFlashdata('error'); ?></span></div>
+  <?php } ?>
 
-    <!-- Main content -->
-    <section class="content">
-
-
-         <?php if(session()->getFlashdata('success')) { ?>
-            <div class="callout callout-info">
-                <?php echo session()->getFlashdata('success'); ?>
-            </div>
-        <?php } else if(session()->getFlashdata('error')) { ?>
-            <div class="callout callout-danger">
-                <?php echo session()->getFlashdata('error'); ?>
-            </div>
-        <?php } ?>
-
-
-      <div class="row">
-        <div class="col-md-12">
-
-
-          <div class="box box-primary">
-            <div class="box-header with-border">
-                <div class="form-group">
-                    <form method="POST" action="<?= base_url('admin/addministrychoice'); ?>">
-                        <div class="col-md-5">
-                            <input type="text" placeholder="የአገልግሎት ዘርፍ" name="ministry_title" maxlength="48"  class="form-control" required>
-                        </div>
-                        <div class="col-md-2">
-                            <input type="submit" class="btn btn-primary btn-flat" name="" value="<?= lang('label.save') ?>">
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <table class="table table-bordered table-hover">
-                    <?php foreach($ministries as $choice) { ?>
-                        <tr>
-                            <td>
-                                <?= $choice['ministry_title']; ?>
-                            </td>
-                            <td style="text-align: center">
-                                <a data-toggle="modal" href="#editMinistry<?= $choice['ministry_id']; ?>" ><i class="fa fa-pencil"  style="color: #00c0ef;" aria-hidden="true"></i></a>
-                                <a data-toggle="modal" href="#deleteMinistry<?= $choice['ministry_id']; ?>" ><i class="fa fa-trash"  style="color: #dd4b39;" aria-hidden="true"></i></a>
-
-
-
-                                    <div id="editMinistry<?= $choice['ministry_id']?>" class="modal fade" role="dialog">
-                                      <div class="modal-dialog">
-
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                          <div class="modal-header" align="left">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">አባል የሆኑበት ሁኔታ  ማስተካከያ</h4><p>እባክዎ በጥንቃቄ ይሙሉ</p>
-                                          </div>
-                                          <div class="modal-body">
-                                            <div class="row">
-                                                <form method="POST" action="<?= base_url('admin/editministrychoice'); ?>" id="#editForm<?= $choice['ministry_id']; ?>">
-                                                    <input type="text" name="ministry_old_title" value="<?= $choice['ministry_title']; ?>" hidden>
-                                                    <div class="col-md-5">
-                                                        <input type="text" name="ministry_new_title" maxlength="48" value="<?= $choice['ministry_title']; ?>" class="form-control" required>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">ይቅር</button>
-                                            <input type="submit" form="#editForm<?= $choice['ministry_id']; ?>" class="btn btn-info btn-flat" name="" value="አስተካክል">
-                                          </div>
-                                        </div>
-
-                                      </div>
-                                    </div>
-
-
-
-
-                                    <div id="deleteMinistry<?= $choice['ministry_id']?>" class="modal modal-danger fade" role="dialog">
-                                      <div class="modal-dialog modal-sm">
-
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                          <div class="modal-header" align="left">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>መልሶ ማስተካከል አይቻልም</p>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">አይ</button>
-                                            <a href="<?= base_url(); ?>admin/deleteministry/<?= $choice['ministry_id']; ?>" class="btn btn-danger">አዎ</a>
-                                          </div>
-                                        </div>
-
-                                      </div>
-                                    </div>    
-
-
-                            </td>
-                        </tr>
-
-                    <?php } ?>
-                </table>
-            </div>
-          </div>
-          <!-- /.box -->
-
+  <div class="card border border-base-content/15 bg-base-100 shadow-md">
+    <div class="card-body">
+      <form method="POST" action="<?= base_url('admin/addministrychoice'); ?>" class="flex flex-wrap items-end gap-4">
+        <div class="min-w-[12rem] flex-1">
+          <input type="text" placeholder="የአገልግሎት ዘርፍ" name="ministry_title" maxlength="48" class="input input-bordered w-full" required>
         </div>
-        <!-- /.col -->
+        <input type="submit" class="btn btn-primary" name="" value="<?= lang('label.save') ?>">
+      </form>
+
+      <div class="mt-6 overflow-x-auto">
+        <table class="table table-zebra">
+          <?php foreach ($ministries as $choice) { ?>
+            <tr>
+              <td><?= esc($choice['ministry_title']); ?></td>
+              <td class="text-center">
+                <a href="#" data-open-modal="editMinistry<?= $choice['ministry_id']; ?>" class="link link-primary px-1"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="#" data-open-modal="deleteMinistry<?= $choice['ministry_id']; ?>" class="link link-error px-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
+              </td>
+            </tr>
+          <?php } ?>
+        </table>
       </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
+    </div>
   </div>
+
+  <?php foreach ($ministries as $choice) { ?>
+    <dialog id="editMinistry<?= $choice['ministry_id'] ?>" class="modal">
+      <div class="modal-box max-w-lg">
+        <h3 class="text-lg font-bold">የአገልግሎት ዘርፍ ማስተካከያ</h3>
+        <p class="py-2 text-sm opacity-80">እባክዎ በጥንቃቄ ይሙሉ</p>
+        <form method="POST" action="<?= base_url('admin/editministrychoice'); ?>" class="space-y-4">
+          <input type="text" name="ministry_old_title" value="<?= esc($choice['ministry_title']); ?>" hidden>
+          <input type="text" name="ministry_new_title" maxlength="48" value="<?= esc($choice['ministry_title']); ?>" class="input input-bordered w-full" required>
+          <div class="modal-action">
+            <button type="button" class="btn btn-ghost" onclick="document.getElementById('editMinistry<?= $choice['ministry_id'] ?>').close()">ይቅር</button>
+            <button type="submit" class="btn btn-info">አስተካክል</button>
+          </div>
+        </form>
+      </div>
+      <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
+
+    <dialog id="deleteMinistry<?= $choice['ministry_id'] ?>" class="modal">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
+        <p class="py-4">መልሶ ማስተካከል አይቻልም</p>
+        <div class="modal-action">
+          <form method="dialog"><button class="btn btn-ghost">አይ</button></form>
+          <a href="<?= base_url(); ?>admin/deleteministry/<?= $choice['ministry_id']; ?>" class="btn btn-error">አዎ</a>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
+  <?php } ?>
+
+</section>

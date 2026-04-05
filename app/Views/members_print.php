@@ -1,39 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="am" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>General Report</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
-  <link rel="stylesheet" href="<?php echo base_url('assets/vendors/bootstrap/css/bootstrap.min.css'); ?>">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/css/AdminLTE.min.css'); ?>">
-
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/tailwind.css'); ?>">
 </head>
-<body onload="window.print();">
+<body class="bg-base-100 text-base-content" onload="window.print();">
 
-	  <!-- Content Wrapper. Contains page content -->
-	  <div class="content-wrapper" style="margin-left: 0px;background-color: #fff; padding-top: 20px;">
+	  <div class="mx-auto max-w-[100%] bg-base-100 p-6 print:p-2">
 
-	    <!-- Main content -->
 	    <section class="invoice">
-	      <!-- title row -->
-	      <div class="row">
-	        <div class="col-xs-12">
-	          <h2 class="page-header">
-	            <i class="fa fa-globe"></i> <?php echo session()->get('system_name'); ?>, Inc.
-	            <small class="pull-right">Date: <?= date('M-d-Y'); ?></small>
-	          </h2>
-	        </div>
-	        <!-- /.col -->
+	      <div class="mb-6 flex flex-wrap items-start justify-between gap-4 border-b border-base-content/15 pb-4">
+	        <h2 class="text-xl font-bold">
+	            <i class="fa fa-globe"></i> <?php echo esc(session()->get('system_name')); ?>, Inc.
+	        </h2>
+            <small class="text-sm opacity-80">Date: <?= date('M-d-Y'); ?></small>
 	      </div>
-	  
-	      <!-- Table row -->
-	      <div class="row">
-	        <div class="col-xs-12">
-	          <table class="table table-striped">
+
+	      <div class="overflow-x-auto">
+	          <table class="table table-zebra table-sm w-full border border-base-content/15 text-sm">
 	            <thead>
 	            <tr>
 	              <th>ስም</th>
@@ -58,37 +46,31 @@
 	            <tbody>
 	            <?php foreach($members as $member) { ?>
 		            <tr>
-						<td><?= $member['firstname']; ?></td>
-						<td><?= $member['middlename']; ?></td>
-						<td><?= $member['lastname']; ?></td>
-						<td><?= $member['gender']; ?></td>
-						<td><?= $member['birthdate']; ?></td>
-						<td><?= $member['age']; ?></td>
-						<td><?= $member['birth_place']; ?></td>
-						<td><?= $member['mobile_phone']; ?></td>
-						<td><?= $member['email']; ?></td>
-						<td><?= $member['job_type']; ?></td>
-						<td><?= $member['workplace_name']; ?></td>
-						<td><?= $member['workplace_phone']; ?></td>
-						<td><?php if($member['membership_year']) { echo $member['membership_year']; } ?></td>
-						<td><?= $member['membership_cause']; ?></td>
-						<td><?= $member['membership_level']; ?></td>
-						<td><?= $member['ministry']; ?></td>
-						<td><?= $member['marital_status']; ?></td>
+						<td><?= esc($member['firstname']); ?></td>
+						<td><?= esc($member['middlename']); ?></td>
+						<td><?= esc($member['lastname']); ?></td>
+						<td><?= esc($member['gender']); ?></td>
+						<td><?= esc($member['birthdate']); ?></td>
+						<td><?= esc($member['age']); ?></td>
+						<td><?= esc($member['birth_place']); ?></td>
+						<td><?= esc($member['mobile_phone']); ?></td>
+						<td><?= esc($member['email']); ?></td>
+						<td><?= esc($member['job_type']); ?></td>
+						<td><?= esc($member['workplace_name']); ?></td>
+						<td><?= esc($member['workplace_phone']); ?></td>
+						<td><?php if($member['membership_year']) { echo esc($member['membership_year']); } ?></td>
+						<td><?= esc($member['membership_cause']); ?></td>
+						<td><?= esc($member['membership_level']); ?></td>
+						<td><?= esc($member['ministry']); ?></td>
+						<td><?= esc($member['marital_status']); ?></td>
 		            </tr>
 		        <?php } ?>
 	            </tbody>
 	          </table>
-	        </div>
-	        <!-- /.col -->
 	      </div>
-	      <!-- /.row -->
 
 	    </section>
-	    <!-- /.content -->
-	    <div class="clearfix"></div>
 	  </div>
 
   </body>
 </html>
-

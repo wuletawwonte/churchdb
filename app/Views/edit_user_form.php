@@ -4,48 +4,41 @@
 
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-    	<h1>
-        	ተጠቃሚ ምዝገባ
-      	</h1>
-      	<ol class="breadcrumb">
-        	<li><a href="<?php echo base_url(); ?>admin/users"><i class="fa fa-cog"></i> ጠቅላላ መቼት </a></li>
-        	<li class="active">ተጠቃሚ ምዝገባ</li>
-      	</ol>
-    </section>
-
-    <!-- Main content -->
+    <?= view('templates/partials/page_heading', [
+        'title' => 'ተጠቃሚ ምዝገባ',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url('admin/users'), 'url') . '" class="link link-hover"><i class="fa fa-cog"></i> ጠቅላላ መቼት </a></li><li class="text-base-content/80">ተጠቃሚ ምዝገባ</li></ul>',
+    ]); ?>
     <section class="content container-fluid">
 
 
 		<!-- Default box -->
-		<div class="box box-info">
-		    <div class="box-body">
+		<div class="card border border-base-content/15 bg-base-100 shadow-md">
+		    <div class="card-body">
 
-		        <div class="callout callout-info">
+		        <div class="alert alert-info">
 		            ልብ ይበሉ: አዲስ የሲስተም ተጠቃሚ የሚመዘገብበት ፎርም ነው።
 		        </div>
 
 
 		        <form method="post" action="<?php echo base_url(); ?>admin/edituser/<?= $user['id']; ?>">
 		            <div class="table-responsive">
-		                <table class="table table-hover">
+		                <table class="table table-zebra w-full">
 
 		                    <tr>
 		                        <td>ስም:</td>
-		                        <td><input type="text" value="<?= $user['firstname']; ?>" name="firstname" class="form-control" required></td>
+		                        <td><input type="text" value="<?= $user['firstname']; ?>" name="firstname" class="input input-bordered w-full max-w-full" required></td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>የአባት ስም:</td>
-		                        <td><input type="text" value="<?= $user['lastname']; ?>" name="lastname" class="form-control" required></td>
+		                        <td><input type="text" value="<?= $user['lastname']; ?>" name="lastname" class="input input-bordered w-full max-w-full" required></td>
 		                    </tr>
 
 		                    <tr>
 		                        <td>የሲስተም መግቢያ ስም:</td>
-		                        <td><input type="text" value="<?= $user['username']; ?>" name="username" class="form-control" required></td>
+		                        <td><input type="text" value="<?= $user['username']; ?>" name="username" class="input input-bordered w-full max-w-full" required></td>
 		                    </tr>
 
 		                    <tr>
@@ -86,7 +79,7 @@
 		            </div>
 		        </form>
 		    </div>
-		    <!-- /.box-body -->
+		    <!-- /.card-body -->
 		</div>
 		<!-- /.box -->
 	</section>
@@ -102,7 +95,7 @@
     });
 
     $(function () {
-        $('input').iCheck({
+        $('input:not(#layout-drawer):not([data-theme-toggle]):not([type="file"]):not([type="hidden"])').iCheck({
 	      checkboxClass: 'icheckbox_square-blue',
 	      radioClass: 'iradio_square-blue',
 	      increaseArea: '20%' /* optional */

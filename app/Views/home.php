@@ -1,274 +1,155 @@
-<script type="text/javascript" src="<?= base_url('assets/vendors/chartjs/Chart.min.js'); ?>" ></script>
-
-
-
-<style type="text/css">
-
-.profile-image {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  padding: 2px;
-  border: 2px solid #d2d6de;
-  font-size: 25px;
-  color: #fff;
-  text-align: center;
-  line-height: 70px;
-  margin: 0 auto; 
+<?php
+$membership_pie_segments = [];
+foreach ($membership_levels as $ml) {
+    $membership_pie_segments[] = [
+        'value' => (int) ($ml['count'] ?? 0),
+        'color' => (string) ($ml['color'] ?? '#777777'),
+        'highlight' => (string) ($ml['color'] ?? '#777777'),
+        'label' => (string) ($ml['title'] ?? ''),
+    ];
 }
+$membership_pie_sum = array_sum(array_column($membership_pie_segments, 'value'));
+?>
 
-</style>
+<?= view('templates/partials/page_heading', [
+    'title' => lang('label.welcome'),
+    'breadcrumbs_html' => '<ul><li class="text-base-content/80"><i class="fa fa-dashboard" aria-hidden="true"></i> ዳሽቦርድ</li></ul>',
+]); ?>
 
+<section class="space-y-6">
 
-
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= lang('label.welcome') ?>
-      </h1>
-    </section>
-
-    <!-- Main content -->
-    <section class="content container-fluid">
-
-
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>150</h3>
-
-              <p><?= lang('label.website_hits') ?></p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-globe"></i>
-            </div>
-            <a href="#" class="small-box-footer"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3><?= $total_members; ?></h3>
-
-              <p><?= lang('label.members') ?></p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-user"></i>
-            </div>
-            <a href="<?= base_url('admin/listmembers'); ?>" class="small-box-footer"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3><?= $total_groups; ?></h3>
-
-              <p><?= lang('label.groups') ?></p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-tag"></i>
-            </div>
-            <a href="<?= base_url('admin/listgroups'); ?>" class="small-box-footer"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="stats border border-base-content/15 bg-base-100 shadow">
+      <div class="stat">
+        <div class="stat-figure text-info"><i class="fa fa-globe text-3xl"></i></div>
+        <div class="stat-title"><?= lang('label.website_hits') ?></div>
+        <div class="stat-value text-info">150</div>
+        <div class="stat-desc"><a href="#" class="link"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a></div>
       </div>
-      <!-- /.row -->
-
-
-<div class="row">
-    <div class="col-lg-6">
-        <div class="box box-solid">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><?= lang('label.latest_members'); ?></h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body no-padding">
-                    <ul class="users-list clearfix">
-                        <?php foreach($latest_members as $member) { ?>
-                        <li style="padding-left: 0px; padding-right: 0px;">
-                            <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
-                                <?php if($member['avatar'] == NULL) { ?>
-                                    <div class="profile-image">
-                                        <div style="width: 100%; height: 100%; border-radius: 50%; background: <?= $member['profile_color']; ?>">
-                                            <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
-                                        </div>
-                                    </div>
-                                <?php } else { ?>
-                                    <div>
-                                        <img class="img-circle" style="border: 2px solid <?= $member['profile_color']; ?>;padding: 2px;height: 70px; width: 70px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
-                                    </div>
-                                <?php } ?>
-
-                            </a>
-                            <span class="user-details"><?= $member['firstname'].' '.$member['middlename']; ?></span>
-                            <span class="users-list-date"><?= timespan(human_to_unix($member['created']), null, 1).' በፊት'; ?>&nbsp;</span>
-                        </li>
-                        <?php } ?>
-                    </ul>
-                    <!-- /.users-list -->
-                </div>
-                <div class="box-footer text-center">
-                  <a href="<?= base_url(); ?>admin/listmembers" class="uppercase">ወደ ምዕመናን ሁሉ</a>
-                </div>
-            </div>
-        </div>
     </div>
-
-    <div class="col-lg-6">
-
-        <div class="box box-info">
-            <div class="box-header with-border">
-                <h3 class="box-title"> የአባልነት ደራጃ ተዋፅኦ </h3>
-
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-            </div>
-
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="chart-responsive">
-                            <canvas id="pieChart" height="160" width="207" style="width: 207px; height: 160px;"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <ul class="chart-legend clearfix">
-                        <?php foreach($membership_levels as $membership_level) { ?>
-                            <li><i class="fa fa-circle-o" style="color: <?= $membership_level['color']; ?>;"></i> <?= $membership_level['title']; ?> </li>
-                        <?php } ?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-            <?php
-            $totalMembers = (int) $total_members;
-            $femalePct    = $totalMembers > 0 ? ($gender_count['female'] / $totalMembers) * 100 : 0.0;
-            $malePct      = $totalMembers > 0 ? ($gender_count['male'] / $totalMembers) * 100 : 0.0;
-            ?>
-            <div class="info-box bg-yellow">
-                <span class="info-box-icon"><i class="fa fa-female"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text"> ሴት </span>
-                    <span class="info-box-number"><?= $gender_count['female']; ?></span>
-
-                    <div class="progress">
-                        <div class="progress-bar" style="width: <?= $femalePct; ?>%"></div>
-                    </div>
-                    <span class="progress-description">
-                        በፐርሰንት ሲቀመጥ፡ <?= (int) round($femalePct); ?>%
-                    </span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <div class="info-box bg-purple">
-                <span class="info-box-icon"><i class="fa fa-male"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text"> ወንድ </span>
-                    <span class="info-box-number"><?= $gender_count['male']; ?></span>
-
-                    <div class="progress">
-                        <div class="progress-bar" style="width: <?= $malePct; ?>%"></div>
-                    </div>
-                    <span class="progress-description">
-                        በፐርሰንት ሲቀመጥ፡ <?= (int) round($malePct); ?>%
-                    </span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-        </div>
+    <div class="stats border border-base-content/15 bg-base-100 shadow">
+      <div class="stat">
+        <div class="stat-figure text-warning"><i class="fa fa-user text-3xl"></i></div>
+        <div class="stat-title"><?= lang('label.members') ?></div>
+        <div class="stat-value text-warning"><?= esc($total_members); ?></div>
+        <div class="stat-desc"><a href="<?= base_url('admin/members'); ?>" class="link link-primary"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a></div>
+      </div>
     </div>
-
-
-
-    </section>
-    <!-- /.content -->
+    <div class="stats border border-base-content/15 bg-base-100 shadow sm:col-span-2 lg:col-span-1">
+      <div class="stat">
+        <div class="stat-figure text-error"><i class="fa fa-tag text-3xl"></i></div>
+        <div class="stat-title"><?= lang('label.groups') ?></div>
+        <div class="stat-value text-error"><?= esc($total_groups); ?></div>
+        <div class="stat-desc"><a href="<?= base_url('admin/groups'); ?>" class="link"><?= lang('label.more_info') ?> <i class="fa fa-arrow-circle-right"></i></a></div>
+      </div>
+    </div>
   </div>
-  <!-- /.content-wrapper -->
 
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <div class="card border border-base-content/15 bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title border-b border-base-content/15 pb-2"><?= lang('label.latest_members'); ?></h2>
+        <ul class="menu w-full rounded-box bg-base-200/50 p-2">
+          <?php foreach ($latest_members as $member) { ?>
+            <li class="w-full">
+              <a href="<?= base_url('admin/memberdetails/' . $member['id']); ?>" class="w-full gap-3">
+                <?= view('templates/partials/member_avatar', ['member' => $member, 'size' => 'dashboard']); ?>
+                <div class="min-w-0 flex-1">
+                  <span class="block truncate font-medium"><?= esc($member['firstname'] . ' ' . $member['middlename']); ?></span>
+                  <span class="text-xs opacity-70"><?= timespan(human_to_unix($member['created']), null, 1) . ' በፊት'; ?></span>
+                </div>
+              </a>
+            </li>
+          <?php } ?>
+        </ul>
+        <div class="card-actions justify-center border-t border-base-content/15 pt-4">
+          <a href="<?= base_url(); ?>admin/members" class="link link-primary font-semibold uppercase">ወደ ምዕመናን ሁሉ</a>
+        </div>
+      </div>
+    </div>
 
+    <div class="space-y-4">
+      <div class="card border border-base-content/15 bg-base-100 shadow-md overflow-hidden">
+        <div class="card-body gap-4">
+          <h2 class="card-title border-b border-base-content/15 pb-2"> የአባልነት ደራጃ ተዋፅኦ </h2>
+          <div class="flex flex-col items-stretch gap-6 md:flex-row md:items-center">
+            <div class="flex min-w-0 shrink-0 justify-center md:w-[min(44%,220px)]">
+              <div class="chart-responsive box-border flex aspect-square w-full max-w-[200px] items-center justify-center overflow-hidden rounded-xl bg-base-200/40 p-2 md:max-w-none md:w-full">
+                <?php if ($membership_pie_sum > 0) : ?>
+                <canvas id="pieChart" width="184" height="184" class="block max-h-full max-w-full" style="width: 184px; height: 184px; max-width: 100%; max-height: 100%;"></canvas>
+                <?php else : ?>
+                <p class="px-2 text-center text-sm text-base-content/60">ለዚህ ስብስብ የአባልነት ደረጃ ቁጥር የለም።</p>
+                <?php endif; ?>
+              </div>
+            </div>
+            <ul class="flex min-w-0 flex-1 flex-col gap-2 text-sm">
+              <?php foreach ($membership_levels as $membership_level) { ?>
+                <li><i class="fa fa-circle-o" style="color: <?= esc($membership_level['color']); ?>;"></i> <?= esc($membership_level['title']); ?> </li>
+              <?php } ?>
+            </ul>
+          </div>
+        </div>
+      </div>
 
+      <?php
+      $totalMembers = (int) $total_members;
+      $femalePct = $totalMembers > 0 ? ($gender_count['female'] / $totalMembers) * 100 : 0.0;
+      $malePct = $totalMembers > 0 ? ($gender_count['male'] / $totalMembers) * 100 : 0.0;
+      ?>
+      <div class="card border border-base-content/15 bg-base-100 shadow-md">
+        <div class="card-body flex-row items-center gap-4">
+          <div class="text-4xl text-warning"><i class="fa fa-female"></i></div>
+          <div class="min-w-0 flex-1">
+            <p class="text-sm opacity-80"> ሴት </p>
+            <p class="text-2xl font-bold"><?= esc($gender_count['female']); ?></p>
+            <progress class="progress progress-warning mt-2 w-full" value="<?= (int) round($femalePct); ?>" max="100"></progress>
+            <p class="mt-1 text-xs opacity-70"> በፐርሰንት ሲቀመጥ፡ <?= (int) round($femalePct); ?>% </p>
+          </div>
+        </div>
+      </div>
+      <div class="card border border-base-content/15 bg-base-100 shadow-md">
+        <div class="card-body flex-row items-center gap-4">
+          <div class="text-4xl text-secondary"><i class="fa fa-male"></i></div>
+          <div class="min-w-0 flex-1">
+            <p class="text-sm opacity-80"> ወንድ </p>
+            <p class="text-2xl font-bold"><?= esc($gender_count['male']); ?></p>
+            <progress class="progress progress-secondary mt-2 w-full" value="<?= (int) round($malePct); ?>" max="100"></progress>
+            <p class="mt-1 text-xs opacity-70"> በፐርሰንት ሲቀመጥ፡ <?= (int) round($malePct); ?>% </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<script type="text/javascript">
-  $(document).ready(function () {
+</section>
 
-
-    //-------------
-    //- PIE CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-    var pieChart       = new Chart(pieChartCanvas)
-    var PieData        = [
-    <?php foreach($membership_levels as $membership_level) { ?>
-      {
-        value    : <?= $membership_level['count']?>,
-        color    : '<?= $membership_level['color']?>',
-        highlight: '<?= $membership_level['color']?>',
-        label    : "<?= $membership_level['title']?>"
-      },
-    <?php } ?>
-    ]
-    var pieOptions     = {
-      //Boolean - Whether we should show a stroke on each segment
-      segmentShowStroke    : true,
-      //String - The colour of each segment stroke
-      segmentStrokeColor   : '#fff',
-      //Number - The width of each segment stroke
-      segmentStrokeWidth   : 2,
-      //Number - The percentage of the chart that we cut out of the middle
-      percentageInnerCutout: 50, // This is 0 for Pie charts
-      //Number - Amount of animation steps
-      animationSteps       : 100,
-      //String - Animation easing effect
-      animationEasing      : 'easeOutBounce',
-      //Boolean - Whether we animate the rotation of the Doughnut
-      animateRotate        : true,
-      //Boolean - Whether we animate scaling the Doughnut from the centre
-      animateScale         : true,
-      //Boolean - whether to make the chart responsive to window resizing
-      responsive           : true,
-      // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-      maintainAspectRatio  : true,
-      //String - A legend template
-      legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    pieChart.Doughnut(PieData, pieOptions)
-
-
-
-  });
+<?php if ($membership_pie_sum > 0) : ?>
+<script src="<?= base_url('assets/vendors/chartjs/Chart.min.js'); ?>"></script>
+<script>
+(function () {
+  if (typeof Chart === 'undefined') {
+    return;
+  }
+  var canvas = document.getElementById('pieChart');
+  if (!canvas || !canvas.getContext) {
+    return;
+  }
+  var ctx = canvas.getContext('2d');
+  var pieData = <?= json_encode($membership_pie_segments, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP) ?: '[]' ?>;
+  var pieOptions = {
+    segmentShowStroke: true,
+    segmentStrokeColor: '#ffffff',
+    segmentStrokeWidth: 2,
+    percentageInnerCutout: 50,
+    animationSteps: 100,
+    animationEasing: 'easeOutBounce',
+    animateRotate: true,
+    animateScale: false,
+    responsive: false,
+    maintainAspectRatio: true,
+    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+  };
+  new Chart(ctx).Doughnut(pieData, pieOptions);
+})();
 </script>
-
-
-
-
-
-
+<?php endif; ?>

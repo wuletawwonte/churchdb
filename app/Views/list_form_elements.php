@@ -3,29 +3,21 @@
 
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="space-y-4">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        የቅፅ ማስተካከያ 
-        <small>የሚሞላው ፎርም ውስጥ ያሉ አማራጮች</small>
-      </h1>
-      <ol class="breadcrumb">
-          <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li>
-          <li class="active"> የቅፅ ማስተካከያ </li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
+    <?= view('templates/partials/page_heading', [
+        'title_html' => 'የቅፅ ማስተካከያ <span class="mt-1 block text-base font-normal opacity-70">የሚሞላው ፎርም ውስጥ ያሉ አማራጮች</span>',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-dashboard"></i> ዳሽቦርድ  </a></li><li class="text-base-content/80"> የቅፅ ማስተካከያ </li></ul>',
+    ]); ?>
     <section class="content">
 
 
          <?php if(session()->getFlashdata('success')) { ?>
-            <div class="callout callout-info">
+            <div class="alert alert-info">
                 <?php echo session()->getFlashdata('success'); ?>
             </div>
         <?php } else if(session()->getFlashdata('error')) { ?>
-            <div class="callout callout-danger">
+            <div class="alert alert-error">
                 <?php echo session()->getFlashdata('error'); ?>
             </div>
         <?php } ?>
@@ -35,9 +27,9 @@
         <div class="col-md-12">
 
 
-          <div class="box box-primary">
+          <div class="card border border-base-content/15 bg-base-100 shadow-md">
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="card-body">
               <table class="table table-bordered table-large table-hover">
                 <tr style="text-align:center;">
                     <td><a href="<?= base_url(); ?>admin/editmembershiplevels">የአባልነት ደረጃ</a></td>

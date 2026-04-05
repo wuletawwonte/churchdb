@@ -1,61 +1,28 @@
 
 <script src="<?= base_url(); ?>assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?= base_url(); ?>assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="<?= base_url(); ?>assets/vendors/DataTables/datatables.min.css">
 
 
 <style type="text/css">
-
-    .profile-image {
-      margin: 0 auto;
-      margin-top: 15px;
-      width: 130px;
-      height: 130px;
-      padding: 3px;
-      border-radius: 50%;
-      border: 3px solid #d2d6de; 
-      font-size: 50px;
-      color: #fff;
-      text-align: center;
-      line-height: 128px;
-    }
-
     .user-list tbody td a, .user-list tbody td span {
         line-height: 50px;
     }
 </style>
 
-<div class="content-wrapper">
-    <section class="content-header">
-        <h1><?= lang('label.person_profile') ?></h1>
-        <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>admin/listmembers"><i class="fa fa-users"></i> ምዕመናን </a></li>
-            <li class="active"> ምዕመን </li>
-        </ol>
-    </section>
-    <!-- Main content -->
-    <section class="content">
-    <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-3">
-            <div class="box box-primary">
-                <div class="box-body box-profile">
-                    <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>">
-                    	<?php if($member['avatar'] == NULL) { ?>
-                            <div class="profile-image">
-                                <div style="width: 100%; height: 100%; border-radius: 50%; background: <?= $member['profile_color']; ?>">
-                                    <b><?= mb_substr($member['firstname'], 0, 1).mb_substr($member['middlename'], 0, 1); ?></b>
-                                </div>
-                            </div>
-                        <?php } else { ?>
-                            <div style="margin: 0 auto;height: 130px; width: 130px;margin-top: 15px;">
-                                <img class="img-circle" style="border: 3px solid <?= $member['profile_color']; ?>;padding: 3px;height: 130px; width: 130px;" src="<?= base_url(); ?>assets/avatars/<?= $member['avatar']?>">
-                            </div>
-
-                        <?php } ?>
+<?= view('templates/partials/page_heading', [
+    'title' => lang('label.person_profile'),
+    'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url('admin/members'), 'url') . '" class="link link-hover"><i class="fa fa-users"></i> ምዕመናን </a></li><li class="text-base-content/80"> ምዕመን </li></ul>',
+]); ?>
+<section class="content">
+    <div class="flex flex-col gap-6 lg:flex-row">
+        <div class="w-full shrink-0 lg:w-80">
+            <div class="card border border-base-content/15 bg-base-100 shadow-md">
+                <div class="card-body items-center text-center">
+                    <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>" class="mx-auto mt-2 flex justify-center">
+                        <?= view('templates/partials/member_avatar', ['member' => $member, 'size' => 'lg']); ?>
                     </a><br>
                   
-                  <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><h3 class="profile-username text-center">
+                  <a href="<?= base_url('admin/memberdetails/'.$member['id']); ?>"><h3 class="text-center text-lg font-semibold">
                       <?php if($member['gender'] == 'ወንድ'){ ?>
                         <i class="fa fa-male"></i>
                       <?php } else {?>
@@ -64,19 +31,16 @@
                         <?= $member['firstname']." ".$member['middlename']; ?></h3></a>
 
 
-                      <a  href="<?= base_url('admin/editmember/'.$member['id']); ?>" class="btn btn-primary btn-block <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" id="EditPerson"><b><?= lang('label.edit') ?></b></a>
+                      <a  href="<?= base_url('admin/editmember/'.$member['id']); ?>" class="btn btn-primary btn-block mt-2 <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'btn-disabled pointer-events-none'; } ?>" id="EditPerson"><b><?= lang('label.edit') ?></b></a>
                   </div>
-          <!-- /.box-body -->
         </div>
-        <!-- /.box -->
 
-        <!-- About Me Box -->
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title text-center"> ስለ እኔ </h3>
+        <div class="card mt-4 border border-base-content/15 bg-base-100 shadow-md">
+            <div class="card-body border-b border-base-content/15">
+                <h3 class="card-title justify-center text-center"> ስለ እኔ </h3>
             </div>
           
-            <div class="box-body" style="overflow-x: hidden;">
+            <div class="card-body overflow-x-hidden">
                 <ul class="fa-ul">
                     <li><i class="fa-li fa fa-user"></i>የጋብቻ ሁኔታ: <?= $member['marital_status']?></li>
                     <?php if($member['spouse'] != NULL) { ?>
@@ -103,79 +67,57 @@
             </div>
         </div>
         
-        <div class="alert alert-info alert-dismissable">
-            <i class="fa fa-fw fa-tree"></i> indicates items inherited from the associated family record.        </div>
+        <div role="alert" class="alert alert-info mt-4">
+            <i class="fa fa-fw fa-tree"></i> indicates items inherited from the associated family record.
+        </div>
         </div>
 
-        <div class="col-lg-9 col-md-9 col-sm-9">
+        <div class="min-w-0 flex-1 space-y-4">
             <?php if(session()->getFlashdata('success')) { ?>
-                <div class="callout callout-info">
-                    <?php echo session()->getFlashdata('success'); ?>
-                </div>
+                <div class="alert alert-success"><span><?php echo session()->getFlashdata('success'); ?></span></div>
             <?php } else if(session()->getFlashdata('error')) { ?>
-                <div class="callout callout-danger">
-                    <?php echo session()->getFlashdata('error'); ?>
-                </div>
+                <div class="alert alert-error"><span><?php echo session()->getFlashdata('error'); ?></span></div>
             <?php } ?>
-        </div>
 
-        <div class="col-lg-9 col-md-9 col-sm-9">
-            <div class="box box-primary box-body">
-                <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetailsprint/<?= $member['id']; ?>" target="_blank"><i class="fa fa-print"></i> የሚታተም ገፅ </a>
-                <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/payment"><i class="fa fa-money"></i> የክፍያ መረጃ </a>
-                <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/status"><i class="fa fa-user"></i> የምዕመን ሁኔታ </a>
-                <a class="btn btn-app" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
-                <a class="btn btn-app <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'disabled'; } ?>" href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-user-secret"></i> መረጃ ቀይር </a>
-                <a data-toggle="modal" href="#deleteMember" style="background-color: orange; color: white;" class="btn btn-app delete-person"><i class="fa fa-trash-o"></i> ወደ ቆሼ </a>                
-                <a data-toggle="modal" href="#permanentlyDeleteMember" class="btn btn-app bg-maroon delete-person"><i class="fa fa-trash-o"></i> አስወግድ </a>
-            </div>
-
-            <!-- ምዕመን አጥፋ Dialogue -->
-            <div id="permanentlyDeleteMember" class="modal modal-danger fade" role="dialog">
-                <div class="modal-dialog modal-sm">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-body" align="left">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>የዚህን ምዕመን መረጃ ሙሉ በሙሉ ሊያጠፉ ነው።</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal">አይ</button>
-                            <a href="<?= base_url()?>admin/permanentdeletemember/<?= $member['id']?>" class="btn btn-outline btn-flat">አዎ</a>
-                        </div>
-                    </div>
-
+            <div class="card border border-base-content/15 bg-base-100 p-4 shadow-md">
+                <div class="flex flex-wrap gap-2">
+                <a class="btn btn-outline btn-primary btn-sm" href="<?= base_url(); ?>admin/memberdetailsprint/<?= $member['id']; ?>" target="_blank" rel="noopener"><i class="fa fa-print"></i> የሚታተም ገፅ </a>
+                <a class="btn btn-outline btn-primary btn-sm" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/payment"><i class="fa fa-money"></i> የክፍያ መረጃ </a>
+                <a class="btn btn-outline btn-primary btn-sm" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/status"><i class="fa fa-user"></i> የምዕመን ሁኔታ </a>
+                <a class="btn btn-outline btn-primary btn-sm" href="<?= base_url(); ?>admin/memberdetails/<?= $member['id']?>/notes"><i class="fa fa-sticky-note"></i> የተያዙ ማስታወሻዎች </a>
+                <a class="btn btn-outline btn-primary btn-sm <?php if($_SESSION['current_user']['user_type'] == 'መደበኛ ተጠቃሚ' && $_SESSION['current_user']['p_edit_member'] != 'allow'){ echo 'btn-disabled pointer-events-none'; } ?>" href="<?= base_url('admin/editmember/'.$member['id']); ?>"><i class="fa fa-user-secret"></i> መረጃ ቀይር </a>
+                <button type="button" data-open-modal="deleteMember" class="btn btn-warning btn-sm delete-person"><i class="fa fa-trash-o"></i> ወደ ቆሼ </button>                
+                <button type="button" data-open-modal="permanentlyDeleteMember" class="btn btn-error btn-sm delete-person"><i class="fa fa-trash-o"></i> አስወግድ </button>
                 </div>
             </div>
 
-            <!-- ምዕመን አጥፋ Dialogue -->
-            <div id="deleteMember" class="modal modal-danger fade" role="dialog">
-                <div class="modal-dialog modal-sm">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-body" align="left">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>የዚህን ምዕመን መረጃ ወደ ቆሼ ሊከቱ ነው።</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal">አይ</button>
-                            <a href="<?= base_url()?>admin/deletemember/<?= $member['id']?>" class="btn btn-outline btn-flat">አዎ</a>
-                        </div>
+            <dialog id="permanentlyDeleteMember" class="modal">
+                <div class="modal-box">
+                    <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
+                    <p class="py-4">የዚህን ምዕመን መረጃ ሙሉ በሙሉ ሊያጠፉ ነው።</p>
+                    <div class="modal-action">
+                        <form method="dialog"><button class="btn btn-ghost">አይ</button></form>
+                        <a href="<?= base_url()?>admin/permanentdeletemember/<?= $member['id']?>" class="btn btn-error">አዎ</a>
                     </div>
-
                 </div>
-            </div>
+                <form method="dialog" class="modal-backdrop"><button>close</button></form>
+            </dialog>
 
+            <dialog id="deleteMember" class="modal">
+                <div class="modal-box">
+                    <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
+                    <p class="py-4">የዚህን ምዕመን መረጃ ወደ ቆሼ ሊከቱ ነው።</p>
+                    <div class="modal-action">
+                        <form method="dialog"><button class="btn btn-ghost">አይ</button></form>
+                        <a href="<?= base_url()?>admin/deletemember/<?= $member['id']?>" class="btn btn-error">አዎ</a>
+                    </div>
+                </div>
+                <form method="dialog" class="modal-backdrop"><button>close</button></form>
+            </dialog>
 
+            <div class="nav-tabs-custom card border border-base-content/15 bg-base-100 shadow-md">
 
-
-        </div>
-        <div class="col-lg-9 col-md-9 col-sm-9">
-            <div class="nav-tabs-custom">
-
-            <ul class="nav nav-tabs" role="tablist">
+            <ul class="tabs tabs-boxed flex flex-wrap gap-1 bg-base-200 p-2" role="tablist">
                 <li role="presentation" <?php if($active_tab == NULL) { echo "class='active'"; } ?> ><a href="#details" aria-controls="details" role="tab" data-toggle="tab">ዝርዝር መረጃ</a></li>
                 <li role="presentation"><a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">የጊዜ መስመር</a></li>
                 <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">የተመድቡበት ቡድን</a></li>
@@ -189,7 +131,7 @@
 
                 <!-- ዝርዝር መረጃ tab starts here -->
 
-                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == NULL) { echo "active"; } ?>" id="details">
+                <div class="tab-pane <?php if($active_tab == NULL) { echo "active"; } ?>" id="details">
                     <div class="row"><br>
                         <blockquote>
                             <p>የምዕመን ዝርዝር መረጃ የሚያካትታቸው ዝርዝሮች የሚከተሉትን ብቻ ሳይሆን የቡድን መረጃ እንዲሁም የማስታወሻ ጽሁፎችንም ያካትታ</p>
@@ -197,14 +139,14 @@
                         </blockquote>
 
                         <div class="col-md-6">
-                          <div class="box box-solid">
-                            <div class="box-header with-border">
+                          <div class="card border border-base-content/15 bg-base-100 shadow-md">
+                            <div class="card-body border-b border-base-content/15 pb-3 mb-3">
                               <i class="fa fa-info"></i>
 
-                              <h3 class="box-title">አድራሻና የሥራ ሁኔታ</h3>
+                              <h3 class="card-title text-lg">አድራሻና የሥራ ሁኔታ</h3>
                             </div>
                             <!-- /.box-header -->
-                            <div class="box-body">
+                            <div class="card-body">
                                 <dl class="dl-horizontal">
                                     <dt> ክፍለ ከተማ </dt>
                                     <dd> <?= $member['kifle_ketema']; ?></dd>
@@ -226,20 +168,20 @@
                                     <dd> <?= $member['workplace_phone']?> </dd>
                                 </dl>                        
                             </div>
-                            <!-- /.box-body -->
+                            <!-- /.card-body -->
                           </div>
                           <!-- /.box -->
                         </div>
 
                         <div class="col-md-6">
-                          <div class="box box-solid">
-                            <div class="box-header with-border">
+                          <div class="card border border-base-content/15 bg-base-100 shadow-md">
+                            <div class="card-body border-b border-base-content/15 pb-3 mb-3">
                               <i class="fa fa-info"></i>
 
-                              <h3 class="box-title">የቤተክርስቲያን ተሳትፎ</h3>
+                              <h3 class="card-title text-lg">የቤተክርስቲያን ተሳትፎ</h3>
                             </div>
                             <!-- /.box-header -->
-                            <div class="box-body">
+                            <div class="card-body">
                                 <dl class="dl-horizontal">
                                     <dt>አባል የሆኑበት ዘመን</dt>
                                     <dd><?php if($member['membership_year']) { echo $member['membership_year']; } else { echo ""; }?></dd>
@@ -251,7 +193,7 @@
                                     <dd><?= $member['ministry']?></dd>
                                 </dl>                        
                             </div>
-                            <!-- /.box-body -->
+                            <!-- /.card-body -->
                           </div>
                           <!-- /.box -->
                         </div>
@@ -261,7 +203,7 @@
 
                 <!-- የጊዜ መስመር tab starts here -->
 
-                <div role="tab-pane fade" class="tab-pane" id="timeline">
+                <div class="tab-pane" id="timeline">
                     <div style="max-height: 450px;overflow-y: scroll;">
                         <ul class="timeline">
                             <!-- timeline time label -->
@@ -300,9 +242,9 @@
                           
                 <!-- ቡድኖች tab starts here -->
 
-                <div role="tab-pane fade" class="tab-pane" id="groups">
+                <div class="tab-pane" id="groups">
                     <?php if($assigned_groups != false) { ?>
-                        <table class="table table-hover">
+                        <table class="table table-zebra w-full">
                             <thead>
                                 <tr>
                                     <th><span><?= lang('label.name') ?></span></th>
@@ -315,7 +257,7 @@
                             <?php foreach($assigned_groups as $group) {?>
                                 <tr>
                                     <td>                      
-                                        <a href="<?= base_url('admin/groupdetails/'.$group['gid']); ?>"><?= $group['name'];?> </a>
+                                        <a href="<?= base_url('admin/group/'.$group['gid']); ?>"><?= $group['name'];?> </a>
                                     </td>
                                     <td class="text-center">
                                         <span class='label label-default'><?= $group['type']?> </span>
@@ -328,7 +270,7 @@
                         </table><p/><hr> 
                     <?php } else { ?>                      
                         <div class="main-box clearfix">
-                            <div class="main-box-body clearfix"><br>
+                            <div class="main-card-body clearfix"><br>
                                 <div class="alert alert-warning">
                                     <i class="fa fa-question-circle fa-fw fa-lg"></i> <span>በምንም ቡድን ውስጥ አልተመድቡም።</span>
                                 </div>
@@ -339,7 +281,7 @@
 
                 <!-- የአስራት መረጃ tab starts here -->
 
-                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'payment') { echo 'active'; } ?>" id="payment">
+                <div class="tab-pane <?php if($active_tab == 'payment') { echo 'active'; } ?>" id="payment">
                     <div class="main-box">
 
 
@@ -352,7 +294,7 @@
                                 <a href="<?= base_url()?>admin/printreceipt/<?= session()->getFlashdata('transaction_id'); ?>" target="_blank" class="btn btn-outline" style="text-decoration: none;"><i class="fa fa-print"></i> ደረሰኝ አትም</a>                            
                             </div>
                         <?php } else if(session()->getFlashdata('payment_save_error')) { ?>
-                            <div class="alert alert-danger">
+                            <div class="alert alert-error">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                 <h4><i class="fa fa-ban"></i> ይቅርታ</h4>
                                 <?php echo session()->getFlashdata('payment_save_error'); ?>
@@ -362,16 +304,16 @@
 
                         <div class="box">
 
-                            <div class="box-header with-border">
+                            <div class="card-body border-b border-base-content/15 pb-3 mb-3">
                                 <span>ክፍያ መዝግብ</span>
                             </div>
-                            <div class="box-body">
-                                <form method="post" action="<?= base_url(); ?>admin/savepayment">    
+                            <div class="card-body">
+                                <form id="memberSavePaymentForm" method="post" action="<?= base_url(); ?>admin/savepayment">    
                                     <input type="text" name="page" value="memberdetails" hidden> 
                                     <input type="text" name="member_id" value="<?= $member['id']?>" hidden> 
 
                                     <div class="col-md-3">
-                                        <select name="payment_type" class="form-control s2" style="width: 100%;" tabindex="-1" area-hidden="true" required>
+                                        <select name="payment_type" class="input input-bordered w-full s2" style="width: 100%;" tabindex="-1" area-hidden="true" required>
                                             <option disabled selected>ምክንያት</option>
                                             <option value="አስራት"> አስራት </option>
                                             <option value="የፍቅር ስጦታ"> የፍቅር ስጦታ </option>
@@ -380,47 +322,36 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        <div class="input-group">
-                                            <input type="tel" name="payment_amount" placeholder="የገንዘብ መጠን" class="form-control" required>
-                                            <div class="input-group-addon">ብር</div>
-                                        </div>
+                                        <label class="input input-bordered w-full max-w-full w-full">
+                                            <span class="label-text">ብር</span>
+                                            <input type="tel" name="payment_amount" placeholder="የገንዘብ መጠን" class="input input-bordered w-full" required>
+                                        </label>
                                     </div>
 
 
                                     <div class="col-md-2">
-                                        <a data-toggle="modal" href="#savepayment" class="btn btn-primary btn-flat">መዝግብ</a>
+                                        <button type="button" class="btn btn-primary" data-open-modal="savepayment">መዝግብ</button>
                                     </div>
-
-
-                                    <!-- pre payment saving modal massage -->
-                                    <div id="savepayment" class="modal modal-info fade" role="dialog">
-                                        <div class="modal-dialog modal-sm">
-
-                                            <!-- Modal content-->
-                                            <div class="modal-content">
-                                                <div class="modal-body" align="left">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>መልሶ ማስተካከል አይቻልም</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline btn-flat pull-left" data-dismiss="modal">አይ</button>
-                                                    <input type="submit" class="btn btn-outline btn-flat" value="አዎ">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-
-
 
                                 </form>
+
+                                <dialog id="savepayment" class="modal">
+                                    <div class="modal-box">
+                                        <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
+                                        <p class="py-4">መልሶ ማስተካከል አይቻልም</p>
+                                        <div class="modal-action">
+                                            <button type="button" class="btn btn-ghost" onclick="document.getElementById('savepayment').close()">አይ</button>
+                                            <button type="submit" form="memberSavePaymentForm" class="btn btn-primary" value="አዎ">አዎ</button>
+                                        </div>
+                                    </div>
+                                    <form method="dialog" class="modal-backdrop"><button>close</button></form>
+                                </dialog>
                             </div><br>
                         </div>
 
 
-                        <div class="box-body table-responsive" style="padding: 0px;">
-                            <table id="paymentsTable" class="table table-hover table-striped table-bordered">
+                        <div class="card-body table-responsive" style="padding: 0px;">
+                            <table id="paymentsTable" class="table table-zebra w-full table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th>መለያ</th>
@@ -459,16 +390,16 @@
 
                 <!-- የምዕመን ሁኔታ tab starts here -->
 
-                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'status') { echo "active"; } ?>" id="properties">
+                <div class="tab-pane <?php if($active_tab == 'status') { echo "active"; } ?>" id="properties">
                     <div class="main-box clearfix">
-                        <div class="main-box-body clearfix"><br>
+                        <div class="main-card-body clearfix"><br>
 
                             <?php if(session()->getFlashdata('status_change_success')) { ?>
-                                <div class="callout callout-info">
+                                <div class="alert alert-info">
                                     <?php echo session()->getFlashdata('status_change_success'); ?>
                                 </div>
                             <?php } else if(session()->getFlashdata('status_change_error')) { ?>
-                                <div class="callout callout-danger">
+                                <div class="alert alert-error">
                                     <?php echo session()->getFlashdata('status_change_error'); ?>
                                 </div>
                             <?php } ?>
@@ -489,66 +420,56 @@
 
                             <h4><strong>የምዕመን ሁኔታ:</strong></h4>
 
-                            <form method="post" action="<?= base_url(); ?>admin/changestatus" id="assign-property-form">
+                            <form method="post" action="<?= base_url(); ?>admin/changestatus" id="changestatusForm">
                                 <input type="hidden" name="id" value="<?= $member['id']?>" >
                                 <div class="row">
                                     <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
                                         <div class="form-group col-xs-12">
-                                            <select name="status" id="status" class="form-control s2" style="width:100%">
+                                            <select name="status" id="status" class="input input-bordered w-full s2" style="width:100%">
                                                 <option value="ያለ">ያለ</option>
                                                 <option value="የሌለ">የሌለ</option>
                                             </select>    
                                         </div>
                                         <div class="form-group col-xs-12" id="statusRemarkDiv" hidden>
-                                            <textarea class="form-control" name="status_remark" id="statusRemark" rows="2" placeholder="ምርመራ ..."></textarea>
+                                            <textarea class="textarea textarea-bordered w-full" name="status_remark" id="statusRemark" rows="2" placeholder="ምርመራ ..."></textarea>
                                         </div>
                                     </div>
 
 
 
                                     <div class="col-md-6">
-                                        <a data-toggle="modal" href="#changeMemberStatus" class="btn btn-primary btn-flat">ቀይር</a>
+                                        <button type="button" class="btn btn-primary" data-open-modal="changeMemberStatus">ቀይር</button>
                                     </div>
-
-
-                                    <!-- pre payment saving modal massage -->
-                                    <div id="changeMemberStatus" class="modal modal-warning fade" role="dialog">
-                                        <div class="modal-dialog modal-sm">
-
-                                            <!-- Modal content-->
-                                            <div class="modal-content">
-                                                <div class="modal-body" align="left">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">እርግጠኛ ኖት?</h4><p>ይህ ማስተካከያ በምዕመኑ መረጃ ላይ ትልቅ ተፅዕኖ አለው።</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline btn-flat pull-left" data-dismiss="modal">አይ</button>
-                                                    <input type="submit" class="btn btn-outline btn-flat" value="አዎ">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-
 
                                 </div>
                             </form>
+
+                                    <dialog id="changeMemberStatus" class="modal">
+                                        <div class="modal-box">
+                                            <h3 class="text-lg font-bold">እርግጠኛ ኖት?</h3>
+                                            <p class="py-4">ይህ ማስተካከያ በምዕመኑ መረጃ ላይ ትልቅ ተፅዕኖ አለው።</p>
+                                            <div class="modal-action">
+                                                <button type="button" class="btn btn-ghost" onclick="document.getElementById('changeMemberStatus').close()">አይ</button>
+                                                <button type="submit" form="changestatusForm" class="btn btn-warning">አዎ</button>
+                                            </div>
+                                        </div>
+                                        <form method="dialog" class="modal-backdrop"><button>close</button></form>
+                                    </dialog>
                         </div>
                     </div>
                 </div>                
 
                 <!-- Notes tab starts here -->
 
-                <div role="tab-pane fade" class="tab-pane <?php if($active_tab == 'notes') { echo "active"; } ?>" id="notes">
+                <div class="tab-pane <?php if($active_tab == 'notes') { echo "active"; } ?>" id="notes">
 
 
                     <?php if(session()->getFlashdata('note-save-success')) { ?>
-                        <div class="callout callout-info">
+                        <div class="alert alert-info">
                             <?php echo session()->getFlashdata('note-save-success'); ?>
                         </div>
                     <?php } else if(session()->getFlashdata('note-save-error')) { ?>
-                        <div class="callout callout-danger">
+                        <div class="alert alert-error">
                             <?php echo session()->getFlashdata('note-save-error'); ?>
                         </div>
                     <?php } ?>
@@ -574,11 +495,11 @@
                                     <form method="post" action="<?= base_url(); ?>admin/savenote">
                                     <input type="text" name="member_id" value="<?= $member['id']?>" hidden>
                                     <div class="form-group" style="margin-bottom: 0px;">
-                                        <textarea class="form-control" rows="3" name="note_content" placeholder="ማስታወሻ መያዣ ..." spellcheck="false" required></textarea>
+                                        <textarea class="input input-bordered w-full max-w-full" rows="3" name="note_content" placeholder="ማስታወሻ መያዣ ..." spellcheck="false" required></textarea>
                                     </div>                                
                                 </div>
                                 <div class="timeline-footer">
-                                    <input type="submit" class="btn btn-primary btn-flat" value="መዝግብ" />
+                                    <input type="submit" class="btn btn-primary" value="መዝግብ" />
                                     </form>
                                 </div>
                               </div>
@@ -595,8 +516,8 @@
 
                                 <div class="timeline-body"><?= $note['note_content']?></div>
                                 <div class="timeline-footer">
-                                  <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                                  <a class="btn btn-danger btn-flat btn-xs">አጥፋ</a>
+                                  <a class="btn btn-warning btn-xs">View comment</a>
+                                  <a class="btn btn-error btn-xs">አጥፋ</a>
                                 </div>
                               </div>
                             </li>
@@ -617,10 +538,9 @@
 
               </div>
             </div>
-          </div>
         </div>
-    </section>
-</div>
+    </div>
+</section>
 
 
 <script type="text/javascript">

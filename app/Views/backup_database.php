@@ -1,21 +1,17 @@
 
 
-<div class="content-wrapper">
-    <section class="content-header">
-        <h1>የመረጃቋት ባካፕ</h1>
-        <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>"><i class="fa fa-users"></i> ዳሽቦርድ </a></li>
-            <li class="active"> የመረጃቋት ባካፕ </li>
-        </ol>
-    </section>
-    <!-- Main content -->
+<div class="space-y-4">
+    <?= view('templates/partials/page_heading', [
+        'title' => 'የመረጃቋት ባካፕ',
+        'breadcrumbs_html' => '<ul><li><a href="' . esc(base_url(), 'url') . '" class="link link-hover"><i class="fa fa-users"></i> ዳሽቦርድ </a></li><li class="text-base-content/80"> የመረጃቋት ባካፕ </li></ul>',
+    ]); ?>
     <section class="content">
 
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">የመረጃቋቱ ባካፕ ሲደረግ የሚከተሉትን መተግበር የተሻለ መንገድ ነው።</h3>
+        <div class="card border border-base-content/15 bg-base-100 shadow-md">
+            <div class="card-body border-b border-base-content/15 pb-3 mb-3">
+                <h3 class="card-title text-lg">የመረጃቋቱ ባካፕ ሲደረግ የሚከተሉትን መተግበር የተሻለ መንገድ ነው።</h3>
             </div>
-            <div class="box-body">
+            <div class="card-body">
                 <ul>
                 <li>የመረጃቋቱን ቢያንስ በወር አንድ ጊዜ ባካፕ ማድረግ ተመራጭ መንገድ ነው። ተደጋጋሚ የባካፕ እቅድ ማውታት ደግሞ የተሻለ ነው።</li><br>
                 <li>የመረጃቋቱን ባካፕ ከሰርቨሩ ካወረዱ በኋላ፣ ሁለት ኮፒ ማዘጋጀት ያስፈልጋል። አንደኛውን ሊጠፋ በማይችል ቦታ ኮምፒውር ላይ ማስቀመጥ ሁለተኛውን ደግሞ ኢንተርኔት ላይ በኢሜልም ቢሆን ማስቀመጥ ያስፈልጋል።</li><br>
