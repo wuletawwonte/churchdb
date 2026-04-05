@@ -1,0 +1,10 @@
+/**
+ * Tailwind CSS v4 + daisyUI 5
+ * Scan PHP views for class names. During Bootstrap/AdminLTE migration, keep both
+ * stylesheets linked; remove Bootstrap when the UI no longer depends on it.
+ */
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* CodeIgniter views (and nested partials) */
+@source "../../app/Views/**/*.php";

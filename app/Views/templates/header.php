@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="light">
 <head>
   <meta http-equiv="Content-Type" content="text/html;; charset=UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +14,8 @@
   <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/select2/css/select2-bootstrap.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/skins/skin-yellow-light.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/AdminLTE.min.css'); ?>">
+  <!-- Tailwind v4 + daisyUI (new components); Bootstrap/AdminLTE remain until migration completes -->
+  <link rel="stylesheet" href="<?= base_url('assets/css/tailwind.css'); ?>">
   <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.ico'); ?>">
   
   <style type="text/css">

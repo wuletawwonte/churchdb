@@ -6,10 +6,15 @@
   "directories": {
     "test": "tests"
   },
-  "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "daisyui": "^5.5.19",
+    "tailwindcss": "^4.2.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "mkdir -p public/assets/css && npx @tailwindcss/cli -i resources/css/app.css -o public/assets/css/tailwind.css --minify",
+    "watch:css": "mkdir -p public/assets/css && npx @tailwindcss/cli -i resources/css/app.css -o public/assets/css/tailwind.css --watch"
   },
   "repository": {
     "type": "git",

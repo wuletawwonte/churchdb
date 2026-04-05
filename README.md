@@ -15,6 +15,7 @@ The project is **built with Ethiopian churches in mind**—including **Amharic**
 - **PHP** 8.2+ with extensions such as **intl**, **mbstring**, and **mysqli** / **mysqlnd** (see the [CodeIgniter 4 user guide](https://codeigniter.com/user_guide/) for full details)  
 - **MySQL** or **MariaDB** for the application database  
 - **Composer** for PHP dependencies  
+- **Node.js 20+** (optional) — only if you change styles and need to rebuild **`public/assets/css/tailwind.css`** (Tailwind CSS v4 + [daisyUI](https://daisyui.com/))
 
 ## Quick start (local)
 
@@ -38,6 +39,17 @@ The project is **built with Ethiopian churches in mind**—including **Amharic**
    ```
 
 4. Point your web server at the **`public/`** directory (not the project root), or use Docker (see below).
+
+## Frontend CSS (Tailwind + daisyUI)
+
+The admin UI still loads **Bootstrap** and **AdminLTE**; **Tailwind v4** and **daisyUI** are included so you can add new screens or components with utility classes and daisyUI patterns. After editing views under `app/Views/` or `resources/css/app.css`, rebuild:
+
+```bash
+npm ci
+npm run build:css
+```
+
+Use `npm run watch:css` during development. The Docker image runs this build automatically so the container always includes a fresh `tailwind.css`.
 
 ## Docker
 
